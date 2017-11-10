@@ -1,4 +1,6 @@
-package semesterprojekt;
+package Game;
+
+import Game.CommandWord;
 
 /**
  * @author Michael Kolling and David J. Barnes

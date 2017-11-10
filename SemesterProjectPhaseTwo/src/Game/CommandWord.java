@@ -1,4 +1,4 @@
-package semesterprojekt;
+package Game;
 
 /**
  * @author Michael Kolling and David J. Barnes
