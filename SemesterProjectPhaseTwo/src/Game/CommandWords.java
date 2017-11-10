@@ -1,4 +1,4 @@
-package semesterprojekt;
+package Game;
 
 import java.util.HashMap;
 
