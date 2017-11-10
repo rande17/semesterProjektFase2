@@ -19,6 +19,7 @@ public class SemesterProjekt {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
         //initializing a game object and starting the game
         Game game = new Game(); //Laver en instans af klassen Game{} og kalder den game
         game.play(); //Her invoker vi metoden play() som ligger i Game{}-klassen

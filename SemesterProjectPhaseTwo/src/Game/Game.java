@@ -32,9 +32,7 @@ public class Game {
     ItemLocation itemLocation = new ItemLocation();
     Inventory inventory = new Inventory();
     Item debug = new Item("debug");
-    Mission mission1 = new Mission();
-    Mission mission2 = new Mission();
-    Mission mission3 = new Mission();
+    Mission allMissions = new Mission();
 
     /**
      * Used to initialize different rooms and their respective items, and also
@@ -55,44 +53,48 @@ public class Game {
         airport.setExit("west", beach);
 
         //Initializing an item and putting it in a room
-        itemLocation.addItem(airport, new Item("Bottle"));
-        itemLocation.addItem(airport, new Item("Boardingpass"));
+        itemLocation.addItem(airport, new Item("Bottle", 2));
+        itemLocation.addItem(airport, new Item("Boardingpass", 1));
+
+        //Initializing an mission and putting it in a room
+        allMissions.addMission(airport, "First mission", "Find your boardingpass", 5);
+        
 
         //Setting the the exit
         beach.setExit("north", jungle);
         beach.setExit("south", seaBottom);
         beach.setExit("west", camp);
 
-        itemLocation.addItem(beach, new Item("Stone"));
-        itemLocation.addItem(beach, new Item("Fish"));
-        itemLocation.addItem(beach, new Item("Flint"));
-        itemLocation.addItem(beach, new Item("Rope"));
-        itemLocation.addItem(beach, new Item("Stick"));
+        itemLocation.addItem(beach, new Item("Stone", 2));
+        itemLocation.addItem(beach, new Item("Fish", 1));
+        itemLocation.addItem(beach, new Item("Flint", 2));
+        itemLocation.addItem(beach, new Item("Rope", 2));
+        itemLocation.addItem(beach, new Item("Stick", 1));
 
         jungle.setExit("north", mountain);
         jungle.setExit("east", cave);
         jungle.setExit("south", beach);
-        itemLocation.addItem(jungle, new Item("Berry"));
-        itemLocation.addItem(jungle, new Item("Lumber"));
-        itemLocation.addItem(jungle, new Item("Lian"));
-        itemLocation.addItem(jungle, new Item("Stone"));
-        itemLocation.addItem(jungle, new Item("Stick"));
+        itemLocation.addItem(jungle, new Item("Berry", 1));
+        itemLocation.addItem(jungle, new Item("Lumber", 3));
+        itemLocation.addItem(jungle, new Item("Lian", 2));
+        itemLocation.addItem(jungle, new Item("Stone", 2));
+        itemLocation.addItem(jungle, new Item("Stick", 1));
 
         NPC npc1 = new NPC("Good guy", jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, but he is heavly injured on his right leg so he cant move ");
         npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter");
 
         mountain.setExit("south", jungle);
-        itemLocation.addItem(mountain, new Item("Stone"));
-        itemLocation.addItem(mountain, new Item("Egg"));
+        itemLocation.addItem(mountain, new Item("Stone", 2));
+        itemLocation.addItem(mountain, new Item("Egg", 1));
 
         NPC npc3 = new NPC("Evil guy", mountain);
 
         cave.setExit("west", jungle);
-        itemLocation.addItem(cave, new Item("Shroom"));
-        itemLocation.addItem(cave, new Item("Stone"));
-        itemLocation.addItem(cave, new Item("Freshwater"));
-        itemLocation.addItem(cave, new Item("Flint"));
+        itemLocation.addItem(cave, new Item("Shroom", 1));
+        itemLocation.addItem(cave, new Item("Stone", 2));
+        itemLocation.addItem(cave, new Item("Freshwater", 2));
+        itemLocation.addItem(cave, new Item("Flint", 2));
 
         NPC npc2 = new NPC("Mysterious crab", cave);
         npc2.setDescribtion("A mysterious crab that you dont really get why can talk");
@@ -104,27 +106,15 @@ public class Game {
         itemLocation.addItem(camp, new Item(""));
 
         seaBottom.setExit("north", beach);
-        itemLocation.addItem(seaBottom, new Item("Backpack"));
-        itemLocation.addItem(seaBottom, new Item("WaterBottle"));
-        itemLocation.addItem(seaBottom, new Item("Rope"));
+        itemLocation.addItem(seaBottom, new Item("Backpack", 2));
+        itemLocation.addItem(seaBottom, new Item("WaterBottle", 1));
+        itemLocation.addItem(seaBottom, new Item("Rope", 2));
 
         raft.setExit("east", camp);
 
         currentRoom = airport;
 
     }
-
-    private void createMissions() {
-        mission1.addMission("Getting started", "First item", 10);
-        mission2.addMission("Adventure", "Visited the whole island", 20);
-        mission3.addMission("Waking up", "Discovered the beach", 5);
-
-    }
-//    private void createItems(){
-//    
-//    ob1.addItem(airport, new Item("Bottle"));
-//    ob1.addItem(airport, new Item("Boardingpass"));    
-//    }
 
     /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
@@ -185,8 +175,14 @@ public class Game {
         } else if (commandWord == CommandWord.DROP) {
             dropItem(command);
         } else if (commandWord == CommandWord.MISSION) {
-//            showMissions(command); 
+            showMissions();
         }
+
+        //setting the condition to complete the mission.
+        if (inventory.getInventory().containsKey("Boardingpass")) {
+            allMissions.setMissionComplete("First mission");
+        }
+
         return wantToQuit;
     }
 
@@ -235,19 +231,14 @@ public class Game {
 //    private void inspectRoom(Command command){
     private void inspectRoom() {
         ArrayList items = itemLocation.getItems(currentRoom);
-        String itemList = "";
         Item seeItem;
 
-        System.out.print("Items in room is: ");
         for (int i = 0; i < items.size(); i++) {
-            seeItem = (Item) items.get(i);
-            itemList+=seeItem.getName();
-            if (i < items.size() - 1) {
-                itemList = itemList + ", ";
-            }
 
+            seeItem = (Item) items.get(i);
+            System.out.println(seeItem.getName());
         }
-        System.out.println(itemList);
+
     }
 
     /**
@@ -286,6 +277,34 @@ public class Game {
 //          getdialog();
 //     }
 //
+    /* 
+    * Method used for showing missions
+     */
+    private void showMissions() {
+
+        HashMap<String, String> viewMission = allMissions.missionInfo;
+        HashMap<String, Boolean> missionStatus = allMissions.missionStatus;
+
+        System.out.println("Your missions are: ");
+        for (String i : viewMission.keySet()) {
+
+            System.out.println(viewMission.get(i) + "\t| Status: " + missionStatus.get(i));
+        }
+
+        for (String i : missionStatus.keySet()) {
+            missionStatus.get(i);
+
+            if (missionStatus.get(i) == false) {
+                System.out.println("Mission is in progress.");
+            }
+            if (missionStatus.get(i) == true) {
+                System.out.println("Mission is complete");
+            }
+        }
+
+    }
+
+
     /**
      * Method used for dropping item from inventory
      *
@@ -311,7 +330,6 @@ public class Game {
         if (!indexItem.equals("")) {
             inventory.dropItemInventory(indexItem);
             System.out.println("You have dropped: " + indexItem);
-            itemLocation.addItem(currentRoom, new Item(indexItem));
 
         } else {
             System.out.println("Can't drop item that isn't in inventory " + command.getSecondWord());
@@ -319,15 +337,6 @@ public class Game {
 
     }
 
-//    private void showMissions(Command command){
-//      
-//      HashMap<String, String> viewMission = mission.getMissionDescribtion(key);
-//
-//        for (String i : viewMission.keySet()) {
-//            System.out.println("Your missions are: ");
-//            System.out.println(viewMission.get(i) + mission.missionStatus + mission.missionPoint);
-//        }
-//    }
     /**
      * method to quit the game and if there is a second word it print out a line
      * "Quit what"

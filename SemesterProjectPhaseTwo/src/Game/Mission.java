@@ -5,6 +5,7 @@
  */
 package Game;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,8 +19,11 @@ public class Mission {
     HashMap<String, Integer> missionPoint = new HashMap();
     Score score = new Score();
 
+    //constructor
+    public Mission() {
+}
 
-    public void addMission(String name, String describtion, int point) {
+    public void addMission(Room room, String name, String describtion, int point) {
         missionInfo.put(name, describtion);
         missionStatus.put(name, false);
         missionPoint.put(name, point);
@@ -28,12 +32,13 @@ public class Mission {
     public String getMissionDescribtion(String key) {
         return missionInfo.get(key);
     }
+           
 
     public void setMissionComplete(String key) {
-        missionStatus.replace(key, false, true);
+        missionStatus.replace(key, true);
         //Kalder ukendt klasse
 
-        score.addToPoints(missionPoint.get(key));
+//        score.addToPoints(missionPoint.get(key));
     }
 
 }

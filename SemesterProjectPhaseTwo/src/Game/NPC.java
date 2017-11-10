@@ -1,8 +1,23 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Game;
 
 import java.util.ArrayList;
 
-public class NPC extends Character {
+/**
+ *
+ * @author marti
+ */
+public class NPC {
+
+    //String used for the describtion of the NPC
+    private String desc;
+
+    //String used for the name os the NPC
+    private String name;
 
     //int used to store how much damage the NPC does
     private int dmgValue;
@@ -10,27 +25,23 @@ public class NPC extends Character {
     //ArrayList used to store all dialog options of the NPC;
     private ArrayList<String> dialog = new ArrayList<String>();
 
-    
-    // Constructor no args, creates NPC's
+    //Room to stre the current room
+    private Room currentPosition;
+
+    // no args Constructor, creates NPC's
     public NPC() {
     }
 
     //Constructor that set the name and location of the NPC's while creating it
     /**
-     * @param _name used to set the name og the NPC
-     * @param _currentRoom used to set the current room of the NPC
+     * @param _name used to set the name
+     * @param _currentPosition used to set spawning location
      */
-    
-    public NPC (String _name, Room _currentRoom){
-        super (_name, _currentRoom);
+    public NPC(String _name, Room _currentPosition) {
+        name = _name;
+        currentPosition = _currentPosition;
     }
-            
-    
-    public NPC (String _name, String _desc, Room _currentRoom, int _dmgValue){
-        super (_name, _desc, _currentRoom);
-        dmgValue = _dmgValue;
-    }
-    
+
     /**
      *
      * @param _dialog used to add a dialog option to the NPC
@@ -67,9 +78,45 @@ public class NPC extends Character {
         return dmgValue;
     }
 
+    /**
+     * @param _desc sets the describtion of the NPC, should be some defining
+     * features of the characther
+     */
+    public void setDescribtion(String _desc) {
+        desc = _desc;
+    }
+
+    /**
+     * @return gets the description of the NPC
+     */
+    public String getDescribtion() {
+        return desc;
+    }
+
     //should be used to close any open dialog with the NPC
     public void quitDialog() {
 
+    }
+
+    /**
+     * @return gets the NPC's name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return gets the room the NPC is in
+     */
+    public Room getCurrentRoom() {
+        return currentPosition;
+    }
+
+    /**
+     * @param goToRoom moves the NPC to another room
+     */
+    public void setCurrentRoom(Room goToRoom) {
+        currentPosition = goToRoom;
     }
 
 }

@@ -1,101 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Game;
 
 import java.util.Date;
 
+/**
+ *
+ * @author marti
+ */
 public class Item {
 
-    // Data field
-    // String used for describtion of the item
+    /*
+    Dette dokument er ikke færdigarbejdet
+     */
     private String itemDescribtion;
-
-    // Int used for the max carry weight
     private int maxCarryWeight = 10;
-
-    // Int used for the total weight in the backpack
     private int totalWeightInBackpack;
-
-    // Int 
-    private int weight = 1;
+    private int weight;
     private Date respawnTime;
     private Room mapLocation;
     private String name;
 
-    /**
-     *
-     * @param _name refers to the name of the item
+    /*
+    Klasse: Item
+    Constructor: Item(name, weight, respawnTime, mapLocation(StringArray))
+    Metoder: getItemOnMap, setItemOnMap, addItemInInventory, removeItemFromInventory, setItemDescribtions, getItemDescribtion, getRespawnTime
      */
-    // Constructor, with arg, Room mapLocation maybe has to be changed
-    Item(String _name) {
-        name = _name;
+    //Creating a constructor with a parameter-list, Room mapLocation maybe has to be changed
+    Item(String name) {
+        this.name = name;
     }
 
-    /**
-     *
-     * @param _name refers to the name of the item
-     * @param _weight refers to the weight of the item
-     */
-    // Constructor
-    Item(String _name, int _weight) {
-        name = _name;
-        weight = _weight;
+    Item(String name, int weight) {
+        this.name = name;
+        this.weight = weight;
     }
 
-    /**
-     *
-     * @param _name refers to the name of the item
-     * @param _weight refers to the weight of the item
-     * @param _respawnTime refers to the respawn time for an item
-     * @param _mapLocation refers to where an item is located
-     */
-    // Constructor
-    Item(String _name, int _weight, Date _respawnTime, Room _mapLocation) {
-        name = _name;
-        weight = _weight;
-        respawnTime = _respawnTime;
-        mapLocation = _mapLocation;
+    Item(String name, int weight, Date respawnTime, Room mapLocation) {
+        //This body is left empty for now
+        this.name = name;
+        this.weight = weight;
+        this.respawnTime = respawnTime;
+        this.mapLocation = mapLocation;
     }
 
-    /**
-     *
-     * @returns weight of an item
-     */
-    // Method, get weight
+//    public Item getItemOnMap(Item[] allItems) {
+////        This body is left empty for now
+//    }
+//    public void setItemOnMap(Item _item, Room location) {
+////        Body is empty
+//    }
     public int getWeight() {
         return weight;
     }
 
-    /**
-     *
-     * @param newDescribtion sets a new itemdesribtion for an item
-     */
-    // Method, set item desribtion
+    public void removeItemFromInventory(Item _item) {
+        //Her skal objekt"tingen" sættes til null, hvis en anden bedre måde ikke fremkommer
+    }
+
     public void setItemDescribtions(String newDescribtion) {
         itemDescribtion = newDescribtion;
     }
 
-    /**
-     *
-     * @returns the itemdesribtion
-     */
-    // Method, get item describtion
     public String getItemDescribtion() {
         return itemDescribtion;
     }
 
-    /**
-     *
-     * @returns repawntime of the item
-     */
-    // Method, get respawntime
     public Date getRespawnTime() {
         return respawnTime;
     }
 
-    /**
-     *
-     * @returns the name of an item
-     */
-    // Method, get name
     public String getName() {
         return name;
     }
