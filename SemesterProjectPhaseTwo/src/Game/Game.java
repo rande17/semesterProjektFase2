@@ -33,6 +33,9 @@ public class Game {
     Inventory inventory = new Inventory();
     Item debug = new Item("debug");
     Mission allMissions = new Mission();
+    NPC npc1 = new NPC();
+    NPC npc2 = new NPC();
+    NPC npc3 = new NPC();
 
     /**
      * Used to initialize different rooms and their respective items, and also
@@ -58,7 +61,6 @@ public class Game {
 
         //Initializing an mission and putting it in a room
         allMissions.addMission(airport, "First mission", "Find your boardingpass", 5);
-        
 
         //Setting the the exit
         beach.setExit("north", jungle);
@@ -80,15 +82,19 @@ public class Game {
         itemLocation.addItem(jungle, new Item("Stone", 2));
         itemLocation.addItem(jungle, new Item("Stick", 1));
 
-        NPC npc1 = new NPC("Good guy", jungle);
+        npc1.setName("BS Christiansen");
+        npc1.setCurrentRoom(jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, but he is heavly injured on his right leg so he cant move ");
-        npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter");
+        npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter.");
 
         mountain.setExit("south", jungle);
         itemLocation.addItem(mountain, new Item("Stone", 2));
         itemLocation.addItem(mountain, new Item("Egg", 1));
 
-        NPC npc3 = new NPC("Evil guy", mountain);
+        npc3.setName("Joseph Schitzel");
+        npc3.setCurrentRoom(mountain);
+        npc3.setDescribtion("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
+        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's.");
 
         cave.setExit("west", jungle);
         itemLocation.addItem(cave, new Item("Shroom", 1));
@@ -96,7 +102,8 @@ public class Game {
         itemLocation.addItem(cave, new Item("Freshwater", 2));
         itemLocation.addItem(cave, new Item("Flint", 2));
 
-        NPC npc2 = new NPC("Mysterious crab", cave);
+        npc2.setName("Mysterious crab");
+        npc2.setCurrentRoom(cave);
         npc2.setDescribtion("A mysterious crab that you dont really get why can talk");
         npc2.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them all mr.Crab and know this island like the back of my hand.... oh i mean claw"
                 + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff ");
@@ -166,12 +173,11 @@ public class Game {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.INSPECT) {
-//            inspectRoom(command);
             inspectRoom();
         } else if (commandWord == CommandWord.TAKE) {
             takeItem(command);
         } else if (commandWord == CommandWord.TALK) {
-//            TalkTo(command);
+            TalkTo();
         } else if (commandWord == CommandWord.DROP) {
             dropItem(command);
         } else if (commandWord == CommandWord.MISSION) {
@@ -232,13 +238,28 @@ public class Game {
     private void inspectRoom() {
         ArrayList items = itemLocation.getItems(currentRoom);
         Item seeItem;
-
+        String itemList = "";
         for (int i = 0; i < items.size(); i++) {
 
             seeItem = (Item) items.get(i);
-            System.out.println(seeItem.getName());
+//            System.out.println(seeItem.getName());
+                itemList+=seeItem.getName();
+            if (i < items.size() - 1) {
+                itemList = itemList + ", ";
+            }
         }
-
+        System.out.println(itemList);
+        if (npc1.getCurrentRoom()==currentRoom) {
+            System.out.println("There seems to be someone resting in the leaves");
+        }
+        else if (npc2.getCurrentRoom()==currentRoom) {
+            System.out.println("You sense somebody in the cave");
+        }
+        else if (npc3.getCurrentRoom()==currentRoom) {
+            System.out.println("There is an intense smell, somebody seems to be near!");
+        }
+        else 
+            System.out.println("You are alone in the room");
     }
 
     /**
@@ -271,12 +292,20 @@ public class Game {
         }
     }
 
-//     private void TalkTo(Command command){
-//        ArrayList talk =  
-//        if(npc1 == currentRoom)
-//          getdialog();
-//     }
-//
+    private void TalkTo() {
+
+        if (npc1.getCurrentRoom() == currentRoom) {
+            System.out.println(npc1.getDescribtion() + ", yet he still gives u good advice:\n" + npc1.getDialog(0));
+        } else if (npc2.getCurrentRoom() == currentRoom) {
+            System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
+        } else if (npc3.getCurrentRoom() == currentRoom) {
+            System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
+        } else {
+            System.out.println("There is nobody to communicate with in this Room");
+        }
+
+    }
+
     /* 
     * Method used for showing missions
      */
@@ -303,7 +332,6 @@ public class Game {
         }
 
     }
-
 
     /**
      * Method used for dropping item from inventory

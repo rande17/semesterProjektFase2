@@ -49,7 +49,10 @@ public class NPC {
     public void addDialog(String _dialog) {
         dialog.add(_dialog);
     }
-
+    
+    public void setName(String _name) {
+        name = _name;
+    }
     /**
      *
      * @param i used to get the dialog option at this index
