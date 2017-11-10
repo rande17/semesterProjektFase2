@@ -317,7 +317,7 @@ public class Game {
         System.out.println("Your missions are: ");
         for (String i : viewMission.keySet()) {
 
-            System.out.println(viewMission.get(i) + "\t| Status: " + missionStatus.get(i));
+            System.out.println(viewMission.get(i) + "\t| The mission is complete: " + missionStatus.get(i));
         }
 
         for (String i : missionStatus.keySet()) {
