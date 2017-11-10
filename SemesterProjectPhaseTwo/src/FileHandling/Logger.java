@@ -9,6 +9,10 @@ package FileHandling;
  *
  * @author marti
  */
-public class Logger {
+public class Logger extends WriteToFile {
     
+    public Logger(){
+        super("game", "log");
+    }
+
 }

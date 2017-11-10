@@ -1,5 +1,8 @@
 package Game;
 
+import FileHandling.Logger;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,6 +39,9 @@ public class Game {
     NPC npc1 = new NPC();
     NPC npc2 = new NPC();
     NPC npc3 = new NPC();
+
+    //file thats gonna be written to and the extension
+    Logger log = new Logger();
 
     /**
      * Used to initialize different rooms and their respective items, and also
@@ -125,8 +131,9 @@ public class Game {
 
     /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
-    public void play() {
+    public void play() throws FileNotFoundException, IOException {
         printWelcome();
+        log.write("\n\n >>>  Starting new game <<< \n\n");
 
         boolean finished = false;
 
@@ -153,10 +160,12 @@ public class Game {
        not know to the game it print out the message "I don't know what you mean..." and return false*/
  /* It does the same with Help and GO where it print out a message with the use of the method printHelp and goRoom
        and if the command word is quit it return wantToQuit*/
-    private boolean processCommand(Command command) {
+    private boolean processCommand(Command command) throws FileNotFoundException, IOException {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
+
+        log.write(commandWord.toString() + " " + command.getSecondWord());
 
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
@@ -243,23 +252,21 @@ public class Game {
 
             seeItem = (Item) items.get(i);
 //            System.out.println(seeItem.getName());
-                itemList+=seeItem.getName();
+            itemList += seeItem.getName();
             if (i < items.size() - 1) {
                 itemList = itemList + ", ";
             }
         }
         System.out.println(itemList);
-        if (npc1.getCurrentRoom()==currentRoom) {
+        if (npc1.getCurrentRoom() == currentRoom) {
             System.out.println("There seems to be someone resting in the leaves");
-        }
-        else if (npc2.getCurrentRoom()==currentRoom) {
+        } else if (npc2.getCurrentRoom() == currentRoom) {
             System.out.println("You sense somebody in the cave");
-        }
-        else if (npc3.getCurrentRoom()==currentRoom) {
+        } else if (npc3.getCurrentRoom() == currentRoom) {
             System.out.println("There is an intense smell, somebody seems to be near!");
-        }
-        else 
+        } else {
             System.out.println("You are alone in the room");
+        }
     }
 
     /**
