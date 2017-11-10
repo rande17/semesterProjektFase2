@@ -57,7 +57,8 @@ public class Character {
     }
     
     // Method, set Character describtion
-    public void setDescribtion(){
+    public void setDescribtion(String _desc){
+        _desc=desc;
         
     }
     

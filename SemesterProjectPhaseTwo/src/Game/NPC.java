@@ -18,10 +18,13 @@ public class NPC extends Character {
     //Constructor that set the name and location of the NPC's while creating it
     /**
      * @param _name used to set the name og the NPC
-     * @param _desc used to set describtion of the NPC
      * @param _currentRoom used to set the current room of the NPC
-     * @param _dmgValue used to set the damage value of the NPC
      */
+    
+    public NPC (String _name, Room _currentRoom){
+        super (_name, _currentRoom);
+    }
+            
     
     public NPC (String _name, String _desc, Room _currentRoom, int _dmgValue){
         super (_name, _desc, _currentRoom);
