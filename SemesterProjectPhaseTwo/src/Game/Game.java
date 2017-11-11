@@ -134,7 +134,7 @@ public class Game {
 
     /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
-    public void play() throws FileNotFoundException, IOException {
+    public void play() throws FileNotFoundException, IOException, Throwable {
         printWelcome();
         log.write("\n\n >>>  Starting new game <<< \n\n");
 
@@ -144,8 +144,10 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-
+        
         System.out.println("Thank you for playing.  Good bye.");
+        //added to shutdown
+        System.exit(0);
     }
 
     /* A method that is used in the play method to print a message when you start the game */
@@ -163,7 +165,7 @@ public class Game {
        not know to the game it print out the message "I don't know what you mean..." and return false*/
  /* It does the same with Help and GO where it print out a message with the use of the method printHelp and goRoom
        and if the command word is quit it return wantToQuit*/
-    private boolean processCommand(Command command) throws FileNotFoundException, IOException {
+    private boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -395,7 +397,7 @@ public class Game {
         }
     }
 
-    private void saveGame() throws IOException {
+    private void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(gson.toJson(inventory));
         save.addToSaveGame(gson.toJson(itemLocation));
@@ -404,5 +406,6 @@ public class Game {
 //        save.addToSaveGame(gson.toJson(npc2));
 //        save.addToSaveGame(gson.toJson(npc3));
         save.saveGame();
+        
     }
 }
