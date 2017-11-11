@@ -3,6 +3,7 @@ package Game;
 import FileHandling.Logger;
 import FileHandling.Save;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class Game {
 
     //file thats gonna be written to and the extension
     Logger log = new Logger();
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**
      * Used to initialize different rooms and their respective items, and also
@@ -399,13 +400,21 @@ public class Game {
 
     private void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
-        save.addToSaveGame(gson.toJson(inventory));
-        save.addToSaveGame(gson.toJson(itemLocation));
-        save.addToSaveGame(gson.toJson(allMissions));
-//        save.addToSaveGame(gson.toJson(npc1));
-//        save.addToSaveGame(gson.toJson(npc2));
-//        save.addToSaveGame(gson.toJson(npc3));
+        save.addToSaveGame(objectsToSave());
         save.saveGame();
+    }
+    
+    private String objectsToSave(){
+        ArrayList saveObjectsJSON;
+        saveObjectsJSON = new ArrayList(10);
+        saveObjectsJSON.add(inventory);
+        saveObjectsJSON.add(itemLocation);
+        saveObjectsJSON.add(allMissions);
+        //saveObjectsJSON.add(npc1);
+        //saveObjectsJSON.add(npc2);
+        //saveObjectsJSON.add(npc3);
         
+        
+        return gson.toJson(saveObjectsJSON);
     }
 }

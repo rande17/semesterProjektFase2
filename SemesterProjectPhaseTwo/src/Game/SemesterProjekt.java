@@ -21,7 +21,7 @@ public class SemesterProjekt {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, Throwable{
         
         //initializing a game object and starting the game
         Game game = new Game(); //Laver en instans af klassen Game{} og kalder den game
