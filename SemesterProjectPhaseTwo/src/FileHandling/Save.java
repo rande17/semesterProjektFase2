@@ -12,22 +12,20 @@ import java.io.IOException;
  * @author rickie
  */
 public class Save extends WriteToFile {
-    
+
     String saveString = "";
-    
+
     public Save(String _fileName) {
         super(_fileName, false);
     }
-    
-    public void addToSaveGame(String str){
-        
+
+    public void addToSaveGame(String str) {
+
         saveString += str + "\n";
     }
-    
-    public void saveGame() throws IOException{
+
+    public void saveGame() throws IOException, Throwable {
         super.write(saveString);
-        
     }
-    
-    
+
 }
