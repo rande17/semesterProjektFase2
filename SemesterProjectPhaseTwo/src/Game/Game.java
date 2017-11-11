@@ -1,6 +1,8 @@
 package Game;
 
 import FileHandling.Logger;
+import FileHandling.Save;
+import com.google.gson.Gson;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class Game {
 
     //file thats gonna be written to and the extension
     Logger log = new Logger();
+    Gson gson = new Gson();
 
     /**
      * Used to initialize different rooms and their respective items, and also
@@ -191,6 +194,8 @@ public class Game {
             dropItem(command);
         } else if (commandWord == CommandWord.MISSION) {
             showMissions();
+        } else if (commandWord == CommandWord.SAVE) {
+            saveGame();
         }
 
         //setting the condition to complete the mission.
@@ -388,5 +393,16 @@ public class Game {
         } else {
             return true;
         }
+    }
+
+    private void saveGame() throws IOException {
+        Save save = new Save("01");
+        save.addToSaveGame(gson.toJson(inventory));
+        save.addToSaveGame(gson.toJson(itemLocation));
+        save.addToSaveGame(gson.toJson(allMissions));
+//        save.addToSaveGame(gson.toJson(npc1));
+//        save.addToSaveGame(gson.toJson(npc2));
+//        save.addToSaveGame(gson.toJson(npc3));
+        save.saveGame();
     }
 }

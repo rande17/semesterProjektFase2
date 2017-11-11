@@ -17,6 +17,8 @@ import java.io.IOException;
  */
 public class WriteToFile {
 
+    
+    Boolean append = true;
     String userHome = System.getProperty("user.home");
     String defaultFolder = "stranded";
     String fileName;
@@ -27,8 +29,10 @@ public class WriteToFile {
 
     FileWriter writer;
 
-    public WriteToFile(String _fileName) {
+    public WriteToFile(String _fileName, Boolean _append) {
         fileName = _fileName;
+        append = _append;
+        
     }
 
     public WriteToFile(String _fileName, String _ext) {
@@ -38,7 +42,7 @@ public class WriteToFile {
 
     public void write(String str) throws FileNotFoundException, IOException {
         if (writer == null) {
-            writer = new FileWriter(userHome + File.separator + defaultFolder + File.separator + fileName + ext, true);
+            writer = new FileWriter(userHome + File.separator + defaultFolder + File.separator + fileName + ext, append);
         }
         writer.write(str + "\n");
         writer.flush();
