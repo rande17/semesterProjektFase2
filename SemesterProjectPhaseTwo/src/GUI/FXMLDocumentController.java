@@ -7,29 +7,66 @@ package GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
+import Game.*;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 
 /**
  *
  * @author rickie
  */
 public class FXMLDocumentController implements Initializable {
-    
+
+    NPC player = new NPC();
+    int x;
+    int y;
+
     @FXML
-    private Label label;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+    private GridPane roomGridpane;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        createPlayer();
+        
+    }
+
+    public void createPlayer() {
+        Rectangle r = new Rectangle();
+        x=7;
+        y=7;
+//        r.setX(300);
+//        r.setY(300);
+        r.setWidth(20);
+        r.setHeight(20);
+        r.setArcWidth(20);
+        r.setArcHeight(20);
+        roomGridpane.add(r, x, y);
+
+    }
+
+    @FXML
+    private void move(KeyEvent event) {
+        switch (event.getCode()) {
+            case W:
+                y--;
+                break;
+            case D:
+                x++;
+                break;
+            case S:
+                y++;
+                break;
+            case A:
+                x--;
+                break;
+        }
+        createPlayer();
+
+    }
     
+
 }
