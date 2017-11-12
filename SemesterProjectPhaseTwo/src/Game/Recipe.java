@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FileHandling;
+package Game;
 
 /**
  *
  * @author marti
  */
-public class Logger extends WriteToFile {
-    
-    public Logger(){
-        super("game", "log");
-    }
-
+public class Recipe {
+   
 }

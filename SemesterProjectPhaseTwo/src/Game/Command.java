@@ -1,7 +1,5 @@
 package Game;
 
-import Game.CommandWord;
-
 /**
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
