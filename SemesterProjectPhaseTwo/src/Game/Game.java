@@ -23,6 +23,7 @@ public class Game {
        making them private so we only can use them in the Game class */
     private Parser parser;
     private Room currentRoom;
+    private Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
@@ -33,7 +34,7 @@ public class Game {
 
     /* Private method createRoom which means we can only use createRoom in the Game class */
  /* In the method body we set the names of the rooms, create the rooms by using the Room 
-       constructor from the Room class and then set where you can move to from the different rooms by
+       constructor from the Room class and then set where you can move to  from the different rooms by
        using the method setExit from the Room class */
  /* The currentRoom is also given a value which is the start location = outside */
     ItemLocation itemLocation = new ItemLocation();
@@ -47,13 +48,12 @@ public class Game {
     //file thats gonna be written to and the extension
 //    Logger log = new Logger();
 //    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
     /**
      * Used to initialize different rooms and their respective items, and also
      * set the currentRoom
      */
     private void createRooms() {
-        Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
+//        Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
 
         airport = new Room("at the airport");
         beach = new Room("at the beach");
@@ -63,16 +63,14 @@ public class Game {
         camp = new Room("in the camp");
         seaBottom = new Room("at the bottom of the sea");
         raft = new Room("building the raft");
-    
+
         //Initializing missions and putting and putting them in the game
         allMissions.addMission(airport, "First mission", "Find your boardingpass", 100);
         allMissions.addMission(airport, "First item", "Picking up your first item", 100);
-        allMissions.addMission(beach, "Find food to survive", "Pick up food" , 100);
+        allMissions.addMission(beach, "Find food to survive", "Pick up food", 100);
         allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
 
-        airport.setExit("west", beach);
-  
-        
+//        airport.setExit("west", beach);
         //Initializing an item and putting it in a room
         itemLocation.addItem(airport, new Item("Bottle", 2));
         itemLocation.addItem(airport, new Item("Boardingpass", 1));
@@ -136,15 +134,12 @@ public class Game {
         currentRoom = airport;
 
     }
-    
-   
-    
 
     /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
     public void play() throws FileNotFoundException, IOException, Throwable {
         printWelcome();
- //       log.write("\n\n >>>  Starting new game <<< \n\n");
+        //       log.write("\n\n >>>  Starting new game <<< \n\n");
 
         boolean finished = false;
 
@@ -152,7 +147,7 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        
+
         System.out.println("Thank you for playing.  Good bye.");
         //added to shutdown
         System.exit(0);
@@ -178,8 +173,7 @@ public class Game {
 
         CommandWord commandWord = command.getCommandWord();
 
-    //    log.write(commandWord.toString() + " " + command.getSecondWord());
-
+        //    log.write(commandWord.toString() + " " + command.getSecondWord());
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -207,7 +201,7 @@ public class Game {
         } else if (commandWord == CommandWord.SAVE) {
 //            saveGame();
         }
-        
+
         //setting the condition to complete the missions.
         if (inventory.getInventory().containsKey("Boardingpass")) {
             allMissions.setMissionComplete("First mission");
@@ -224,11 +218,13 @@ public class Game {
         if (inventory.getInventory().containsKey("Fish")) {
             allMissions.setMissionComplete("Find food to survive");
         }
-        
-        if(CommandWord.TALK == commandWord){
-           allMissions.setMissionComplete("Find survivors");
-        }
 
+        if (CommandWord.TALK == commandWord) {
+            allMissions.setMissionComplete("Find survivors");
+        }
+        if (currentRoom == airport) {
+            lockRoom();
+        }
         return wantToQuit;
     }
 
@@ -369,21 +365,21 @@ public class Game {
 
         System.out.println("Your missions are: ");
         System.out.println("");
-        
+
         for (String i : viewMission.keySet()) {
 
-            System.out.printf(viewMission.get(i) + "| The mission is complete: "+ missionStatus.get(i)+"\n" );
-         
+            System.out.printf(viewMission.get(i) + "| The mission is complete: " + missionStatus.get(i) + "\n");
+
             if (missionStatus.get(i) == false) {
                 System.out.println("Mission is in progress.");
             }
-            
+
             if (missionStatus.get(i) == true) {
                 System.out.println("Mission is complete");
             }
             System.out.println("");
         }
-        
+
         for (String i : missionStatus.keySet()) {
             missionStatus.get(i);
         }
@@ -420,6 +416,18 @@ public class Game {
             System.out.println("Can't drop item that isn't in inventory " + command.getSecondWord());
         }
 
+    }
+
+    private void lockRoom() {
+        if (inventory.getInventory().containsKey("Boardingpass") == false) {
+
+            airport.setExit("west", airport);
+
+            System.out.println("You have no boardingpass, please return when you do");
+        } else {
+            airport.setExit("west", beach);
+            System.out.println("Exits: west");
+        }
     }
 
     /**
