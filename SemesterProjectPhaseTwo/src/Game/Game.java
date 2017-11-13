@@ -7,8 +7,9 @@ import FileHandling.Save;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Scanner;
+import java.util.HashMap;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -46,7 +47,6 @@ public class Game {
     //file thats gonna be written to and the extension
 //    Logger log = new Logger();
 //    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
     /**
      * Used to initialize different rooms and their respective items, and also
      * set the currentRoom
@@ -62,16 +62,15 @@ public class Game {
         camp = new Room("in the camp");
         seaBottom = new Room("at the bottom of the sea");
         raft = new Room("building the raft");
-    
+
         //Creating missions and putting and putting them in the game
         allMissions.addMission(airport, "First mission", "Find your boardingpass", 100);
         allMissions.addMission(airport, "First item", "Picking up your first item", 100);
-        allMissions.addMission(beach, "Find food to survive", "Pick up food" , 100);
+        allMissions.addMission(beach, "Find food to survive", "Pick up food", 100);
         allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
 
         airport.setExit("west", beach);
-  
-        
+
 //        Room nextRoom = currentRoom.getExit(direction);
 //        /* loop that when next room is equel to null it print a message that says "there is no door" 
 //           but if nextRoom is not equel null set currentRoom to nextRoom and print the description of the new room*/
@@ -80,7 +79,6 @@ public class Game {
 //        } else {
 //            currentRoom = nextRoom;
 //            System.out.println(currentRoom.getLongDescription());
-        
         //Initializing an item and putting it in a room
         itemLocation.addItem(airport, new Item("Bottle", 2));
         itemLocation.addItem(airport, new Item("Boardingpass", 1));
@@ -108,7 +106,8 @@ public class Game {
         npc1.setName("BS Christiansen");
         npc1.setCurrentRoom(jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, but he is heavly injured on his right leg so he cant move ");
-        npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter.");
+        npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter."
+                + "You can craft items to help you survive, if you have the right components");
 
         mountain.setExit("south", jungle);
         itemLocation.addItem(mountain, new Item("Stone", 2));
@@ -117,7 +116,7 @@ public class Game {
         npc3.setName("Joseph Schitzel");
         npc3.setCurrentRoom(mountain);
         npc3.setDescribtion("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
-        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's.");
+        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's." + "\n" + "Come on, fetch me some eggs!");
 
         cave.setExit("west", jungle);
         itemLocation.addItem(cave, new Item("Shroom", 1));
@@ -129,7 +128,8 @@ public class Game {
         npc2.setCurrentRoom(cave);
         npc2.setDescribtion("A mysterious crab that you dont really get why can talk");
         npc2.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them all mr.Crab and know this island like the back of my hand.... oh i mean claw"
-                + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff ");
+                + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
+                + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
 
         camp.setExit("east", beach);
         camp.setExit("west", raft);
@@ -145,15 +145,12 @@ public class Game {
         currentRoom = airport;
 
     }
-    
-   
-    
 
     /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
     public void play() throws FileNotFoundException, IOException, Throwable {
         printWelcome();
- //       log.write("\n\n >>>  Starting new game <<< \n\n");
+        //       log.write("\n\n >>>  Starting new game <<< \n\n");
 
         boolean finished = false;
 
@@ -161,7 +158,7 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        
+
         System.out.println("Thank you for playing.  Good bye.");
         //added to shutdown
         System.exit(0);
@@ -187,8 +184,7 @@ public class Game {
 
         CommandWord commandWord = command.getCommandWord();
 
-    //    log.write(commandWord.toString() + " " + command.getSecondWord());
-
+        //    log.write(commandWord.toString() + " " + command.getSecondWord());
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -215,27 +211,27 @@ public class Game {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
 //            saveGame();
-        
-        //setting the condition to complete the missions.
-        if (inventory.getInventory().containsKey("Boardingpass")) {
-            allMissions.setMissionComplete("First mission");
-        }
-        
-        if(inventory.getInventory().containsKey("Boardingpass")) {
-           allMissions.setMissionComplete("First item");
-        }
-        
-        if(inventory.getInventory().containsKey("Bottle")) {
-           allMissions.setMissionComplete("First item");
-        }
-        
-        if(inventory.getInventory().containsKey("Fish")) {
-           allMissions.setMissionComplete("Find food to survive");
-        }
-        
-        if(CommandWord.TALK == commandWord){
-           allMissions.setMissionComplete("Find survivors");
-        }
+
+            //setting the condition to complete the missions.
+            if (inventory.getInventory().containsKey("Boardingpass")) {
+                allMissions.setMissionComplete("First mission");
+            }
+
+            if (inventory.getInventory().containsKey("Boardingpass")) {
+                allMissions.setMissionComplete("First item");
+            }
+
+            if (inventory.getInventory().containsKey("Bottle")) {
+                allMissions.setMissionComplete("First item");
+            }
+
+            if (inventory.getInventory().containsKey("Fish")) {
+                allMissions.setMissionComplete("Find food to survive");
+            }
+
+            if (CommandWord.TALK == commandWord) {
+                allMissions.setMissionComplete("Find survivors");
+            }
         }
 
         return wantToQuit;
@@ -340,15 +336,29 @@ public class Game {
     }
 
     private void TalkTo() {
-
         if (npc1.getCurrentRoom() == currentRoom) {
             System.out.println(npc1.getDescribtion() + ", yet he still gives u good advice:\n" + npc1.getDialog(0));
-        } else if (npc2.getCurrentRoom() == currentRoom) {
+        } else if (npc2.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
+            pregnant();
         } else if (npc3.getCurrentRoom() == currentRoom) {
             System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
         } else {
             System.out.println("There is nobody to communicate with in this Room");
+        }
+
+    }
+    //Create a question
+    public void pregnant() {
+        Scanner scan = new Scanner(System.in); //Creates a new scanner
+        System.out.println("Are u pregnant?"); //Asks question
+        String input = scan.nextLine(); //Waits for input
+        if (input.equalsIgnoreCase("yes")) { 
+            System.out.println("Great! congratulations");
+        } else if (input.equalsIgnoreCase("no")) {
+            System.out.println("Keep trying it will happen.");
+        } else { //If the input is anything else
+            System.out.println("This is a yes or no question.");
         }
 
     }
@@ -363,21 +373,21 @@ public class Game {
 
         System.out.println("Your missions are: ");
         System.out.println("");
-        
+
         for (String i : viewMission.keySet()) {
 
-            System.out.printf(viewMission.get(i) + "| The mission is complete: "+ missionStatus.get(i)+"\n" );
-         
+            System.out.printf(viewMission.get(i) + "| The mission is complete: " + missionStatus.get(i) + "\n");
+
             if (missionStatus.get(i) == false) {
                 System.out.println("Mission is in progress.");
             }
-            
+
             if (missionStatus.get(i) == true) {
                 System.out.println("Mission is complete");
             }
             System.out.println("");
         }
-        
+
         for (String i : missionStatus.keySet()) {
             missionStatus.get(i);
         }
