@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.HashMap;
+import jdk.nashorn.internal.parser.TokenType;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -39,10 +40,15 @@ public class Game {
     ItemLocation itemLocation = new ItemLocation();
     Inventory inventory = new Inventory();
     Item debug = new Item("debug");
+    Item campfire = new Item("Campfire", 2);
+    Item spear = new Item("Spear", 2);
+    Item axe = new Item("Axe",2);
+    Item raft = new Item("Raft",2);
     Mission allMissions = new Mission();
     NPC npc1 = new NPC();
     NPC npc2 = new NPC();
     NPC npc3 = new NPC();
+
 
     //file thats gonna be written to and the extension
 //    Logger log = new Logger();
@@ -210,8 +216,10 @@ public class Game {
         } else if (commandWord == CommandWord.MISSION) {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
-//            saveGame();
+        } else if (commandWord == commandWord.CRAFT) {
+            craftItem(command);
 
+//            saveGame();
             //setting the condition to complete the missions.
             if (inventory.getInventory().containsKey("Boardingpass")) {
                 allMissions.setMissionComplete("First mission");
@@ -348,12 +356,13 @@ public class Game {
         }
 
     }
+
     //Create a question
     public void pregnant() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
         System.out.println("Are u pregnant?"); //Asks question
         String input = scan.nextLine(); //Waits for input
-        if (input.equalsIgnoreCase("yes")) { 
+        if (input.equalsIgnoreCase("yes")) {
             System.out.println("Great! congratulations");
         } else if (input.equalsIgnoreCase("no")) {
             System.out.println("Keep trying it will happen.");
@@ -361,6 +370,59 @@ public class Game {
             System.out.println("This is a yes or no question.");
         }
 
+    }
+
+    public void craftItem(Command command) {
+
+     String craft = command.getSecondWord();
+        if (craft.equalsIgnoreCase("Recipe")) {
+            System.out.println("This is a list of the games craftable items and their recipes:");
+            System.out.println("Campfire: Lumber, Stick and Flint" + "\n" + "Spear: Stick, Fint and Rope or Lian" + "\n" + "Axe: Stick, Stone and Rope or Lian" + "\n" + "Raft: Lumber, Stick and Rope or Lian");
+        }
+        
+     else if (craft.equalsIgnoreCase("Campfire")&&inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")) {    
+            inventory.addItemInInventory(campfire);
+            inventory.dropItemInventory("Lumber");
+            inventory.dropItemInventory("Stick");
+            inventory.dropItemInventory("Flint");
+            System.out.println("A Campfire is added to your inventory");
+        }
+        else if (craft.equalsIgnoreCase("Spear")&&inventory.getInventory().containsKey("Stick")&& inventory.getInventory().containsKey("Flint")
+                && (inventory.getInventory().containsKey("Lian")||inventory.getInventory().containsKey("Rope"))) {
+            inventory.addItemInInventory(spear);
+            inventory.dropItemInventory("Stick");
+            inventory.dropItemInventory("Flint");
+            System.out.println("A Spear is added to your inventory");
+            if (inventory.getInventory().containsKey("Rope")) {
+                inventory.dropItemInventory("Rope");
+            }
+            else inventory.dropItemInventory("Lian");
+        }
+        else if (craft.equalsIgnoreCase("Axe")&&inventory.getInventory().containsKey("Stick")&& inventory.getInventory().containsKey("Stone")
+                && (inventory.getInventory().containsKey("Lian")|inventory.getInventory().containsKey("Rope"))) {
+            inventory.addItemInInventory(axe);
+            inventory.dropItemInventory("Stick");
+            inventory.dropItemInventory("Stone");
+            System.out.println("An axe is added to your inventory");
+            if (inventory.getInventory().containsKey("Rope")) {
+                inventory.dropItemInventory("Rope");
+            }
+            else inventory.dropItemInventory("Lian");
+               
+        }
+        else if (craft.equalsIgnoreCase("Raft")&&inventory.getInventory().containsKey("Lumber")&& inventory.getInventory().containsKey("Stick")
+                && (inventory.getInventory().containsKey("Lian")|inventory.getInventory().containsKey("Rope"))) {
+            inventory.addItemInInventory(spear);
+            inventory.dropItemInventory("Lumber");
+            inventory.dropItemInventory("Stick");
+            System.out.println("A raft is added to your inventory");
+            if (inventory.getInventory().containsKey("Rope")) {
+                inventory.dropItemInventory("Rope");
+            }
+            else inventory.dropItemInventory("Lian");
+        }
+           else 
+               System.out.println("You can not craft that Item.");
     }
 
     /* 
