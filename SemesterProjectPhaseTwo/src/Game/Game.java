@@ -63,7 +63,7 @@ public class Game {
         seaBottom = new Room("at the bottom of the sea");
         raft = new Room("building the raft");
     
-        //Initializing missions and putting and putting them in the game
+        //Creating missions and putting and putting them in the game
         allMissions.addMission(airport, "First mission", "Find your boardingpass", 100);
         allMissions.addMission(airport, "First item", "Picking up your first item", 100);
         allMissions.addMission(beach, "Find food to survive", "Pick up food" , 100);
