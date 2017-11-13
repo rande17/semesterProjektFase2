@@ -2,8 +2,8 @@ package Game;
 
 import FileHandling.Logger;
 import FileHandling.Save;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,8 +44,8 @@ public class Game {
     NPC npc3 = new NPC();
 
     //file thats gonna be written to and the extension
-    Logger log = new Logger();
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//    Logger log = new Logger();
+//    Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**
      * Used to initialize different rooms and their respective items, and also
@@ -62,15 +62,28 @@ public class Game {
         camp = new Room("in the camp");
         seaBottom = new Room("at the bottom of the sea");
         raft = new Room("building the raft");
+    
+        //Initializing missions and putting and putting them in the game
+        allMissions.addMission(airport, "First mission", "Find your boardingpass", 100);
+        allMissions.addMission(airport, "First item", "Picking up your first item", 100);
+        allMissions.addMission(beach, "Find food to survive", "Pick up food" , 100);
+        allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
 
         airport.setExit("west", beach);
-
+  
+        
+//        Room nextRoom = currentRoom.getExit(direction);
+//        /* loop that when next room is equel to null it print a message that says "there is no door" 
+//           but if nextRoom is not equel null set currentRoom to nextRoom and print the description of the new room*/
+//        if (nextRoom == null) {
+//            System.out.println("There is no path!");
+//        } else {
+//            currentRoom = nextRoom;
+//            System.out.println(currentRoom.getLongDescription());
+        
         //Initializing an item and putting it in a room
         itemLocation.addItem(airport, new Item("Bottle", 2));
         itemLocation.addItem(airport, new Item("Boardingpass", 1));
-
-        //Initializing an mission and putting it in a room
-        allMissions.addMission(airport, "First mission", "Find your boardingpass", 5);
 
         //Setting the the exit
         beach.setExit("north", jungle);
@@ -132,12 +145,15 @@ public class Game {
         currentRoom = airport;
 
     }
+    
+   
+    
 
     /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
     public void play() throws FileNotFoundException, IOException, Throwable {
         printWelcome();
-        log.write("\n\n >>>  Starting new game <<< \n\n");
+ //       log.write("\n\n >>>  Starting new game <<< \n\n");
 
         boolean finished = false;
 
@@ -171,7 +187,7 @@ public class Game {
 
         CommandWord commandWord = command.getCommandWord();
 
-        log.write(commandWord.toString() + " " + command.getSecondWord());
+    //    log.write(commandWord.toString() + " " + command.getSecondWord());
 
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
@@ -198,12 +214,28 @@ public class Game {
         } else if (commandWord == CommandWord.MISSION) {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
-            saveGame();
-        }
-
-        //setting the condition to complete the mission.
+//            saveGame();
+        
+        //setting the condition to complete the missions.
         if (inventory.getInventory().containsKey("Boardingpass")) {
             allMissions.setMissionComplete("First mission");
+        }
+        
+        if(inventory.getInventory().containsKey("Boardingpass")) {
+           allMissions.setMissionComplete("First item");
+        }
+        
+        if(inventory.getInventory().containsKey("Bottle")) {
+           allMissions.setMissionComplete("First item");
+        }
+        
+        if(inventory.getInventory().containsKey("Fish")) {
+           allMissions.setMissionComplete("Find food to survive");
+        }
+        
+        if(CommandWord.TALK == commandWord){
+           allMissions.setMissionComplete("Find survivors");
+        }
         }
 
         return wantToQuit;
@@ -330,20 +362,24 @@ public class Game {
         HashMap<String, Boolean> missionStatus = allMissions.missionStatus;
 
         System.out.println("Your missions are: ");
+        System.out.println("");
+        
         for (String i : viewMission.keySet()) {
 
-            System.out.println(viewMission.get(i) + "\t| The mission is complete: " + missionStatus.get(i));
-        }
-
-        for (String i : missionStatus.keySet()) {
-            missionStatus.get(i);
-
+            System.out.printf(viewMission.get(i) + "| The mission is complete: "+ missionStatus.get(i)+"\n" );
+         
             if (missionStatus.get(i) == false) {
                 System.out.println("Mission is in progress.");
             }
+            
             if (missionStatus.get(i) == true) {
                 System.out.println("Mission is complete");
             }
+            System.out.println("");
+        }
+        
+        for (String i : missionStatus.keySet()) {
+            missionStatus.get(i);
         }
 
     }
@@ -398,23 +434,23 @@ public class Game {
         }
     }
 
-    private void saveGame() throws IOException, Throwable {
-        Save save = new Save("01");
-        save.addToSaveGame(objectsToSave());
-        save.saveGame();
-    }
-    
-    private String objectsToSave(){
-        ArrayList saveObjectsJSON;
-        saveObjectsJSON = new ArrayList(10);
-        saveObjectsJSON.add(inventory);
-        saveObjectsJSON.add(itemLocation);
-        saveObjectsJSON.add(allMissions);
-        //saveObjectsJSON.add(npc1);
-        //saveObjectsJSON.add(npc2);
-        //saveObjectsJSON.add(npc3);
-        
-        
-        return gson.toJson(saveObjectsJSON);
-    }
+//    private void saveGame() throws IOException, Throwable {
+//        Save save = new Save("01");
+//        save.addToSaveGame(objectsToSave());
+//        save.saveGame();
+//    }
+//    
+//    private String objectsToSave(){
+//        ArrayList saveObjectsJSON;
+//        saveObjectsJSON = new ArrayList(10);
+//        saveObjectsJSON.add(inventory);
+//        saveObjectsJSON.add(itemLocation);
+//        saveObjectsJSON.add(allMissions);
+//        //saveObjectsJSON.add(npc1);
+//        //saveObjectsJSON.add(npc2);
+//        //saveObjectsJSON.add(npc3);
+//        
+//        
+//        return gson.toJson(saveObjectsJSON);
+//    }
 }
