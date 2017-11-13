@@ -7,9 +7,10 @@ import FileHandling.Save;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.HashMap;
+import jdk.nashorn.internal.parser.TokenType;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -40,10 +41,15 @@ public class Game {
     ItemLocation itemLocation = new ItemLocation();
     Inventory inventory = new Inventory();
     Item debug = new Item("debug");
+    Item campfire = new Item("Campfire","", 2);
+    Item spear = new Item("Spear", "",2);
+    Item axe = new Item("Axe","",2);
+    Item raftCraft = new Item("Raft","", 2);
     Mission allMissions = new Mission();
     NPC npc1 = new NPC();
     NPC npc2 = new NPC();
     NPC npc3 = new NPC();
+
 
     //file thats gonna be written to and the extension
 //    Logger log = new Logger();
@@ -64,14 +70,14 @@ public class Game {
         seaBottom = new Room("at the bottom of the sea");
         raft = new Room("building the raft");
 
-        //Initializing missions and putting and putting them in the game
+        //Creating missions and putting and putting them in the game
         allMissions.addMission(airport, "First mission", "Find your boardingpass", 100);
         allMissions.addMission(airport, "First item", "Picking up your first item", 100);
         allMissions.addMission(beach, "Find food to survive", "Pick up food", 100);
         allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
         allMissions.addMission(cave, "Get high", "Eat the shrooms", 100);
 
-//        airport.setExit("west", beach);
+//        airport.setExit("west", airport);
         //Initializing an item and putting it in a room
         itemLocation.addItem(airport, new Item("Bottle", "This is a bottle that have been left behind by someone", 2));
         itemLocation.addItem(airport, new Item("Boardingpass", "This is a boardingpass to get on the plane to Hawaii", 1));
@@ -98,7 +104,8 @@ public class Game {
         npc1.setName("BS Christiansen");
         npc1.setCurrentRoom(jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, but he is heavly injured on his right leg so he cant move ");
-        npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter.");
+        npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter."
+                + "You can craft items to help you survive, if you have the right components");
 
         mountain.setExit("south", jungle);
         itemLocation.addItem(mountain, new Item("Stone","This is a stone, maybe it can be used to create something more usefull", 2));
@@ -107,7 +114,7 @@ public class Game {
         npc3.setName("Joseph Schitzel");
         npc3.setCurrentRoom(mountain);
         npc3.setDescribtion("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
-        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's.");
+        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's." + "\n" + "Come on, fetch me some eggs!");
 
         cave.setExit("west", jungle);
         itemLocation.addItem(cave, new Item("Shroom","these shrooms look suspecius, but maybe the can be", 1));
@@ -119,7 +126,8 @@ public class Game {
         npc2.setCurrentRoom(cave);
         npc2.setDescribtion("A mysterious crab that you dont really get why can talk");
         npc2.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them all mr.Crab and know this island like the back of my hand.... oh i mean claw"
-                + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff ");
+                + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
+                + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
 
         camp.setExit("east", beach);
         camp.setExit("west", raft);
@@ -200,33 +208,38 @@ public class Game {
         } else if (commandWord == CommandWord.MISSION) {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
-//            saveGame();
+            //            saveGame();
+        } else if (commandWord == commandWord.CRAFT) {
+            craftItem(command);
         }
+    
 
-        //setting the condition to complete the missions.
-        if (inventory.getInventory().containsKey("Boardingpass")) {
-            allMissions.setMissionComplete("First mission");
-        }
 
-        if (inventory.getInventory().containsKey("Boardingpass")) {
-            allMissions.setMissionComplete("First item");
-        }
+            //setting the condition to complete the missions.
+            if (inventory.getInventory().containsKey("Boardingpass")) {
+                allMissions.setMissionComplete("First mission");
+            }
 
-        if (inventory.getInventory().containsKey("Bottle")) {
-            allMissions.setMissionComplete("First item");
-        }
+            if (inventory.getInventory().containsKey("Boardingpass")) {
+                allMissions.setMissionComplete("First item");
+            }
 
-        if (inventory.getInventory().containsKey("Fish")) {
-            allMissions.setMissionComplete("Find food to survive");
-        }
+            if (inventory.getInventory().containsKey("Bottle")) {
+                allMissions.setMissionComplete("First item");
+            }
 
-        if (CommandWord.TALK == commandWord) {
-            allMissions.setMissionComplete("Find survivors");
-        }
-        if (currentRoom == airport) {
+            if (inventory.getInventory().containsKey("Fish")) {
+                allMissions.setMissionComplete("Find food to survive");
+            }
+
+            if (CommandWord.TALK == commandWord) {
+                allMissions.setMissionComplete("Find survivors");
+            }
+            
+            if (currentRoom == airport) {
             lockRoom();
-        }
-        return wantToQuit;
+            }
+            return wantToQuit;
     }
 
     /* A method to print a message that show the different commands everytime the command help is used */
@@ -328,11 +341,11 @@ public class Game {
     }
 
     private void TalkTo() {
-
         if (npc1.getCurrentRoom() == currentRoom) {
             System.out.println(npc1.getDescribtion() + ", yet he still gives u good advice:\n" + npc1.getDialog(0));
-        } else if (npc2.getCurrentRoom() == currentRoom) {
+        } else if (npc2.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
+            pregnant();
         } else if (npc3.getCurrentRoom() == currentRoom) {
             System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
         } else {
@@ -356,6 +369,58 @@ public class Game {
 
     }
 
+    public void craftItem(Command command) {
+
+     String craft = command.getSecondWord();
+        if (craft.equalsIgnoreCase("Recipe")) {
+            System.out.println("This is a list of the games craftable items and their recipes:");
+            System.out.println("Campfire: Lumber, Stick and Flint" + "\n" + "Spear: Stick, Fint and Rope or Lian" + "\n" + "Axe: Stick, Stone and Rope or Lian" + "\n" + "Raft: Lumber, Stick and Rope or Lian");
+        }
+        
+     else if (craft.equalsIgnoreCase("Campfire")&&inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")) {    
+            inventory.addItemInInventory(campfire);
+            inventory.dropItemInventory("Lumber");
+            inventory.dropItemInventory("Stick");
+            inventory.dropItemInventory("Flint");
+            System.out.println("A Campfire is added to your inventory");
+        }
+        else if (craft.equalsIgnoreCase("Spear")&&inventory.getInventory().containsKey("Stick")&& inventory.getInventory().containsKey("Flint")
+                && (inventory.getInventory().containsKey("Lian")||inventory.getInventory().containsKey("Rope"))) {
+            inventory.addItemInInventory(spear);
+            inventory.dropItemInventory("Stick");
+            inventory.dropItemInventory("Flint");
+            System.out.println("A Spear is added to your inventory");
+            if (inventory.getInventory().containsKey("Rope")) {
+                inventory.dropItemInventory("Rope");
+            }
+            else inventory.dropItemInventory("Lian");
+        }
+        else if (craft.equalsIgnoreCase("Axe")&&inventory.getInventory().containsKey("Stick")&& inventory.getInventory().containsKey("Stone")
+                && (inventory.getInventory().containsKey("Lian")|inventory.getInventory().containsKey("Rope"))) {
+            inventory.addItemInInventory(axe);
+            inventory.dropItemInventory("Stick");
+            inventory.dropItemInventory("Stone");
+            System.out.println("An axe is added to your inventory");
+            if (inventory.getInventory().containsKey("Rope")) {
+                inventory.dropItemInventory("Rope");
+            }
+            else inventory.dropItemInventory("Lian");
+               
+        }
+        else if (craft.equalsIgnoreCase("Raft")&&inventory.getInventory().containsKey("Lumber")&& inventory.getInventory().containsKey("Stick")
+                && (inventory.getInventory().containsKey("Lian")|inventory.getInventory().containsKey("Rope"))) {
+            inventory.addItemInInventory(spear);
+            inventory.dropItemInventory("Lumber");
+            inventory.dropItemInventory("Stick");
+            System.out.println("A raft is added to your inventory");
+            if (inventory.getInventory().containsKey("Rope")) {
+                inventory.dropItemInventory("Rope");
+            }
+            else inventory.dropItemInventory("Lian");
+        }
+           else 
+               System.out.println("You can not craft that Item.");
+    }
     /* 
     * Method used for showing missions
      */
