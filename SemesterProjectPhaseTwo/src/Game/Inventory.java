@@ -18,17 +18,29 @@ public class Inventory {
     private int inventoryMaxWeight = 10; //set default inventory weight 
     private int currentInventoryWeight = 0;
     private HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
+    private HashMap<String, Integer> itemWeight = new HashMap<>();
 //constuctor  
 
     Inventory() {
     }
 //constructer
-
+/**
+ * 
+ * @param newInventoryMaxWeight set the max weight of the inventory when constructed
+ */
     Inventory(int newInventoryMaxWeight) {
         inventoryMaxWeight = newInventoryMaxWeight;
     }
 //get max inventory weight
-
+/**
+ * 
+ * @param newInventoryMaxWeight set the max weight of the inventory when constructed
+ * @param newInventoryMaxQuantity set the max quantity of the inventory when constructed
+ */
+    Inventory(int newInventoryMaxWeight, int newInventoryMaxQuantity) {
+        inventoryMaxWeight = newInventoryMaxWeight;
+        inventoryMaxQuantity = newInventoryMaxQuantity;
+    }
     public int getInventoryMaxWeight() {
         return inventoryMaxWeight;
     }
@@ -37,8 +49,11 @@ public class Inventory {
         int quantity = 0;
         String itemInInventory = "";
         String itemName = _item.getName();
+        int weightOfItem = _item.getWeight();
+        
+        itemWeight.put(itemName, weightOfItem );
 
-        if (currentQuantity < inventoryMaxQuantity) {
+        if (currentQuantity < inventoryMaxQuantity && (weightOfItem + currentInventoryWeight) <=inventoryMaxWeight) {
             if (inventory.containsKey(itemName)) {
                 quantity = inventory.get(itemName) + 1;
 
@@ -47,6 +62,7 @@ public class Inventory {
             }
             inventory.put(itemName, quantity);
             currentQuantity += 1;
+            currentInventoryWeight += weightOfItem;
         } else {
             System.out.println("You can't pickup this item");
         }
@@ -63,7 +79,7 @@ public class Inventory {
             inventory.replace(_string, quantity);
 
         }
-        
+        currentInventoryWeight -= itemWeight.get(_string);
         currentQuantity = currentQuantity - 1;
 //        getItems itemList
 //        .put(_item, quantity);
@@ -72,17 +88,17 @@ public class Inventory {
 
 //get current inventory weight
     public int getCurrentInventoryWeight() {
-        currentInventoryWeight = 0;
+        //currentInventoryWeight = 0;
         //Iterates through list of item in inventory to get current inventory weight 
 
-        for (String items : inventory.keySet()) {
-            int quantity = inventory.get(items);
+        //for (String items : inventory.keySet()) {
+         //   int quantity = inventory.get(items);
 //            int weight = items.getWeight();
-            int weight = 1;
-            int thisItemWeight = quantity * weight;
-            currentInventoryWeight += thisItemWeight;
+         //   int weight = 1;
+         //   int thisItemWeight = quantity * weight;
+         //   currentInventoryWeight += thisItemWeight;
 
-        }
+        //}
 
         return currentInventoryWeight;
     }
@@ -97,6 +113,10 @@ public class Inventory {
         inventoryMaxWeight = newInventoryMaxWeight;
     }
 
+    public void setinventoryMaxQuantity(int newInventoryMaxQuantity){
+        inventoryMaxQuantity = newInventoryMaxQuantity;
+    }
+    
     public void useItem() {
 
     }
