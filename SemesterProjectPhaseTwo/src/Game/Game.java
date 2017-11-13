@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -72,15 +73,6 @@ public class Game {
         airport.setExit("west", beach);
   
         
-//        Room nextRoom = currentRoom.getExit(direction);
-//        /* loop that when next room is equel to null it print a message that says "there is no door" 
-//           but if nextRoom is not equel null set currentRoom to nextRoom and print the description of the new room*/
-//        if (nextRoom == null) {
-//            System.out.println("There is no path!");
-//        } else {
-//            currentRoom = nextRoom;
-//            System.out.println(currentRoom.getLongDescription());
-        
         //Initializing an item and putting it in a room
         itemLocation.addItem(airport, new Item("Bottle", 2));
         itemLocation.addItem(airport, new Item("Boardingpass", 1));
@@ -89,7 +81,6 @@ public class Game {
         beach.setExit("north", jungle);
         beach.setExit("south", seaBottom);
         beach.setExit("west", camp);
-
         itemLocation.addItem(beach, new Item("Stone", 2));
         itemLocation.addItem(beach, new Item("Fish", 1));
         itemLocation.addItem(beach, new Item("Flint", 2));
@@ -215,27 +206,27 @@ public class Game {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
 //            saveGame();
+        }
         
         //setting the condition to complete the missions.
         if (inventory.getInventory().containsKey("Boardingpass")) {
             allMissions.setMissionComplete("First mission");
         }
-        
-        if(inventory.getInventory().containsKey("Boardingpass")) {
-           allMissions.setMissionComplete("First item");
+
+        if (inventory.getInventory().containsKey("Boardingpass")) {
+            allMissions.setMissionComplete("First item");
         }
-        
-        if(inventory.getInventory().containsKey("Bottle")) {
-           allMissions.setMissionComplete("First item");
+
+        if (inventory.getInventory().containsKey("Bottle")) {
+            allMissions.setMissionComplete("First item");
         }
-        
-        if(inventory.getInventory().containsKey("Fish")) {
-           allMissions.setMissionComplete("Find food to survive");
+
+        if (inventory.getInventory().containsKey("Fish")) {
+            allMissions.setMissionComplete("Find food to survive");
         }
         
         if(CommandWord.TALK == commandWord){
            allMissions.setMissionComplete("Find survivors");
-        }
         }
 
         return wantToQuit;
@@ -349,6 +340,21 @@ public class Game {
             System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
         } else {
             System.out.println("There is nobody to communicate with in this Room");
+        }
+
+    }
+
+    //Create a question
+    public void pregnant() {
+        Scanner scan = new Scanner(System.in); //Creates a new scanner
+        System.out.println("Are u pregnant?"); //Asks question
+        String input = scan.nextLine(); //Waits for input
+        if (input.equalsIgnoreCase("yes")) {
+            System.out.println("Great! congratulations");
+        } else if (input.equalsIgnoreCase("no")) {
+            System.out.println("Keep trying it will happen.");
+        } else { //If the input is anything else
+            System.out.println("This is a yes or no question.");
         }
 
     }
