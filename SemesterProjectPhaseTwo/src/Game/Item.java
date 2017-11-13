@@ -23,6 +23,7 @@ public class Item {
     private Date respawnTime;
     private Room mapLocation;
     private String name;
+    private String describtion;
 
     /*
     Klasse: Item
@@ -34,9 +35,10 @@ public class Item {
         this.name = name;
     }
 
-    Item(String name, int weight) {
+    Item(String name, String describtion, int weight) {
         this.name = name;
         this.weight = weight;
+        this.describtion = describtion;
     }
 
     Item(String name, int weight, Date respawnTime, Room mapLocation) {
