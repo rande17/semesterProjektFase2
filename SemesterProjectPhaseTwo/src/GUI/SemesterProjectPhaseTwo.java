@@ -23,8 +23,10 @@ public class SemesterProjectPhaseTwo extends Application {
         
         Scene scene = new Scene(root);
         
+        stage.setTitle("Semester Projekt");
         stage.setScene(scene);
         stage.show();
+        scene.getRoot().requestFocus();
     }
 
     /**
