@@ -10,10 +10,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
-import Game.*;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 /**
  *
@@ -21,52 +20,43 @@ import javafx.scene.shape.Rectangle;
  */
 public class FXMLDocumentController implements Initializable {
 
-    NPC player = new NPC();
-    int x;
-    int y;
-
     @FXML
-    private GridPane roomGridpane;
+    private GridPane roomGridPane;
+    @FXML
+    private Rectangle playerRectangle;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        createPlayer();
-        
-    }
-
-    public void createPlayer() {
-        Rectangle r = new Rectangle();
-        x=7;
-        y=7;
-//        r.setX(300);
-//        r.setY(300);
-        r.setWidth(20);
-        r.setHeight(20);
-        r.setArcWidth(20);
-        r.setArcHeight(20);
-        roomGridpane.add(r, x, y);
-
+        //TODO
     }
 
     @FXML
-    private void move(KeyEvent event) {
-        switch (event.getCode()) {
+    private void handleKeyPressed(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
             case W:
-                y--;
+                GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) - 1);
+                System.out.println("Pressed: " + keyEvent.getCode());
                 break;
             case D:
-                x++;
+                GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) + 1);
+                System.out.println("Pressed: " + keyEvent.getCode());
                 break;
             case S:
-                y++;
+                GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) + 1);
+                System.out.println("Pressed: " + keyEvent.getCode());
                 break;
             case A:
-                x--;
+                GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) - 1);
+                System.out.println("Pressed: " + keyEvent.getCode());
+                break;
+            case ESCAPE:
+                Stage stage = (Stage) roomGridPane.getScene().getWindow();
+                stage.close();
+                break;
+            default:
+                System.out.println("Pressed not defined in switch!");
                 break;
         }
-        createPlayer();
-
     }
-    
 
 }
