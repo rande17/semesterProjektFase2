@@ -2,8 +2,8 @@ package Game;
 
 import FileHandling.Logger;
 import FileHandling.Save;
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public class Game {
 
     /* data field with the attributes parser and currentRoom
        making them private so we only can use them in the Game class */
+    private boolean hasBoardingpass=false;
     private Parser parser;
     private Room currentRoom;
     private Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
@@ -41,19 +42,19 @@ public class Game {
     ItemLocation itemLocation = new ItemLocation();
     Inventory inventory = new Inventory();
     Item debug = new Item("debug");
-    Item campfire = new Item("Campfire","", 2);
-    Item spear = new Item("Spear", "",2);
-    Item axe = new Item("Axe","",2);
-    Item raftCraft = new Item("Raft","", 2);
+    Item campfire = new Item("Campfire", "", 2);
+    Item spear = new Item("Spear", "", 2);
+    Item axe = new Item("Axe", "", 2);
+    Item raftCraft = new Item("Raft", "", 2);
     Mission allMissions = new Mission();
     NPC npc1 = new NPC();
     NPC npc2 = new NPC();
     NPC npc3 = new NPC();
 
-
     //file thats gonna be written to and the extension
-//    Logger log = new Logger();
-//    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    Logger log = new Logger();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     /**
      * Used to initialize different rooms and their respective items, and also
      * set the currentRoom
@@ -86,20 +87,20 @@ public class Game {
         beach.setExit("north", jungle);
         beach.setExit("south", seaBottom);
         beach.setExit("west", camp);
-        itemLocation.addItem(beach, new Item("Stone","This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(beach, new Item("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(beach, new Item("Fish", "Why are you inspecting this item, its GOD damn fish", 1));
-        itemLocation.addItem(beach, new Item("Flint","This a flint, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(beach, new Item("Rope","This is some rope that has been washed up on the beach shore from the plane crash ", 2));
-        itemLocation.addItem(beach, new Item("Stick","This is a small stick, maybe it can be used to create something more usefull", 1));
+        itemLocation.addItem(beach, new Item("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(beach, new Item("Rope", "This is some rope that has been washed up on the beach shore from the plane crash ", 2));
+        itemLocation.addItem(beach, new Item("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
 
         jungle.setExit("north", mountain);
         jungle.setExit("east", cave);
         jungle.setExit("south", beach);
-        itemLocation.addItem(jungle, new Item("Berry","this is berries, maybe its poisonous try ur luck!! ", 1));
-        itemLocation.addItem(jungle, new Item("Lumber","This is a log of tree, maybe it can be used to craft something to get away from this island ", 3));
-        itemLocation.addItem(jungle, new Item("Lian","This is a lian from the jungle, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(jungle, new Item("Stone","This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(jungle, new Item("Stick","This is a small stick, maybe it can be used to create something more usefull", 1));
+        itemLocation.addItem(jungle, new Item("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1));
+        itemLocation.addItem(jungle, new Item("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3));
+        itemLocation.addItem(jungle, new Item("Lian", "This is a lian from the jungle, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(jungle, new Item("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(jungle, new Item("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
 
         npc1.setName("BS Christiansen");
         npc1.setCurrentRoom(jungle);
@@ -108,8 +109,8 @@ public class Game {
                 + "You can craft items to help you survive, if you have the right components");
 
         mountain.setExit("south", jungle);
-        itemLocation.addItem(mountain, new Item("Stone","This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(mountain, new Item("Egg","This is some wild eggs, maybe it can be used for food", 1));
+        itemLocation.addItem(mountain, new Item("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(mountain, new Item("Egg", "This is some wild eggs, maybe it can be used for food", 1));
 
         npc3.setName("Joseph Schitzel");
         npc3.setCurrentRoom(mountain);
@@ -117,10 +118,10 @@ public class Game {
         npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's." + "\n" + "Come on, fetch me some eggs!");
 
         cave.setExit("west", jungle);
-        itemLocation.addItem(cave, new Item("Shroom","these shrooms look suspecius, but maybe the can be", 1));
-        itemLocation.addItem(cave, new Item("Stone","This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(cave, new Item("Freshwater","This is freshwater found in the jungle, maybe you can drink it", 2));
-        itemLocation.addItem(cave, new Item("Flint","This a flint, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(cave, new Item("Shroom", "these shrooms look suspecius, but maybe the can be", 1));
+        itemLocation.addItem(cave, new Item("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(cave, new Item("Freshwater", "This is freshwater found in the jungle, maybe you can drink it", 2));
+        itemLocation.addItem(cave, new Item("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
 
         npc2.setName("Mysterious crab");
         npc2.setCurrentRoom(cave);
@@ -134,9 +135,9 @@ public class Game {
         itemLocation.addItem(camp, new Item(""));
 
         seaBottom.setExit("north", beach);
-        itemLocation.addItem(seaBottom, new Item("Backpack","This is a backpack from the plane crash maybe you can use it to carry more items ", 2));
-        itemLocation.addItem(seaBottom, new Item("WaterBottle","This is a water bottle from the plan crash ", 1));
-        itemLocation.addItem(seaBottom, new Item("Rope", "This is some rope that has been washed up on the beach shore from the plane crash",2));
+        itemLocation.addItem(seaBottom, new Item("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 2));
+        itemLocation.addItem(seaBottom, new Item("WaterBottle", "This is a water bottle from the plan crash ", 1));
+        itemLocation.addItem(seaBottom, new Item("Rope", "This is some rope that has been washed up on the beach shore from the plane crash", 2));
 
         raft.setExit("east", camp);
 
@@ -148,7 +149,7 @@ public class Game {
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
     public void play() throws FileNotFoundException, IOException, Throwable {
         printWelcome();
-        //       log.write("\n\n >>>  Starting new game <<< \n\n");
+        log.write(System.lineSeparator() + System.lineSeparator() + " >>>  Starting new game <<< " + System.lineSeparator() + System.lineSeparator());
 
         boolean finished = false;
 
@@ -182,7 +183,7 @@ public class Game {
 
         CommandWord commandWord = command.getCommandWord();
 
-        //    log.write(commandWord.toString() + " " + command.getSecondWord());
+        log.write(commandWord.toString() + " " + command.getSecondWord());
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -208,38 +209,36 @@ public class Game {
         } else if (commandWord == CommandWord.MISSION) {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
-            //            saveGame();
+            saveGame();
         } else if (commandWord == commandWord.CRAFT) {
             craftItem(command);
         }
-    
 
+        //setting the condition to complete the missions.
+        if (inventory.getInventory().containsKey("Boardingpass")) {
+            allMissions.setMissionComplete("First mission");
+        }
 
-            //setting the condition to complete the missions.
-            if (inventory.getInventory().containsKey("Boardingpass")) {
-                allMissions.setMissionComplete("First mission");
-            }
+        if (inventory.getInventory().containsKey("Boardingpass")) {
+            allMissions.setMissionComplete("First item");
+        }
 
-            if (inventory.getInventory().containsKey("Boardingpass")) {
-                allMissions.setMissionComplete("First item");
-            }
+        if (inventory.getInventory().containsKey("Bottle")) {
+            allMissions.setMissionComplete("First item");
+        }
 
-            if (inventory.getInventory().containsKey("Bottle")) {
-                allMissions.setMissionComplete("First item");
-            }
+        if (inventory.getInventory().containsKey("Fish")) {
+            allMissions.setMissionComplete("Find food to survive");
+        }
 
-            if (inventory.getInventory().containsKey("Fish")) {
-                allMissions.setMissionComplete("Find food to survive");
-            }
+        if (CommandWord.TALK == commandWord) {
+            allMissions.setMissionComplete("Find survivors");
+        }
 
-            if (CommandWord.TALK == commandWord) {
-                allMissions.setMissionComplete("Find survivors");
-            }
-            
-            if (currentRoom == airport) {
-            lockRoom();
-            }
-            return wantToQuit;
+        if (currentRoom == airport) {
+            lockRoom(command);
+        }
+        return wantToQuit;
     }
 
     /* A method to print a message that show the different commands everytime the command help is used */
@@ -371,56 +370,55 @@ public class Game {
 
     public void craftItem(Command command) {
 
-     String craft = command.getSecondWord();
+        String craft = command.getSecondWord();
         if (craft.equalsIgnoreCase("Recipe")) {
             System.out.println("This is a list of the games craftable items and their recipes:");
             System.out.println("Campfire: Lumber, Stick and Flint" + "\n" + "Spear: Stick, Fint and Rope or Lian" + "\n" + "Axe: Stick, Stone and Rope or Lian" + "\n" + "Raft: Lumber, Stick and Rope or Lian");
-        }
-        
-     else if (craft.equalsIgnoreCase("Campfire")&&inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")) {    
+        } else if (craft.equalsIgnoreCase("Campfire") && inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")) {
             inventory.addItemInInventory(campfire);
             inventory.dropItemInventory("Lumber");
             inventory.dropItemInventory("Stick");
             inventory.dropItemInventory("Flint");
             System.out.println("A Campfire is added to your inventory");
-        }
-        else if (craft.equalsIgnoreCase("Spear")&&inventory.getInventory().containsKey("Stick")&& inventory.getInventory().containsKey("Flint")
-                && (inventory.getInventory().containsKey("Lian")||inventory.getInventory().containsKey("Rope"))) {
+        } else if (craft.equalsIgnoreCase("Spear") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")
+                && (inventory.getInventory().containsKey("Lian") || inventory.getInventory().containsKey("Rope"))) {
             inventory.addItemInInventory(spear);
             inventory.dropItemInventory("Stick");
             inventory.dropItemInventory("Flint");
             System.out.println("A Spear is added to your inventory");
             if (inventory.getInventory().containsKey("Rope")) {
                 inventory.dropItemInventory("Rope");
+            } else {
+                inventory.dropItemInventory("Lian");
             }
-            else inventory.dropItemInventory("Lian");
-        }
-        else if (craft.equalsIgnoreCase("Axe")&&inventory.getInventory().containsKey("Stick")&& inventory.getInventory().containsKey("Stone")
-                && (inventory.getInventory().containsKey("Lian")|inventory.getInventory().containsKey("Rope"))) {
+        } else if (craft.equalsIgnoreCase("Axe") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Stone")
+                && (inventory.getInventory().containsKey("Lian") | inventory.getInventory().containsKey("Rope"))) {
             inventory.addItemInInventory(axe);
             inventory.dropItemInventory("Stick");
             inventory.dropItemInventory("Stone");
             System.out.println("An axe is added to your inventory");
             if (inventory.getInventory().containsKey("Rope")) {
                 inventory.dropItemInventory("Rope");
+            } else {
+                inventory.dropItemInventory("Lian");
             }
-            else inventory.dropItemInventory("Lian");
-               
-        }
-        else if (craft.equalsIgnoreCase("Raft")&&inventory.getInventory().containsKey("Lumber")&& inventory.getInventory().containsKey("Stick")
-                && (inventory.getInventory().containsKey("Lian")|inventory.getInventory().containsKey("Rope"))) {
+
+        } else if (craft.equalsIgnoreCase("Raft") && inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick")
+                && (inventory.getInventory().containsKey("Lian") | inventory.getInventory().containsKey("Rope"))) {
             inventory.addItemInInventory(spear);
             inventory.dropItemInventory("Lumber");
             inventory.dropItemInventory("Stick");
             System.out.println("A raft is added to your inventory");
             if (inventory.getInventory().containsKey("Rope")) {
                 inventory.dropItemInventory("Rope");
+            } else {
+                inventory.dropItemInventory("Lian");
             }
-            else inventory.dropItemInventory("Lian");
+        } else {
+            System.out.println("You can not craft that Item.");
         }
-           else 
-               System.out.println("You can not craft that Item.");
     }
+
     /* 
     * Method used for showing missions
      */
@@ -451,7 +449,6 @@ public class Game {
         }
 
     }
-
 
     /**
      * Method used for dropping item from inventory
@@ -484,19 +481,29 @@ public class Game {
         }
 
     }
-    
+
     //set it so you cant go to the beach before you have the boardingpass
-    private void lockRoom() {
-        if (inventory.getInventory().containsKey("Boardingpass") == false) {
+    private void lockRoom(Command command) {
+//        System.out.println(inventory.getInventory().containsKey("Boardingpass"));
+//        System.out.println(command.getSecondWord());
+//        System.out.println(command.getCommandWord().name());
+        if (command.getCommandWord().name().equalsIgnoreCase(CommandWord.GO.toString())) {
+            if (inventory.getInventory().containsKey("Boardingpass") == false && command.getSecondWord().equalsIgnoreCase("west")) {
 
-            airport.setExit("west", airport);
+                airport.setExit("west", airport);
 
-            System.out.println("You have no boardingpass, please return when you do!!!");
-        } else {
+                System.out.println("You have no boardingpass, please return when you do!!!");
+
+            }
+//            else {
+//                airport.setExit("west", beach);
+//                System.out.println("Exits: west");
+        }
+        if (inventory.getInventory().containsKey("Boardingpass") && !hasBoardingpass) {
+            hasBoardingpass=true;
             airport.setExit("west", beach);
             System.out.println("Exits: west");
         }
-        
     }
 
     /**
@@ -517,23 +524,22 @@ public class Game {
         }
     }
 
-//    private void saveGame() throws IOException, Throwable {
-//        Save save = new Save("01");
-//        save.addToSaveGame(objectsToSave());
-//        save.saveGame();
-//    }
-//    
-//    private String objectsToSave(){
-//        ArrayList saveObjectsJSON;
-//        saveObjectsJSON = new ArrayList(10);
-//        saveObjectsJSON.add(inventory);
-//        saveObjectsJSON.add(itemLocation);
-//        saveObjectsJSON.add(allMissions);
-//        //saveObjectsJSON.add(npc1);
-//        //saveObjectsJSON.add(npc2);
-//        //saveObjectsJSON.add(npc3);
-//        
-//        
-//        return gson.toJson(saveObjectsJSON);
-//    }
+    private void saveGame() throws IOException, Throwable {
+        Save save = new Save("01");
+        save.addToSaveGame(objectsToSave());
+        save.saveGame();
+    }
+
+    private String objectsToSave() {
+        ArrayList saveObjectsJSON;
+        saveObjectsJSON = new ArrayList(10);
+        saveObjectsJSON.add(inventory);
+        saveObjectsJSON.add(itemLocation);
+        saveObjectsJSON.add(allMissions);
+        //saveObjectsJSON.add(npc1);
+        //saveObjectsJSON.add(npc2);
+        //saveObjectsJSON.add(npc3);
+
+        return gson.toJson(saveObjectsJSON);
+    }
 }

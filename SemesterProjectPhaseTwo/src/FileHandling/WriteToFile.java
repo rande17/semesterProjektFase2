@@ -44,7 +44,7 @@ public class WriteToFile {
         if (writer == null) {
             writer = new FileWriter(userHome + File.separator + defaultFolder + File.separator + fileName + ext, append);
         }
-        writer.write(str + "\n");
+        writer.write(str + System.lineSeparator());
         writer.flush();
     }
 
