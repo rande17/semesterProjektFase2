@@ -34,27 +34,35 @@ public class FXMLDocumentController implements Initializable {
     private void handleKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case W:
-                GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) - 1);
-                System.out.println("Pressed: " + keyEvent.getCode());
+                if (GridPane.getRowIndex(playerRectangle) > 0) {
+                    GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) - 1);
+                }
                 break;
             case D:
-                GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) + 1);
-                System.out.println("Pressed: " + keyEvent.getCode());
+                if (GridPane.getColumnIndex(playerRectangle) < 15) {
+                    GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) + 1);
+                }
                 break;
             case S:
-                GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) + 1);
-                System.out.println("Pressed: " + keyEvent.getCode());
+                if (GridPane.getRowIndex(playerRectangle) < 15) {
+                    GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) + 1);
+                }
                 break;
             case A:
-                GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) - 1);
-                System.out.println("Pressed: " + keyEvent.getCode());
+                if (GridPane.getColumnIndex(playerRectangle) > 0) {
+                    GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) - 1);
+                }
+                break;
+            case F1:
+                //Kun for at se koordinaterne på figuren
+                System.out.println(GridPane.getRowIndex(playerRectangle) + " : " + GridPane.getColumnIndex(playerRectangle));
                 break;
             case ESCAPE:
                 Stage stage = (Stage) roomGridPane.getScene().getWindow();
                 stage.close();
                 break;
             default:
-                System.out.println("Pressed not defined in switch!");
+//                System.out.println("Pressed not defined in switch!");
                 break;
         }
     }
