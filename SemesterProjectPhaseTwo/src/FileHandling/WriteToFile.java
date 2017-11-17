@@ -25,7 +25,8 @@ public class WriteToFile {
     String ext = ".save";
 
     FileHandler fh;
-    File file;
+    
+    
 
     FileWriter writer;
 
@@ -41,8 +42,11 @@ public class WriteToFile {
     }
 
     public void write(String str) throws FileNotFoundException, IOException {
+    String outputfile = userHome + File.separator + defaultFolder + File.separator + fileName + ext;
+    File file = new File(outputfile);
         if (writer == null) {
-            writer = new FileWriter(userHome + File.separator + defaultFolder + File.separator + fileName + ext, append);
+            file.getParentFile().mkdirs();
+            writer = new FileWriter(outputfile, append);
         }
         writer.write(str + System.lineSeparator());
         writer.flush();

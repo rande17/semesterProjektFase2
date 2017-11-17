@@ -44,7 +44,7 @@ public class Game {
     Item debug = new Item("debug");
     Item campfire = new Item("Campfire", "", 2);
     Item spear = new Item("Spear", "", 2);
-    Item axe = new Item("Axe", "used for defending yourself", 2);
+    Item axe = new Item("Axe", "", 2);
     Item raftCraft = new Item("Raft", "", 2);
     Mission allMissions = new Mission();
     NPC npc1 = new NPC();
@@ -150,7 +150,7 @@ public class Game {
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
     public void play() throws FileNotFoundException, IOException, Throwable {
         printWelcome();
-        //       log.write("\n\n >>>  Starting new game <<< \n\n");
+        log.write(System.lineSeparator() + System.lineSeparator() + " >>>  Starting new game <<< " + System.lineSeparator() + System.lineSeparator());
 
         boolean finished = false;
 
@@ -184,7 +184,7 @@ public class Game {
 
         CommandWord commandWord = command.getCommandWord();
 
-        //    log.write(commandWord.toString() + " " + command.getSecondWord());
+        log.write(commandWord.toString() + " " + command.getSecondWord());
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -237,7 +237,7 @@ public class Game {
         }
 
         if (currentRoom == airport) {
-            lockRoom();
+            lockRoom(command);
         }
         return wantToQuit;
     }
@@ -489,17 +489,27 @@ public class Game {
     }
 
     //set it so you cant go to the beach before you have the boardingpass
-    private void lockRoom() {
-        if (inventory.getInventory().containsKey("Boardingpass") == false) {
+    private void lockRoom(Command command) {
+//        System.out.println(inventory.getInventory().containsKey("Boardingpass"));
+//        System.out.println(command.getSecondWord());
+//        System.out.println(command.getCommandWord().name());
+        if (command.getCommandWord().name().equalsIgnoreCase(CommandWord.GO.toString())) {
+            if (inventory.getInventory().containsKey("Boardingpass") == false && command.getSecondWord().equalsIgnoreCase("west")) {
 
-            airport.setExit("west", airport);
+                airport.setExit("west", airport);
 
-            System.out.println("You have no boardingpass, please return when you do!!!");
-        } else {
+                System.out.println("You have no boardingpass, please return when you do!!!");
+
+            }
+//            else {
+//                airport.setExit("west", beach);
+//                System.out.println("Exits: west");
+        }
+        if (inventory.getInventory().containsKey("Boardingpass") && !hasBoardingpass) {
+            hasBoardingpass=true;
             airport.setExit("west", beach);
             System.out.println("Exits: west");
         }
-
     }
 
     /**
