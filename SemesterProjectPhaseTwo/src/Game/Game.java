@@ -22,7 +22,7 @@ public class Game {
 
     /* data field with the attributes parser and currentRoom
        making them private so we only can use them in the Game class */
-    private boolean hasBoardingpass=false;
+    private boolean hasBoardingpass = false;
     private Parser parser;
     private Room currentRoom;
     private Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
@@ -30,7 +30,7 @@ public class Game {
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
     public Game() {
-        createRooms();
+        initGame();
         parser = new Parser();
     }
 
@@ -71,78 +71,113 @@ public class Game {
         seaBottom = new Room("at the bottom of the sea");
         raft = new Room("building the raft");
 
-        //Creating missions and putting and putting them in the game
-        allMissions.addMission(airport, "First mission", "Find your boardingpass", 100);
-        allMissions.addMission(airport, "First item", "Picking up your first item", 100);
-        allMissions.addMission(beach, "Find food to survive", "Pick up food", 100);
-        allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
-        allMissions.addMission(cave, "Get high", "Eat the shrooms", 100);
-
-//        airport.setExit("west", airport);
-        //Initializing an item and putting it in a room
-        itemLocation.addItem(airport, new PickableItem("Bottle", "This is a bottle that have been left behind by someone", 2));
-        itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii", 1));
-        itemLocation.addItem(airport, new Item("Shop", "this is a shop", 1));
-
         //Setting the the exit
         beach.setExit("north", jungle);
         beach.setExit("south", seaBottom);
         beach.setExit("west", camp);
+
+        jungle.setExit("north", mountain);
+        jungle.setExit("east", cave);
+        jungle.setExit("south", beach);
+
+        mountain.setExit("south", jungle);
+
+        cave.setExit("west", jungle);
+
+        camp.setExit("east", beach);
+        camp.setExit("west", raft);
+
+        seaBottom.setExit("north", beach);
+
+        raft.setExit("east", camp);
+
+        currentRoom = airport;
+
+    }
+
+    public void createItem() {
+        //Initializing an item and putting it in a room airport
+        itemLocation.addItem(airport, new PickableItem("Bottle", "This is a bottle that have been left behind by someone", 2));
+        itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii", 1));
+
+        //non pickable item
+        itemLocation.addItem(airport, new Item("Shop", "this is a shop", 1));
+
+        //Initializing an item and putting it in a room beach
         itemLocation.addItem(beach, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(beach, new PickableItem("Fish", "Why are you inspecting this item, its GOD damn fish", 1));
         itemLocation.addItem(beach, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(beach, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash ", 2));
         itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
 
-        jungle.setExit("north", mountain);
-        jungle.setExit("east", cave);
-        jungle.setExit("south", beach);
+        //Initializing an item and putting it in a room jungle
         itemLocation.addItem(jungle, new PickableItem("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1));
         itemLocation.addItem(jungle, new PickableItem("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3));
         itemLocation.addItem(jungle, new PickableItem("Lian", "This is a lian from the jungle, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(jungle, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(jungle, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
 
+        //Initializing an item and putting it in a room mountain
+        itemLocation.addItem(mountain, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1));
+
+        //Initializing an item and putting it in a room cave
+        itemLocation.addItem(cave, new PickableItem("Shroom", "these shrooms look suspecius, but maybe the can be", 1));
+        itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(cave, new PickableItem("Freshwater", "This is freshwater found in the jungle, maybe you can drink it", 2));
+        itemLocation.addItem(cave, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
+
+        //Initializing an item and putting it in a room camp
+        itemLocation.addItem(camp, new Item(""));
+
+        //Initializing an item and putting it in a room seaBottom
+        itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 2));
+        itemLocation.addItem(seaBottom, new PickableItem("WaterBottle", "This is a water bottle from the plan crash ", 1));
+        itemLocation.addItem(seaBottom, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash", 2));
+
+    }
+
+    public void createMissions() {
+
+        //Creating missions and putting and putting them in the game
+        allMissions.addMission(airport, "First mission", "Find your boardingpass", 100);
+        allMissions.addMission(airport, "First item", "Picking up your first item", 100);
+        allMissions.addMission(beach, "Find food to survive", "Pick up food", 100);
+        allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
+        allMissions.addMission(cave, "Get high", "Eat the shrooms", 100);
+    }
+
+    public void createNPC() {
+        //create the good npc
         npc1.setName("BS Christiansen");
         npc1.setCurrentRoom(jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, but he is heavly injured on his right leg so he cant move ");
         npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter."
                 + "You can craft items to help you survive, if you have the right components");
 
-        mountain.setExit("south", jungle);
-        itemLocation.addItem(mountain, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1));
-
+        //create the bad npc
         npc3.setName("Joseph Schitzel");
         npc3.setCurrentRoom(mountain);
         npc3.setDescribtion("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
         npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's." + "\n" + "Come on, fetch me some eggs!");
 
-        cave.setExit("west", jungle);
-        itemLocation.addItem(cave, new PickableItem("Shroom", "these shrooms look suspecius, but maybe the can be", 1));
-        itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(cave, new PickableItem("Freshwater", "This is freshwater found in the jungle, maybe you can drink it", 2));
-        itemLocation.addItem(cave, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
-
+        //create another npc
         npc2.setName("Mysterious crab");
         npc2.setCurrentRoom(cave);
         npc2.setDescribtion("A mysterious crab that you dont really get why can talk");
         npc2.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them all mr.Crab and know this island like the back of my hand.... oh i mean claw"
                 + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
                 + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
+    }
 
-        camp.setExit("east", beach);
-        camp.setExit("west", raft);
-        itemLocation.addItem(camp, new Item(""));
+    //Initializing game
+    public void initGame() {
+        
+        createRooms();
+        createItem();
+        createMissions();
+        createNPC();
 
-        seaBottom.setExit("north", beach);
-        itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 2));
-        itemLocation.addItem(seaBottom, new PickableItem("WaterBottle", "This is a water bottle from the plan crash ", 1));
-        itemLocation.addItem(seaBottom, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash", 2));
-
-        raft.setExit("east", camp);
-
-        currentRoom = airport;
 
     }
 
@@ -506,7 +541,7 @@ public class Game {
 //                System.out.println("Exits: west");
         }
         if (inventory.getInventory().containsKey("Boardingpass") && !hasBoardingpass) {
-            hasBoardingpass=true;
+            hasBoardingpass = true;
             airport.setExit("west", beach);
             System.out.println("Exits: west");
         }
