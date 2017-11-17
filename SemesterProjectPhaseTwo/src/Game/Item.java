@@ -16,12 +16,9 @@ public class Item {
     /*
     Dette dokument er ikke færdigarbejdet
      */
+    
     private String itemDescribtion;
-    private int maxCarryWeight = 10;
-    private int totalWeightInBackpack;
     private int weight;
-    private Date respawnTime;
-    private Room mapLocation;
     private String name;
     private String describtion;
 
@@ -31,54 +28,54 @@ public class Item {
     Metoder: getItemOnMap, setItemOnMap, addItemInInventory, removeItemFromInventory, setItemDescribtions, getItemDescribtion, getRespawnTime
      */
     //Creating a constructor with a parameter-list, Room mapLocation maybe has to be changed
+    /**
+     * 
+     * @param name 
+     */
     Item(String name) {
         this.name = name;
     }
 
-    Item(String name, String describtion, int weight) {
+    /**
+     * 
+     * @param name
+     * @param weight 
+     */
+    Item(String name, String description, int weight) {
         this.name = name;
         this.weight = weight;
         this.describtion = describtion;
     }
 
-    Item(String name, int weight, Date respawnTime, Room mapLocation) {
-        //This body is left empty for now
-        this.name = name;
-        this.weight = weight;
-        this.respawnTime = respawnTime;
-        this.mapLocation = mapLocation;
-    }
-
-//    public Item getItemOnMap(Item[] allItems) {
-////        This body is left empty for now
-//    }
-//    public void setItemOnMap(Item _item, Room location) {
-////        Body is empty
-//    }
+    /**
+     * 
+     * @return returns the weight
+     */
     public int getWeight() {
         return weight;
     }
 
-    public void removeItemFromInventory(Item _item) {
-        //Her skal objekt"tingen" sættes til null, hvis en anden bedre måde ikke fremkommer
-    }
-
+    /**
+     * 
+     * @param newDescribtion sets new description
+     */
     public void setItemDescribtions(String newDescribtion) {
         itemDescribtion = newDescribtion;
     }
 
+    /**
+     * 
+     * @return returns the description of the Item
+     */
     public String getItemDescribtion() {
         return itemDescribtion;
     }
 
-    public Date getRespawnTime() {
-        return respawnTime;
-    }
-
+    /**
+     * 
+     * @return returns the name of the item
+     */
     public String getName() {
         return name;
     }
-     
-    
 }
-
