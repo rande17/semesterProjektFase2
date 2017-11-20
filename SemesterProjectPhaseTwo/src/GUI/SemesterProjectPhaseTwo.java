@@ -39,6 +39,7 @@ public class SemesterProjectPhaseTwo extends Application {
     public static void main(String[] args) throws Throwable {
         
         Thread thread = new Thread() {
+            @Override
             public void run() {
                 Game game = new Game();
                 try {
