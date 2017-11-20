@@ -248,7 +248,11 @@ public class Game {
             saveGame();
         } else if (commandWord == commandWord.CRAFT) {
             craftItem(command);
-        }
+        } else if (commandWord == commandWord.WIN) {
+            win();
+        } else if (commandWord == commandWord.LOSE) {
+            lose();
+        } 
 
         //setting the condition to complete the missions.
         if (inventory.getInventory().containsKey("Boardingpass")) {
@@ -583,5 +587,13 @@ public class Game {
         //saveObjectsJSON.add(npc3);
 
         return gson.toJson(saveObjectsJSON);
+    }
+    void win(){
+        System.out.println("You have won the game!");
+        System.exit(0);
+    }
+    void lose(){
+        System.out.println("You have lost the game!!!");
+        System.exit(0);
     }
 }
