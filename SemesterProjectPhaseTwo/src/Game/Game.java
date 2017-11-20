@@ -521,7 +521,7 @@ public class Game {
         if (!indexItem.equals("")) {
             inventory.dropItemInventory(indexItem);
             System.out.println("You have dropped: " + indexItem);
-            itemLocation.addItem(currentRoom, new Item(indexItem));
+            itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem)));
 
         } else {
             System.out.println("Can't drop item that isn't in inventory " + command.getSecondWord());

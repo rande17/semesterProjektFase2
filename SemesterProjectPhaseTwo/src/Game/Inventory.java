@@ -151,6 +151,10 @@ public class Inventory {
     public void showInventory() {
         System.out.println(inventory + "\n");
     }
+    
+    public int getItemWeight(String itemName){
+        return itemWeight.get(itemName);
+    }
 
 //    public void addItemToInventory() {
 //        if (checkInventoryMaxWeigth()) {

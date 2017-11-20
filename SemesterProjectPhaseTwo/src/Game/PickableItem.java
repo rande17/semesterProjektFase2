@@ -14,6 +14,10 @@ import java.util.Date;
 public class PickableItem extends Item{
     private Date respawnTime;
 
+    PickableItem(String name, int weight){
+        
+        super(name, "", weight);
+    }
     /**
      * 
      * @param name used to set the name for Item
