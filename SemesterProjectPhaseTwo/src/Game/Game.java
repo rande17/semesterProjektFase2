@@ -172,19 +172,20 @@ public class Game {
 
     //Initializing game
     public void initGame() {
-        
+
         createRooms();
         createItem();
         createMissions();
         createNPC();
-
 
     }
 
     /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
        and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
     public void play() throws FileNotFoundException, IOException, Throwable {
+        Time time = new Time();
         printWelcome();
+        System.out.println(time.getStartTime());
         log.write(System.lineSeparator() + System.lineSeparator() + " >>>  Starting new game <<< " + System.lineSeparator() + System.lineSeparator());
 
         boolean finished = false;
@@ -194,7 +195,7 @@ public class Game {
             finished = processCommand(command);
         }
 
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing.  Good bye." + time.getEndTime() + "\n" + "\n" + time.timeSpend());
         //added to shutdown
         System.exit(0);
     }
