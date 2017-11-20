@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Game.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,9 +32,15 @@ public class SemesterProjectPhaseTwo extends Application {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Throwable
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable {
         launch(args);
+        
+        //initializing a game object and starting the game
+        Game game = new Game(); //Laver en instans af klassen Game{} og kalder den game
+        game.play(); //Her invoker vi metoden play() som ligger i Game{}-klassen
+        
     }
     
 }
