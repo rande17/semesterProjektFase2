@@ -6,6 +6,8 @@
 package GUI;
 
 import Game.Game;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,13 +19,13 @@ import javafx.stage.Stage;
  * @author rickie
  */
 public class SemesterProjectPhaseTwo extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setTitle("Semester Projekt");
         stage.setScene(scene);
         stage.show();
@@ -35,12 +37,20 @@ public class SemesterProjectPhaseTwo extends Application {
      * @throws java.lang.Throwable
      */
     public static void main(String[] args) throws Throwable {
+        
+        Thread thread = new Thread() {
+            public void run() {
+                Game game = new Game();
+                try {
+                    game.play();
+                } catch (Throwable ex) {
+                    Logger.getLogger(SemesterProjectPhaseTwo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        thread.start();
         launch(args);
-        
-        //initializing a game object and starting the game
-        Game game = new Game(); //Laver en instans af klassen Game{} og kalder den game
-        game.play(); //Her invoker vi metoden play() som ligger i Game{}-klassen
-        
+
     }
-    
+
 }
