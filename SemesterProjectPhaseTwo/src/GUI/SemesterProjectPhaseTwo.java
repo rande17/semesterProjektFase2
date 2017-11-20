@@ -48,7 +48,9 @@ public class SemesterProjectPhaseTwo extends Application {
                 }
             }
         };
+        
         thread.start();
+        
         launch(args);
 
     }
