@@ -33,21 +33,25 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
+            case UP:
             case W:
                 if (GridPane.getRowIndex(playerRectangle) > 0) {
                     GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) - 1);
                 }
                 break;
+            case RIGHT:
             case D:
                 if (GridPane.getColumnIndex(playerRectangle) < 15) {
                     GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) + 1);
                 }
                 break;
+            case DOWN:
             case S:
                 if (GridPane.getRowIndex(playerRectangle) < 15) {
                     GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) + 1);
                 }
                 break;
+            case LEFT:
             case A:
                 if (GridPane.getColumnIndex(playerRectangle) > 0) {
                     GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) - 1);
