@@ -141,7 +141,8 @@ public class Game {
         allMissions.addMission(beach, "Find food to survive", "Pick up food", 100);
         allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
         allMissions.addMission(cave, "Get high", "Eat the shrooms", 100);
-        allMissions.addMission(camp, "craft raft", "craft raft to leave the island", 100);
+        allMissions.addMission(camp, "craft raft", "craft raft to prepare to escape the island", 100);
+        allMissions.addMission(camp, "Escape the island", "Collect items to survive on the sea", 100);
     }
 
     public void createNPC() {
@@ -269,6 +270,10 @@ public class Game {
             allMissions.setMissionComplete("Find food to survive");
         }
 
+        if (inventory.getInventory().containsKey("Berry")) {
+            allMissions.setMissionComplete("Find food to survive");
+        }
+
         if (CommandWord.TALK == commandWord) {
             allMissions.setMissionComplete("Find survivors");
         }
@@ -276,11 +281,28 @@ public class Game {
         if (inventory.getInventory().containsKey("raft")) {
             allMissions.setMissionComplete("craft raft");
         }
-        
-        if(inventory.getInventory().containsKey("Backpack")) {
-        inventory.setInventoryMaxWeight(25);
+
+        if (inventory.getInventory().containsKey("Backpack")) {
+            inventory.setInventoryMaxWeight(25);
         }
-        
+
+        if (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
+            && inventory.getInventory().containsKey("Spear")) {
+           
+            allMissions.setMissionComplete("Escape the island");
+
+            Scanner scan = new Scanner(System.in); //create new scanner
+            System.out.println("You have completed the prepare to escape the island mission");
+            System.out.println("Do you want to go to the beach and leave the island");
+            String input = scan.nextLine(); //Waits for input
+            if (input.equalsIgnoreCase("yes")) {
+                win();
+            }
+            else if (input.equalsIgnoreCase("no")) {
+                lose();
+            }
+        }
+
         if (currentRoom == airport) {
             lockRoom(command);
         }
