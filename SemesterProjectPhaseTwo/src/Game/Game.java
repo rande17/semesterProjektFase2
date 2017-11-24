@@ -25,7 +25,7 @@ public class Game {
     private boolean hasBoardingpass = false;
     private Parser parser;
     private Room currentRoom;
-    private Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
+    private Room airport, beach, jungle, mountain, cave, camp, seaBottom;
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
@@ -45,7 +45,7 @@ public class Game {
     Item campfire = new Item("Campfire", "", 2);
     Item spear = new Item("Spear", "", 2);
     Item axe = new Item("Axe", "", 2);
-    Item raftCraft = new Item("Raft", "", 2);
+    Item raft = new Item("Raft", "", 2);
     Mission allMissions = new Mission();
     NPC npc1 = new NPC();
     NPC npc2 = new NPC();
@@ -69,7 +69,6 @@ public class Game {
         cave = new Room("in the cave");
         camp = new Room("in the camp");
         seaBottom = new Room("at the bottom of the sea");
-        raft = new Room("building the raft");
 
         //Setting the the exit
         beach.setExit("north", jungle);
@@ -85,11 +84,8 @@ public class Game {
         cave.setExit("west", jungle);
 
         camp.setExit("east", beach);
-        camp.setExit("west", raft);
 
         seaBottom.setExit("north", beach);
-
-        raft.setExit("east", camp);
 
         currentRoom = airport;
 
@@ -131,7 +127,7 @@ public class Game {
         itemLocation.addItem(camp, new Item(""));
 
         //Initializing an item and putting it in a room seaBottom
-        itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 2));
+        itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 0));
         itemLocation.addItem(seaBottom, new PickableItem("WaterBottle", "This is a water bottle from the plan crash ", 1));
         itemLocation.addItem(seaBottom, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash", 2));
 
@@ -145,6 +141,7 @@ public class Game {
         allMissions.addMission(beach, "Find food to survive", "Pick up food", 100);
         allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
         allMissions.addMission(cave, "Get high", "Eat the shrooms", 100);
+        allMissions.addMission(camp, "craft raft", "craft raft to leave the island", 100);
     }
 
     public void createNPC() {
@@ -276,6 +273,14 @@ public class Game {
             allMissions.setMissionComplete("Find survivors");
         }
 
+        if (inventory.getInventory().containsKey("raft")) {
+            allMissions.setMissionComplete("craft raft");
+        }
+        
+        if(inventory.getInventory().containsKey("Backpack")) {
+        inventory.setInventoryMaxWeight(25);
+        }
+        
         if (currentRoom == airport) {
             lockRoom(command);
         }
@@ -317,7 +322,7 @@ public class Game {
 
         HashMap<String, Integer> inventoryHM = inventory.getInventory();
 
-        System.out.println("Items in inventory is: ");
+        System.out.println("Items in inventory is: " + inventory.getCurrentInventoryWeight() + "/" + inventory.getInventoryMaxWeight());
         for (String i : inventoryHM.keySet()) {
             System.out.println(inventoryHM.get(i) + "x" + i);
         }
@@ -421,49 +426,52 @@ public class Game {
                 System.out.println("This is a list of the games craftable items and their recipes:");
                 System.out.println("Campfire: Lumber, Stick and Flint" + "\n" + "Spear: Stick, Fint and Rope or Lian" + "\n" + "Axe: Stick, Stone and Rope or Lian" + "\n" + "Raft: Lumber, Stick and Rope or Lian");
             } else if (craft.equalsIgnoreCase("Campfire") && inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")) {
-                inventory.addItemInInventory(campfire);
                 inventory.dropItemInventory("Lumber");
                 inventory.dropItemInventory("Stick");
                 inventory.dropItemInventory("Flint");
+                inventory.addItemInInventory(campfire);
                 System.out.println("A Campfire is added to your inventory");
+
             } else if (craft.equalsIgnoreCase("Spear") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")
                     && (inventory.getInventory().containsKey("Lian") || inventory.getInventory().containsKey("Rope"))) {
-                inventory.addItemInInventory(spear);
                 inventory.dropItemInventory("Stick");
                 inventory.dropItemInventory("Flint");
-                System.out.println("A Spear is added to your inventory");
                 if (inventory.getInventory().containsKey("Rope")) {
                     inventory.dropItemInventory("Rope");
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
+                inventory.addItemInInventory(spear);
+                System.out.println("A Spear is added to your inventory");
+
             } else if (craft.equalsIgnoreCase("Axe") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Stone")
                     && (inventory.getInventory().containsKey("Lian") | inventory.getInventory().containsKey("Rope"))) {
-                inventory.addItemInInventory(axe);
                 inventory.dropItemInventory("Stick");
                 inventory.dropItemInventory("Stone");
-                System.out.println("An axe is added to your inventory");
                 if (inventory.getInventory().containsKey("Rope")) {
                     inventory.dropItemInventory("Rope");
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
+                inventory.addItemInInventory(axe);
+                System.out.println("An axe is added to your inventory");
 
             } else if (craft.equalsIgnoreCase("Raft") && inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick")
-                    && (inventory.getInventory().containsKey("Lian") | inventory.getInventory().containsKey("Rope"))) {
-                inventory.addItemInInventory(spear);
+                    && (inventory.getInventory().containsKey("Lian") || inventory.getInventory().containsKey("Rope"))) {
                 inventory.dropItemInventory("Lumber");
                 inventory.dropItemInventory("Stick");
-                System.out.println("A raft is added to your inventory");
                 if (inventory.getInventory().containsKey("Rope")) {
                     inventory.dropItemInventory("Rope");
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
+                inventory.addItemInInventory(raft);
+                System.out.println("Raft has been added to inventory");
             } else {
                 System.out.println("You can not craft that Item.");
             }
-        }else{
+
+        } else {
             System.out.println("What do you want to craft?");
         }
     }
