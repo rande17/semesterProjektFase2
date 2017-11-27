@@ -198,7 +198,7 @@ public class Game {
     public void play() throws FileNotFoundException, IOException, Throwable {
         Time time = new Time();
         printWelcome();
-        System.out.println(time.getStartTime());
+        time.start();
         log.write(System.lineSeparator() + System.lineSeparator() + " >>>  Starting new game <<< " + System.lineSeparator() + System.lineSeparator());
 
         boolean finished = false;
@@ -207,8 +207,8 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-
-        System.out.println("Thank you for playing.  Good bye." + time.getEndTime() + "\n" + "\n" + time.timeSpend());
+        time.stopTime();
+        System.out.println("Thank you for playing.  Good bye." + "\n" + "You spend: "+ time.timeSpend() + " seconds playing the game");
         //added to shutdown
         System.exit(0);
     }
@@ -673,12 +673,12 @@ public class Game {
     }
 
     void win() {
-        System.out.println("You have won the game!");
+        System.out.println("You have won the game!" + "\n" + "You spend: " + Time.timeSpend() + " seconds playing the game!");
         System.exit(0);
     }
 
     void lose() {
-        System.out.println("You have lost the game!!!");
+        System.out.println("You have lost the game!!!" + "\n" + "You spend: " + Time.timeSpend() + " seconds playing the game!");
         System.exit(0);
     }
 }
