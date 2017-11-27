@@ -16,7 +16,6 @@ public class Mission {
 
     HashMap<String, Boolean> missionStatus = new HashMap();
     HashMap<String, String> missionInfo = new HashMap();
-    HashMap<String, Integer> missionPoint = new HashMap();
     
     Score score = new Score();
     
@@ -25,10 +24,10 @@ public class Mission {
     public Mission() {
 }
 
-    public void addMission(Room room, String name, String describtion, int point) {
+    public void addMission(Room room, String name, String describtion) {
         missionInfo.put(name, describtion);
         missionStatus.put(name, false);
-        missionPoint.put(name, point);
+
       }
 
     public String getMissionDescribtion(String key) {

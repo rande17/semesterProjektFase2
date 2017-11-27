@@ -41,6 +41,7 @@ public class Game {
  /* The currentRoom is also given a value which is the start location = outside */
     ItemLocation itemLocation = new ItemLocation();
     Inventory inventory = new Inventory();
+    Score score = new Score();
     Item debug = new Item("debug");
     Item campfire = new Item("Campfire", "", 2);
     Item spear = new Item("Spear", "", 2);
@@ -151,13 +152,13 @@ public class Game {
     public void createMissions() {
 
         //Creating missions and putting and putting them in the game
-        allMissions.addMission(airport, "First mission", "Find your boardingpass", 100);
-        allMissions.addMission(airport, "First item", "Picking up your first item", 100);
-        allMissions.addMission(beach, "Find food to survive", "Pick up food", 100);
-        allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors", 100);
-        allMissions.addMission(cave, "Get high", "Eat the shrooms", 100);
-        allMissions.addMission(camp, "craft raft", "craft raft to prepare to escape the island", 100);
-        allMissions.addMission(camp, "Escape the island", "Collect items to survive on the sea", 100);
+        allMissions.addMission(airport, "First mission", "Find your boardingpass");
+        allMissions.addMission(airport, "First item", "Picking up your first item");
+        allMissions.addMission(beach, "Find food to survive", "Pick up food");
+        allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors");
+        allMissions.addMission(cave, "Get high", "Eat the shrooms");
+        allMissions.addMission(camp, "craft raft", "craft raft to prepare to escape the island");
+        allMissions.addMission(camp, "Escape the island", "Collect items to survive on the sea");
     }
 
     public void createNPC() {
@@ -307,9 +308,9 @@ public class Game {
             inventory.setInventoryMaxWeight(25);
         }
 
-        while (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
-                && inventory.getInventory().containsKey("Spear")) {
-
+//        while (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
+//                && inventory.getInventory().containsKey("Spear")) {
+            while(inventory.getInventory().containsKey("Boardingpass")){
             allMissions.setMissionComplete("Escape the island");
             
             if(currentRoom != beach) {
@@ -329,6 +330,7 @@ public class Game {
         if (currentRoom == airport) {
             lockRoom(command);
         }
+
         return wantToQuit;
     }
 
@@ -634,6 +636,19 @@ public class Game {
             System.out.println("- You cant use this command yet");
         }
     }
+    
+    //calculate point for each mission completed
+    private void calculateMissionScore(){
+        
+        HashMap<String, Boolean> missionStatus = allMissions.missionStatus;
+
+        for (String i : missionStatus.keySet()) {
+            
+            if (missionStatus.get(i) == true) {
+                score.addToPoints(250);
+            }
+    }
+    }
 
     /**
      * method to quit the game and if there is a second word it print out a line
@@ -673,7 +688,10 @@ public class Game {
     }
 
     void win() {
-        System.out.println("You have won the game!" + "\n" + "You spend: " + Time.timeSpend() + " seconds playing the game!");
+        calculateMissionScore();
+        int totalSum = score.getCurrentScore() + (10000 / Time.getSecondsPassed());
+        System.out.println("You have won the game!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
+        System.out.println("Your score is: " + totalSum);
         System.exit(0);
     }
 
