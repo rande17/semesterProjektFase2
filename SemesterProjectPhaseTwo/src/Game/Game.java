@@ -94,34 +94,49 @@ public class Game {
     public void createItem() {
         //Initializing an item and putting it in a room airport
         itemLocation.addItem(airport, new PickableItem("Bottle", "This is a bottle that have been left behind by someone", 2));
-        itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii", 1));
-
+        itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii: 126AB", 1));
+//        itemLocation.addItem(airport, new PickableItem("Boardingpass to Hawaii: 126AB", "This is a boardingpass to get on the plane to Hawaii", 1));
+//        itemLocation.addItem(airport, new PickableItem("Boardingpass to Kenya: 426DB", "this is a boardingpass to Kenya", 1));
+//        itemLocation.addItem(airport, new PickableItem("Boardingpass to Russia: 139BA", "This boardingpass has expired", 1));
         //non pickable item
-        itemLocation.addItem(airport, new Item("Shop", "this is a shop", 1));
+        itemLocation.addItem(airport, new Item("Stop sign", "this is a shop", 100));
 
         //Initializing an item and putting it in a room beach
         itemLocation.addItem(beach, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(beach, new PickableItem("Fish", "Why are you inspecting this item, its GOD damn fish", 1));
+        itemLocation.addItem(beach, new PickableItem("Fish", "Why are you inspecting this item, its GOD damn fish", 1));
         itemLocation.addItem(beach, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(beach, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash ", 2));
         itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
+        itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
+        //non pickable item
+        itemLocation.addItem(beach, new Item("Giant rock", "The giant rock dont look like it can be moved", 100));
+        itemLocation.addItem(beach, new Item("Giant log", "The giant log dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room jungle
         itemLocation.addItem(jungle, new PickableItem("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1));
+        itemLocation.addItem(jungle, new PickableItem("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1));
         itemLocation.addItem(jungle, new PickableItem("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3));
+        itemLocation.addItem(jungle, new PickableItem("Lian", "This is a lian from the jungle, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(jungle, new PickableItem("Lian", "This is a lian from the jungle, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(jungle, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(jungle, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
+        //non pickable item
+        itemLocation.addItem(jungle, new Item("Giant log", "The giant log dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room mountain
         itemLocation.addItem(mountain, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1));
+        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1));
+        itemLocation.addItem(mountain, new PickableItem("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3));
 
         //Initializing an item and putting it in a room cave
         itemLocation.addItem(cave, new PickableItem("Shroom", "these shrooms look suspecius, but maybe the can be", 1));
         itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(cave, new PickableItem("Freshwater", "This is freshwater found in the jungle, maybe you can drink it", 2));
         itemLocation.addItem(cave, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(cave, new Item("Giant rock", "The giant rock dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room camp
         itemLocation.addItem(camp, new Item(""));
@@ -204,6 +219,10 @@ public class Game {
         System.out.println("Welcome to the game Stranded!");
         System.out.println("Stranded is an adventure game, where you are to "
                 + "find out how to escape the island");
+        System.out.println("");
+        System.out.println("The first step on the journey is to find your lost boardingpass, that has the numeber 126AB, ");
+        System.out.println("and then board the plane, to get your well deserved long and safe vacation...");
+        System.out.println("Good luck");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -251,6 +270,8 @@ public class Game {
             win();
         } else if (commandWord == commandWord.LOSE) {
             lose();
+        } else if (commandWord == commandWord.ESCAPE) {
+            escapeTheIsland();
         }
 
         //setting the condition to complete the missions.
@@ -286,21 +307,23 @@ public class Game {
             inventory.setInventoryMaxWeight(25);
         }
 
-        if (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
-            && inventory.getInventory().containsKey("Spear")) {
-           
-            allMissions.setMissionComplete("Escape the island");
+        while (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
+                && inventory.getInventory().containsKey("Spear")) {
 
-            Scanner scan = new Scanner(System.in); //create new scanner
-            System.out.println("You have completed the prepare to escape the island mission");
-            System.out.println("Do you want to go to the beach and leave the island");
-            String input = scan.nextLine(); //Waits for input
-            if (input.equalsIgnoreCase("yes")) {
-                win();
+            allMissions.setMissionComplete("Escape the island");
+            
+            if(currentRoom != beach) {
+            System.out.println("");
+            System.out.println("You can escape the island now");
+            System.out.println("when you are ready to do so, go to the beach and use the command escape");
+            System.out.println("");
             }
-            else if (input.equalsIgnoreCase("no")) {
-                lose();
-            }
+
+            if (currentRoom == beach){
+                System.out.println("");
+                System.out.println("You are now at the beach and can use the command escape");    
+                }
+            break;
         }
 
         if (currentRoom == airport) {
@@ -583,6 +606,32 @@ public class Game {
             hasBoardingpass = true;
             airport.setExit("west", beach);
             System.out.println("Exits: west");
+        }
+    }
+
+    //command to leave the island if you choose to stay to complete more quest for at better highscore
+    private void escapeTheIsland() {
+        while (currentRoom == beach) {
+            if (allMissions.missionStatus.get("Escape the island") == true) {
+
+                Scanner scan = new Scanner(System.in); //create new scanner
+                System.out.println("");
+                System.out.println("- Are you sure you want to leave: Yes or no");
+                System.out.println("");
+                String input = scan.nextLine(); //Waits for input
+                while (input.equalsIgnoreCase("yes")) {
+                    win();
+                    break;
+                }
+//                while (input.equalsIgnoreCase("no")) {
+//                break;
+//                }
+
+            }
+            break;
+        }
+        if (allMissions.missionStatus.get("Escape the island") == false) {
+            System.out.println("- You cant use this command yet");
         }
     }
 

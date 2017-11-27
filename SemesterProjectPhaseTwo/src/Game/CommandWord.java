@@ -5,7 +5,7 @@ package Game;
  * @version 2006.03.30
  */
 public enum CommandWord { // enum er en blanding af en klasse og et array, den definerer en type med en identifier og hvilke værdier der skal ligge i den
-    GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), INSPECT("inspect"), TAKE("take"), USE("use"), TALK("talk"), DROP("drop"), CRAFT("craft"), SHOW("show"), MISSION("mission"), SAVE("save"), WIN("win"), LOSE("lose"); //her ses de førnævnte værdier
+    GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), INSPECT("inspect"), TAKE("take"), USE("use"), TALK("talk"), DROP("drop"), CRAFT("craft"), SHOW("show"), MISSION("mission"), SAVE("save"), WIN("win"), LOSE("lose"), ESCAPE("escape"); //her ses de førnævnte værdier
 
     private String commandString; //opretter en privat instansvariabel af typen string
 
