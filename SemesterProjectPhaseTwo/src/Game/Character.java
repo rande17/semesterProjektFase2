@@ -11,6 +11,9 @@ public class Character {
     // Room, refers to the Characters current room
     private Room currentRoom;
     
+    private int health;
+    private int energi;
+    
     
     // Constructors, creates instance of Character
     
@@ -28,10 +31,13 @@ public class Character {
      * @param _desc sets the describtion of the Character instance
      * @param _currentRoom sets the current room of the Character
      */
-    public Character (String _name, String _desc, Room _currentRoom){
+    public Character (String _name, String _desc, Room _currentRoom, int _health, int _energi){
         name = _name;
         desc = _desc;
         currentRoom = _currentRoom;
+        health = _health;
+        energi = _energi;
+        
     }
     
     // Methods
@@ -64,7 +70,32 @@ public class Character {
     
     // Method, set Characters current room
     public void setCurrentRoom(Room goToRoom){
-        Room currentPosition = goToRoom;
+        currentRoom = goToRoom;
     }
+    
+    public Room getCurrentRoom(){
+        return currentRoom;
+        
+    }
+    
+        public void setEnergi(int newEnergi) {
+        energi = newEnergi;
+    }
+
+    public void setHealth(int newHealth) {
+        health = newHealth;
+    }
+
+    public int getEnergi() {
+        return energi;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void LoseHealth(){
+
+         }
     
 }

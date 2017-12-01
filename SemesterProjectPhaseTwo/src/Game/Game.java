@@ -1,5 +1,6 @@
 package Game;
 
+import FileHandling.HighscoreManager;
 import FileHandling.Logger;
 import FileHandling.Save;
 import com.google.gson.Gson;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.HashMap;
-import jdk.nashorn.internal.parser.TokenType;
+
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -26,6 +27,7 @@ public class Game {
     private Parser parser;
     private Room currentRoom;
     private Room airport, beach, jungle, mountain, cave, camp, seaBottom;
+    private String name;
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
@@ -33,7 +35,6 @@ public class Game {
         initGame();
         parser = new Parser();
     }
-
     /* Private method createRoom which means we can only use createRoom in the Game class */
  /* In the method body we set the names of the rooms, create the rooms by using the Room 
        constructor from the Room class and then set where you can move to  from the different rooms by
@@ -41,6 +42,8 @@ public class Game {
  /* The currentRoom is also given a value which is the start location = outside */
     ItemLocation itemLocation = new ItemLocation();
     Inventory inventory = new Inventory();
+    HighscoreManager highscore = new HighscoreManager();
+    Player player = new Player("Player", "???", currentRoom, 100, 100);
     Score score = new Score();
     Item debug = new Item("debug");
     Item campfire = new Item("Campfire", "", 2);
@@ -70,7 +73,7 @@ public class Game {
         cave = new Room("in the cave");
         camp = new Room("in the camp");
         seaBottom = new Room("at the bottom of the sea");
-
+        
         //Setting the the exit
         beach.setExit("north", jungle);
         beach.setExit("south", seaBottom);
@@ -165,9 +168,10 @@ public class Game {
         //create the good npc
         npc1.setName("BS Christiansen");
         npc1.setCurrentRoom(jungle);
-        npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, but he is heavly injured on his right leg so he cant move ");
+        npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, "
+                          + "\nbut he is heavly injured on his right leg so he cant move ");
         npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter."
-                + "You can craft items to help you survive, if you have the right components");
+                     + "\nYou can craft items to help you survive, if you have the right components.");
 
         //create the bad npc
         npc3.setName("Joseph Schitzel");
@@ -209,7 +213,7 @@ public class Game {
             finished = processCommand(command);
         }
         time.stopTime();
-        System.out.println("Thank you for playing.  Good bye." + "\n" + "You spend: "+ time.timeSpend() + " seconds playing the game");
+        System.out.println("Thank you for playing.  Good bye." + "\n" + "You spend: " + time.timeSpend() + " seconds playing the game");
         //added to shutdown
         System.exit(0);
     }
@@ -312,18 +316,18 @@ public class Game {
 //                && inventory.getInventory().containsKey("Spear")) {
             while(inventory.getInventory().containsKey("Boardingpass")){
             allMissions.setMissionComplete("Escape the island");
-            
-            if(currentRoom != beach) {
-            System.out.println("");
-            System.out.println("You can escape the island now");
-            System.out.println("when you are ready to do so, go to the beach and use the command escape");
-            System.out.println("");
+
+            if (currentRoom != beach) {
+                System.out.println("");
+                System.out.println("You can escape the island now");
+                System.out.println("when you are ready to do so, go to the beach and use the command escape");
+                System.out.println("");
             }
 
-            if (currentRoom == beach){
+            if (currentRoom == beach) {
                 System.out.println("");
-                System.out.println("You are now at the beach and can use the command escape");    
-                }
+                System.out.println("You are now at the beach and can use the command escape");
+            }
             break;
         }
 
@@ -351,15 +355,18 @@ public class Game {
         }
 
         String direction = command.getSecondWord();
-
+        
         Room nextRoom = currentRoom.getExit(direction);
+        player.setCurrentRoom(nextRoom);
         /* loop that when next room is equel to null it print a message that says "there is no door" 
            but if nextRoom is not equel null set currentRoom to nextRoom and print the description of the new room*/
         if (nextRoom == null) {
             System.out.println("There is no path!");
         } else {
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            //System.out.println(currentRoom.getLongDescription());
+            System.out.println(player.getCurrentRoom().getLongDescription());
+            
         }
     }
 
@@ -439,7 +446,27 @@ public class Game {
 
     private void TalkTo() {
         if (npc1.getCurrentRoom() == currentRoom) {
-            System.out.println(npc1.getDescribtion() + ", yet he still gives u good advice:\n" + npc1.getDialog(0));
+            System.out.println(npc1.getDescribtion() + ", yet he still gives you good advice:\n");
+            System.out.println(npc1.getDialog(0));
+            System.out.println("");
+            System.out.println("Maybe you could bring me some food and something to defend myself now that i cant move");
+            System.out.println("Do you want to accept his mission: Yes or no");
+            Scanner scan = new Scanner(System.in); //Creates a new scanner
+            String input = scan.nextLine(); //Waits for input
+            if (input.equalsIgnoreCase("yes")) {
+                System.out.println("You got a mission, please use the show command for more information");
+                allMissions.addMission(jungle, "Helping the injured survivor", "helping the survivor, because of his great advice he have given you");
+            } else if (input.equalsIgnoreCase("no")) {
+                System.out.println("Come back again if you change your mind");
+            } else{
+                System.out.println("Come back again if you change your mind");
+            }
+//            if (allMissions.missionStatus.get("Helping the injured survivor") == true){
+//                System.out.println("");
+//                
+            
+    
+
         } else if (npc2.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
             pregnant();
@@ -636,18 +663,32 @@ public class Game {
             System.out.println("- You cant use this command yet");
         }
     }
-    
+
     //calculate point for each mission completed
-    private void calculateMissionScore(){
-        
+    private void calculateMissionScore() {
+
         HashMap<String, Boolean> missionStatus = allMissions.missionStatus;
 
         for (String i : missionStatus.keySet()) {
-            
+
             if (missionStatus.get(i) == true) {
                 score.addToPoints(250);
             }
+        }
     }
+
+    //method to set the name of the highscore
+    private void setHighscoreName() {
+
+        //create Scanner
+        Scanner input = new Scanner(System.in);
+        //prompt the user to enter the name their highscore
+        System.out.println("");
+        System.out.println("Please enter your highscore name:");
+        String name = input.nextLine();
+
+        score.setName(name);
+
     }
 
     /**
@@ -689,9 +730,15 @@ public class Game {
 
     void win() {
         calculateMissionScore();
+        setHighscoreName();
         int totalSum = score.getCurrentScore() + (10000 / Time.getSecondsPassed());
         System.out.println("You have won the game!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
         System.out.println("Your score is: " + totalSum);
+        System.out.println("your score has been added to highscore");
+        highscore.addHighscore(score.getName(), totalSum);
+        System.out.println("");
+        System.out.println("Current highscore list is: ");
+        System.out.println(highscore.getHighscoreList());
         System.exit(0);
     }
 
