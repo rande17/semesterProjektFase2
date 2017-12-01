@@ -28,7 +28,8 @@ public class FXMLDocumentController implements Initializable {
     private int speed = 10;
     private GridPane roomGridPane;
     private Rectangle playerRectangle;
-    Scene scene;
+    static Scene scene;
+    double x, y;
     Parent root;
     @FXML
     private AnchorPane background;
@@ -41,15 +42,20 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void handleButtonAction(KeyEvent event) throws IOException {
+    private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
         System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
-       // scene = roomGridPane.getScene();
+        scene = player.getScene();
         switch (event.getCode()) {
             case W:
             case UP:
                 if (player.getLayoutY() <= 0) {
-                    player.setLayoutY(0);
-                   // changeScene("cave");
+                    x = player.getLayoutX();
+                    y = player.getLayoutY();
+                    System.out.println(x + " " + y);
+                    changeScene("cave");
+                    System.out.println(x + " " + y);
+                    player.setLayoutX(x);
+                    player.setLayoutY(background.getHeight()-player.getHeight());
                 } else {
                     player.setLayoutY(player.getLayoutY() - speed);
                 }
@@ -85,5 +91,7 @@ public class FXMLDocumentController implements Initializable {
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene.setRoot(root);
+        scene.getRoot().requestFocus();
+        player = (Rectangle)root.getChildrenUnmodifiable().get(0);
     }
 }

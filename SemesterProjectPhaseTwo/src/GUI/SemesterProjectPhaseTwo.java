@@ -23,7 +23,7 @@ public class SemesterProjectPhaseTwo extends Application {
         Scene scene;
     @Override
     public void start(Stage stage) throws Exception {
-        root = FXMLLoader.load(getClass().getResource("airport.fxml"));
+        root = FXMLLoader.load(getClass().getResource("beach.fxml"));
         scene = new Scene(root);
         stage.setTitle("Semester Projekt");
         stage.setScene(scene);

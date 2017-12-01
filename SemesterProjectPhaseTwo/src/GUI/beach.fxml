@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('GUI/Assets/beach.png');" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+<AnchorPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
    <children>
       <GridPane layoutX="600.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0">
         <columnConstraints>
@@ -36,9 +36,9 @@
             <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <AnchorPane prefHeight="600.0" prefWidth="600.0">
+      <AnchorPane fx:id="background" prefHeight="600.0" prefWidth="600.0" maxWidth="600" style="overflow: hidden; -fx-background-image: url('GUI/Assets/beach.png');">
          <children>
-            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="295.0" layoutY="295.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="290.0" layoutY="290.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
          </children>
       </AnchorPane>
    </children>
