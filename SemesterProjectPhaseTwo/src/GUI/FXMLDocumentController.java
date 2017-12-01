@@ -43,7 +43,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonAction(KeyEvent event) throws IOException {
         System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
-        scene = roomGridPane.getScene();
+       // scene = roomGridPane.getScene();
         switch (event.getCode()) {
             case W:
             case UP:
