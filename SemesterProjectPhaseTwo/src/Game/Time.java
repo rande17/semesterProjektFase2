@@ -21,7 +21,7 @@ public class Time {
         @Override
         public void run() {
             secondsPassed++;
-          
+//            System.out.println(secondsPassed);
         }
     };
     
@@ -41,10 +41,10 @@ public class Time {
         myTimer.cancel();
     }
     
-    public static int timeSpend() {
-          
-        return getSecondsPassed()/startTime;
-    }
+//    public static int timeSpend() {
+//          
+//        return getSecondsPassed()/startTime;
+//    }
     
     public static void main(String[] args) {
         Time time = new Time();

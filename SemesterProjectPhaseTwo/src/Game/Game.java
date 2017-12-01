@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.Random;
 
 
 /**
@@ -213,7 +214,7 @@ public class Game {
             finished = processCommand(command);
         }
         time.stopTime();
-        System.out.println("Thank you for playing.  Good bye." + "\n" + "You spend: " + time.timeSpend() + " seconds playing the game");
+        System.out.println("Thank you for playing.  Good bye." + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game");
         //added to shutdown
         System.exit(0);
     }
@@ -690,6 +691,30 @@ public class Game {
         score.setName(name);
 
     }
+    public void NPCMove() {
+        Random random = new Random();
+        if (Time.getSecondsPassed() % 10 == 0) {
+
+            if (npc3.getCurrentRoom() == mountain) {
+                npc3.setCurrentRoom(jungle);
+                System.out.println(npc3.currentRoom.toString());
+            } else if (npc3.getCurrentRoom() == cave) {
+                npc3.setCurrentRoom(jungle);
+                System.out.println(npc3.currentRoom);
+            } else if (npc3.getCurrentRoom() == seaBottom) {
+                npc3.setCurrentRoom(beach);
+                System.out.println(npc3.currentRoom);
+            } else if (npc3.getCurrentRoom() == jungle) {
+                Room[] arr = {beach, cave, mountain};
+                int select = random.nextInt(arr.length);
+                npc3.setCurrentRoom(arr[select]);
+                System.out.println(npc3.currentRoom);
+
+            } else {
+                System.out.println("ikke godt");
+            }
+        }
+    }
 
     /**
      * method to quit the game and if there is a second word it print out a line
@@ -743,7 +768,7 @@ public class Game {
     }
 
     void lose() {
-        System.out.println("You have lost the game!!!" + "\n" + "You spend: " + Time.timeSpend() + " seconds playing the game!");
+        System.out.println("You have lost the game!!!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
         System.exit(0);
     }
 }

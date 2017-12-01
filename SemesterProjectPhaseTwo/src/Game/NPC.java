@@ -6,6 +6,7 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -28,6 +29,10 @@ public class NPC {
     //Room to stre the current room
     private Room currentPosition;
 
+    private ArrayList NPCExits;
+
+    Room currentRoom;
+
     // no args Constructor, creates NPC's
     public NPC() {
     }
@@ -40,6 +45,7 @@ public class NPC {
     public NPC(String _name, Room _currentPosition) {
         name = _name;
         currentPosition = _currentPosition;
+
     }
 
     /**
@@ -49,10 +55,11 @@ public class NPC {
     public void addDialog(String _dialog) {
         dialog.add(_dialog);
     }
-    
+
     public void setName(String _name) {
         name = _name;
     }
+
     /**
      *
      * @param i used to get the dialog option at this index
@@ -122,4 +129,32 @@ public class NPC {
         currentPosition = goToRoom;
     }
 
+    public void NPCMove() {
+        while (Time.secondsPassed % 20 == 0) {
+       
+                
+            }
+//            String direction;
+//            for (Iterator<String> i = NPCExits.iterator(); i.hasNext();) {
+//                getCurrentRoom().getExit();
+////                String item = i.next();
+////                CString item = i.next();
+////                System.out.println(item);
+//            }
+//        }
+//        Room nextRoom;
+////                    = currentRoom.getExit(direction);
+//        NPCExits.add(currentPosition.getExit(desc));
+//        setCurrentRoom(NPCExits);
+//        setCurrentRoom(getCurrentRoom().getExit(desc));
+//        getCurrentRoom().getExit(desc);
+//        Math.random();
+//        System.out.println(getCurrentRoom());
+//    }
 }
+
+    public void setCurrentPosition(Room currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+    }
+

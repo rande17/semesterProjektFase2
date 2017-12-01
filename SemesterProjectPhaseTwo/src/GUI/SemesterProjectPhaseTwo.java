@@ -19,13 +19,12 @@ import javafx.stage.Stage;
  * @author rickie
  */
 public class SemesterProjectPhaseTwo extends Application {
-
+        Parent root;
+        Scene scene;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-
-        Scene scene = new Scene(root);
-
+        root = FXMLLoader.load(getClass().getResource("airport.fxml"));
+        scene = new Scene(root);
         stage.setTitle("Semester Projekt");
         stage.setScene(scene);
         stage.show();

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('GUI/Assets/jungle.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+   <children>
+      <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="395.0" layoutY="295.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+   </children>
+</AnchorPane>
