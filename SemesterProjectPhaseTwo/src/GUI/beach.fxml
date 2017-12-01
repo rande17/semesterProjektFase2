@@ -33,13 +33,13 @@
             <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="4" />
             <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="3" />
-            <AnchorPane prefHeight="614.0" prefWidth="614.0" GridPane.rowIndex="3">
-               <children>
-                  <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="295.0" layoutY="295.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
-               </children>
-            </AnchorPane>
             <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
+      <AnchorPane prefHeight="600.0" prefWidth="600.0">
+         <children>
+            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="295.0" layoutY="295.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
