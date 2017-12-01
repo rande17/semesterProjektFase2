@@ -5,12 +5,17 @@
  */
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -20,55 +25,65 @@ import javafx.stage.Stage;
  */
 public class FXMLDocumentController implements Initializable {
 
-    @FXML
+    private int speed = 10;
     private GridPane roomGridPane;
-    @FXML
     private Rectangle playerRectangle;
+    Scene scene;
+    Parent root;
+    @FXML
+    private AnchorPane background;
+    @FXML
+    private Rectangle player;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
+        
     }
 
     @FXML
-    private void handleKeyPressed(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case UP:
+    private void handleButtonAction(KeyEvent event) throws IOException {
+        System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
+        scene = roomGridPane.getScene();
+        switch (event.getCode()) {
             case W:
-                if (GridPane.getRowIndex(playerRectangle) > 0) {
-                    GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) - 1);
+            case UP:
+                if (player.getLayoutY() <= 0) {
+                    player.setLayoutY(0);
+                   // changeScene("cave");
+                } else {
+                    player.setLayoutY(player.getLayoutY() - speed);
                 }
                 break;
-            case RIGHT:
-            case D:
-                if (GridPane.getColumnIndex(playerRectangle) < 15) {
-                    GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) + 1);
-                }
-                break;
-            case DOWN:
             case S:
-                if (GridPane.getRowIndex(playerRectangle) < 15) {
-                    GridPane.setRowIndex(playerRectangle, GridPane.getRowIndex(playerRectangle) + 1);
+            case DOWN:
+                if (player.getLayoutY() >= background.getHeight() - speed) {
+                    player.setLayoutY((background.getHeight() - player.getHeight()));
+                } else {
+                    player.setLayoutY(player.getLayoutY() + speed);
                 }
                 break;
-            case LEFT:
             case A:
-                if (GridPane.getColumnIndex(playerRectangle) > 0) {
-                    GridPane.setColumnIndex(playerRectangle, GridPane.getColumnIndex(playerRectangle) - 1);
+            case LEFT:
+
+                if (player.getLayoutX() <= 0) {
+                    player.setLayoutX(0);
+                } else {
+                    player.setLayoutX(player.getLayoutX() - speed);
                 }
                 break;
-            case F1:
-                //Kun for at se koordinaterne på figuren
-                System.out.println(GridPane.getRowIndex(playerRectangle) + " : " + GridPane.getColumnIndex(playerRectangle));
-                break;
-            case ESCAPE:
-                Stage stage = (Stage) roomGridPane.getScene().getWindow();
-                stage.close();
-                break;
-            default:
-//                System.out.println("Pressed not defined in switch!");
-                break;
+
+            case D:
+            case RIGHT:
+                if (player.getLayoutX() >= background.getWidth() - player.getWidth()) {
+                    player.setLayoutX((background.getWidth() - player.getWidth()));
+                } else {
+                    player.setLayoutX(player.getLayoutX() + speed);
+                }
         }
     }
 
+    public void changeScene(String newScene) throws IOException {
+        root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
+        scene.setRoot(root);
+    }
 }
