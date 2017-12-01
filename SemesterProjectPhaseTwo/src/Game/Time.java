@@ -21,7 +21,6 @@ public class Time {
         @Override
         public void run() {
             secondsPassed++;
-//            System.out.println(secondsPassed);
         }
     };
     

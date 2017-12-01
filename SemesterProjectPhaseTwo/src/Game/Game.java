@@ -177,7 +177,9 @@ public class Game {
         npc3.setName("Joseph Schitzel");
         npc3.setCurrentRoom(mountain);
         npc3.setDescribtion("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
-        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's." + "\n" + "Come on, fetch me some eggs!");
+        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
+        npc3.addDialog("");
+        npc3.setDamageValue(100);
 
         //create another npc
         npc2.setName("Mysterious crab");
@@ -196,6 +198,16 @@ public class Game {
         createMissions();
         createNPC();
 
+    }
+
+    private void npcPath() {
+
+        Random picker = new Random();
+        Room[] roomString = {beach, jungle, mountain};
+        if (Time.secondsPassed % 45 == 0) {
+            int indexOfRoomString = picker.nextInt(roomString.length);
+            npc3.setCurrentRoom(roomString[indexOfRoomString]);
+        }
     }
 
     /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
@@ -312,9 +324,9 @@ public class Game {
             inventory.setInventoryMaxWeight(25);
         }
 
-//        while (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
-//                && inventory.getInventory().containsKey("Spear")) {
-        while (inventory.getInventory().containsKey("Boardingpass")) {
+        while (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
+                && inventory.getInventory().containsKey("Spear")) {
+//        while (inventory.getInventory().containsKey("Boardingpass")) {
             allMissions.setMissionComplete("Escape the island");
 
             if (currentRoom != beach) {
@@ -330,6 +342,10 @@ public class Game {
             }
             break;
         }
+
+        loseCondition();
+
+        npcPath();
 
         if (currentRoom == airport) {
             lockRoom(command);
@@ -398,13 +414,23 @@ public class Game {
             }
         }
         System.out.println(itemList);
+        int currentNPCsInRoom = 0;
+
         if (npc1.getCurrentRoom() == currentRoom) {
             System.out.println("There seems to be someone resting in the leaves");
-        } else if (npc2.getCurrentRoom() == currentRoom) {
+            currentNPCsInRoom++;
+        }
+
+        if (npc2.getCurrentRoom() == currentRoom) {
             System.out.println("You sense somebody in the cave");
-        } else if (npc3.getCurrentRoom() == currentRoom) {
+            currentNPCsInRoom++;
+        }
+
+        if (npc3.getCurrentRoom() == currentRoom) {
             System.out.println("There is an intense smell, somebody seems to be near!");
-        } else {
+            currentNPCsInRoom++;
+        }
+        if (currentNPCsInRoom == 0) {
             System.out.println("You are alone in the room");
         }
     }
@@ -469,7 +495,21 @@ public class Game {
             System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
             pregnant();
         } else if (npc3.getCurrentRoom() == currentRoom) {
+
             System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
+
+            Scanner scan = new Scanner(System.in); //Creates a new scanner
+            String input = scan.nextLine(); //Waits for input
+
+            if (input.equalsIgnoreCase("yes")) {
+                System.out.println("You got a mission, please use the show command for more information");
+                allMissions.addMission(npc3.getCurrentRoom(), "Live or die", "Get me some eggs or I will kill you!!!!");
+                System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
+            } else if (input.equalsIgnoreCase("no")) {
+                System.out.println("");
+                player.LoseHealth(npc3.getDamageValue());
+            }
+
         } else {
             System.out.println("There is nobody to communicate with in this Room");
         }
@@ -717,6 +757,12 @@ public class Game {
         }
     }
 
+    private void loseCondition() {
+        if (player.getHealth() <= 0) {
+            lose();
+        }
+    }
+
     /**
      * method to quit the game and if there is a second word it print out a line
      * "Quit what"
@@ -771,5 +817,6 @@ public class Game {
     void lose() {
         System.out.println("You have lost the game!!!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
         System.exit(0);
+
     }
 }

@@ -83,7 +83,7 @@ public class NPC {
     /**
      * @return returns how much damage this NPC should do
      */
-    public int damageValue() {
+    public int getDamageValue() {
 
         return dmgValue;
     }

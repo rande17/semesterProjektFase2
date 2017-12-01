@@ -68,6 +68,7 @@ public class Character {
         
     }
     
+    
     // Method, set Characters current room
     public void setCurrentRoom(Room goToRoom){
         currentRoom = goToRoom;
@@ -94,8 +95,8 @@ public class Character {
         return health;
     }
 
-    public void LoseHealth(){
-
+    public void LoseHealth(int dmg){
+       health -= dmg;
          }
     
 }
