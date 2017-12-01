@@ -13,7 +13,6 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Random;
 
-
 /**
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
@@ -74,7 +73,7 @@ public class Game {
         cave = new Room("in the cave");
         camp = new Room("in the camp");
         seaBottom = new Room("at the bottom of the sea");
-        
+
         //Setting the the exit
         beach.setExit("north", jungle);
         beach.setExit("south", seaBottom);
@@ -170,9 +169,9 @@ public class Game {
         npc1.setName("BS Christiansen");
         npc1.setCurrentRoom(jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, "
-                          + "\nbut he is heavly injured on his right leg so he cant move ");
+                + "\nbut he is heavly injured on his right leg so he cant move ");
         npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter."
-                     + "\nYou can craft items to help you survive, if you have the right components.");
+                + "\nYou can craft items to help you survive, if you have the right components.");
 
         //create the bad npc
         npc3.setName("Joseph Schitzel");
@@ -315,7 +314,7 @@ public class Game {
 
 //        while (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
 //                && inventory.getInventory().containsKey("Spear")) {
-            while(inventory.getInventory().containsKey("Boardingpass")){
+        while (inventory.getInventory().containsKey("Boardingpass")) {
             allMissions.setMissionComplete("Escape the island");
 
             if (currentRoom != beach) {
@@ -356,7 +355,7 @@ public class Game {
         }
 
         String direction = command.getSecondWord();
-        
+
         Room nextRoom = currentRoom.getExit(direction);
         player.setCurrentRoom(nextRoom);
         /* loop that when next room is equel to null it print a message that says "there is no door" 
@@ -367,7 +366,7 @@ public class Game {
             currentRoom = nextRoom;
             //System.out.println(currentRoom.getLongDescription());
             System.out.println(player.getCurrentRoom().getLongDescription());
-            
+
         }
     }
 
@@ -459,14 +458,12 @@ public class Game {
                 allMissions.addMission(jungle, "Helping the injured survivor", "helping the survivor, because of his great advice he have given you");
             } else if (input.equalsIgnoreCase("no")) {
                 System.out.println("Come back again if you change your mind");
-            } else{
+            } else {
                 System.out.println("Come back again if you change your mind");
             }
 //            if (allMissions.missionStatus.get("Helping the injured survivor") == true){
 //                System.out.println("");
 //                
-            
-    
 
         } else if (npc2.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
@@ -686,10 +683,14 @@ public class Game {
         //prompt the user to enter the name their highscore
         System.out.println("");
         System.out.println("Please enter your highscore name:");
-        String name = input.nextLine();
+        String name = input.next();
 
-        score.setName(name);
-
+        if (!(name.length() <= 16)) {
+            String substringOfName = name.substring(0, 15);
+            score.setName(substringOfName);
+        } else {
+            score.setName(name);
+        }
     }
     public void NPCMove() {
         Random random = new Random();

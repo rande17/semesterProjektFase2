@@ -36,7 +36,7 @@ public class Room {
     }
 
     //returns all possible exis from current room
-    private String getExitString() {
+    public String getExitString() {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         //loops over all existing exits and adds the exits to the string

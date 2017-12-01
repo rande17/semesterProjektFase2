@@ -5,7 +5,6 @@
  */
 package FileHandling;
 
-import FileHandling.CompareScore;
 import Game.Score;
 import java.util.*;
 import java.io.*;
@@ -105,7 +104,7 @@ public class HighscoreManager {
         int highscoreMax = 10;
         //get the arraylist scores
         ArrayList<Score> scores;
-        //set score = the method getScore where it first load the scorefile and then sort the list and return scores
+        //set score = the method getScore where it first load thewi scorefile and then sort the list and return scores
         scores = getScores();
 
         int x = scores.size();
@@ -115,7 +114,8 @@ public class HighscoreManager {
         }
         //for loop that print out score name and score
         for (int i = 0; i < x; i++) {
-            highscoreList += (i + 1) + ".\t" + scores.get(i).getName() + "\t\t" + scores.get(i).getCurrentScore() + "\n";
+//            highscoreList += (i + 1) + ".\t" + scores.get(i).getName() + "\t\t" + scores.get(i).getCurrentScore() + "\n";
+            highscoreList += (i + 1) + ".\t" + String.format("%-12s", scores.get(i).getName()) + "\t\t" + scores.get(i).getCurrentScore() + "\n";
         }
 
         return highscoreList;
