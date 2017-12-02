@@ -13,12 +13,12 @@ public class Command {
     //Laver et commandWord der skal have et secondWord
     /**
      * Constructor that sets commandWord and secondWord while creating it
-     * @param commandWord used to set the commandWord
-     * @param secondWord used to set the secondWord
+     * @param _commandWord used to set the commandWord
+     * @param _secondWord used to set the secondWord
      */
-    public Command(CommandWord commandWord, String secondWord) {
-        this.commandWord = commandWord;
-        this.secondWord = secondWord;
+    public Command(CommandWord _commandWord, String _secondWord) {
+        commandWord = _commandWord;
+        secondWord = _secondWord;
     }
 
     //Laver getter metoder

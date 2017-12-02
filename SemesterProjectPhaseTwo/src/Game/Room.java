@@ -17,10 +17,10 @@ public class Room {
     
     /**
      * Constructor connect the new room with the description
-     * @param description sets room describtion
+     * @param _description sets room describtion
      */
-    public Room(String description) {
-        this.description = description;
+    public Room(String _description) {
+        description = _description;
         exits = new HashMap<String, Room>();
     }
 

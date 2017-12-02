@@ -29,6 +29,7 @@ public class Game {
     static Room currentRoom;
     private Room airport, beach, jungle, mountain, cave, camp, seaBottom;
     private String name;
+    private boolean hasTalkedWithEvilGuy = false;
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
@@ -201,22 +202,59 @@ public class Game {
 
     }
 
+    /**
+     * this method is responisble for moving the npc3
+     */
     private void npcPath() {
+//        Random picker = new Random();
+//        Room[] roomString = {beach, jungle, mountain};
+//            int indexOfRoomString = picker.nextInt(roomString.length);
+//            npc3.setCurrentRoom(roomString[indexOfRoomString]);
 
-        Random picker = new Random();
-        Room[] roomString = {beach, jungle, mountain};
         if (Time.secondsPassed % 45 == 0) {
-            int indexOfRoomString = picker.nextInt(roomString.length);
-            npc3.setCurrentRoom(roomString[indexOfRoomString]);
+            Random picker = new Random();
+            String[] roomString = {"south", "north"};
+            boolean hasMoved = false;
+            while (!hasMoved) {
+                if (npc3.getCurrentRoom().equals(mountain)) {
+                    String[] newRoomString = {"south"};
+                    int index = picker.nextInt(newRoomString.length);
+                    Room next = npc3.getCurrentRoom().getExit(newRoomString[index]);
+                    npc3.setCurrentRoom(next);
+                    hasMoved = true;
+                    break;
+                }
+
+                if (npc3.getCurrentRoom().equals(beach)) {
+                    String[] newRoomString = {"north"};
+                    int indexOfNewRoomString = picker.nextInt(newRoomString.length);
+                    Room nextRoom = npc3.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
+                    npc3.setCurrentRoom(nextRoom);
+                    hasMoved = true;
+                    break;
+                }
+
+                if (npc3.getCurrentRoom().equals(jungle)) {
+                    String[] newRoomString = {"north", "south"};
+                    int indexOfNewRoomString = picker.nextInt(newRoomString.length);
+                    Room nextRoom = npc3.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
+                    npc3.setCurrentRoom(nextRoom);
+                    hasMoved = true;
+                    break;
+                }
+            }
         }
     }
 
     /**
-     * A method that is initialized when we start the game, that first print out a message with the printWelcome method  
-       and then checks if the game is finished or not with a while loop where finished is set to false when the game start
+     * A method that is initialized when we start the game, that first print out
+     * a message with the printWelcome method and then checks if the game is
+     * finished or not with a while loop where finished is set to false when the
+     * game start
+     *
      * @throws FileNotFoundException
      * @throws IOException
-     * @throws Throwable 
+     * @throws Throwable
      */
     public void play() throws FileNotFoundException, IOException, Throwable {
         Time time = new Time();
@@ -252,15 +290,18 @@ public class Game {
     }
 
     /**
-     * A method that set wantToQuit to false and the run a if loop that that does so everytime the commandWord is  
-       not know to the game it print out the message "I don't know what you mean..." and return false
-     * It does the same with Help and GO where it print out a message with the use of the method printHelp and goRoom
-       and if the command word is quit it return wantToQuit
+     * A method that set wantToQuit to false and the run a if loop that that
+     * does so everytime the commandWord is not know to the game it print out
+     * the message "I don't know what you mean..." and return false It does the
+     * same with Help and GO where it print out a message with the use of the
+     * method printHelp and goRoom and if the command word is quit it return
+     * wantToQuit
+     *
      * @param command process command
      * @return
      * @throws FileNotFoundException
      * @throws IOException
-     * @throws Throwable 
+     * @throws Throwable
      */
     private boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
         boolean wantToQuit = false;
@@ -268,6 +309,7 @@ public class Game {
         CommandWord commandWord = command.getCommandWord();
 
         log.write(commandWord.toString() + " " + command.getSecondWord());
+
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -358,8 +400,7 @@ public class Game {
 
         loseCondition();
 
-        npcPath();
-
+//        npcPath();
         if (currentRoom == airport) {
             lockRoom(command);
         }
@@ -377,7 +418,9 @@ public class Game {
     }
 
     /**
-     * method that is initializing everytime you use the command "go" and print the message "Go where"
+     * method that is initializing everytime you use the command "go" and print
+     * the message "Go where"
+     *
      * @param command to go to room
      */
     private void goRoom(Command command) {
@@ -400,6 +443,8 @@ public class Game {
             System.out.println(player.getCurrentRoom().getLongDescription());
 
         }
+
+        forceDialog();
     }
 
 // Method used for showing contents in inventory
@@ -491,48 +536,57 @@ public class Game {
             System.out.println(npc1.getDescribtion() + ", yet he still gives you good advice:\n");
             System.out.println(npc1.getDialog(0));
             System.out.println("");
-            System.out.println("Maybe you could bring me some food and something to defend myself now that i cant move");
-            System.out.println("Do you want to accept his mission: Yes or no");
-            Scanner scan = new Scanner(System.in); //Creates a new scanner
-            String input = scan.nextLine(); //Waits for input
-            if (input.equalsIgnoreCase("yes")) {
-                System.out.println("You got a mission, please use the show command for more information");
-                allMissions.addMission(jungle, "Helping the injured survivor", "helping the survivor, because of his great advice he have given you");
-            } else if (input.equalsIgnoreCase("no")) {
-                System.out.println("Come back again if you change your mind");
-            } else {
-                System.out.println("Come back again if you change your mind");
-            }
-//            if (allMissions.missionStatus.get("Helping the injured survivor") == true){
-//                System.out.println("");
-//                
+            woundedSurvivor();
 
         } else if (npc2.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
             pregnant();
-        } else if (npc3.getCurrentRoom() == currentRoom) {
-
-            System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
-
-            Scanner scan = new Scanner(System.in); //Creates a new scanner
-            String input = scan.nextLine(); //Waits for input
-
-            if (input.equalsIgnoreCase("yes")) {
-                System.out.println("You got a mission, please use the show command for more information");
-                allMissions.addMission(npc3.getCurrentRoom(), "Live or die", "Get me some eggs or I will kill you!!!!");
-                System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
-            } else if (input.equalsIgnoreCase("no")) {
-                System.out.println("");
-                player.LoseHealth(npc3.getDamageValue());
-            }
-
-        } else {
+        } //        else if (npc3.getCurrentRoom() == currentRoom) {
+        //            System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
+        //            evilGuyDialog();
+        //        } 
+        else {
             System.out.println("There is nobody to communicate with in this Room");
         }
 
     }
 
-    //Create a question
+    /**
+     * force dialog with npc3, if player is in same room
+     */
+    private void forceDialog() {
+        if (hasTalkedWithEvilGuy == false) {
+            if (npc3.getCurrentRoom() == currentRoom) {
+                System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
+                evilGuyDialog();
+                hasTalkedWithEvilGuy = true;
+            }
+        }
+    }
+
+    /**
+     * creates a dialog for npc1
+     */
+    public void woundedSurvivor() {
+        System.out.println("Maybe you could bring me some food and something to defend myself now that i cant move");
+        System.out.println("Do you want to accept his mission: Yes or no");
+        Scanner scan = new Scanner(System.in); //Creates a new scanner
+        String input = scan.nextLine(); //Waits for input
+        if (input.equalsIgnoreCase("yes")) {
+            System.out.println("You got a mission, please use the show command for more information");
+            allMissions.addMission(jungle, "Helping the injured survivor", "helping the survivor, because of his great advice he have given you");
+        } else if (input.equalsIgnoreCase("no")) {
+            System.out.println("Come back again if you change your mind");
+        } else {
+            System.out.println("Come back again if you change your mind");
+        }
+//            if (allMissions.missionStatus.get("Helping the injured survivor") == true){
+//                System.out.println("");
+    }
+
+    /**
+     * Creates question when talking with npc2
+     */
     public void pregnant() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
         System.out.println("Are u pregnant?"); //Asks question
@@ -546,8 +600,27 @@ public class Game {
         }
 
     }
+
     /**
-     * 
+     * creates a short dialog when talking to npc3
+     */
+    public void evilGuyDialog() {
+        Scanner scan = new Scanner(System.in); //Creates a new scanner
+        String input = scan.nextLine(); //Waits for input
+
+        if (input.equalsIgnoreCase("yes")) {
+            System.out.println("You got a mission, please use the show command for more information");
+            allMissions.addMission(npc3.getCurrentRoom(), "Live or die", "Get me some eggs or I will kill you!!!!");
+            System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
+        } else if (input.equalsIgnoreCase("no")) {
+            System.out.println("");
+            player.LoseHealth(npc3.getDamageValue());
+        }
+
+    }
+
+    /**
+     *
      * @param command to craft item
      */
     public void craftItem(Command command) {
@@ -677,12 +750,10 @@ public class Game {
 //        System.out.println(command.getSecondWord());
 //        System.out.println(command.getCommandWord().name());
         if (command.getCommandWord().name().equalsIgnoreCase(CommandWord.GO.toString())) {
-            if (inventory.getInventory().containsKey("Boardingpass") == false && command.getSecondWord().equalsIgnoreCase("west")) {
-
-                airport.setExit("west", airport);
-
+//            if (inventory.getInventory().containsKey("Boardingpass") == false && command.getSecondWord().equalsIgnoreCase("west")) {
+            if (inventory.getInventory().containsKey("Boardingpass") == false) {
+//                airport.setExit("west", airport);                                 // This lines prints out the exit for some reason, which is not good
                 System.out.println("You have no boardingpass, please return when you do!!!");
-
             }
 //            else {
 //                airport.setExit("west", beach);
@@ -691,7 +762,7 @@ public class Game {
         if (inventory.getInventory().containsKey("Boardingpass") && !hasBoardingpass) {
             hasBoardingpass = true;
             airport.setExit("west", beach);
-            System.out.println("Exits: west");
+            System.out.println(airport.getExitString());
         }
     }
 
@@ -775,11 +846,12 @@ public class Game {
             return true;
         }
     }
-/**
- * 
- * @throws IOException
- * @throws Throwable 
- */
+
+    /**
+     *
+     * @throws IOException
+     * @throws Throwable
+     */
     private void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());

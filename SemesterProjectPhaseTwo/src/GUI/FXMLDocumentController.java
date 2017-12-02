@@ -99,6 +99,9 @@ public class FXMLDocumentController implements Initializable {
                 } else {
                     player.setLayoutX(player.getLayoutX() + speed);
                 }
+            case F1:
+                System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
+                break;
         }
         intersectsItem();
     }

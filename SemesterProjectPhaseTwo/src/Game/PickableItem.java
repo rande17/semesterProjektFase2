@@ -33,9 +33,9 @@ public class PickableItem extends Item{
      * @param weight used to set the weight for Item
      * @param respawnTime used to set the repawn time for Item
      */
-    PickableItem(String name, String description, int weight, Date respawnTime) {
+    PickableItem(String name, String description, int weight, Date _respawnTime) {
         super(name, description, weight);
-        this.respawnTime = respawnTime;
+        respawnTime = _respawnTime;
     }
     
     /**

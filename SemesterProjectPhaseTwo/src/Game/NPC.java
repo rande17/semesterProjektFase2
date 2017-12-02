@@ -135,9 +135,9 @@ public class NPC {
 
     /**
      *
-     * @param currentPosition
+     * @param _currentPosition
      */
-    public void setCurrentPosition(Room currentPosition) {
-        this.currentPosition = currentPosition;
+    public void setCurrentPosition(Room _currentPosition) {
+        currentPosition = _currentPosition;
     }
 }
