@@ -400,7 +400,7 @@ public class Game {
 
         loseCondition();
 
-//        npcPath();
+        npcPath();
         if (currentRoom == airport) {
             lockRoom(command);
         }
