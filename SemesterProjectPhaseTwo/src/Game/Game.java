@@ -1,5 +1,6 @@
 package Game;
 
+import acquaintance.InterfaceGame;
 import FileHandling.HighscoreManager;
 import FileHandling.Logger;
 import FileHandling.Save;
@@ -19,7 +20,7 @@ import java.util.Random;
  * @author Nicolai
  * @version 2006.03.30daSFT
  */
-public class Game {
+public class Game implements InterfaceGame {
 
     /* data field with the attributes parser and currentRoom
        making them private so we only can use them in the Game class */
@@ -440,7 +441,7 @@ public class Game {
      *
      * @param command used for checking if an item exists in current room
      */
-    private void takeItem(Command command) {
+    public void takeItem(Command command) {
         ArrayList currentRoomItem = itemLocation.getItems(currentRoom);
         Item seeItem;
         int indexItem = -1;

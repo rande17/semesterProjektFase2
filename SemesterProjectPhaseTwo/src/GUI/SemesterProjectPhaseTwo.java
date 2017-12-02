@@ -19,8 +19,10 @@ import javafx.stage.Stage;
  * @author rickie
  */
 public class SemesterProjectPhaseTwo extends Application {
-        Parent root;
-        Scene scene;
+
+    Parent root;
+    Scene scene;
+
     @Override
     public void start(Stage stage) throws Exception {
         root = FXMLLoader.load(getClass().getResource("beach.fxml"));
@@ -36,7 +38,7 @@ public class SemesterProjectPhaseTwo extends Application {
      * @throws java.lang.Throwable
      */
     public static void main(String[] args) throws Throwable {
-        
+
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -48,9 +50,9 @@ public class SemesterProjectPhaseTwo extends Application {
                 }
             }
         };
-        
+
         thread.start();
-        
+
         launch(args);
 
     }
