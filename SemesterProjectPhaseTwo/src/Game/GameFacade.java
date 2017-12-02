@@ -5,6 +5,7 @@
  */
 package Game;
 
+import static Game.CommandWord.*;
 import acquaintance.*;
 import java.util.ArrayList;
 
@@ -26,6 +27,12 @@ public class GameFacade implements InterfaceGame{
             itemNameArrayList.add(item.getName());
         }
         return itemNameArrayList;
+    }
+
+    @Override
+    public void takeItemGUI(String itemToTake) {
+       Command command = new Command(TAKE, itemToTake);
+       Game.takeItem(command);
     }
 
     

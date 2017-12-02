@@ -16,4 +16,5 @@ import java.util.ArrayList;
  */
 public interface InterfaceGame {
     public ArrayList getItemsOnMap();
+    public void takeItemGUI(String itemToTake);
 }

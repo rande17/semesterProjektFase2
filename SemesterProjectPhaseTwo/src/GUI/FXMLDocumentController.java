@@ -44,15 +44,16 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane background;
     @FXML
     private Rectangle player;
+    ArrayList itemsArray;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        populateItemsOnMap();
+       // populateItemsOnMap();
     }
 
     @FXML
     private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
-
+        
         scene = player.getScene();
         switch (event.getCode()) {
             case F12:
@@ -99,6 +100,7 @@ public class FXMLDocumentController implements Initializable {
                     player.setLayoutX(player.getLayoutX() + speed);
                 }
         }
+        intersectsItem();
     }
 
     public void changeScene(String newScene) throws IOException {
@@ -110,11 +112,33 @@ public class FXMLDocumentController implements Initializable {
 
     }
     
-    
+    public void intersectsItem(){
+        double pxstart, pxend, pystart, pyend;
+        pxstart = player.getLayoutX();
+        pxend = pxstart+player.getWidth();
+        pystart = player.getLayoutY();
+        pyend = pystart+player.getHeight();
+                
+        for(int i = 0; i < itemsArray.size(); i++){
+            Rectangle itemToCheck = (Rectangle) background.getChildren().get(i);
+            
+            String itemID = itemToCheck.getId();
+           // System.out.println(itemID);
+            if(!itemID.equals("player")){
+                    double ixstart = itemToCheck.getLayoutX();
+                    double ixend = itemToCheck.getLayoutX()+itemToCheck.getWidth();
+                    double iystart = itemToCheck.getLayoutY();
+                    double iyend = itemToCheck.getLayoutY()+itemToCheck.getHeight();
+                  if(pxstart >= ixstart && pxstart <= ixend && pystart >= iystart && pystart <= iyend){
+                    game.takeItemGUI(itemID);
+                  }
+            }
+        }
+    }
 
     public void populateItemsOnMap() {
       //  if (!itemsDrawed) {
-            ArrayList itemsArray = game.getItemsOnMap();
+            itemsArray = game.getItemsOnMap();
 
             for (int i = 0; i < itemsArray.size(); i++) {
                 Rectangle item = new Rectangle();

@@ -42,7 +42,7 @@ public class Game {
        using the method setExit from the Room class */
  /* The currentRoom is also given a value which is the start location = outside */
     static ItemLocation itemLocation = new ItemLocation();
-    Inventory inventory = new Inventory();
+    static Inventory inventory = new Inventory();
     HighscoreManager highscore = new HighscoreManager();
     Player player = new Player("Player", "???", currentRoom, 100, 100);
     Score score = new Score();
@@ -456,11 +456,11 @@ public class Game {
      *
      * @param command used for checking if an item exists in current room
      */
-    public void takeItem(Command command) {
+    public static void takeItem(Command command) {
         ArrayList currentRoomItem = itemLocation.getItems(currentRoom);
         Item seeItem;
         int indexItem = -1;
-        Item addToInventory = debug;
+        Item addToInventory = null;
 
         for (int i = 0; i < currentRoomItem.size(); i++) {
             seeItem = (Item) currentRoomItem.get(i);
