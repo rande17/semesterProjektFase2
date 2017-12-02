@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Game.GameFacade;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +20,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import acquaintance.InterfaceGame;
+import java.util.ArrayList;
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  *
@@ -27,12 +31,15 @@ import javafx.scene.Node;
  */
 public class FXMLDocumentController implements Initializable {
 
+    private static GameFacade game = new GameFacade();
     private int speed = 10;
     private GridPane roomGridPane;
     private Rectangle playerRectangle;
     static Scene scene;
     double x, y;
+   // boolean itemsDrawed = false;
     Parent root;
+
     @FXML
     private AnchorPane background;
     @FXML
@@ -40,21 +47,26 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        populateItemsOnMap();
     }
 
     @FXML
     private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
+
         scene = player.getScene();
         switch (event.getCode()) {
+            case F12:
+                System.out.println(background.getChildrenUnmodifiable().toString());
+                break;
+            case F11:
+                populateItemsOnMap();
+                break;
             case W:
             case UP:
                 if (player.getLayoutY() <= 0) {
                     x = player.getLayoutX();
                     y = player.getLayoutY();
-                    System.out.println(x + " " + y);
                     changeScene("cave");
-                    System.out.println(x + " " + y);
                     player.setLayoutX(x);
                     player.setLayoutY(background.getHeight() - player.getHeight());
                 } else {
@@ -94,8 +106,33 @@ public class FXMLDocumentController implements Initializable {
 
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
+        //itemsDrawed = false;
         scene.setRoot(root);
         scene.getRoot().requestFocus();
-        player = (Rectangle) root.getChildrenUnmodifiable().get(0);
+        player = (Rectangle) root.lookup("#player");
+
+    }
+    
+    
+
+    public void populateItemsOnMap() {
+      //  if (!itemsDrawed) {
+            ArrayList itemsArray = game.getItemsOnMap();
+
+            for (int i = 0; i < itemsArray.size(); i++) {
+                Rectangle item = new Rectangle();
+                Paint color = Color.rgb(0, 0, 255);
+                item.setLayoutX(Math.random() * background.getWidth() - 20);
+                item.setLayoutY(Math.random() * background.getHeight() - 20);
+                item.setHeight(20);
+                item.setWidth(20);
+                item.setStroke(color);
+                item.setId((String) itemsArray.get(i));
+                item.setFill(color);
+                item.setVisible(true);
+                background.getChildren().add(item);
+            }
+       //     itemsDrawed = true;
+        
     }
 }
