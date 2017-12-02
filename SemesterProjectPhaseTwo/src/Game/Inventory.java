@@ -79,10 +79,8 @@ public class Inventory {
             System.out.println("You can't pickup this item");
         }
     }
-
-    // Drop item from inventory and add to Room 
     /**
-     * 
+     * Drop item from inventory and add to Room 
      * @param _string used for ether remove or decrease number of items
      */
     public void dropItemInventory(String _string) {
@@ -99,23 +97,20 @@ public class Inventory {
         currentQuantity = currentQuantity - 1;
 
     }
+    
+    public void useItem() {  
+    }
+    
+    //method to show inventory
+    public void showInventory() {
+        System.out.println(inventory + "\n");
+    }
 
-//get current inventory weight
     /**
-     * 
+     * get current inventory weight
      * @return returns the current weight
      */
     public int getCurrentInventoryWeight() {
-        //currentInventoryWeight = 0;
-        //Iterates through list of item in inventory to get current inventory weight 
-
-        //for (String items : inventory.keySet()) {
-        //   int quantity = inventory.get(items);
-//            int weight = items.getWeight();
-        //   int weight = 1;
-        //   int thisItemWeight = quantity * weight;
-        //   currentInventoryWeight += thisItemWeight;
-        //}
         return currentInventoryWeight;
     }
 
@@ -127,10 +122,9 @@ public class Inventory {
     public HashMap getInventory() {
         return inventory;
     }
-
-//Set new weight for the inventory
+    
     /**
-     * 
+     * Set new weight for the inventory
      * @param newInventoryMaxWeight used to set the max weight
      */
     void setInventoryMaxWeight(int newInventoryMaxWeight) {
@@ -144,38 +138,13 @@ public class Inventory {
         inventoryMaxQuantity = newInventoryMaxQuantity;
     }
     
-    public void useItem() {
-        
-    }
-    
-    public void showInventory() {
-        System.out.println(inventory + "\n");
-    }
-    
+    /**
+     * 
+     * @param itemName get the item weight of a specific item
+     * @return 
+     */
     public int getItemWeight(String itemName){
         return itemWeight.get(itemName);
     }
 
-//    public void addItemToInventory() {
-//        if (checkInventoryMaxWeigth()) {
-//            inventory.put(Item.Name, Item.Weight)   
-//        } else {
-//            System.out.println("Inventory is full");
-//        }
-//    }
-//    public void dropItemInventory(Item _item) {
-//        if(inventory.containsKey(_item)){
-//        
-//        inventory.remove(_item);
-//        }
-//    }
-//   
-//Check max weigth of the inventory everytime you pick up a new item
-//    public boolean checkInventoryMaxWeigth() {
-//        if (currentInventoryWeight + item.getWeight <= inventoryMaxWeight) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 }

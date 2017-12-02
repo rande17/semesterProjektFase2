@@ -18,12 +18,19 @@ public class Save extends WriteToFile {
     public Save(String _fileName) {
         super(_fileName, false);
     }
-
+/**
+ * 
+ * @param str 
+ */
     public void addToSaveGame(String str) {
 
         saveString += str + "\n";
     }
-
+/**
+ * 
+ * @throws IOException
+ * @throws Throwable 
+ */
     public void saveGame() throws IOException, Throwable {
         super.write(saveString);
     }

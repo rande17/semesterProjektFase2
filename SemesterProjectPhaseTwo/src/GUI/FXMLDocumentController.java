@@ -18,6 +18,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import acquaintance.InterfaceGame;
+import javafx.scene.Node;
 
 /**
  *

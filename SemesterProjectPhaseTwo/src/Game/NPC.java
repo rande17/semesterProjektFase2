@@ -56,6 +56,10 @@ public class NPC {
         dialog.add(_dialog);
     }
 
+    /**
+     *
+     * @param _name sets name of NPC
+     */
     public void setName(String _name) {
         name = _name;
     }
@@ -129,6 +133,10 @@ public class NPC {
         currentPosition = goToRoom;
     }
 
+    /**
+     *
+     * @param currentPosition
+     */
     public void setCurrentPosition(Room currentPosition) {
         this.currentPosition = currentPosition;
     }
