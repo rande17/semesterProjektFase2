@@ -200,13 +200,16 @@ public class Game {
 
     }
 
+    /**
+     * this method is responisble for moving the npc3
+     */
     private void npcPath() {
 //        Random picker = new Random();
 //        Room[] roomString = {beach, jungle, mountain};
 //            int indexOfRoomString = picker.nextInt(roomString.length);
 //            npc3.setCurrentRoom(roomString[indexOfRoomString]);
 
-        if (Time.secondsPassed % 5 == 0) {
+        if (Time.secondsPassed % 45 == 0) {
             Random picker = new Random();
             String[] roomString = {"south", "north"};
             boolean hasMoved = false;
@@ -376,8 +379,7 @@ public class Game {
 
         loseCondition();
 
-        npcPath();
-
+//        npcPath();
         if (currentRoom == airport) {
             lockRoom(command);
         }
@@ -689,8 +691,8 @@ public class Game {
 //        System.out.println(command.getSecondWord());
 //        System.out.println(command.getCommandWord().name());
         if (command.getCommandWord().name().equalsIgnoreCase(CommandWord.GO.toString())) {
-            if (inventory.getInventory().containsKey("Boardingpass") == false && command.getSecondWord().equalsIgnoreCase("west")) {
-
+//            if (inventory.getInventory().containsKey("Boardingpass") == false && command.getSecondWord().equalsIgnoreCase("west")) {
+            if (inventory.getInventory().containsKey("Boardingpass") == false) {
                 airport.setExit("west", airport);
 
                 System.out.println("You have no boardingpass, please return when you do!!!");
@@ -703,7 +705,7 @@ public class Game {
         if (inventory.getInventory().containsKey("Boardingpass") && !hasBoardingpass) {
             hasBoardingpass = true;
             airport.setExit("west", beach);
-            System.out.println("Exits: west");
+            System.out.println(airport.getExitString());
         }
     }
 
