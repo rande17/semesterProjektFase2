@@ -696,7 +696,6 @@ public class Game {
                 airport.setExit("west", airport);
 
                 System.out.println("You have no boardingpass, please return when you do!!!");
-
             }
 //            else {
 //                airport.setExit("west", beach);
