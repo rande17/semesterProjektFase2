@@ -201,12 +201,43 @@ public class Game {
     }
 
     private void npcPath() {
+//        Random picker = new Random();
+//        Room[] roomString = {beach, jungle, mountain};
+//            int indexOfRoomString = picker.nextInt(roomString.length);
+//            npc3.setCurrentRoom(roomString[indexOfRoomString]);
 
-        Random picker = new Random();
-        Room[] roomString = {beach, jungle, mountain};
-        if (Time.secondsPassed % 45 == 0) {
-            int indexOfRoomString = picker.nextInt(roomString.length);
-            npc3.setCurrentRoom(roomString[indexOfRoomString]);
+        if (Time.secondsPassed % 5 == 0) {
+            Random picker = new Random();
+            String[] roomString = {"south", "north"};
+            boolean hasMoved = false;
+            while (!hasMoved) {
+                if (npc3.getCurrentRoom().equals(mountain)) {
+                    String[] newRoomString = {"south"};
+                    int index = picker.nextInt(newRoomString.length);
+                    Room next = npc3.getCurrentRoom().getExit(newRoomString[index]);
+                    npc3.setCurrentRoom(next);
+                    hasMoved = true;
+                    break;
+                }
+
+                if (npc3.getCurrentRoom().equals(beach)) {
+                    String[] newRoomString = {"north"};
+                    int indexOfNewRoomString = picker.nextInt(newRoomString.length);
+                    Room nextRoom = npc3.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
+                    npc3.setCurrentRoom(nextRoom);
+                    hasMoved = true;
+                    break;
+                }
+
+                if (npc3.getCurrentRoom().equals(jungle)) {
+                    String[] newRoomString = {"north", "south"};
+                    int indexOfNewRoomString = picker.nextInt(newRoomString.length);
+                    Room nextRoom = npc3.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
+                    npc3.setCurrentRoom(nextRoom);
+                    hasMoved = true;
+                    break;
+                }
+            }
         }
     }
 
@@ -730,30 +761,6 @@ public class Game {
             score.setName(substringOfName);
         } else {
             score.setName(name);
-        }
-    }
-    public void NPCMove() {
-        Random random = new Random();
-        if (Time.getSecondsPassed() % 10 == 0) {
-
-            if (npc3.getCurrentRoom() == mountain) {
-                npc3.setCurrentRoom(jungle);
-                System.out.println(npc3.currentRoom.toString());
-            } else if (npc3.getCurrentRoom() == cave) {
-                npc3.setCurrentRoom(jungle);
-                System.out.println(npc3.currentRoom);
-            } else if (npc3.getCurrentRoom() == seaBottom) {
-                npc3.setCurrentRoom(beach);
-                System.out.println(npc3.currentRoom);
-            } else if (npc3.getCurrentRoom() == jungle) {
-                Room[] arr = {beach, cave, mountain};
-                int select = random.nextInt(arr.length);
-                npc3.setCurrentRoom(arr[select]);
-                System.out.println(npc3.currentRoom);
-
-            } else {
-                System.out.println("ikke godt");
-            }
         }
     }
 

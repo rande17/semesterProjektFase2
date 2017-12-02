@@ -38,12 +38,11 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
     }
 
     @FXML
     private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
-        System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
         scene = player.getScene();
         switch (event.getCode()) {
             case W:
@@ -55,7 +54,7 @@ public class FXMLDocumentController implements Initializable {
                     changeScene("cave");
                     System.out.println(x + " " + y);
                     player.setLayoutX(x);
-                    player.setLayoutY(background.getHeight()-player.getHeight());
+                    player.setLayoutY(background.getHeight() - player.getHeight());
                 } else {
                     player.setLayoutY(player.getLayoutY() - speed);
                 }
@@ -85,6 +84,9 @@ public class FXMLDocumentController implements Initializable {
                 } else {
                     player.setLayoutX(player.getLayoutX() + speed);
                 }
+            case F1:
+                System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
+                break;
         }
     }
 
@@ -92,6 +94,6 @@ public class FXMLDocumentController implements Initializable {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene.setRoot(root);
         scene.getRoot().requestFocus();
-        player = (Rectangle)root.getChildrenUnmodifiable().get(0);
+        player = (Rectangle) root.getChildrenUnmodifiable().get(0);
     }
 }
