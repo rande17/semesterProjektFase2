@@ -22,12 +22,12 @@ public class Score implements Serializable {
 
     /**
      *
-     * @param name sets the name of the score
-     * @param score sets the the score
+     * @param _name sets the name of the score
+     * @param _score sets the the score
      */
-    public Score(String name, int score) {
-        this.score = score;
-        this.name = name;
+    public Score(String _name, int _score) {
+        score = _score;
+        name = _name;
     }
 
     /**

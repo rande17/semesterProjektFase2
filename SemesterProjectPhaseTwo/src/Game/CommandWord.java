@@ -10,10 +10,10 @@ public enum CommandWord { //enum is a mix of a class and a array, It define the 
     private String commandString; //private variable of the instance string
 /**
  * 
- * @param commandString 
+ * @param _commandString 
  */
-    CommandWord(String commandString) { //Constructer with the parameterlist String commandString 
-        this.commandString = commandString; //Instance variable commandString is set to be the parameter commandString
+    CommandWord(String _commandString) { //Constructer with the parameterlist String commandString 
+        commandString = _commandString; //Instance variable commandString is set to be the parameter commandString
     }
 /**
  * toString method

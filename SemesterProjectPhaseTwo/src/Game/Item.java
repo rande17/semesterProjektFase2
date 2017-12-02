@@ -20,21 +20,21 @@ public class Item {
 
     /**
      * constructer for item
-     * @param name of item
+     * @param _name of item
      */
-    Item(String name) {
-        this.name = name;
+    Item(String _name) {
+        name = _name;
     }
 
     /**
      * constructer for item
-     * @param name of the item
-     * @param weight of the item
+     * @param _name of the item
+     * @param _weight of the item
      */
-    Item(String name, String description, int weight) {
-        this.name = name;
-        this.weight = weight;
-        this.describtion = describtion;
+    Item(String _name, String _description, int _weight) {
+        name = _name;
+        weight = _weight;
+        describtion = _description;
     }
 
     /**
