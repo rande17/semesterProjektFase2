@@ -56,10 +56,10 @@ public class FXMLDocumentController implements Initializable {
 
         scene = player.getScene();
         switch (event.getCode()) {
-            case F12:
+            case O:
                 System.out.println(background.getChildrenUnmodifiable().toString());
                 break;
-            case F11:
+            case P:
                 populateItemsOnMap();
                 break;
             case W:
@@ -106,7 +106,7 @@ public class FXMLDocumentController implements Initializable {
                     player.setLayoutX(player.getLayoutX() + speed);
                 }
                 break;
-            case F1:
+            case L:
                 System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
                 break;
         }
