@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
    <children>
       <GridPane layoutX="600.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0">
         <columnConstraints>
@@ -33,10 +33,10 @@
             <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="4" />
             <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="3" />
-            <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <TextArea editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <AnchorPane fx:id="background" prefHeight="600.0" prefWidth="600.0" maxWidth="600" style="overflow: hidden; -fx-background-image: url('GUI/Assets/mountain.png'); -fx-background-size: stretch">
+      <AnchorPane fx:id="background" maxWidth="600" prefHeight="600.0" prefWidth="600.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/mountain.png'); -fx-background-size: stretch">
          <children>
             <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="290.0" layoutY="290.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
          </children>
