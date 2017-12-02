@@ -9,6 +9,7 @@ import acquaintance.*;
 import java.util.ArrayList;
 
 
+
 /**
  *
  * @author rickie
@@ -18,12 +19,13 @@ public class GameFacade implements InterfaceGame{
     @Override
     public ArrayList getItemsOnMap() {
         ArrayList itemArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
+        ArrayList itemNameArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
         itemArrayList = Game.itemLocation.getItems(Game.currentRoom);
         for(int i = 0; i< itemArrayList.size(); i++){
             Item item = (Item)itemArrayList.get(i);
-            System.out.println(item);
+            itemNameArrayList.add(item.getName());
         }
-        return itemArrayList;
+        return itemNameArrayList;
     }
 
     
