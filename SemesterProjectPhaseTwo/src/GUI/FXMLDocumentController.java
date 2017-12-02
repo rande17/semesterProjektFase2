@@ -37,23 +37,23 @@ public class FXMLDocumentController implements Initializable {
     private Rectangle playerRectangle;
     static Scene scene;
     double x, y;
-   // boolean itemsDrawed = false;
+    // boolean itemsDrawed = false;
     Parent root;
 
     @FXML
     private AnchorPane background;
     @FXML
     private Rectangle player;
-    ArrayList itemsArray;
+    ArrayList itemsArray = new ArrayList(1);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       // populateItemsOnMap();
+        // populateItemsOnMap();
     }
 
     @FXML
     private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
-        
+
         scene = player.getScene();
         switch (event.getCode()) {
             case F12:
@@ -67,7 +67,9 @@ public class FXMLDocumentController implements Initializable {
                 if (player.getLayoutY() <= 0) {
                     x = player.getLayoutX();
                     y = player.getLayoutY();
-                    changeScene("cave");
+
+                    go("north");
+
                     player.setLayoutX(x);
                     player.setLayoutY(background.getHeight() - player.getHeight());
                 } else {
@@ -77,6 +79,7 @@ public class FXMLDocumentController implements Initializable {
             case S:
             case DOWN:
                 if (player.getLayoutY() >= background.getHeight() - speed) {
+                    go("south");
                     player.setLayoutY((background.getHeight() - player.getHeight()));
                 } else {
                     player.setLayoutY(player.getLayoutY() + speed);
@@ -86,7 +89,9 @@ public class FXMLDocumentController implements Initializable {
             case LEFT:
 
                 if (player.getLayoutX() <= 0) {
+                    go("west");
                     player.setLayoutX(0);
+
                 } else {
                     player.setLayoutX(player.getLayoutX() - speed);
                 }
@@ -96,9 +101,11 @@ public class FXMLDocumentController implements Initializable {
             case RIGHT:
                 if (player.getLayoutX() >= background.getWidth() - player.getWidth()) {
                     player.setLayoutX((background.getWidth() - player.getWidth()));
+                    go("east");
                 } else {
                     player.setLayoutX(player.getLayoutX() + speed);
                 }
+                break;
             case F1:
                 System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
                 break;
@@ -114,35 +121,36 @@ public class FXMLDocumentController implements Initializable {
         player = (Rectangle) root.lookup("#player");
 
     }
-    
-    public void intersectsItem(){
+
+    public void intersectsItem() {
         double pxstart, pxend, pystart, pyend;
         pxstart = player.getLayoutX();
-        pxend = pxstart+player.getWidth();
+        pxend = pxstart + player.getWidth();
         pystart = player.getLayoutY();
-        pyend = pystart+player.getHeight();
-                
-        for(int i = 0; i < itemsArray.size(); i++){
-            Rectangle itemToCheck = (Rectangle) background.getChildren().get(i);
-            
-            String itemID = itemToCheck.getId();
-           // System.out.println(itemID);
-            if(!itemID.equals("player")){
+        pyend = pystart + player.getHeight();
+        if (!itemsArray.isEmpty()) {
+            for (int i = 0; i < itemsArray.size(); i++) {
+                Rectangle itemToCheck = (Rectangle) background.getChildren().get(i);
+
+                String itemID = itemToCheck.getId();
+                // System.out.println(itemID);
+                if (!itemID.equals("player")) {
                     double ixstart = itemToCheck.getLayoutX();
-                    double ixend = itemToCheck.getLayoutX()+itemToCheck.getWidth();
+                    double ixend = itemToCheck.getLayoutX() + itemToCheck.getWidth();
                     double iystart = itemToCheck.getLayoutY();
-                    double iyend = itemToCheck.getLayoutY()+itemToCheck.getHeight();
-                  if(pxstart >= ixstart && pxstart <= ixend && pystart >= iystart && pystart <= iyend){
-                    game.takeItemGUI(itemID);
-                  }
+                    double iyend = itemToCheck.getLayoutY() + itemToCheck.getHeight();
+                    if (pxstart >= ixstart && pxstart <= ixend && pystart >= iystart && pystart <= iyend) {
+                        game.takeItemGUI(itemID);
+                    }
+                }
             }
         }
     }
 
     public void populateItemsOnMap() {
-      //  if (!itemsDrawed) {
-            itemsArray = game.getItemsOnMap();
-
+        //  if (!itemsDrawed) {
+        itemsArray = game.getItemsOnMap();
+        if (!itemsArray.isEmpty()) {
             for (int i = 0; i < itemsArray.size(); i++) {
                 Rectangle item = new Rectangle();
                 Paint color = Color.rgb(0, 0, 255);
@@ -156,7 +164,13 @@ public class FXMLDocumentController implements Initializable {
                 item.setVisible(true);
                 background.getChildren().add(item);
             }
-       //     itemsDrawed = true;
-        
+        }
+        //     itemsDrawed = true;
+
+    }
+
+    public void go(String dir) throws IOException {
+        game.goGUI(dir);
+        changeScene(game.getRoom());
     }
 }

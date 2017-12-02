@@ -17,4 +17,6 @@ import java.util.ArrayList;
 public interface InterfaceGame {
     public ArrayList getItemsOnMap();
     public void takeItemGUI(String itemToTake);
+    public void goGUI(String dir);
+    public String getRoom();
 }

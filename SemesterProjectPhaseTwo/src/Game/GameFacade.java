@@ -35,6 +35,19 @@ public class GameFacade implements InterfaceGame{
        Game.takeItem(command);
     }
 
+    @Override
+    public void goGUI(String dir) {
+       Command command = new Command(GO, dir);
+       Game.goRoom(command);
+    }
+
+    @Override
+    public String getRoom() {
+    
+    return Game.currentRoom.getShortDescription();
+    
+    }
+
     
     
     

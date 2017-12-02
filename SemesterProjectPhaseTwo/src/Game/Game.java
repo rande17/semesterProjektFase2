@@ -24,12 +24,12 @@ public class Game {
 
     /* data field with the attributes parser and currentRoom
        making them private so we only can use them in the Game class */
-    private boolean hasBoardingpass = false;
+    static private boolean hasBoardingpass = false;
     private Parser parser;
     static Room currentRoom;
-    private Room airport, beach, jungle, mountain, cave, camp, seaBottom;
+    private static Room airport, beach, jungle, mountain, cave, camp, seaBottom;
     private String name;
-    private boolean hasTalkedWithEvilGuy = false;
+    static private boolean hasTalkedWithEvilGuy = false;
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
@@ -45,17 +45,17 @@ public class Game {
     static ItemLocation itemLocation = new ItemLocation();
     static Inventory inventory = new Inventory();
     HighscoreManager highscore = new HighscoreManager();
-    Player player = new Player("Player", "???", currentRoom, 100, 100);
+    static Player player = new Player("Player", "???", currentRoom, 100, 100);
     Score score = new Score();
     Item debug = new Item("debug");
     Item campfire = new Item("Campfire", "", 2);
     Item spear = new Item("Spear", "", 2);
     Item axe = new Item("Axe", "", 2);
     Item raft = new Item("Raft", "", 2);
-    Mission allMissions = new Mission();
-    NPC npc1 = new NPC();
-    NPC npc2 = new NPC();
-    NPC npc3 = new NPC();
+    static Mission allMissions = new Mission();
+    static NPC npc1 = new NPC();
+    static NPC npc2 = new NPC();
+    static NPC npc3 = new NPC();
 
     //file thats gonna be written to and the extension
     Logger log = new Logger();
@@ -68,13 +68,13 @@ public class Game {
     private void createRooms() {
 //        Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
 
-        airport = new Room("at the airport");
-        beach = new Room("at the beach");
-        jungle = new Room("in the jungle");
-        mountain = new Room("at the mountain");
-        cave = new Room("in the cave");
-        camp = new Room("in the camp");
-        seaBottom = new Room("at the bottom of the sea");
+        airport = new Room("airport");
+        beach = new Room("beach");
+        jungle = new Room("jungle");
+        mountain = new Room("mountain");
+        cave = new Room("cave");
+        camp = new Room("camp");
+        seaBottom = new Room("seabuttom");
 
         //Setting the the exit
         beach.setExit("north", jungle);
@@ -423,7 +423,10 @@ public class Game {
      *
      * @param command to go to room
      */
-    private void goRoom(Command command) {
+    static void goRoom(Command command) {
+        if (currentRoom == airport) {
+            lockRoom(command);
+        }
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
@@ -554,7 +557,7 @@ public class Game {
     /**
      * force dialog with npc3, if player is in same room
      */
-    private void forceDialog() {
+    static private void forceDialog() {
         if (hasTalkedWithEvilGuy == false) {
             if (npc3.getCurrentRoom() == currentRoom) {
                 System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
@@ -604,7 +607,7 @@ public class Game {
     /**
      * creates a short dialog when talking to npc3
      */
-    public void evilGuyDialog() {
+    static public void evilGuyDialog() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
         String input = scan.nextLine(); //Waits for input
 
@@ -745,7 +748,7 @@ public class Game {
     }
 
     //set it so you cant go to the beach before you have the boardingpass
-    private void lockRoom(Command command) {
+    private static void lockRoom(Command command) {
 //        System.out.println(inventory.getInventory().containsKey("Boardingpass"));
 //        System.out.println(command.getSecondWord());
 //        System.out.println(command.getCommandWord().name());
@@ -759,6 +762,7 @@ public class Game {
 //                airport.setExit("west", beach);
 //                System.out.println("Exits: west");
         }
+        
         if (inventory.getInventory().containsKey("Boardingpass") && !hasBoardingpass) {
             hasBoardingpass = true;
             airport.setExit("west", beach);
