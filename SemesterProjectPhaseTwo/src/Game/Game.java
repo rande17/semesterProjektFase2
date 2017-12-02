@@ -693,8 +693,7 @@ public class Game {
         if (command.getCommandWord().name().equalsIgnoreCase(CommandWord.GO.toString())) {
 //            if (inventory.getInventory().containsKey("Boardingpass") == false && command.getSecondWord().equalsIgnoreCase("west")) {
             if (inventory.getInventory().containsKey("Boardingpass") == false) {
-                airport.setExit("west", airport);
-
+//                airport.setExit("west", airport);                                 // This lines prints out the exit for some reason, which is not good
                 System.out.println("You have no boardingpass, please return when you do!!!");
             }
 //            else {
