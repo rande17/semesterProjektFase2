@@ -9,9 +9,9 @@ public class Player extends Character {
 
     /**
      *
-     * @param _name
-     * @param _desc
-     * @param _currentRoom
+     * @param _name sets name of player
+     * @param _desc sets describtion of player
+     * @param _currentRoom sets player current room
      * @param 
      */
     public Player(String _name, String _desc, Room _currentRoom, int _health, int _energi) {

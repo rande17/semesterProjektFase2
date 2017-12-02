@@ -29,14 +29,18 @@ public class HighscoreManager {
         //initialising the scores-arraylist
         scores = new ArrayList<Score>();
     }
-
-    //Method to get the arraylist, where it first loader the score file and then sorts the different score after the condition set in the CompareScore class 
+/**
+ * 
+ * @return the scores arraylist
+ * Method to get the arraylist, where it first loader the score file and then sorts the different score after the condition set in the CompareScore class  
+ * because if we dont load the score file we dont get the newest highscore.
+ */   
     public ArrayList<Score> getScores() {
         loadScoreFile();
         sort();
         return scores;
     }
-
+    
     private void sort() {
         //make object comparator of CompareScore
         CompareScore comparator = new CompareScore();
@@ -44,7 +48,12 @@ public class HighscoreManager {
         Collections.sort(scores, comparator);
     }
 
-    //add score to the arraylist
+  
+    /**
+     * add score to the arraylist
+     * @param name set the name of the highscore
+     * @param score set the score of the highscore
+     */
     public void addHighscore(String name, int score) {
         loadScoreFile(); //load the curret score list
         scores.add(new Score(name, score)); // add new Score with a name and a score
@@ -97,7 +106,11 @@ public class HighscoreManager {
         }
     }
 
-    //mehtod to get highscore list
+    
+    /**
+     * 
+     * @return the highscore list in for of a string
+     */
     public String getHighscoreList() {
         String highscoreList = "";
         //set length of the highscore list

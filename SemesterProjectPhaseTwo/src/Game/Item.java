@@ -12,34 +12,24 @@ import java.util.Date;
  * @author marti
  */
 public class Item {
-
-    /*
-    Dette dokument er ikke færdigarbejdet
-     */
-    
+  
     private String itemDescribtion;
     private int weight;
     private String name;
     private String describtion;
 
-    /*
-    Klasse: Item
-    Constructor: Item(name, weight, respawnTime, mapLocation(StringArray))
-    Metoder: getItemOnMap, setItemOnMap, addItemInInventory, removeItemFromInventory, setItemDescribtions, getItemDescribtion, getRespawnTime
-     */
-    //Creating a constructor with a parameter-list, Room mapLocation maybe has to be changed
     /**
-     * 
-     * @param name 
+     * constructer for item
+     * @param name of item
      */
     Item(String name) {
         this.name = name;
     }
 
     /**
-     * 
-     * @param name
-     * @param weight 
+     * constructer for item
+     * @param name of the item
+     * @param weight of the item
      */
     Item(String name, String description, int weight) {
         this.name = name;
