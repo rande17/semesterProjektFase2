@@ -30,17 +30,31 @@ public class WriteToFile {
 
     FileWriter writer;
 
+    /**
+     * 
+     * @param _fileName set the name of the file
+     * @param _append 
+     */
     public WriteToFile(String _fileName, Boolean _append) {
         fileName = _fileName;
         append = _append;
         
     }
-
+/**
+ * 
+ * @param _fileName set the name of the file
+ * @param _ext extend the file 
+ */
     public WriteToFile(String _fileName, String _ext) {
         fileName = _fileName;
         ext = "." + _ext;
     }
-
+/**
+ * 
+ * @param str string
+ * @throws FileNotFoundException
+ * @throws IOException 
+ */
     public void write(String str) throws FileNotFoundException, IOException {
     String outputfile = userHome + File.separator + defaultFolder + File.separator + fileName + ext;
     File file = new File(outputfile);

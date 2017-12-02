@@ -211,8 +211,13 @@ public class Game {
         }
     }
 
-    /* A method that is initialized when we start the game, that first print out a message with the printWelcome method  
-       and then checks if the game is finished or not with a while loop where finished is set to false when the game start*/
+    /**
+     * A method that is initialized when we start the game, that first print out a message with the printWelcome method  
+       and then checks if the game is finished or not with a while loop where finished is set to false when the game start
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws Throwable 
+     */
     public void play() throws FileNotFoundException, IOException, Throwable {
         Time time = new Time();
         printWelcome();
@@ -246,10 +251,17 @@ public class Game {
         System.out.println(currentRoom.getLongDescription());
     }
 
-    /* A method that set wantToQuit to false and the run a if loop that that does so everytime the commandWord is  
-       not know to the game it print out the message "I don't know what you mean..." and return false*/
- /* It does the same with Help and GO where it print out a message with the use of the method printHelp and goRoom
-       and if the command word is quit it return wantToQuit*/
+    /**
+     * A method that set wantToQuit to false and the run a if loop that that does so everytime the commandWord is  
+       not know to the game it print out the message "I don't know what you mean..." and return false
+     * It does the same with Help and GO where it print out a message with the use of the method printHelp and goRoom
+       and if the command word is quit it return wantToQuit
+     * @param command process command
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws Throwable 
+     */
     private boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
         boolean wantToQuit = false;
 
@@ -364,7 +376,10 @@ public class Game {
         parser.showCommands();
     }
 
-    /* method that is initializing everytime you use the command "go" and print the message "Go where" */
+    /**
+     * method that is initializing everytime you use the command "go" and print the message "Go where"
+     * @param command to go to room
+     */
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
@@ -387,7 +402,7 @@ public class Game {
         }
     }
 
-    // Method used for showing contents in inventory
+// Method used for showing contents in inventory
 //    private void showInventory(Command command) {
     private void showInventory() {
 
@@ -531,7 +546,10 @@ public class Game {
         }
 
     }
-
+    /**
+     * 
+     * @param command to craft item
+     */
     public void craftItem(Command command) {
         if (command.hasSecondWord()) {
             String craft = command.getSecondWord();
@@ -733,30 +751,6 @@ public class Game {
             score.setName(name);
         }
     }
-    public void NPCMove() {
-        Random random = new Random();
-        if (Time.getSecondsPassed() % 10 == 0) {
-
-            if (npc3.getCurrentRoom() == mountain) {
-                npc3.setCurrentRoom(jungle);
-                System.out.println(npc3.currentRoom.toString());
-            } else if (npc3.getCurrentRoom() == cave) {
-                npc3.setCurrentRoom(jungle);
-                System.out.println(npc3.currentRoom);
-            } else if (npc3.getCurrentRoom() == seaBottom) {
-                npc3.setCurrentRoom(beach);
-                System.out.println(npc3.currentRoom);
-            } else if (npc3.getCurrentRoom() == jungle) {
-                Room[] arr = {beach, cave, mountain};
-                int select = random.nextInt(arr.length);
-                npc3.setCurrentRoom(arr[select]);
-                System.out.println(npc3.currentRoom);
-
-            } else {
-                System.out.println("ikke godt");
-            }
-        }
-    }
 
     private void loseCondition() {
         if (player.getHealth() <= 0) {
@@ -781,7 +775,11 @@ public class Game {
             return true;
         }
     }
-
+/**
+ * 
+ * @throws IOException
+ * @throws Throwable 
+ */
     private void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());

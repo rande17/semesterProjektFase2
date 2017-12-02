@@ -56,6 +56,10 @@ public class NPC {
         dialog.add(_dialog);
     }
 
+    /**
+     *
+     * @param _name sets name of NPC
+     */
     public void setName(String _name) {
         name = _name;
     }
@@ -129,32 +133,11 @@ public class NPC {
         currentPosition = goToRoom;
     }
 
-    public void NPCMove() {
-        while (Time.secondsPassed % 20 == 0) {
-       
-                
-            }
-//            String direction;
-//            for (Iterator<String> i = NPCExits.iterator(); i.hasNext();) {
-//                getCurrentRoom().getExit();
-////                String item = i.next();
-////                CString item = i.next();
-////                System.out.println(item);
-//            }
-//        }
-//        Room nextRoom;
-////                    = currentRoom.getExit(direction);
-//        NPCExits.add(currentPosition.getExit(desc));
-//        setCurrentRoom(NPCExits);
-//        setCurrentRoom(getCurrentRoom().getExit(desc));
-//        getCurrentRoom().getExit(desc);
-//        Math.random();
-//        System.out.println(getCurrentRoom());
-//    }
-}
-
+    /**
+     *
+     * @param currentPosition
+     */
     public void setCurrentPosition(Room currentPosition) {
         this.currentPosition = currentPosition;
     }
-    }
-
+}
