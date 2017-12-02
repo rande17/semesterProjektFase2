@@ -20,13 +20,13 @@ import java.util.Random;
  * @author Nicolai
  * @version 2006.03.30daSFT
  */
-public class Game implements InterfaceGame {
+public class Game {
 
     /* data field with the attributes parser and currentRoom
        making them private so we only can use them in the Game class */
     private boolean hasBoardingpass = false;
     private Parser parser;
-    private Room currentRoom;
+    static Room currentRoom;
     private Room airport, beach, jungle, mountain, cave, camp, seaBottom;
     private String name;
 
@@ -41,7 +41,7 @@ public class Game implements InterfaceGame {
        constructor from the Room class and then set where you can move to  from the different rooms by
        using the method setExit from the Room class */
  /* The currentRoom is also given a value which is the start location = outside */
-    ItemLocation itemLocation = new ItemLocation();
+    static ItemLocation itemLocation = new ItemLocation();
     Inventory inventory = new Inventory();
     HighscoreManager highscore = new HighscoreManager();
     Player player = new Player("Player", "???", currentRoom, 100, 100);

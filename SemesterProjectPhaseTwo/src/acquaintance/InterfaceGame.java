@@ -8,12 +8,12 @@ package acquaintance;
 import Game.Command;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
  * @author rickie
  */
 public interface InterfaceGame {
-    public void play() throws FileNotFoundException, IOException, Throwable;
-    public void takeItem(Command command);
+    public ArrayList getItemsOnMap();
 }

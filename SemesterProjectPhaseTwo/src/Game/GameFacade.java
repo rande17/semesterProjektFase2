@@ -6,8 +6,7 @@
 package Game;
 
 import acquaintance.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -17,14 +16,17 @@ import java.io.IOException;
 public class GameFacade implements InterfaceGame{
 
     @Override
-    public void play() throws FileNotFoundException, IOException, Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList getItemsOnMap() {
+        ArrayList itemArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
+        itemArrayList = Game.itemLocation.getItems(Game.currentRoom);
+        for(int i = 0; i< itemArrayList.size(); i++){
+            Item item = (Item)itemArrayList.get(i);
+            System.out.println(item);
+        }
+        return itemArrayList;
     }
 
-    @Override
-    public void takeItem(Command command) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
     
    

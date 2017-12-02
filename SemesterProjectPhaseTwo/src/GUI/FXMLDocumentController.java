@@ -18,6 +18,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import acquaintance.InterfaceGame;
+import javafx.scene.Node;
 
 /**
  *
@@ -92,6 +94,6 @@ public class FXMLDocumentController implements Initializable {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene.setRoot(root);
         scene.getRoot().requestFocus();
-        player = (Rectangle)root.getChildrenUnmodifiable().get(0);
+        player = (Rectangle) root.lookup("#player");
     }
 }
