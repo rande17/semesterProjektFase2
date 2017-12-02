@@ -320,7 +320,6 @@ public class Game {
         } else if (commandWord == CommandWord.GO) {
             goRoom(command);
         } else if (commandWord == CommandWord.SHOW) {
-//            showInventory(command);
             showInventory();
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
@@ -336,13 +335,13 @@ public class Game {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
             saveGame();
-        } else if (commandWord == commandWord.CRAFT) {
+        } else if (commandWord == CommandWord.CRAFT) {
             craftItem(command);
-        } else if (commandWord == commandWord.WIN) {
+        } else if (commandWord == CommandWord.WIN) {
             win();
-        } else if (commandWord == commandWord.LOSE) {
+        } else if (commandWord == CommandWord.LOSE) {
             lose();
-        } else if (commandWord == commandWord.ESCAPE) {
+        } else if (commandWord == CommandWord.ESCAPE) {
             escapeTheIsland();
         }
 
@@ -503,8 +502,9 @@ public class Game {
      * Method used for taking and placing an item in inventory
      *
      * @param command used for checking if an item exists in current room
+     * @return
      */
-    public static void takeItem(Command command) {
+    public static boolean takeItem(Command command) {
         ArrayList currentRoomItem = itemLocation.getItems(currentRoom);
         Item seeItem;
         int indexItem = -1;
@@ -525,12 +525,15 @@ public class Game {
                 inventory.addItemInInventory(addToInventory);
                 currentRoomItem.remove(indexItem);
                 itemLocation.setItem(currentRoom, currentRoomItem);
+                return true;
             } else {
                 System.out.println("You can't pickup this item");
+                return false;
             }
 
         } else {
             System.out.println("could not find " + command.getSecondWord());
+            return false;
         }
     }
 
@@ -762,7 +765,7 @@ public class Game {
 //                airport.setExit("west", beach);
 //                System.out.println("Exits: west");
         }
-        
+
         if (inventory.getInventory().containsKey("Boardingpass") && !hasBoardingpass) {
             hasBoardingpass = true;
             airport.setExit("west", beach);

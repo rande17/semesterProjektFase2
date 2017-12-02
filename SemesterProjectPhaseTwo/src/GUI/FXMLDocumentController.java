@@ -37,7 +37,7 @@ public class FXMLDocumentController implements Initializable {
     private Rectangle playerRectangle;
     static Scene scene;
     double x, y;
-    // boolean itemsDrawed = false;
+    boolean itemsDrawed = false;
     Parent root;
 
     @FXML
@@ -53,8 +53,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
-
+        x = player.getLayoutX();
+        y = player.getLayoutY();
         scene = player.getScene();
+        populateItemsOnMap();
         switch (event.getCode()) {
             case O:
                 System.out.println(background.getChildrenUnmodifiable().toString());
@@ -65,8 +67,6 @@ public class FXMLDocumentController implements Initializable {
             case W:
             case UP:
                 if (player.getLayoutY() <= 0) {
-                    x = player.getLayoutX();
-                    y = player.getLayoutY();
 
                     go("north");
 
@@ -80,7 +80,8 @@ public class FXMLDocumentController implements Initializable {
             case DOWN:
                 if (player.getLayoutY() >= background.getHeight() - speed) {
                     go("south");
-                    player.setLayoutY((background.getHeight() - player.getHeight()));
+                    player.setLayoutX(x);
+                    player.setLayoutY(0);
                 } else {
                     player.setLayoutY(player.getLayoutY() + speed);
                 }
@@ -90,7 +91,8 @@ public class FXMLDocumentController implements Initializable {
 
                 if (player.getLayoutX() <= 0) {
                     go("west");
-                    player.setLayoutX(0);
+                    player.setLayoutX(background.getWidth() - player.getWidth());
+                    player.setLayoutY(y);
 
                 } else {
                     player.setLayoutX(player.getLayoutX() - speed);
@@ -100,8 +102,9 @@ public class FXMLDocumentController implements Initializable {
             case D:
             case RIGHT:
                 if (player.getLayoutX() >= background.getWidth() - player.getWidth()) {
-                    player.setLayoutX((background.getWidth() - player.getWidth()));
                     go("east");
+                    player.setLayoutX(0);
+                    player.setLayoutY(y);
                 } else {
                     player.setLayoutX(player.getLayoutX() + speed);
                 }
@@ -115,11 +118,10 @@ public class FXMLDocumentController implements Initializable {
 
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
-        //itemsDrawed = false;
+        itemsDrawed = false;
         scene.setRoot(root);
         scene.getRoot().requestFocus();
         player = (Rectangle) root.lookup("#player");
-
     }
 
     public void intersectsItem() {
@@ -140,7 +142,10 @@ public class FXMLDocumentController implements Initializable {
                     double iystart = itemToCheck.getLayoutY();
                     double iyend = itemToCheck.getLayoutY() + itemToCheck.getHeight();
                     if (pxstart >= ixstart && pxstart <= ixend && pystart >= iystart && pystart <= iyend) {
-                        game.takeItemGUI(itemID);
+                        if (game.takeItemGUI(itemID)) {
+                            background.getChildren().remove(i);
+                            itemsArray.remove(i);
+                        }
                     }
                 }
             }
@@ -148,25 +153,25 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void populateItemsOnMap() {
-        //  if (!itemsDrawed) {
-        itemsArray = game.getItemsOnMap();
-        if (!itemsArray.isEmpty()) {
-            for (int i = 0; i < itemsArray.size(); i++) {
-                Rectangle item = new Rectangle();
-                Paint color = Color.rgb(0, 0, 255);
-                item.setLayoutX(Math.random() * background.getWidth() - 20);
-                item.setLayoutY(Math.random() * background.getHeight() - 20);
-                item.setHeight(20);
-                item.setWidth(20);
-                item.setStroke(color);
-                item.setId((String) itemsArray.get(i));
-                item.setFill(color);
-                item.setVisible(true);
-                background.getChildren().add(item);
+        if (!itemsDrawed) {
+            itemsArray = game.getItemsOnMap();
+            if (!itemsArray.isEmpty()) {
+                for (int i = 0; i < itemsArray.size(); i++) {
+                    Rectangle item = new Rectangle();
+                    Paint color = Color.rgb(0, 0, 255);
+                    item.setLayoutX(Math.random() * (background.getWidth() - 40));
+                    item.setLayoutY(Math.random() * (background.getHeight() - 40));
+                    item.setHeight(20);
+                    item.setWidth(20);
+                    item.setStroke(color);
+                    item.setId((String) itemsArray.get(i));
+                    item.setFill(color);
+                    item.setVisible(true);
+                    background.getChildren().add(item);
+                }
             }
+            itemsDrawed = true;
         }
-        //     itemsDrawed = true;
-
     }
 
     public void go(String dir) throws IOException {

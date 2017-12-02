@@ -30,9 +30,9 @@ public class GameFacade implements InterfaceGame{
     }
 
     @Override
-    public void takeItemGUI(String itemToTake) {
+    public boolean takeItemGUI(String itemToTake) {
        Command command = new Command(TAKE, itemToTake);
-       Game.takeItem(command);
+       return Game.takeItem(command);
     }
 
     @Override

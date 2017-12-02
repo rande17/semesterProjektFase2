@@ -9,6 +9,7 @@ import Game.Game;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,6 +32,7 @@ public class SemesterProjectPhaseTwo extends Application {
         stage.setScene(scene);
         stage.show();
         scene.getRoot().requestFocus();
+         stage.setOnCloseRequest(e -> System.exit(0));
     }
 
     /**
