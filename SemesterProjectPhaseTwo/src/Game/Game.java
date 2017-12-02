@@ -28,6 +28,7 @@ public class Game {
     private Room currentRoom;
     private Room airport, beach, jungle, mountain, cave, camp, seaBottom;
     private String name;
+    private boolean hasTalkedWithEvilGuy = false;
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
@@ -289,6 +290,7 @@ public class Game {
         CommandWord commandWord = command.getCommandWord();
 
         log.write(commandWord.toString() + " " + command.getSecondWord());
+
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -417,6 +419,8 @@ public class Game {
             System.out.println(player.getCurrentRoom().getLongDescription());
 
         }
+
+        forceDialog();
     }
 
     // Method used for showing contents in inventory
@@ -508,48 +512,57 @@ public class Game {
             System.out.println(npc1.getDescribtion() + ", yet he still gives you good advice:\n");
             System.out.println(npc1.getDialog(0));
             System.out.println("");
-            System.out.println("Maybe you could bring me some food and something to defend myself now that i cant move");
-            System.out.println("Do you want to accept his mission: Yes or no");
-            Scanner scan = new Scanner(System.in); //Creates a new scanner
-            String input = scan.nextLine(); //Waits for input
-            if (input.equalsIgnoreCase("yes")) {
-                System.out.println("You got a mission, please use the show command for more information");
-                allMissions.addMission(jungle, "Helping the injured survivor", "helping the survivor, because of his great advice he have given you");
-            } else if (input.equalsIgnoreCase("no")) {
-                System.out.println("Come back again if you change your mind");
-            } else {
-                System.out.println("Come back again if you change your mind");
-            }
-//            if (allMissions.missionStatus.get("Helping the injured survivor") == true){
-//                System.out.println("");
-//                
+            woundedSurvivor();
 
         } else if (npc2.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
             pregnant();
-        } else if (npc3.getCurrentRoom() == currentRoom) {
-
-            System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
-
-            Scanner scan = new Scanner(System.in); //Creates a new scanner
-            String input = scan.nextLine(); //Waits for input
-
-            if (input.equalsIgnoreCase("yes")) {
-                System.out.println("You got a mission, please use the show command for more information");
-                allMissions.addMission(npc3.getCurrentRoom(), "Live or die", "Get me some eggs or I will kill you!!!!");
-                System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
-            } else if (input.equalsIgnoreCase("no")) {
-                System.out.println("");
-                player.LoseHealth(npc3.getDamageValue());
-            }
-
-        } else {
+        } //        else if (npc3.getCurrentRoom() == currentRoom) {
+        //            System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
+        //            evilGuyDialog();
+        //        } 
+        else {
             System.out.println("There is nobody to communicate with in this Room");
         }
 
     }
 
-    //Create a question
+    /**
+     * force dialog with npc3, if player is in same room
+     */
+    private void forceDialog() {
+        if (hasTalkedWithEvilGuy == false) {
+            if (npc3.getCurrentRoom() == currentRoom) {
+                System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
+                evilGuyDialog();
+                hasTalkedWithEvilGuy = true;
+            }
+        }
+    }
+
+    /**
+     * creates a dialog for npc1
+     */
+    public void woundedSurvivor() {
+        System.out.println("Maybe you could bring me some food and something to defend myself now that i cant move");
+        System.out.println("Do you want to accept his mission: Yes or no");
+        Scanner scan = new Scanner(System.in); //Creates a new scanner
+        String input = scan.nextLine(); //Waits for input
+        if (input.equalsIgnoreCase("yes")) {
+            System.out.println("You got a mission, please use the show command for more information");
+            allMissions.addMission(jungle, "Helping the injured survivor", "helping the survivor, because of his great advice he have given you");
+        } else if (input.equalsIgnoreCase("no")) {
+            System.out.println("Come back again if you change your mind");
+        } else {
+            System.out.println("Come back again if you change your mind");
+        }
+//            if (allMissions.missionStatus.get("Helping the injured survivor") == true){
+//                System.out.println("");
+    }
+
+    /**
+     * Creates question when talking with npc2
+     */
     public void pregnant() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
         System.out.println("Are u pregnant?"); //Asks question
@@ -560,6 +573,24 @@ public class Game {
             System.out.println("Keep trying it will happen.");
         } else { //If the input is anything else
             System.out.println("This is a yes or no question.");
+        }
+
+    }
+
+    /**
+     * creates a short dialog when talking to npc3
+     */
+    public void evilGuyDialog() {
+        Scanner scan = new Scanner(System.in); //Creates a new scanner
+        String input = scan.nextLine(); //Waits for input
+
+        if (input.equalsIgnoreCase("yes")) {
+            System.out.println("You got a mission, please use the show command for more information");
+            allMissions.addMission(npc3.getCurrentRoom(), "Live or die", "Get me some eggs or I will kill you!!!!");
+            System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
+        } else if (input.equalsIgnoreCase("no")) {
+            System.out.println("");
+            player.LoseHealth(npc3.getDamageValue());
         }
 
     }
