@@ -69,10 +69,10 @@ public class GameFacade implements InterfaceGame{
         return Game.printHelp();
     }
 
-//    @Override
-//    public void quitGame() {
-//        Game.processCommand(QUIT);
-//    }
+    @Override
+    public void quitGame() {
+        System.exit(0);
+    }
 
     
     

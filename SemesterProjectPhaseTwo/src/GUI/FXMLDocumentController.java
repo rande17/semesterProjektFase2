@@ -201,6 +201,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void quitGame(MouseEvent event) {
+        game.quitGame();
     }
 
     @FXML
