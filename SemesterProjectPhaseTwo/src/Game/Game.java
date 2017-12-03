@@ -78,6 +78,7 @@ public class Game {
         cave = new Room("cave");
         camp = new Room("camp");
         seaBottom = new Room("seabuttom");
+        
 
         //Setting the the exit
         beach.setExit("north", jungle);
