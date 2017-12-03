@@ -39,6 +39,11 @@ public class Game {
         initGame();
         parser = new Parser();
     }
+        public static boolean getExitBool(String dir){
+        
+        return (currentRoom.getExit(dir) != null);
+    }
+
     /* Private method createRoom which means we can only use createRoom in the Game class */
  /* In the method body we set the names of the rooms, create the rooms by using the Room 
        constructor from the Room class and then set where you can move to  from the different rooms by

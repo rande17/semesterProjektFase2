@@ -87,5 +87,11 @@ public class GameFacade implements InterfaceGame {
     public String printHighscoreGUI() {
         return Game.getHighscoreFromData().toString();
     }
+    
+        @Override
+    public boolean checkExit(String dir) {
+        return Game.getExitBool(dir);
+    }
+
 
 }

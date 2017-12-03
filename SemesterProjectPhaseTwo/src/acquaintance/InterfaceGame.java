@@ -25,5 +25,6 @@ public interface InterfaceGame {
     public String printMissions();
     public String printHighscoreGUI();
     public void getCraftableItems();
+    public boolean checkExit(String dir);
 //    public String showHelp();
 }

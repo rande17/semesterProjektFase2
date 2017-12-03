@@ -64,7 +64,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
+     private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
         x = player.getLayoutX();
         y = player.getLayoutY();
         scene = player.getScene();
@@ -79,11 +79,12 @@ public class FXMLDocumentController implements Initializable {
             case W:
             case UP:
                 if (player.getLayoutY() <= 0) {
-
+                    if(game.checkExit("north")){
                     go("north");
 
                     player.setLayoutX(x);
                     player.setLayoutY(background.getHeight() - player.getHeight());
+                    }
                 } else {
                     player.setLayoutY(player.getLayoutY() - speed);
                 }
@@ -91,9 +92,11 @@ public class FXMLDocumentController implements Initializable {
             case S:
             case DOWN:
                 if (player.getLayoutY() >= background.getHeight() - speed) {
+                    if(game.checkExit("south")){
                     go("south");
                     player.setLayoutX(x);
                     player.setLayoutY(0);
+                    }
                 } else {
                     player.setLayoutY(player.getLayoutY() + speed);
                 }
@@ -102,21 +105,23 @@ public class FXMLDocumentController implements Initializable {
             case LEFT:
 
                 if (player.getLayoutX() <= 0) {
+                    if(game.checkExit("west")){
                     go("west");
                     player.setLayoutX(background.getWidth() - player.getWidth());
                     player.setLayoutY(y);
-
+                    }
                 } else {
                     player.setLayoutX(player.getLayoutX() - speed);
                 }
                 break;
-
             case D:
             case RIGHT:
                 if (player.getLayoutX() >= background.getWidth() - player.getWidth()) {
+                    if(game.checkExit("east")){
                     go("east");
                     player.setLayoutX(0);
                     player.setLayoutY(y);
+                    }
                 } else {
                     player.setLayoutX(player.getLayoutX() + speed);
                 }
@@ -161,7 +166,7 @@ public class FXMLDocumentController implements Initializable {
                         if (game.takeItemGUI(itemID)) {
                             System.out.println(background.getChildren().get(i).toString());
                             background.getChildren().remove(i);
-
+                            game.goGUI(null);
                             itemsArray.remove(i);
                         }
                     }
@@ -194,6 +199,7 @@ public class FXMLDocumentController implements Initializable {
     
 
     public void go(String dir) throws IOException {
+        
         game.goGUI(dir);
         changeScene(game.getRoom());
     }
