@@ -22,4 +22,6 @@ public interface InterfaceGame {
     public String printInventory();
     public String showHelp();
     public void quitGame();
+    public String printMissions();
+//    public String showHelp();
 }

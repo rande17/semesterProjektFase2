@@ -5,8 +5,10 @@
  */
 package Game;
 
+import static Game.Game.allMissions;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -15,9 +17,11 @@ import java.util.HashMap;
 public class Mission {
 
     HashMap<String, Boolean> missionStatus = new HashMap();
-    HashMap<String, String> missionInfo = new HashMap();
+//    HashMap<String, String> missionInfo = new HashMap();
 
     Score score = new Score();
+    
+    private String name;
 
     //constructor
     public Mission() {
@@ -29,10 +33,13 @@ public class Mission {
      * @param name sets the name of the mission
      * @param describtion set the describtion of the mission
      */
-    public void addMission(Room room, String name, String describtion) {
-        missionInfo.put(name, describtion);
+    public void addMission(Room room, String _name) {
+        name=_name;
         missionStatus.put(name, false);
 
+    }
+    private String getName(){
+        return name;
     }
 
     /**
@@ -41,10 +48,9 @@ public class Mission {
      * @param key of the hashmap
      * @return
      */
-    public String getMissionDescribtion(String key) {
-        return missionInfo.get(key);
-    }
-
+//    public String getMissionDescribtion(String key) {
+//        return missionInfo.get(key);
+//    }
     /**
      * method to set mission to true if complete
      *
@@ -57,4 +63,25 @@ public class Mission {
 //        score.addToPoints(missionPoint.get(key));
     }
 
+    @Override
+    public String toString() {
+        String missionStatusString = "";
+        Iterator iteratorMissionStatus = allMissions.missionStatus.entrySet().iterator();
+
+        while (iteratorMissionStatus.hasNext()) {
+            HashMap.Entry entry = (HashMap.Entry) iteratorMissionStatus.next();
+            missionStatusString += (String) entry.getKey();
+            missionStatusString += ": ";
+            missionStatusString += "\n";
+            if ((boolean) (entry.getValue()) == false) {
+                missionStatusString += "mission in progress\n";
+            }
+            if ((boolean) (entry.getValue()) == true) {
+                missionStatusString += "mission is complete\n";
+            }
+            missionStatusString += "\n";
+
+           }
+        return missionStatusString;
+    }
 }

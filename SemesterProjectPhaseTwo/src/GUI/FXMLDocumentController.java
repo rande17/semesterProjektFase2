@@ -197,8 +197,6 @@ public class FXMLDocumentController implements Initializable {
         changeScene(game.getRoom());
     }
 
-  
-    
 //        private void helpPopup {
 //      Button btn = new Button();
 //        btn.setText("Open Dialog");
@@ -217,33 +215,27 @@ public class FXMLDocumentController implements Initializable {
 //            }
 //        });
 //    }
-
-       
-
     @FXML
-        private void showInventory(ActionEvent event) {
-             String inventory = "";
+    private void showInventory(ActionEvent event) {
+        String inventory = "";
         inventory += game.printInventory();
         textArea.setText(inventory);
     }
 
     @FXML
-        private void showHelp(ActionEvent event) {
-         String help = "";
+    private void showHelp(ActionEvent event) {
+        String help = "";
         help += game.showHelp();
         textArea.setText(help);
     }
 
     @FXML
-        private void quitGame(ActionEvent event) {
-             game.quitGame();
-    }
-
-    @FXML
-    private void showHelp(MouseEvent event) {
+    private void quitGame(ActionEvent event) {
+        game.quitGame();
     }
 
     @FXML
     private void showMission(ActionEvent event) {
+        textArea.setText(game.printMissions());
     }
 }

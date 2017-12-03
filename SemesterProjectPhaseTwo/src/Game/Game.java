@@ -157,13 +157,13 @@ public class Game {
     public void createMissions() {
 
         //Creating missions and putting and putting them in the game
-        allMissions.addMission(airport, "First mission", "Find your boardingpass");
-        allMissions.addMission(airport, "First item", "Picking up your first item");
-        allMissions.addMission(beach, "Find food to survive", "Pick up food");
-        allMissions.addMission(jungle, "Find survivors", "Get into contact with other survivors");
-        allMissions.addMission(cave, "Get high", "Eat the shrooms");
-        allMissions.addMission(camp, "craft raft", "craft raft to prepare to escape the island");
-        allMissions.addMission(camp, "Escape the island", "Collect items to survive on the sea");
+        allMissions.addMission(airport, "Find your boardingpass");
+        allMissions.addMission(airport, "Picking up first item");
+        allMissions.addMission(beach, "Pick up food");
+        allMissions.addMission(jungle, "Find survivors");
+        allMissions.addMission(cave, "Eat the shrooms");
+        allMissions.addMission(camp, "prepare to escape the island");
+        allMissions.addMission(camp, "Escape the island");
     }
 
     public void createNPC() {
@@ -347,23 +347,23 @@ public class Game {
 
         //setting the condition to complete the missions.
         if (inventory.getInventory().containsKey("Boardingpass")) {
-            allMissions.setMissionComplete("First mission");
+            allMissions.setMissionComplete("Find your boardingpass");
         }
 
         if (inventory.getInventory().containsKey("Boardingpass")) {
-            allMissions.setMissionComplete("First item");
+            allMissions.setMissionComplete("Picking up first item");
         }
 
         if (inventory.getInventory().containsKey("Bottle")) {
-            allMissions.setMissionComplete("First item");
+            allMissions.setMissionComplete("Picking up first item");
         }
 
         if (inventory.getInventory().containsKey("Fish")) {
-            allMissions.setMissionComplete("Find food to survive");
+            allMissions.setMissionComplete("Pick up food");
         }
 
         if (inventory.getInventory().containsKey("Berry")) {
-            allMissions.setMissionComplete("Find food to survive");
+            allMissions.setMissionComplete("Pick up food");
         }
 
         if (CommandWord.TALK == commandWord) {
@@ -371,7 +371,7 @@ public class Game {
         }
 
         if (inventory.getInventory().containsKey("raft")) {
-            allMissions.setMissionComplete("craft raft");
+            allMissions.setMissionComplete("craft item to escape the island");
         }
 
         if (inventory.getInventory().containsKey("Backpack")) {
@@ -586,7 +586,7 @@ public class Game {
         String input = scan.nextLine(); //Waits for input
         if (input.equalsIgnoreCase("yes")) {
             System.out.println("You got a mission, please use the show command for more information");
-            allMissions.addMission(jungle, "Helping the injured survivor", "helping the survivor, because of his great advice he have given you");
+            allMissions.addMission(jungle, "Helping the injured survivor");
         } else if (input.equalsIgnoreCase("no")) {
             System.out.println("Come back again if you change your mind");
         } else {
@@ -622,7 +622,7 @@ public class Game {
 
         if (input.equalsIgnoreCase("yes")) {
             System.out.println("You got a mission, please use the show command for more information");
-            allMissions.addMission(npc3.getCurrentRoom(), "Live or die", "Get me some eggs or I will kill you!!!!");
+            allMissions.addMission(npc3.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
             System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
         } else if (input.equalsIgnoreCase("no")) {
             System.out.println("");
@@ -697,31 +697,25 @@ public class Game {
      */
     static private void showMissions() {
 
-        HashMap<String, String> viewMission = allMissions.missionInfo;
-        HashMap<String, Boolean> missionStatus = allMissions.missionStatus;
+        Iterator iteratorMissionStatus = allMissions.missionStatus.entrySet().iterator();
 
-        System.out.println("Your missions are: ");
-        System.out.println("");
+        while (iteratorMissionStatus.hasNext()) {
+            HashMap.Entry entry = (HashMap.Entry) iteratorMissionStatus.next();
+            System.out.println((String) entry.getKey() + ": ");
+          
 
-        for (String i : viewMission.keySet()) {
-
-            System.out.printf(viewMission.get(i) + "| The mission is complete: " + missionStatus.get(i) + "\n");
-
-            if (missionStatus.get(i) == false) {
-                System.out.println("Mission is in progress.");
+            if ((boolean) (entry.getValue()) == false) {
+                System.out.print("mission in progress"); 
+                System.out.println("");
             }
-
-            if (missionStatus.get(i) == true) {
-                System.out.println("Mission is complete");
+            if ((boolean) (entry.getValue()) == true) {
+                System.out.print("mission is complete"); 
+                System.out.println("");
             }
             System.out.println("");
+    
         }
-
-        for (String i : missionStatus.keySet()) {
-            missionStatus.get(i);
         }
-
-    }
 
     /**
      * Method used for dropping item from inventory
