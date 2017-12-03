@@ -176,5 +176,19 @@ public class Inventory {
     public int getItemWeight(String itemName) {
         return itemWeight.get(itemName);
     }
-
+    @Override
+    public String toString() {
+        String inventoryString ="";
+        Iterator iterator = inventory.entrySet().iterator();
+        
+            while (iterator.hasNext()) {            
+                HashMap.Entry entry = (HashMap.Entry) iterator.next();
+                
+                inventoryString += (String)entry.getValue().toString();
+                inventoryString += "x ";
+                inventoryString += (String)entry.getKey();
+                inventoryString += "\n";
+        }
+        return inventoryString;
+    }
 }
