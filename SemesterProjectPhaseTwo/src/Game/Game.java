@@ -408,12 +408,15 @@ public class Game {
     }
 
     /* A method to print a message that show the different commands everytime the command help is used */
-    static private void printHelp() {
+    static String printHelp() {
+        String helpDialog = "You are lost. You are alone." + "\n" + "You wander around on this" + "\n" + "god forsaken island."
+                + "\n" + "\n" + "You move around using" + "\n" + "W A S D or the arrows";
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around on this god forsaken island.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
+        return helpDialog;
     }
 
     /**
@@ -876,17 +879,31 @@ public class Game {
     }
 
     static void win() {
-        calculateMissionScore();
-        setHighscoreName();
-        int totalSum = score.getCurrentScore() + (10000 / Time.getSecondsPassed());
-        System.out.println("You have won the game!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
-        System.out.println("Your score is: " + totalSum);
-        System.out.println("your score has been added to highscore");
-        highscore.addHighscore(score.getName(), totalSum);
-        System.out.println("");
-        System.out.println("Current highscore list is: ");
-        System.out.println(highscore.getHighscoreList());
-        System.exit(0);
+        if (Time.getSecondsPassed() < 1) {
+            calculateMissionScore();
+            setHighscoreName();
+            int totalSum = score.getCurrentScore() + (10000 / 1);
+            System.out.println("You have won the game!" + "\n" + "You spend: " + 1 + " seconds playing the game!");
+            System.out.println("Your score is: " + totalSum);
+            System.out.println("your score has been added to highscore");
+            highscore.addHighscore(score.getName(), totalSum);
+            System.out.println("");
+            System.out.println("Current highscore list is: ");
+            System.out.println(highscore.getHighscoreList());
+            System.exit(0);
+        } else {
+            calculateMissionScore();
+            setHighscoreName();
+            int totalSum = score.getCurrentScore() + (10000 / Time.getSecondsPassed());
+            System.out.println("You have won the game!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
+            System.out.println("Your score is: " + totalSum);
+            System.out.println("your score has been added to highscore");
+            highscore.addHighscore(score.getName(), totalSum);
+            System.out.println("");
+            System.out.println("Current highscore list is: ");
+            System.out.println(highscore.getHighscoreList());
+            System.exit(0);
+        }
     }
 
     static void lose() {

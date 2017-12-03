@@ -29,10 +29,10 @@
           <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="inventoryButton" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#showInventory" text="Inventory" />
-            <Button fx:id="helpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Help" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="quitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#quitGame" text="Quit" GridPane.columnIndex="1" />
-            <Button fx:id="missionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#showMission" text="Mission" GridPane.rowIndex="1" />
+            <Button fx:id="inventoryButton" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showInventory" text="Inventory" />
+            <Button fx:id="helpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showHelp" onMouseClicked="#showHelp" text="Help" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="quitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quitGame" text="Quit" GridPane.columnIndex="1" />
+            <Button fx:id="missionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMission" text="Mission" GridPane.rowIndex="1" />
             <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="4" />

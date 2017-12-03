@@ -33,13 +33,16 @@ public class GameFacade implements InterfaceGame{
 
     @Override
     public boolean takeItemGUI(String itemToTake) {
-        try {
+            boolean returnbool; 
             Command command = new Command(TAKE, itemToTake);
-            return Game.processCommand(command);
-        } catch (Throwable ex) {
-            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
+            returnbool = Game.takeItem(command);
+//            Command commandd = new Command(UNKNOWN, itemToTake);
+//        try {
+//            Game.processCommand(commandd);
+//        } catch (Throwable ex) {
+//            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+            return returnbool;
     }
 
     @Override
@@ -69,10 +72,15 @@ public class GameFacade implements InterfaceGame{
         return Game.allMissions.toString();
     }
 
-//    @Override
-//    public String showHelp() {
-//        return Game
-//    }
+    @Override
+    public String showHelp() {
+        return Game.printHelp();
+    }
+
+    @Override
+    public void quitGame() {
+        System.exit(0);
+    }
 
     
     

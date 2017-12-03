@@ -18,10 +18,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import acquaintance.InterfaceGame;
 import java.util.ArrayList;
-import javafx.scene.Node;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
@@ -49,6 +47,8 @@ public class FXMLDocumentController implements Initializable {
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
     @FXML
+    private TextArea textArea;
+    @FXML
     private Button inventoryButton;
     @FXML
     private Button helpButton;
@@ -56,8 +56,6 @@ public class FXMLDocumentController implements Initializable {
     private Button quitButton;
     @FXML
     private Button missionButton;
-    @FXML
-    private TextArea textArea;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -133,6 +131,10 @@ public class FXMLDocumentController implements Initializable {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         itemsDrawed = false;
         scene.setRoot(root);
+        while (!scene.getRoot().equals(root)) {
+
+        }
+
         scene.getRoot().requestFocus();
         player = (Rectangle) root.lookup("#player");
     }
@@ -156,7 +158,9 @@ public class FXMLDocumentController implements Initializable {
                     double iyend = itemToCheck.getLayoutY() + itemToCheck.getHeight();
                     if (pxstart >= ixstart && pxstart <= ixend && pystart >= iystart && pystart <= iyend) {
                         if (game.takeItemGUI(itemID)) {
+                            System.out.println(background.getChildren().get(i).toString());
                             background.getChildren().remove(i);
+
                             itemsArray.remove(i);
                         }
                     }
@@ -192,24 +196,45 @@ public class FXMLDocumentController implements Initializable {
         changeScene(game.getRoom());
     }
 
+//        private void helpPopup {
+//      Button btn = new Button();
+//        btn.setText("Open Dialog");
+//        btn.setOnAction(
+//                new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                final Stage dialog = new Stage();
+//                dialog.initModality(Modality.APPLICATION_MODAL);
+//                dialog.initOwner(primaryStage);
+//                VBox dialogVbox = new VBox(20);
+//                dialogVbox.getChildren().add(new Text("This is a Dialog"));
+//                Scene dialogScene = new Scene(dialogVbox, 300, 200);
+//                dialog.setScene(dialogScene);
+//                dialog.show();
+//            }
+//        });
+//    }
     @FXML
-    private void showInventory(MouseEvent event) {
+    private void showInventory(ActionEvent event) {
         String inventory = "";
-//        inventory +=
         inventory += game.printInventory();
         textArea.setText(inventory);
     }
 
     @FXML
-    private void quitGame(MouseEvent event) {
+    private void showHelp(ActionEvent event) {
+        String help = "";
+        help += game.showHelp();
+        textArea.setText(help);
     }
 
     @FXML
-    private void showMission(MouseEvent event) {
+    private void quitGame(ActionEvent event) {
+        game.quitGame();
+    }
+
+    @FXML
+    private void showMission(ActionEvent event) {
         textArea.setText(game.printMissions());
-    }
-
-    @FXML
-    private void showHelp(MouseEvent event) {
     }
 }
