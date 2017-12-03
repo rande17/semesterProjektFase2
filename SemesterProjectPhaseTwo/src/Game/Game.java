@@ -25,10 +25,10 @@ public class Game {
     /* data field with the attributes parser and currentRoom
        making them private so we only can use them in the Game class */
     static private boolean hasBoardingpass = false;
-    private Parser parser;
+    static private Parser parser;
     static Room currentRoom;
     private static Room airport, beach, jungle, mountain, cave, camp, seaBottom;
-    private String name;
+    static private String name;
     static private boolean hasTalkedWithEvilGuy = false;
 
     /* Constructor that runs the method createRooms and set our variable parser
@@ -44,22 +44,22 @@ public class Game {
  /* The currentRoom is also given a value which is the start location = outside */
     static ItemLocation itemLocation = new ItemLocation();
     static Inventory inventory = new Inventory();
-    HighscoreManager highscore = new HighscoreManager();
+    static HighscoreManager highscore = new HighscoreManager();
     static Player player = new Player("Player", "???", currentRoom, 100, 100);
-    Score score = new Score();
-    Item debug = new Item("debug");
-    Item campfire = new Item("Campfire", "", 2);
-    Item spear = new Item("Spear", "", 2);
-    Item axe = new Item("Axe", "", 2);
-    Item raft = new Item("Raft", "", 2);
+    static Score score = new Score();
+    static Item debug = new Item("debug");
+    static Item campfire = new Item("Campfire", "", 2);
+    static Item spear = new Item("Spear", "", 2);
+    static Item axe = new Item("Axe", "", 2);
+    static Item raft = new Item("Raft", "", 2);
     static Mission allMissions = new Mission();
     static NPC npc1 = new NPC();
     static NPC npc2 = new NPC();
     static NPC npc3 = new NPC();
 
     //file thats gonna be written to and the extension
-    Logger log = new Logger();
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    static Logger log = new Logger();
+    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**
      * Used to initialize different rooms and their respective items, and also
@@ -205,7 +205,7 @@ public class Game {
     /**
      * this method is responisble for moving the npc3
      */
-    private void npcPath() {
+    static private void npcPath() {
 //        Random picker = new Random();
 //        Room[] roomString = {beach, jungle, mountain};
 //            int indexOfRoomString = picker.nextInt(roomString.length);
@@ -303,7 +303,7 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    private boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
+    static boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -408,7 +408,7 @@ public class Game {
     }
 
     /* A method to print a message that show the different commands everytime the command help is used */
-    private void printHelp() {
+    static private void printHelp() {
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around on this god forsaken island.");
         System.out.println();
@@ -451,7 +451,7 @@ public class Game {
 
 // Method used for showing contents in inventory
 //    private void showInventory(Command command) {
-    private void showInventory() {
+    static private void showInventory() {
 
         HashMap<String, Integer> inventoryHM = inventory.getInventory();
 
@@ -463,7 +463,7 @@ public class Game {
 
     //Method used for inspecting room and showing items in that room
 //    private void inspectRoom(Command command){
-    private void inspectRoom() {
+    static private void inspectRoom() {
         ArrayList items = itemLocation.getItems(currentRoom);
         Item seeItem;
         String itemList = "";
@@ -540,7 +540,7 @@ public class Game {
         }
     }
 
-    private void TalkTo() {
+    static private void TalkTo() {
         if (npc1.getCurrentRoom() == currentRoom) {
             System.out.println(npc1.getDescribtion() + ", yet he still gives you good advice:\n");
             System.out.println(npc1.getDialog(0));
@@ -576,7 +576,7 @@ public class Game {
     /**
      * creates a dialog for npc1
      */
-    public void woundedSurvivor() {
+    static public void woundedSurvivor() {
         System.out.println("Maybe you could bring me some food and something to defend myself now that i cant move");
         System.out.println("Do you want to accept his mission: Yes or no");
         Scanner scan = new Scanner(System.in); //Creates a new scanner
@@ -596,7 +596,7 @@ public class Game {
     /**
      * Creates question when talking with npc2
      */
-    public void pregnant() {
+    static public void pregnant() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
         System.out.println("Are u pregnant?"); //Asks question
         String input = scan.nextLine(); //Waits for input
@@ -632,7 +632,7 @@ public class Game {
      *
      * @param command to craft item
      */
-    public void craftItem(Command command) {
+    static public void craftItem(Command command) {
         if (command.hasSecondWord()) {
             String craft = command.getSecondWord();
             if (craft.equalsIgnoreCase("Recipe")) {
@@ -692,7 +692,7 @@ public class Game {
     /* 
     * Method used for showing missions
      */
-    private void showMissions() {
+    static private void showMissions() {
 
         HashMap<String, String> viewMission = allMissions.missionInfo;
         HashMap<String, Boolean> missionStatus = allMissions.missionStatus;
@@ -725,7 +725,7 @@ public class Game {
      *
      * @param command used for checking if an item exists in inventory
      */
-    private void dropItem(Command command) {
+    static private void dropItem(Command command) {
         HashMap newInventory = inventory.getInventory();
         Iterator itte = newInventory.entrySet().iterator();
         String seeItem;
@@ -777,7 +777,7 @@ public class Game {
     }
 
     //command to leave the island if you choose to stay to complete more quest for at better highscore
-    private void escapeTheIsland() {
+    static private void escapeTheIsland() {
         while (currentRoom == beach) {
             if (allMissions.missionStatus.get("Escape the island") == true) {
 
@@ -803,7 +803,7 @@ public class Game {
     }
 
     //calculate point for each mission completed
-    private void calculateMissionScore() {
+    static private void calculateMissionScore() {
 
         HashMap<String, Boolean> missionStatus = allMissions.missionStatus;
 
@@ -816,7 +816,7 @@ public class Game {
     }
 
     //method to set the name of the highscore
-    private void setHighscoreName() {
+    static private void setHighscoreName() {
 
         //create Scanner
         Scanner input = new Scanner(System.in);
@@ -833,7 +833,7 @@ public class Game {
         }
     }
 
-    private void loseCondition() {
+    static private void loseCondition() {
         if (player.getHealth() <= 0) {
             lose();
         }
@@ -848,7 +848,7 @@ public class Game {
      * @return gives either true or false, returns true when input has no second
      * word other than "quit" and terminates program
      */
-    private boolean quit(Command command) {
+    static private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
@@ -862,13 +862,13 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    private void saveGame() throws IOException, Throwable {
+    static private void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());
         save.saveGame();
     }
 
-    private String objectsToSave() {
+    static private String objectsToSave() {
         ArrayList saveObjectsJSON;
         saveObjectsJSON = new ArrayList(10);
         saveObjectsJSON.add(inventory);
@@ -881,7 +881,7 @@ public class Game {
         return gson.toJson(saveObjectsJSON);
     }
 
-    void win() {
+    static void win() {
         calculateMissionScore();
         setHighscoreName();
         int totalSum = score.getCurrentScore() + (10000 / Time.getSecondsPassed());
@@ -895,7 +895,7 @@ public class Game {
         System.exit(0);
     }
 
-    void lose() {
+    static void lose() {
         System.out.println("You have lost the game!!!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
         System.exit(0);
 
