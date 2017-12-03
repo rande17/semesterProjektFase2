@@ -17,80 +17,71 @@ import java.util.Iterator;
 public class Mission {
 
     HashMap<String, Boolean> missionStatus = new HashMap();
-    HashMap<String, String> missionInfo = new HashMap();
-    
+//    HashMap<String, String> missionInfo = new HashMap();
+
     Score score = new Score();
     
+    private String name;
 
     //constructor
     public Mission() {
-}
-/**
- * 
- * @param room sets the room of the mission do not work atm
- * @param name sets the name of the mission
- * @param describtion set the describtion of the mission
- */
-    public void addMission(Room room, String name, String describtion) {
-        missionInfo.put(name, describtion);
+    }
+
+    /**
+     *
+     * @param room sets the room of the mission do not work atm
+     * @param name sets the name of the mission
+     * @param describtion set the describtion of the mission
+     */
+    public void addMission(Room room, String _name) {
+        name=_name;
         missionStatus.put(name, false);
 
-      }
-/**
- * method to get mission descibtion
- * @param key of the hashmap
- * @return 
- */
-    public String getMissionDescribtion(String key) {
-        return missionInfo.get(key);
     }
-           
-/**
- * method to set mission to true if complete
- * @param key of the hashmap
- */
+    private String getName(){
+        return name;
+    }
+
+    /**
+     * method to get mission descibtion
+     *
+     * @param key of the hashmap
+     * @return
+     */
+//    public String getMissionDescribtion(String key) {
+//        return missionInfo.get(key);
+//    }
+    /**
+     * method to set mission to true if complete
+     *
+     * @param key of the hashmap
+     */
     public void setMissionComplete(String key) {
         missionStatus.replace(key, true);
         //Kalder ukendt klasse
 
 //        score.addToPoints(missionPoint.get(key));
     }
-   
+
     @Override
     public String toString() {
-        String missionInfoString ="";
-        String missionStatusString ="";
-        Iterator iteratorMissionInfo = allMissions.missionInfo.entrySet().iterator();
+        String missionStatusString = "";
         Iterator iteratorMissionStatus = allMissions.missionStatus.entrySet().iterator();
-        
-            while (iteratorMissionInfo.hasNext()) {            
-                HashMap.Entry entry = (HashMap.Entry) iteratorMissionInfo.next();
-                missionInfoString += (String)entry.getKey();
-                missionInfoString += ": ";
-                missionInfoString += "\n";
-                missionInfoString += (String)entry.getValue().toString();
-                missionInfoString += "\n";
-                missionInfoString += "\n";
-        }
-//            while(iteratorMissionStatus.hasNext()){
-//                HashMap.Entry entry = (HashMap.Entry)iteratorMissionStatus.next();
-////              missionStatusString += (String)entry.getKey();
-////              missionStatusString += (String)entry.getValue().toString();
-////              missionStatusString += " | ";
-//            }
-//            
-//            if (missionS == false) {
-//               
-//            }
-//
-//            if (missionStatus.get() == true) {
-//                System.out.println("Mission is complete");
-//            }
-        return missionInfoString + missionStatusString;
+
+        while (iteratorMissionStatus.hasNext()) {
+            HashMap.Entry entry = (HashMap.Entry) iteratorMissionStatus.next();
+            missionStatusString += (String) entry.getKey();
+            missionStatusString += ": ";
+            missionStatusString += "\n";
+            if ((boolean) (entry.getValue()) == false) {
+                missionStatusString += "mission in progress\n";
+            }
+            if ((boolean) (entry.getValue()) == true) {
+                missionStatusString += "mission is complete\n";
+            }
+            missionStatusString += "\n";
+
+           }
+        return missionStatusString;
     }
 }
-
-
-
-
-

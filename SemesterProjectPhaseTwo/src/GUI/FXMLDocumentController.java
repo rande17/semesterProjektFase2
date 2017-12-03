@@ -194,8 +194,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void showInventory(MouseEvent event) {
-
-        textArea.setText(game.printInventory());
+        String inventory = "";
+//        inventory +=
+        inventory += game.printInventory();
+        textArea.setText(inventory);
     }
 
     @FXML
