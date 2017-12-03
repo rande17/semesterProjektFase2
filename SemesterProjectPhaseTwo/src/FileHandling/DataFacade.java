@@ -3,14 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acquaintance;
+package FileHandling;
 
+import acquaintance.InterfaceData;
 import java.util.ArrayList;
 
 /**
  *
  * @author Martin Sorensen
  */
-public interface InterfaceData {
-    public ArrayList printHighscore();
+public class DataFacade implements InterfaceData{
+
+    @Override
+    public ArrayList printHighscore() {
+      return HighscoreManager.getScores();
+    }
+    
 }

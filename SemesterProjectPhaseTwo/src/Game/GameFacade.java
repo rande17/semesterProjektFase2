@@ -5,6 +5,7 @@
  */
 package Game;
 
+import FileHandling.DataFacade;
 import static Game.CommandWord.*;
 import acquaintance.*;
 import java.util.ArrayList;
@@ -80,6 +81,11 @@ public class GameFacade implements InterfaceGame{
     @Override
     public void quitGame() {
         System.exit(0);
+    }
+
+    @Override
+    public ArrayList printHighscoreGUI() {
+        return Game.getHighscoreFromData();
     }
 
     

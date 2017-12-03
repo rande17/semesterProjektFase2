@@ -16,14 +16,14 @@ import java.io.*;
 public class HighscoreManager {
 
     // An arraylist of the type "score" we will use to work with the scores inside the class
-    private ArrayList<Score> scores;
+    private static ArrayList<Score> scores;
 
     // The name of the file where the highscores will be saved
     private static final String HIGHSCORE_FILE = "highscores.txt";
 
     //Initialising an in and outputStream for working with the file
-    ObjectOutputStream outputStream = null;
-    ObjectInputStream inputStream = null;
+    static ObjectOutputStream outputStream = null;
+    static ObjectInputStream inputStream = null;
 
     public HighscoreManager() {
         //initialising the scores-arraylist
@@ -35,13 +35,13 @@ public class HighscoreManager {
  * Method to get the arraylist, where it first loader the score file and then sorts the different score after the condition set in the CompareScore class  
  * because if we dont load the score file we dont get the newest highscore.
  */   
-    public ArrayList<Score> getScores() {
+    public static ArrayList<Score> getScores() {
         loadScoreFile();
         sort();
         return scores;
     }
     
-    private void sort() {
+    private static void sort() {
         //make object comparator of CompareScore
         CompareScore comparator = new CompareScore();
         //sort the different scores with comparator algorithm set in the CompareScore class
@@ -60,7 +60,7 @@ public class HighscoreManager {
         updateScoreFile(); //update the score list
     }
 
-    public void loadScoreFile() {
+    public static void loadScoreFile() {
         try {
             //load the highscore file that is in a form of arraylist and put it in the scores arraylist
             inputStream = new ObjectInputStream(new FileInputStream(HIGHSCORE_FILE));
@@ -133,5 +133,16 @@ public class HighscoreManager {
 
         return highscoreList;
     }
-
+   
+//    @Override
+//    public String toString() {
+//        for (String s : scores) {
+//            System.out.println("");
+//        
+//        
+//        
+//        
+//      
+//    }
+//}
 }

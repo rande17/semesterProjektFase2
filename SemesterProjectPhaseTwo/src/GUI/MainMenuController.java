@@ -56,6 +56,7 @@ Parent root;
 
     @FXML
     private void highscoreMenuButtonAction(MouseEvent event) {
+        
     }
 
     @FXML
