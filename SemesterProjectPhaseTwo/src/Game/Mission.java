@@ -16,37 +16,40 @@ public class Mission {
 
     HashMap<String, Boolean> missionStatus = new HashMap();
     HashMap<String, String> missionInfo = new HashMap();
-    
+
     Score score = new Score();
-    
 
     //constructor
     public Mission() {
-}
-/**
- * 
- * @param room sets the room of the mission do not work atm
- * @param name sets the name of the mission
- * @param describtion set the describtion of the mission
- */
+    }
+
+    /**
+     *
+     * @param room sets the room of the mission do not work atm
+     * @param name sets the name of the mission
+     * @param describtion set the describtion of the mission
+     */
     public void addMission(Room room, String name, String describtion) {
         missionInfo.put(name, describtion);
         missionStatus.put(name, false);
 
-      }
-/**
- * method to get mission descibtion
- * @param key of the hashmap
- * @return 
- */
+    }
+
+    /**
+     * method to get mission descibtion
+     *
+     * @param key of the hashmap
+     * @return
+     */
     public String getMissionDescribtion(String key) {
         return missionInfo.get(key);
     }
-           
-/**
- * method to set mission to true if complete
- * @param key of the hashmap
- */
+
+    /**
+     * method to set mission to true if complete
+     *
+     * @param key of the hashmap
+     */
     public void setMissionComplete(String key) {
         missionStatus.replace(key, true);
         //Kalder ukendt klasse
@@ -55,6 +58,3 @@ public class Mission {
     }
 
 }
-
-
-
