@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import static GUI.FXMLDocumentController.scene;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,8 +15,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -25,8 +26,16 @@ import javafx.scene.input.MouseEvent;
  * @author Martin Sorensen
  */
 public class MainMenuController implements Initializable {
-static Scene scene;
-Parent root;
+
+    
+    boolean helpDrawed = false;
+    private TextArea helpText;
+    
+    static Scene scene;
+    @FXML
+    private AnchorPane background;
+    
+    Parent root;
     @FXML
     private Button loadMenuButton;
     @FXML
@@ -35,6 +44,7 @@ Parent root;
     private Button helpMenuButton;
     @FXML
     private Button newGameMenuButton;
+    
 
     /**
      * Initializes the controller class.
@@ -42,14 +52,53 @@ Parent root;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-    }    
+
+    }
+
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene = newGameMenuButton.getScene();
         scene.setRoot(root);
         scene.getRoot().requestFocus();
     }
+
+    public void printHelpMainMenu(){
+        if(!helpDrawed){
+            int helpTextWidth = 280;
+            int helpTextHeight;
+            helpText = new TextArea();
+            helpText.setId("helptext");
+            helpText.setPrefSize(helpTextWidth, 280);
+            helpText.setLayoutX((background.getWidth()/2) - (helpTextWidth/2));
+            helpText.setLayoutY(280);
+            helpText.setText(
+                    "The game 'Stranded' is a survival game" + "\n" +
+                    "\n" +
+                    "You move the player around" + "\n" +
+                    "by using W A S D or the arrows" + "\n" +
+                    "\n" +
+                    "You use the menu on the right" + "\n" +
+                    "by using the mouse and" + "\n" +
+                    "clicking the left mouse button" + "\n" +
+                    "\n" +
+                    "To complete the game" + "\n" +
+                    "you must complete several missions" + "\n" +
+                    "by exploring, collecting items, " + "\n" +
+                    "crafting items and surviving" + "\n" +
+                    "\n" +
+                    "Press the Help button again to close this menu");
+            
+            background.getChildren().add(helpText);
+            helpDrawed = true;
+        }
+        
+        else{
+            System.out.println(background.getChildren());
+            background.getChildren().remove(4);
+            helpDrawed = false;
+        }
+    }
+    
     @FXML
     private void loadgameMenuButtonAction(MouseEvent event) {
     }
@@ -61,16 +110,17 @@ Parent root;
 
     @FXML
     private void helpMenuButtonAction(MouseEvent event) {
+        printHelpMainMenu();
+        
     }
 
     @FXML
     private void newgameButtonAction(ActionEvent event) throws IOException {
         changeScene("airport");
-        
     }
 
     @FXML
     private void handleButtonAction(KeyEvent event) {
     }
-    
+
 }

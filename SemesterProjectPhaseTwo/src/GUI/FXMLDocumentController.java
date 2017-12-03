@@ -46,8 +46,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
-    @FXML
-    private TextArea textArea;
+    
     @FXML
     private Button inventoryButton;
     @FXML
@@ -56,6 +55,8 @@ public class FXMLDocumentController implements Initializable {
     private Button quitButton;
     @FXML
     private Button missionButton;
+    @FXML
+    private TextArea textArea;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
