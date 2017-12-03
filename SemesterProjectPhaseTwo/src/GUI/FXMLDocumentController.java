@@ -156,7 +156,9 @@ public class FXMLDocumentController implements Initializable {
                     double iyend = itemToCheck.getLayoutY() + itemToCheck.getHeight();
                     if (pxstart >= ixstart && pxstart <= ixend && pystart >= iystart && pystart <= iyend) {
                         if (game.takeItemGUI(itemID)) {
+                            System.out.println(background.getChildren().get(i).toString());
                             background.getChildren().remove(i);
+                            
                             itemsArray.remove(i);
                         }
                     }

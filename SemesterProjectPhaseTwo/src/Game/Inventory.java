@@ -65,7 +65,8 @@ public class Inventory {
         int weightOfItem = _item.getWeight();
 
         itemWeight.put(itemName, weightOfItem);
-        if (currentQuantity < inventoryMaxQuantity && (weightOfItem + currentInventoryWeight) <= inventoryMaxWeight) {
+        /*currentQuantity < inventoryMaxQuantity */
+        if ((weightOfItem + currentInventoryWeight) <= inventoryMaxWeight) {
             if (inventory.containsKey(itemName)) {
                 quantity = inventory.get(itemName) + 1;
 //                return true;
@@ -158,6 +159,7 @@ public class Inventory {
      */
     void setInventoryMaxWeight(int _InventoryMaxWeight) {
         inventoryMaxWeight = _InventoryMaxWeight;
+        System.out.println(inventoryMaxWeight);
     }
 
     /**
