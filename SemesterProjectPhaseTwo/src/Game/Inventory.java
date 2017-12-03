@@ -56,6 +56,7 @@ public class Inventory {
     /**
      *
      * @param _item used for adding item to inventory
+     * @return true or false whether there is enough room for the item in inventory
      */
     public boolean addItemInInventory(Item _item) {
         int quantity = 0;
