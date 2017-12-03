@@ -19,6 +19,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
@@ -40,18 +41,21 @@ public class FXMLDocumentController implements Initializable {
     boolean itemsDrawed = false;
     Parent root;
 
+    @FXML
     private AnchorPane background;
+    @FXML
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
+    @FXML
     private TextArea textArea;
     @FXML
-    private Button loadMenuButton;
+    private Button inventoryButton;
     @FXML
-    private Button highscoreMenuButton;
+    private Button helpButton;
     @FXML
-    private Button helpMenuButton;
+    private Button quitButton;
     @FXML
-    private Button newGameMenuButton;
+    private Button missionButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -192,22 +196,7 @@ public class FXMLDocumentController implements Initializable {
         changeScene(game.getRoom());
     }
 
-    private void showInventory(MouseEvent event) {
-        String inventory = "";
-        inventory += game.printInventory();
-        textArea.setText(inventory);
-    }
-
-    private void quitGame(MouseEvent event) {
-        game.quitGame();
-    }
-
-    private void showHelp(MouseEvent event) {
-        String help = "";
-        help += game.showHelp();
-        textArea.setText(help);
-    }
-
+  
     
 //        private void helpPopup {
 //      Button btn = new Button();
@@ -228,21 +217,32 @@ public class FXMLDocumentController implements Initializable {
 //        });
 //    }
 
-@FXML
-        private void loadgameMenuButtonAction(MouseEvent event) {
+       
+
+    @FXML
+        private void showInventory(ActionEvent event) {
+             String inventory = "";
+        inventory += game.printInventory();
+        textArea.setText(inventory);
     }
 
     @FXML
-        private void highscoreMenuButtonAction(MouseEvent event) {
+        private void showHelp(ActionEvent event) {
+         String help = "";
+        help += game.showHelp();
+        textArea.setText(help);
     }
 
     @FXML
-        private void helpMenuButtonAction(MouseEvent event) {
-        
+        private void quitGame(ActionEvent event) {
+             game.quitGame();
     }
 
     @FXML
-        private void newgameButtonAction(MouseEvent event) throws IOException {
-        changeScene("airport");
+    private void showHelp(MouseEvent event) {
+    }
+
+    @FXML
+    private void showMission(ActionEvent event) {
     }
 }
