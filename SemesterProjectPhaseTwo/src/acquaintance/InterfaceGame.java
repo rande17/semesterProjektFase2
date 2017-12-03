@@ -19,4 +19,6 @@ public interface InterfaceGame {
     public boolean takeItemGUI(String itemToTake);
     public void goGUI(String dir);
     public String getRoom();
+    public String printInventory();
+    public String showHelp();
 }
