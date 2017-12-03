@@ -33,6 +33,8 @@ public class Game {
     static private String name;
     static private boolean hasTalkedWithEvilGuy = false;
 
+    
+
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
     public Game() {
@@ -200,7 +202,15 @@ public class Game {
                 + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
                 + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
     }
-
+    
+    static HashMap<String, String> storeNPC() {
+        HashMap<String, String> npcMap = new HashMap<>();
+        npcMap.put(npc1.getName(),npc1.getCurrentRoom().getShortDescription());
+        npcMap.put(npc2.getName(), npc2.getCurrentRoom().getShortDescription());
+        npcMap.put(npc3.getName(), npc3.getCurrentRoom().getShortDescription());
+       return npcMap;   
+    } 
+    
     //Initializing game
     public void initGame() {
 

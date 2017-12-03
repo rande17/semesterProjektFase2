@@ -8,6 +8,7 @@ package Game;
 import static Game.CommandWord.*;
 import acquaintance.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -91,6 +92,11 @@ public class GameFacade implements InterfaceGame {
         @Override
     public boolean checkExit(String dir) {
         return Game.getExitBool(dir);
+    }
+
+    @Override
+    public HashMap<String, String> getNPC() {
+        return Game.storeNPC();
     }
 
 
