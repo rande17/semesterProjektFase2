@@ -21,5 +21,5 @@ public interface InterfaceGame {
     public String getRoom();
     public String printInventory();
     public String showHelp();
-    public void quitGame();
+//    public void quitGame();
 }

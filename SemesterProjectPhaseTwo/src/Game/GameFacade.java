@@ -8,6 +8,8 @@ package Game;
 import static Game.CommandWord.*;
 import acquaintance.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -31,14 +33,23 @@ public class GameFacade implements InterfaceGame{
 
     @Override
     public boolean takeItemGUI(String itemToTake) {
-       Command command = new Command(TAKE, itemToTake);
-       return Game.takeItem(command);
+        try {
+            Command command = new Command(TAKE, itemToTake);
+            return Game.processCommand(command);
+        } catch (Throwable ex) {
+            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
     public void goGUI(String dir) {
        Command command = new Command(GO, dir);
-       Game.goRoom(command);
+        try {
+            Game.processCommand(command);
+        } catch (Throwable ex) {
+            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -55,13 +66,13 @@ public class GameFacade implements InterfaceGame{
 
     @Override
     public String showHelp() {
-        return Game.
+        return Game.printHelp();
     }
 
-    @Override
-    public void quitGame() {
-        Game
-    }
+//    @Override
+//    public void quitGame() {
+//        Game.processCommand(QUIT);
+//    }
 
     
     

@@ -30,7 +30,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="inventoryButton" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#showInventory" text="Inventory" />
-            <Button fx:id="helpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Help" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="helpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#showHelp" text="Help" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="quitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#quitGame" text="Quit" GridPane.columnIndex="1" />
             <Button fx:id="missionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#showMission" text="Mission" GridPane.rowIndex="1" />
             <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
