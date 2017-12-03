@@ -18,10 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import acquaintance.InterfaceGame;
 import java.util.ArrayList;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
@@ -33,7 +30,7 @@ import javafx.scene.paint.Paint;
  * @author rickie
  */
 public class FXMLDocumentController implements Initializable {
-    
+
     private static GameFacade game = new GameFacade();
     private int speed = 10;
     private GridPane roomGridPane;
@@ -43,21 +40,18 @@ public class FXMLDocumentController implements Initializable {
     boolean itemsDrawed = false;
     Parent root;
 
-    @FXML
     private AnchorPane background;
-    @FXML
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
-    @FXML
-    private Button inventoryButton;
-    @FXML
-    private Button helpButton;
-    @FXML
-    private Button quitButton;
-    @FXML
-    private Button missionButton;
-    @FXML
     private TextArea textArea;
+    @FXML
+    private Button loadMenuButton;
+    @FXML
+    private Button highscoreMenuButton;
+    @FXML
+    private Button helpMenuButton;
+    @FXML
+    private Button newGameMenuButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -133,6 +127,10 @@ public class FXMLDocumentController implements Initializable {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         itemsDrawed = false;
         scene.setRoot(root);
+        while (!scene.getRoot().equals(root)) {
+
+        }
+
         scene.getRoot().requestFocus();
         player = (Rectangle) root.lookup("#player");
     }
@@ -158,7 +156,7 @@ public class FXMLDocumentController implements Initializable {
                         if (game.takeItemGUI(itemID)) {
                             System.out.println(background.getChildren().get(i).toString());
                             background.getChildren().remove(i);
-                            
+
                             itemsArray.remove(i);
                         }
                     }
@@ -194,26 +192,57 @@ public class FXMLDocumentController implements Initializable {
         changeScene(game.getRoom());
     }
 
-    @FXML
     private void showInventory(MouseEvent event) {
         String inventory = "";
         inventory += game.printInventory();
         textArea.setText(inventory);
     }
 
-    @FXML
     private void quitGame(MouseEvent event) {
         game.quitGame();
     }
 
-    @FXML
-    private void showMission(MouseEvent event) {
-    }
-
-    @FXML
     private void showHelp(MouseEvent event) {
         String help = "";
         help += game.showHelp();
         textArea.setText(help);
+    }
+
+    
+//        private void helpPopup {
+//      Button btn = new Button();
+//        btn.setText("Open Dialog");
+//        btn.setOnAction(
+//                new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                final Stage dialog = new Stage();
+//                dialog.initModality(Modality.APPLICATION_MODAL);
+//                dialog.initOwner(primaryStage);
+//                VBox dialogVbox = new VBox(20);
+//                dialogVbox.getChildren().add(new Text("This is a Dialog"));
+//                Scene dialogScene = new Scene(dialogVbox, 300, 200);
+//                dialog.setScene(dialogScene);
+//                dialog.show();
+//            }
+//        });
+//    }
+
+@FXML
+        private void loadgameMenuButtonAction(MouseEvent event) {
+    }
+
+    @FXML
+        private void highscoreMenuButtonAction(MouseEvent event) {
+    }
+
+    @FXML
+        private void helpMenuButtonAction(MouseEvent event) {
+        
+    }
+
+    @FXML
+        private void newgameButtonAction(MouseEvent event) throws IOException {
+        changeScene("airport");
     }
 }

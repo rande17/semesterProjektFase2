@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/backgroundMainMenu.png'); -fx-background-size: stretch" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/backgroundMainMenu.png'); -fx-background-size: stretch" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
    <children>
-      <Button fx:id="loadButton" layoutX="79.0" layoutY="177.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" rotate="-20.0" text="LOAD GAME" />
-      <Button layoutX="605.0" layoutY="177.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" rotate="20.0" text="HIGHSCORE" />
-      <Button layoutX="603.0" layoutY="106.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" rotate="15.0" text="HELP" />
-      <Button fx:id="newGame" layoutX="79.0" layoutY="106.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" rotate="-15.0" text="NEW GAME" />
+      <Button fx:id="loadMenuButton" layoutX="79.0" layoutY="177.0" mnemonicParsing="false" onMouseClicked="#loadgameMenuButtonAction" prefHeight="31.0" prefWidth="119.0" rotate="-20.0" text="LOAD GAME" />
+      <Button fx:id="highscoreMenuButton" layoutX="605.0" layoutY="177.0" mnemonicParsing="false" onMouseClicked="#highscoreMenuButtonAction" prefHeight="31.0" prefWidth="115.0" rotate="20.0" text="HIGHSCORE" />
+      <Button fx:id="helpMenuButton" layoutX="603.0" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#helpMenuButtonAction" prefHeight="31.0" prefWidth="119.0" rotate="15.0" text="HELP" />
+      <Button fx:id="newGameMenuButton" layoutX="79.0" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#newgameButtonAction" prefHeight="31.0" prefWidth="119.0" rotate="-15.0" text="NEW GAME" />
    </children>
 </AnchorPane>
