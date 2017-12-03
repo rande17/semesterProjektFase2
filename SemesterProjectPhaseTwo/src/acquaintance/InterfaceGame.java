@@ -23,5 +23,5 @@ public interface InterfaceGame {
     public String showHelp();
     public void quitGame();
     public String printMissions();
-    public ArrayList printHighscoreGUI();
+    public String printHighscoreGUI();
 }

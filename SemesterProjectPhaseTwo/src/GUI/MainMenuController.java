@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Game.GameFacade;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import acquaintance.InterfaceGame;
 
 /**
  * FXML Controller class
@@ -27,14 +29,14 @@ import javafx.scene.layout.AnchorPane;
  */
 public class MainMenuController implements Initializable {
 
-    
+    private static GameFacade game = new GameFacade();
     boolean helpDrawed = false;
-    private TextArea helpText;
-    
+    private TextArea popupText;
+
     static Scene scene;
     @FXML
     private AnchorPane background;
-    
+
     Parent root;
     @FXML
     private Button loadMenuButton;
@@ -44,7 +46,6 @@ public class MainMenuController implements Initializable {
     private Button helpMenuButton;
     @FXML
     private Button newGameMenuButton;
-    
 
     /**
      * Initializes the controller class.
@@ -62,56 +63,68 @@ public class MainMenuController implements Initializable {
         scene.getRoot().requestFocus();
     }
 
-    public void printHelpMainMenu(){
-        if(!helpDrawed){
-            int helpTextWidth = 280;
-            int helpTextHeight;
-            helpText = new TextArea();
-            helpText.setId("helptext");
-            helpText.setPrefSize(helpTextWidth, 280);
-            helpText.setLayoutX((background.getWidth()/2) - (helpTextWidth/2));
-            helpText.setLayoutY(280);
-            helpText.setText(
-                    "The game 'Stranded' is a survival game" + "\n" +
-                    "\n" +
-                    "You move the player around" + "\n" +
-                    "by using W A S D or the arrows" + "\n" +
-                    "\n" +
-                    "You use the menu on the right" + "\n" +
-                    "by using the mouse and" + "\n" +
-                    "clicking the left mouse button" + "\n" +
-                    "\n" +
-                    "To complete the game" + "\n" +
-                    "you must complete several missions" + "\n" +
-                    "by exploring, collecting items, " + "\n" +
-                    "crafting items and surviving" + "\n" +
-                    "\n" +
-                    "Press the Help button again to close this menu");
-            
-            background.getChildren().add(helpText);
+    public void printHelpMainMenu() {
+        if (!helpDrawed) {
+            openWindow();
+            popupText.setText(
+                    "The game 'Stranded' is a survival game" + "\n"
+                    + "\n"
+                    + "You move the player around" + "\n"
+                    + "by using W A S D or the arrows" + "\n"
+                    + "\n"
+                    + "You use the menu on the right" + "\n"
+                    + "by using the mouse and" + "\n"
+                    + "clicking the left mouse button" + "\n"
+                    + "\n"
+                    + "To complete the game" + "\n"
+                    + "you must complete several missions" + "\n"
+                    + "by exploring, collecting items, " + "\n"
+                    + "crafting items and surviving" + "\n"
+                    + "\n"
+                    + "Press the Help button again to close this menu");
+
+            background.getChildren().add(popupText);
             helpDrawed = true;
-        }
-        
-        else{
+        } else {
             System.out.println(background.getChildren());
             background.getChildren().remove(4);
             helpDrawed = false;
         }
     }
-    
+
+    private void openWindow() {
+        int helpTextWidth = 280;
+        int helpTextHeight;
+        popupText = new TextArea();
+        popupText.setPrefSize(helpTextWidth, 280);
+        popupText.setLayoutX((background.getWidth() / 2) - (helpTextWidth / 2));
+        popupText.setLayoutY(280);
+    }
+
     @FXML
     private void loadgameMenuButtonAction(MouseEvent event) {
     }
 
     @FXML
     private void highscoreMenuButtonAction(MouseEvent event) {
-        
+        if (!helpDrawed) {
+            openWindow();
+
+            popupText.setText(game.printHighscoreGUI());
+            background.getChildren().add(popupText);
+            helpDrawed = true;
+        } else {
+            System.out.println(background.getChildren());
+            background.getChildren().remove(4);
+            helpDrawed = false;
+        }
+
     }
 
     @FXML
     private void helpMenuButtonAction(MouseEvent event) {
         printHelpMainMenu();
-        
+
     }
 
     @FXML

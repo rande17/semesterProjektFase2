@@ -882,8 +882,12 @@ public class Game {
     }
     
     
-    static ArrayList getHighscoreFromData() {      
-        return data.printHighscore();
+    static String getHighscoreFromData() {  
+        String highscoreString = "";
+        for (int i = 0; i < data.printHighscore().size(); i++) {
+            highscoreString += data.printHighscore().get(i).toString();
+        }
+        return highscoreString;
     }
 
     static void win() {
