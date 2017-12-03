@@ -6,7 +6,6 @@
 package FileHandling;
 
 import acquaintance.InterfaceData;
-import java.util.ArrayList;
 
 /**
  *
@@ -15,8 +14,8 @@ import java.util.ArrayList;
 public class DataFacade implements InterfaceData{
 
     @Override
-    public ArrayList printHighscore() {
-      return HighscoreManager.getScores();
+    public String printHighscore() {
+      return HighscoreManager.getHighscoreList();
     }
     
 }

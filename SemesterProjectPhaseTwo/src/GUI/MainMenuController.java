@@ -86,7 +86,6 @@ public class MainMenuController implements Initializable {
             background.getChildren().add(popupText);
             helpDrawed = true;
         } else {
-            System.out.println(background.getChildren());
             background.getChildren().remove(4);
             helpDrawed = false;
         }
@@ -114,7 +113,6 @@ public class MainMenuController implements Initializable {
             background.getChildren().add(popupText);
             helpDrawed = true;
         } else {
-            System.out.println(background.getChildren());
             background.getChildren().remove(4);
             helpDrawed = false;
         }

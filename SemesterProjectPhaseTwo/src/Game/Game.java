@@ -884,10 +884,7 @@ public class Game {
     
     
     static String getHighscoreFromData() {  
-        String highscoreString = "";
-        for (int i = 0; i < data.printHighscore().size(); i++) {
-            highscoreString += data.printHighscore().get(i).toString();
-        }
+        String highscoreString = data.printHighscore();
         return highscoreString;
     }
 
@@ -902,7 +899,7 @@ public class Game {
             highscore.addHighscore(score.getName(), totalSum);
             System.out.println("");
             System.out.println("Current highscore list is: ");
-            System.out.println(highscore.getHighscoreList());
+            System.out.println(data.printHighscore());
             System.exit(0);
         } else {
             calculateMissionScore();
@@ -914,7 +911,7 @@ public class Game {
             highscore.addHighscore(score.getName(), totalSum);
             System.out.println("");
             System.out.println("Current highscore list is: ");
-            System.out.println(highscore.getHighscoreList());
+            System.out.println(data.printHighscore());
             System.exit(0);
         }
     }

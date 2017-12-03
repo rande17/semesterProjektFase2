@@ -12,5 +12,5 @@ import java.util.ArrayList;
  * @author Martin Sorensen
  */
 public interface InterfaceData {
-    public ArrayList printHighscore();
+    public String printHighscore();
 }

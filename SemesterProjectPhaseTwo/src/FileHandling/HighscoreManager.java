@@ -111,7 +111,7 @@ public class HighscoreManager {
      * 
      * @return the highscore list in for of a string
      */
-    public String getHighscoreList() {
+    static String getHighscoreList() {
         String highscoreList = "";
         //set length of the highscore list
         int highscoreMax = 10;
