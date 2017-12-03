@@ -524,10 +524,11 @@ public class Game {
                 if (inventory.addItemInInventory(addToInventory) == true) {
                     System.out.println("Item has been added to inventory: " + addToInventory.getName());
 //                    inventory.addItemInInventoryBoolean(addToInventory);
-                    currentRoomItem.remove(indexItem); 
+                    currentRoomItem.remove(indexItem);
+                    return true;
                 }
                 itemLocation.setItem(currentRoom, currentRoomItem);
-                return true;
+                return false;
             } else {
                 System.out.println("You can't pickup this item");
                 return false;
