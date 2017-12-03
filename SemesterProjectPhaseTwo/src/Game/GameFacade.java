@@ -87,6 +87,31 @@ public class GameFacade implements InterfaceGame{
         return Game.getHighscoreFromData().toString();
     }
 
+    @Override
+    public int playerHealth() {
+        return Game.player.getHealth();
+    }
+
+    @Override
+    public int playerEnergi() {
+        return Game.player.getEnergi();
+    }
+
+    @Override
+    public int maxPlayerHealth() {
+        return Game.player.getMaxHealth();
+    }
+
+    @Override
+    public int maxPlayerEnergy() {
+        return Game.player.getMaxEnergi();
+    }
+
+    @Override
+    public void damageToPlayer() {
+         Game.player.LoseHealth(25);
+    }
+
     
     
     

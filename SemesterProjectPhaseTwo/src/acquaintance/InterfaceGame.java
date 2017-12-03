@@ -24,4 +24,9 @@ public interface InterfaceGame {
     public void quitGame();
     public String printMissions();
     public String printHighscoreGUI();
+    public int playerHealth();
+    public int playerEnergi();
+    public int maxPlayerHealth();
+    public int maxPlayerEnergy();
+    public void damageToPlayer();
 }

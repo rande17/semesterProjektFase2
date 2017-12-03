@@ -21,6 +21,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -40,6 +41,8 @@ public class FXMLDocumentController implements Initializable {
     double x, y;
     boolean itemsDrawed = false;
     Parent root;
+    private double health;
+    private double energy;
 
     @FXML
     private AnchorPane background;
@@ -57,6 +60,10 @@ public class FXMLDocumentController implements Initializable {
     private Button missionButton;
     @FXML
     private TextArea textArea;
+    @FXML
+    private ProgressBar healthBar = new ProgressBar(game.maxPlayerHealth());
+    @FXML
+    private ProgressBar energyBar = new ProgressBar(game.maxPlayerEnergy());
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -124,8 +131,12 @@ public class FXMLDocumentController implements Initializable {
             case L:
                 System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
                 break;
+            case H:
+                game.damageToPlayer();
+                break;
         }
         intersectsItem();
+        updateBars();
     }
 
     public void changeScene(String newScene) throws IOException {
@@ -238,5 +249,19 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void showMission(ActionEvent event) {
         textArea.setText(game.printMissions());
+    }
+
+    @FXML
+    private void showHelp(MouseEvent event) {
+    }
+    
+    public void updateBars(){
+        
+        health =  1.0 * game.playerHealth() / game.maxPlayerHealth();
+        energy = 1.0 * game.playerEnergi() / game.maxPlayerEnergy();
+        healthBar.setProgress(health);
+        energyBar.setProgress(game.playerEnergi());
+        
+        
     }
 }
