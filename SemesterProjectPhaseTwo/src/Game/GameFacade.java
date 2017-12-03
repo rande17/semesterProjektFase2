@@ -81,6 +81,11 @@ public class GameFacade implements InterfaceGame{
     public void quitGame() {
         System.exit(0);
     }
+    
+    @Override
+    public void getCraftableItems(){
+        
+    }
 
     
     
