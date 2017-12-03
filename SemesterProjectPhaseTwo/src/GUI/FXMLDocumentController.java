@@ -256,7 +256,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void updateBars(){
-        
+        //
         health =  1.0 * game.playerHealth() / game.maxPlayerHealth();
         energy = 1.0 * game.playerEnergi() / game.maxPlayerEnergy();
         healthBar.setProgress(health);
