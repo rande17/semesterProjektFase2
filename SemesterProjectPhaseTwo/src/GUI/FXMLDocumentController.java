@@ -190,6 +190,7 @@ public class FXMLDocumentController implements Initializable {
             itemsDrawed = true;
         }
     }
+    
 
     public void go(String dir) throws IOException {
         game.goGUI(dir);
