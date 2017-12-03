@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
  *
  * @author frede
  */
-public class CraftMenuController implements Initializable {
+public class CraftMenuControllerBackup implements Initializable {
 
     @FXML
     private Button backButton;

@@ -55,9 +55,7 @@ public class GameFacade implements InterfaceGame {
 
     @Override
     public String getRoom() {
-
         return Game.currentRoom.getShortDescription();
-
     }
 
     @Override
