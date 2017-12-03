@@ -48,6 +48,16 @@ public class GameFacade implements InterfaceGame{
     
     }
 
+    @Override
+    public String printInventory() {
+        return Game.inventory.toString();
+    }
+
+//    @Override
+//    public String showHelp() {
+//        return Game
+//    }
+
     
     
     

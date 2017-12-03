@@ -22,6 +22,9 @@ import javafx.stage.Stage;
 import acquaintance.InterfaceGame;
 import java.util.ArrayList;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -30,7 +33,7 @@ import javafx.scene.paint.Paint;
  * @author rickie
  */
 public class FXMLDocumentController implements Initializable {
-
+    
     private static GameFacade game = new GameFacade();
     private int speed = 10;
     private GridPane roomGridPane;
@@ -45,6 +48,16 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
+    @FXML
+    private Button inventoryButton;
+    @FXML
+    private Button helpButton;
+    @FXML
+    private Button quitButton;
+    @FXML
+    private Button missionButton;
+    @FXML
+    private TextArea textArea;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -177,5 +190,25 @@ public class FXMLDocumentController implements Initializable {
     public void go(String dir) throws IOException {
         game.goGUI(dir);
         changeScene(game.getRoom());
+    }
+
+    @FXML
+    private void showInventory(MouseEvent event) {
+        String inventory = "";
+//        inventory +=
+        inventory += game.printInventory();
+        textArea.setText(inventory);
+    }
+
+    @FXML
+    private void quitGame(MouseEvent event) {
+    }
+
+    @FXML
+    private void showMission(MouseEvent event) {
+    }
+
+    @FXML
+    private void showHelp(MouseEvent event) {
     }
 }
