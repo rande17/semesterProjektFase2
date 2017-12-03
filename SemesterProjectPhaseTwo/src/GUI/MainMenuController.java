@@ -24,7 +24,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Martin Sorensen
  */
-public class MainMenu implements Initializable {
+public class MainMenuController implements Initializable {
 static Scene scene;
 Parent root;
     @FXML
