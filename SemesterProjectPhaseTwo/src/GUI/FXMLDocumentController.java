@@ -197,7 +197,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void showInventory(MouseEvent event) {
         String inventory = "";
-//        inventory +=
         inventory += game.printInventory();
         textArea.setText(inventory);
     }
@@ -212,5 +211,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void showHelp(MouseEvent event) {
+        String help = "";
+        help += game.showHelp();
+        textArea.setText(help);
     }
 }

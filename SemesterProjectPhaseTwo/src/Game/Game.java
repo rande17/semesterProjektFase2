@@ -408,12 +408,15 @@ public class Game {
     }
 
     /* A method to print a message that show the different commands everytime the command help is used */
-    static private void printHelp() {
+    static String printHelp() {
+        String helpDialog = "You are lost. You are alone." + "\n" + "You wander around on this" + "\n" + "god forsaken island."
+                + "\n" + "\n" + "You move around using" + "\n" + "W A S D or the arrows";
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around on this god forsaken island.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
+        return helpDialog;
     }
 
     /**

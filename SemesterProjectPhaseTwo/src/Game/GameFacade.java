@@ -67,9 +67,14 @@ public class GameFacade implements InterfaceGame{
         return Game.inventory.toString();
     }
 
+    @Override
+    public String showHelp() {
+        return Game.printHelp();
+    }
+
 //    @Override
-//    public String showHelp() {
-//        return Game
+//    public void quitGame() {
+//        Game.processCommand(QUIT);
 //    }
 
     
