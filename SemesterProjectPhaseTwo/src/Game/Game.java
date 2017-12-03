@@ -521,9 +521,11 @@ public class Game {
 
         if (indexItem >= 0) {
             if (addToInventory instanceof PickableItem) {
-                System.out.println("Item has been added to inventory: " + addToInventory.getName());
-                inventory.addItemInInventory(addToInventory);
-                currentRoomItem.remove(indexItem);
+                if (inventory.addItemInInventory(addToInventory) == true) {
+                    System.out.println("Item has been added to inventory: " + addToInventory.getName());
+//                    inventory.addItemInInventoryBoolean(addToInventory);
+                    currentRoomItem.remove(indexItem); 
+                }
                 itemLocation.setItem(currentRoom, currentRoomItem);
                 return true;
             } else {
