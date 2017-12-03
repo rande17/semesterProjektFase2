@@ -53,10 +53,15 @@ public class GameFacade implements InterfaceGame{
         return Game.inventory.toString();
     }
 
-//    @Override
-//    public String showHelp() {
-//        return Game
-//    }
+    @Override
+    public String showHelp() {
+        return Game.
+    }
+
+    @Override
+    public void quitGame() {
+        Game
+    }
 
     
     

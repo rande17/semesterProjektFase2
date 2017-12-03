@@ -408,7 +408,7 @@ public class Game {
     }
 
     /* A method to print a message that show the different commands everytime the command help is used */
-    private void printHelp() {
+    public void printHelp() {
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around on this god forsaken island.");
         System.out.println();
