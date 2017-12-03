@@ -33,7 +33,7 @@ import javafx.scene.paint.Paint;
  * @author rickie
  */
 public class FXMLDocumentController implements Initializable {
-    
+
     private static GameFacade game = new GameFacade();
     private int speed = 10;
     private GridPane roomGridPane;
@@ -204,6 +204,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void showMission(MouseEvent event) {
+        textArea.setText(game.printMissions());
     }
 
     @FXML

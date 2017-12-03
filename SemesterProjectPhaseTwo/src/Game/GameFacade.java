@@ -52,11 +52,16 @@ public class GameFacade implements InterfaceGame{
     public String printInventory() {
         return Game.inventory.toString();
     }
-
+  
     @Override
-    public String showHelp() {
-        return Game
+    public String printMissions(){
+        return Game.allMissions.toString();
     }
+
+//    @Override
+//    public String showHelp() {
+//        return Game
+//    }
 
     
     

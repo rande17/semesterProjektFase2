@@ -5,8 +5,10 @@
  */
 package Game;
 
+import static Game.Game.allMissions;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -53,8 +55,42 @@ public class Mission {
 
 //        score.addToPoints(missionPoint.get(key));
     }
-
+   
+    @Override
+    public String toString() {
+        String missionInfoString ="";
+        String missionStatusString ="";
+        Iterator iteratorMissionInfo = allMissions.missionInfo.entrySet().iterator();
+        Iterator iteratorMissionStatus = allMissions.missionStatus.entrySet().iterator();
+        
+            while (iteratorMissionInfo.hasNext()) {            
+                HashMap.Entry entry = (HashMap.Entry) iteratorMissionInfo.next();
+                missionInfoString += (String)entry.getKey();
+                missionInfoString += ": ";
+                missionInfoString += "\n";
+                missionInfoString += (String)entry.getValue().toString();
+                missionInfoString += "\n";
+                missionInfoString += "\n";
+        }
+//            while(iteratorMissionStatus.hasNext()){
+//                HashMap.Entry entry = (HashMap.Entry)iteratorMissionStatus.next();
+////              missionStatusString += (String)entry.getKey();
+////              missionStatusString += (String)entry.getValue().toString();
+////              missionStatusString += " | ";
+//            }
+//            
+//            if (missionS == false) {
+//               
+//            }
+//
+//            if (missionStatus.get() == true) {
+//                System.out.println("Mission is complete");
+//            }
+        return missionInfoString + missionStatusString;
+    }
 }
+
+
 
 
 
