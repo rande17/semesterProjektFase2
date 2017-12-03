@@ -167,7 +167,17 @@ public class Inventory {
     public void setinventoryMaxQuantity(int _InventoryMaxQuantity) {
         inventoryMaxQuantity = _InventoryMaxQuantity;
     }
-
+    
+    public String getInventoryStatus() {
+        String inventoryStatus = "Inventory weight: ";
+        inventoryStatus += getCurrentInventoryWeight();
+        inventoryStatus += "/";
+        inventoryStatus += getInventoryMaxWeight();
+        inventoryStatus += "\n";
+        
+        return inventoryStatus;
+        
+    }
     /**
      *
      * @param itemName get the item weight of a specific item
@@ -180,6 +190,7 @@ public class Inventory {
     public String toString() {
         String inventoryString ="";
         Iterator iterator = inventory.entrySet().iterator();
+        inventoryString += getInventoryStatus();
         
             while (iterator.hasNext()) {            
                 HashMap.Entry entry = (HashMap.Entry) iterator.next();
