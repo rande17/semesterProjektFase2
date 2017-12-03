@@ -87,6 +87,11 @@ public class GameFacade implements InterfaceGame{
         
     }
 
+    @Override
+    public String printHighscoreGUI() {
+        return Game.getHighscoreFromData().toString();
+    }
+
     
     
     

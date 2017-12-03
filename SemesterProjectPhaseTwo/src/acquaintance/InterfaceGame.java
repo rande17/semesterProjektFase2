@@ -23,6 +23,7 @@ public interface InterfaceGame {
     public String showHelp();
     public void quitGame();
     public String printMissions();
+    public String printHighscoreGUI();
     public void getCraftableItems();
 //    public String showHelp();
 }

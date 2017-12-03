@@ -1,9 +1,11 @@
 package Game;
 
+import FileHandling.DataFacade;
 import acquaintance.InterfaceGame;
 import FileHandling.HighscoreManager;
 import FileHandling.Logger;
 import FileHandling.Save;
+import acquaintance.InterfaceData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileNotFoundException;
@@ -42,6 +44,7 @@ public class Game {
        constructor from the Room class and then set where you can move to  from the different rooms by
        using the method setExit from the Room class */
  /* The currentRoom is also given a value which is the start location = outside */
+    private static DataFacade data = new DataFacade();
     static ItemLocation itemLocation = new ItemLocation();
     static Inventory inventory = new Inventory();
     static HighscoreManager highscore = new HighscoreManager();
@@ -878,6 +881,12 @@ public class Game {
 
         return gson.toJson(saveObjectsJSON);
     }
+    
+    
+    static String getHighscoreFromData() {  
+        String highscoreString = data.printHighscore();
+        return highscoreString;
+    }
 
     static void win() {
         if (Time.getSecondsPassed() < 1) {
@@ -890,7 +899,7 @@ public class Game {
             highscore.addHighscore(score.getName(), totalSum);
             System.out.println("");
             System.out.println("Current highscore list is: ");
-            System.out.println(highscore.getHighscoreList());
+            System.out.println(data.printHighscore());
             System.exit(0);
         } else {
             calculateMissionScore();
@@ -902,7 +911,7 @@ public class Game {
             highscore.addHighscore(score.getName(), totalSum);
             System.out.println("");
             System.out.println("Current highscore list is: ");
-            System.out.println(highscore.getHighscoreList());
+            System.out.println(data.printHighscore());
             System.exit(0);
         }
     }
