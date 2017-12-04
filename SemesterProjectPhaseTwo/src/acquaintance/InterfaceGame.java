@@ -33,4 +33,5 @@ public interface InterfaceGame {
     public boolean checkExit(String dir);
     public void getCraftableItems();
     public HashMap<String, String> getNPC();
+    public void lose();
 }

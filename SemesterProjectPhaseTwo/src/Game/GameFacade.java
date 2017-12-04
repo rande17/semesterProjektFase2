@@ -123,6 +123,11 @@ public class GameFacade implements InterfaceGame {
     public HashMap<String, String> getNPC(){
     return Game.storeNPC();
     }
+
+    @Override
+    public void lose() {
+        Game.lose();
+    }
     
     
     

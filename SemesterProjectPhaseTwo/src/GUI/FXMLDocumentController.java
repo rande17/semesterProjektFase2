@@ -284,7 +284,9 @@ public class FXMLDocumentController implements Initializable {
         energy = 1.0 * game.playerEnergi() / game.maxPlayerEnergy();
         healthBar.setProgress(health);
         energyBar.setProgress(game.playerEnergi());
-        
+        if (health == 0) {
+            game.lose();
+        }
         
     }
 }
