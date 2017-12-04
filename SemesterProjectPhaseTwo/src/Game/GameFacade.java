@@ -118,7 +118,11 @@ public class GameFacade implements InterfaceGame {
     public void damageToPlayer() {
          Game.player.LoseHealth(25);
     }
-
+    
+    @Override
+    public HashMap<String, String> getNPC(){
+    return Game.storeNPC();
+    }
     
     
     

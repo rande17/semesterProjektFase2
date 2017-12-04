@@ -32,4 +32,5 @@ public interface InterfaceGame {
     public void damageToPlayer();
     public boolean checkExit(String dir);
     public void getCraftableItems();
+    public HashMap<String, String> getNPC();
 }
