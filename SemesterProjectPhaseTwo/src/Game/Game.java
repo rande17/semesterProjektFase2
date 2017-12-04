@@ -645,7 +645,7 @@ public class Game {
             System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
         } else if (input.equalsIgnoreCase("no")) {
             System.out.println("");
-            player.LoseHealth(npc3.getDamageValue());
+            player.loseHealth(npc3.getDamageValue());
         }
 
     }
