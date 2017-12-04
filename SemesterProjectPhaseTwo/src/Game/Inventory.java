@@ -17,7 +17,7 @@ public class Inventory {
     private int currentQuantity = 0;
     private int inventoryMaxWeight = 10; //set default inventory weight 
     private int currentInventoryWeight = 0;
-    private HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
+    HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
     private HashMap<String, Integer> itemWeight = new HashMap<>();
 //constuctor  
 

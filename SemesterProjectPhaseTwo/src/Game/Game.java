@@ -48,13 +48,14 @@ public class Game {
     static ItemLocation itemLocation = new ItemLocation();
     static Inventory inventory = new Inventory();
     static HighscoreManager highscore = new HighscoreManager();
+    static CraftableItem craftableItem = new CraftableItem();
     static Player player = new Player("Player", "???", currentRoom, 100, 100);
     static Score score = new Score();
     static Item debug = new Item("debug");
-    static Item campfire = new Item("Campfire", "", 2);
-    static Item spear = new Item("Spear", "", 2);
-    static Item axe = new Item("Axe", "", 2);
-    static Item raft = new Item("Raft", "", 2);
+    static Item campfire = new CraftableItem("Campfire", "Campfire: Lumber, Stick and Flint", 3);
+    static Item spear = new CraftableItem("Spear", "Spear: Stick, Fint and Rope or Lian", 3);
+    static Item axe = new CraftableItem("Axe", "Axe: Stick, Stone and Rope or Lian", 3);
+    static Item raft = new CraftableItem("Raft", "Raft: Lumber, Stick and Rope or Lian", 3);
     static Mission allMissions = new Mission();
     static NPC npc1 = new NPC();
     static NPC npc2 = new NPC();
@@ -78,7 +79,6 @@ public class Game {
         cave = new Room("cave");
         camp = new Room("camp");
         seaBottom = new Room("seabuttom");
-        
 
         //Setting the the exit
         beach.setExit("north", jungle);
@@ -158,6 +158,15 @@ public class Game {
 
     }
 
+    public void putCraftableItemInHashmap() {
+
+        craftableItem.craftableList.put("Campfire", campfire);
+        craftableItem.craftableList.put("Raft", raft);
+        craftableItem.craftableList.put("Axe", axe);
+        craftableItem.craftableList.put("Spear", spear);
+
+    }
+
     public void createMissions() {
 
         //Creating missions and putting and putting them in the game
@@ -203,6 +212,7 @@ public class Game {
         createItem();
         createMissions();
         createNPC();
+        putCraftableItemInHashmap();
 
     }
 
@@ -649,8 +659,10 @@ public class Game {
                 inventory.dropItemInventory("Lumber");
                 inventory.dropItemInventory("Stick");
                 inventory.dropItemInventory("Flint");
-                inventory.addItemInInventory(campfire);
-                System.out.println("A Campfire is added to your inventory");
+                if (craftableItem.craftableList.containsKey("Campfire")) {
+                    inventory.addItemInInventory(campfire);
+                    System.out.println("A Campfire is added to your inventory");
+                }
 
             } else if (craft.equalsIgnoreCase("Spear") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")
                     && (inventory.getInventory().containsKey("Lian") || inventory.getInventory().containsKey("Rope"))) {
@@ -661,8 +673,10 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                inventory.addItemInInventory(spear);
-                System.out.println("A Spear is added to your inventory");
+                if (craftableItem.craftableList.containsKey("Spear")) {
+                    inventory.addItemInInventory(spear);
+                    System.out.println("A Spear is added to your inventory");
+                }
 
             } else if (craft.equalsIgnoreCase("Axe") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Stone")
                     && (inventory.getInventory().containsKey("Lian") | inventory.getInventory().containsKey("Rope"))) {
@@ -673,8 +687,10 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                inventory.addItemInInventory(axe);
-                System.out.println("An axe is added to your inventory");
+                if (craftableItem.craftableList.containsKey("Axe")) {
+                    inventory.addItemInInventory(axe);
+                    System.out.println("An axe is added to your inventory");
+                }
 
             } else if (craft.equalsIgnoreCase("Raft") && inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick")
                     && (inventory.getInventory().containsKey("Lian") || inventory.getInventory().containsKey("Rope"))) {
@@ -685,8 +701,10 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                inventory.addItemInInventory(raft);
-                System.out.println("Raft has been added to inventory");
+                if (craftableItem.craftableList.containsKey("Raft")) {
+                    inventory.addItemInInventory(raft);
+                    System.out.println("Raft has been added to inventory");
+                }
             } else {
                 System.out.println("You can not craft that Item.");
             }
@@ -706,20 +724,19 @@ public class Game {
         while (iteratorMissionStatus.hasNext()) {
             HashMap.Entry entry = (HashMap.Entry) iteratorMissionStatus.next();
             System.out.println((String) entry.getKey() + ": ");
-          
 
             if ((boolean) (entry.getValue()) == false) {
-                System.out.print("mission in progress"); 
+                System.out.print("mission in progress");
                 System.out.println("");
             }
             if ((boolean) (entry.getValue()) == true) {
-                System.out.print("mission is complete"); 
+                System.out.print("mission is complete");
                 System.out.println("");
             }
             System.out.println("");
-    
+
         }
-        }
+    }
 
     /**
      * Method used for dropping item from inventory
@@ -881,9 +898,8 @@ public class Game {
 
         return gson.toJson(saveObjectsJSON);
     }
-    
-    
-    static String getHighscoreFromData() {  
+
+    static String getHighscoreFromData() {
         String highscoreString = data.printHighscore();
         return highscoreString;
     }

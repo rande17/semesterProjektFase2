@@ -46,7 +46,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
-    
+
     @FXML
     private Button inventoryButton;
     @FXML
@@ -57,6 +57,8 @@ public class FXMLDocumentController implements Initializable {
     private Button missionButton;
     @FXML
     private TextArea textArea;
+    @FXML
+    private Button craftButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -129,7 +131,9 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void changeScene(String newScene) throws IOException {
+        System.out.println(root.toString());
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
+        System.out.println(root.toString());
         itemsDrawed = false;
         scene.setRoot(root);
         while (!scene.getRoot().equals(root)) {
@@ -137,7 +141,9 @@ public class FXMLDocumentController implements Initializable {
         }
 
         scene.getRoot().requestFocus();
-        player = (Rectangle) root.lookup("#player");
+        if (!newScene.equals("craftMenu")) {
+            player = (Rectangle) root.lookup("#player");
+        }
     }
 
     public void intersectsItem() {
@@ -191,7 +197,6 @@ public class FXMLDocumentController implements Initializable {
             itemsDrawed = true;
         }
     }
-    
 
     public void go(String dir) throws IOException {
         game.goGUI(dir);
@@ -238,5 +243,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void showMission(ActionEvent event) {
         textArea.setText(game.printMissions());
+    }
+
+    @FXML
+    private void showHelp(MouseEvent event) {
+    }
+
+    @FXML
+    private void showCraftMenu(ActionEvent event) throws IOException {
+        changeScene("craftMenu");
     }
 }

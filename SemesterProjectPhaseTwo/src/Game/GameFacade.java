@@ -81,8 +81,8 @@ public class GameFacade implements InterfaceGame {
     }
 
     @Override
-    public void getCraftableItems() {
-
+    public String getCraftableItems() {
+        return CraftableItem.craftableList.toString();
     }
 
     @Override

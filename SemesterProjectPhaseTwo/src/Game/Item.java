@@ -22,6 +22,9 @@ public class Item {
      * constructer for item
      * @param _name of item
      */
+    Item(){
+        
+    }
     Item(String _name) {
         name = _name;
     }

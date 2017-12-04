@@ -20,20 +20,22 @@
         <rowConstraints>
             <RowConstraints vgrow="SOMETIMES" />
           <RowConstraints maxHeight="537.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="537.0" minHeight="30.0" prefHeight="507.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="537.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="537.0" minHeight="30.0" prefHeight="507.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="527.0" minHeight="20.0" prefHeight="21.0" vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Button fx:id="inventoryButton" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showInventory" text="Inventory" />
             <Button fx:id="helpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showHelp" text="Help" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="quitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quitGame" text="Quit" GridPane.columnIndex="1" />
             <Button fx:id="missionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMission" text="Mission" GridPane.rowIndex="1" />
+            <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="4" />
-            <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="3" />
-            <TextArea fx:id="textArea" editable="false" focusTraversable="false" mouseTransparent="true" onMouseClicked="#showHelp" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="5" />
+            <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="4" />
+            <TextArea fx:id="textArea" editable="false" focusTraversable="false" mouseTransparent="true" onMouseClicked="#showHelp" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <Button fx:id="craftButton" mnemonicParsing="false" onAction="#showCraftMenu" prefHeight="31.0" prefWidth="103.0" text="Craft Menu" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <AnchorPane fx:id="background" maxWidth="600" prefHeight="600.0" prefWidth="600.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/airport.png'); -fx-background-size: stretch">

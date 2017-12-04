@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Game.GameFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,6 +21,8 @@ import javafx.scene.layout.VBox;
  * @author frede
  */
 public class CraftMenuController implements Initializable {
+    
+    public static GameFacade craftItemList = new GameFacade();
 
     @FXML
     private Button backButton;
@@ -46,9 +49,6 @@ public class CraftMenuController implements Initializable {
     private void handleCraftAction(ActionEvent event) {
     }
     
-    public void populateCraftableItems(){
-        
-    }
     
     
 }
