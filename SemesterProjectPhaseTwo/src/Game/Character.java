@@ -57,7 +57,6 @@ public class Character {
     }
 
     public void loseEnergy(int loss) {
-        System.out.println(Time.getSecondsPassed() + "\t" + Time.secondsPassed);
         if (Time.getSecondsPassed() % 5 == 0) {
             while (!hasLostEnergy) {
                 energy -= loss;
