@@ -8,6 +8,7 @@ package Game;
 import static Game.CommandWord.*;
 import acquaintance.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,9 +56,7 @@ public class GameFacade implements InterfaceGame {
 
     @Override
     public String getRoom() {
-
         return Game.currentRoom.getShortDescription();
-
     }
 
     @Override
@@ -89,5 +88,54 @@ public class GameFacade implements InterfaceGame {
     public String printHighscoreGUI() {
         return Game.getHighscoreFromData().toString();
     }
+    
+    @Override
+    public boolean checkExit(String dir) {
+        return Game.getExitBool(dir);
+    }
 
+    @Override
+    public int playerHealth() {
+        return Game.player.getHealth();
+    }
+
+    @Override
+    public int playerEnergy() {
+        return Game.player.getEnergy();
+    }
+
+    @Override
+    public int maxPlayerHealth() {
+        return Game.player.getMaxHealth();
+    }
+
+    @Override
+    public int maxPlayerEnergy() {
+        return Game.player.getMaxEnergy();
+    }
+
+    @Override
+    public void damageToPlayer() {
+         Game.player.loseHealth(25);
+    }
+    
+    @Override
+    public void energyLossToPlayer(){
+        Game.player.loseEnergy(25);
+    }
+    
+    @Override
+    public HashMap<String, String> getNPC(){
+    return Game.storeNPC();
+    }
+
+    @Override
+    public void lose() {
+        Game.lose();
+    }
+    
+    
+    
+   
+    
 }

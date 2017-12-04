@@ -9,6 +9,7 @@ import Game.Command;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -26,4 +27,13 @@ public interface InterfaceGame {
     public String printHighscoreGUI();
     public String getCraftableItems();
 //    public String showHelp();
+    public int playerHealth();
+    public int playerEnergy();
+    public int maxPlayerHealth();
+    public int maxPlayerEnergy();
+    public void damageToPlayer();
+    public void energyLossToPlayer();
+    public boolean checkExit(String dir);
+    public HashMap<String, String> getNPC();
+    public void lose();
 }

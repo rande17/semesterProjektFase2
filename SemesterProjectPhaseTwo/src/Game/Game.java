@@ -33,12 +33,19 @@ public class Game {
     static private String name;
     static private boolean hasTalkedWithEvilGuy = false;
 
+    
+
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
     public Game() {
         initGame();
         parser = new Parser();
     }
+        public static boolean getExitBool(String dir){
+        
+        return (currentRoom.getExit(dir) != null);
+    }
+
     /* Private method createRoom which means we can only use createRoom in the Game class */
  /* In the method body we set the names of the rooms, create the rooms by using the Room 
        constructor from the Room class and then set where you can move to  from the different rooms by
@@ -204,7 +211,15 @@ public class Game {
                 + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
                 + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
     }
-
+    
+    static HashMap<String, String> storeNPC() {
+        HashMap<String, String> npcMap = new HashMap<>();
+        npcMap.put(npc1.getName(),npc1.getCurrentRoom().getShortDescription());
+        npcMap.put(npc2.getName(), npc2.getCurrentRoom().getShortDescription());
+        npcMap.put(npc3.getName(), npc3.getCurrentRoom().getShortDescription());
+       return npcMap;   
+    } 
+    
     //Initializing game
     public void initGame() {
 
@@ -640,7 +655,7 @@ public class Game {
             System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
         } else if (input.equalsIgnoreCase("no")) {
             System.out.println("");
-            player.LoseHealth(npc3.getDamageValue());
+            player.loseHealth(npc3.getDamageValue());
         }
 
     }

@@ -19,12 +19,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 /**
  *
@@ -39,13 +43,17 @@ public class FXMLDocumentController implements Initializable {
     static Scene scene;
     double x, y;
     boolean itemsDrawed = false;
+    boolean NPCDrawed = false;
     Parent root;
+    private double health;
+    private double energy;
 
     @FXML
     private AnchorPane background;
     @FXML
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
+    HashMap NPCHashMap;
 
     @FXML
     private Button inventoryButton;
@@ -58,7 +66,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextArea textArea;
     @FXML
-    private Button craftButton;
+    private ProgressBar healthBar = new ProgressBar(game.maxPlayerHealth());
+    @FXML
+    private ProgressBar energyBar = new ProgressBar(game.maxPlayerEnergy());
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -71,6 +81,7 @@ public class FXMLDocumentController implements Initializable {
         y = player.getLayoutY();
         scene = player.getScene();
         populateItemsOnMap();
+        spawnNPC();
         switch (event.getCode()) {
             case O:
                 System.out.println(background.getChildrenUnmodifiable().toString());
@@ -81,11 +92,12 @@ public class FXMLDocumentController implements Initializable {
             case W:
             case UP:
                 if (player.getLayoutY() <= 0) {
+                    if (game.checkExit("north")) {
+                        go("north");
 
-                    go("north");
-
-                    player.setLayoutX(x);
-                    player.setLayoutY(background.getHeight() - player.getHeight());
+                        player.setLayoutX(x);
+                        player.setLayoutY(background.getHeight() - player.getHeight());
+                    }
                 } else {
                     player.setLayoutY(player.getLayoutY() - speed);
                 }
@@ -93,9 +105,11 @@ public class FXMLDocumentController implements Initializable {
             case S:
             case DOWN:
                 if (player.getLayoutY() >= background.getHeight() - speed) {
-                    go("south");
-                    player.setLayoutX(x);
-                    player.setLayoutY(0);
+                    if (game.checkExit("south")) {
+                        go("south");
+                        player.setLayoutX(x);
+                        player.setLayoutY(0);
+                    }
                 } else {
                     player.setLayoutY(player.getLayoutY() + speed);
                 }
@@ -104,10 +118,11 @@ public class FXMLDocumentController implements Initializable {
             case LEFT:
 
                 if (player.getLayoutX() <= 0) {
-                    go("west");
-                    player.setLayoutX(background.getWidth() - player.getWidth());
-                    player.setLayoutY(y);
-
+                    if (game.checkExit("west")) {
+                        go("west");
+                        player.setLayoutX(background.getWidth() - player.getWidth());
+                        player.setLayoutY(y);
+                    }
                 } else {
                     player.setLayoutX(player.getLayoutX() - speed);
                 }
@@ -116,9 +131,11 @@ public class FXMLDocumentController implements Initializable {
             case D:
             case RIGHT:
                 if (player.getLayoutX() >= background.getWidth() - player.getWidth()) {
-                    go("east");
-                    player.setLayoutX(0);
-                    player.setLayoutY(y);
+                    if (game.checkExit("east")) {
+                        go("east");
+                        player.setLayoutX(0);
+                        player.setLayoutY(y);
+                    }
                 } else {
                     player.setLayoutX(player.getLayoutX() + speed);
                 }
@@ -126,8 +143,15 @@ public class FXMLDocumentController implements Initializable {
             case L:
                 System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
                 break;
+            case H:
+                game.damageToPlayer();
+                break;
+            case J:
+                game.energyLossToPlayer();
+                break;
         }
         intersectsItem();
+        updateBars();
     }
 
     public void changeScene(String newScene) throws IOException {
@@ -135,11 +159,8 @@ public class FXMLDocumentController implements Initializable {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         System.out.println(root.toString());
         itemsDrawed = false;
+        NPCDrawed = false;
         scene.setRoot(root);
-        while (!scene.getRoot().equals(root)) {
-
-        }
-
         scene.getRoot().requestFocus();
         if (!newScene.equals("craftMenu")) {
             player = (Rectangle) root.lookup("#player");
@@ -167,7 +188,7 @@ public class FXMLDocumentController implements Initializable {
                         if (game.takeItemGUI(itemID)) {
                             System.out.println(background.getChildren().get(i).toString());
                             background.getChildren().remove(i);
-
+                            game.goGUI(null);
                             itemsArray.remove(i);
                         }
                     }
@@ -199,28 +220,40 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void go(String dir) throws IOException {
+
         game.goGUI(dir);
         changeScene(game.getRoom());
     }
 
-//        private void helpPopup {
-//      Button btn = new Button();
-//        btn.setText("Open Dialog");
-//        btn.setOnAction(
-//                new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                final Stage dialog = new Stage();
-//                dialog.initModality(Modality.APPLICATION_MODAL);
-//                dialog.initOwner(primaryStage);
-//                VBox dialogVbox = new VBox(20);
-//                dialogVbox.getChildren().add(new Text("This is a Dialog"));
-//                Scene dialogScene = new Scene(dialogVbox, 300, 200);
-//                dialog.setScene(dialogScene);
-//                dialog.show();
-//            }
-//        });
-//    }
+    public void spawnNPC() {
+        game.getNPC();
+        
+        if (!NPCDrawed) {
+            NPCHashMap = game.getNPC();
+            if (!NPCHashMap.isEmpty()) {
+
+                Iterator iterator = NPCHashMap.entrySet().iterator();
+
+                while (iterator.hasNext()) {
+                    HashMap.Entry entry = (HashMap.Entry) iterator.next();
+                    Circle NPC = new Circle();
+                    Paint color = Color.rgb(255, 0, 0);
+                    NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
+                    NPC.setLayoutY(Math.random() * (background.getHeight() - 40));
+                    NPC.setRadius(20);
+                    NPC.setStroke(color);
+                    NPC.setId((String) (entry.getKey()));
+                    NPC.setFill(color);
+                    NPC.setVisible(true);
+                    background.getChildren().add(NPC);
+                }
+                NPCDrawed = true;
+            }
+
+        }
+
+    }
+
     @FXML
     private void showInventory(ActionEvent event) {
         String inventory = "";
@@ -248,9 +281,30 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void showHelp(MouseEvent event) {
     }
+    
+    public void updateBars(){
+        //
+        health =  1.0 * game.playerHealth() / game.maxPlayerHealth();
+        energy = 1.0 * game.playerEnergy() / game.maxPlayerEnergy();
+        healthBar.setProgress(health);
+//        energyBar.setProgress(game.playerEnergy());
+        energyBar.setProgress(energy);
 
+        if (health == 0) {
+            game.lose();
+        }
+        if(energy == 0 ){
+            game.lose();
+        }
+    }
+    public void changeSceneBK(String newScene) throws IOException {
+        root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
+        scene = player.getScene();
+        scene.setRoot(root);
+        scene.getRoot().requestFocus();
+    }
     @FXML
     private void showCraftMenu(ActionEvent event) throws IOException {
-        changeScene("craftMenu");
+        changeSceneBK("craftMenu");
     }
 }
