@@ -11,9 +11,9 @@ public class Character {
     private Room currentRoom;
 
     private int health;
-    private int energi;
+    private int energy;
     private int maxHealth;
-    private int maxEnergi;
+    private int maxEnergy;
 
     // Constructors, creates instance of Character
     public Character() {
@@ -35,24 +35,28 @@ public class Character {
      * @param _desc sets the describtion of the Character instance
      * @param _currentRoom sets the current room of the Character
      * @param _health sets the health of the character
-     * @param _energi sets the energi of the character
+     * @param _energy sets the energy of the character
      */
-    public Character(String _name, String _desc, Room _currentRoom, int _health, int _energi) {
+    public Character(String _name, String _desc, Room _currentRoom, int _health, int _energy) {
         name = _name;
         desc = _desc;
         currentRoom = _currentRoom;
         health = _health;
-        energi = _energi;
+        energy = _energy;
         maxHealth = _health;
-        maxEnergi = _energi;
+        maxEnergy = _energy;
     }
     
     /**
     * 
     * @param dmg sets the dmg the character is going to lose
     */
-    public void LoseHealth(int dmg) {
+    public void loseHealth(int dmg) {
         health -= dmg;
+    }
+    
+    public void loseEnergy(int loss){
+        energy -= loss;
     }
 
     
@@ -105,13 +109,13 @@ public class Character {
 
     /**
      *
-     * @param newEnergi sets new value of energi
+     * @param newEnergi sets new value of energy
      */
-    public void setEnergi(int newEnergi) {
-        if (maxEnergi < newEnergi){
-            energi = maxEnergi;
+    public void setEnergy(int newEnergi) {
+        if (maxEnergy < newEnergi){
+            energy = maxEnergy;
         } else {
-            energi = newEnergi; 
+            energy = newEnergi; 
         }
        
     }
@@ -129,10 +133,10 @@ public class Character {
     }
     /**
      * 
-    * @return energi of the character
+    * @return energy of the character
     */
-    public int getEnergi() {
-        return energi;
+    public int getEnergy() {
+        return energy;
     }
     /**
      * 
@@ -144,10 +148,10 @@ public class Character {
     
     /**
      * 
-    * @return energi of the character
+    * @return energy of the character
     */
-    public int getMaxEnergi() {
-        return maxEnergi;
+    public int getMaxEnergy() {
+        return maxEnergy;
     }
     /**
      * 
