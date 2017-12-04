@@ -14,6 +14,7 @@ public class Character {
     private int energy;
     private int maxHealth;
     private int maxEnergy;
+    private boolean hasLostEnergy = false;
 
     // Constructors, creates instance of Character
     public Character() {
@@ -46,22 +47,32 @@ public class Character {
         maxHealth = _health;
         maxEnergy = _energy;
     }
-    
+
     /**
-    * 
-    * @param dmg sets the dmg the character is going to lose
-    */
+     *
+     * @param dmg sets the dmg the character is going to lose
+     */
     public void loseHealth(int dmg) {
         health -= dmg;
     }
-    
-    public void loseEnergy(int loss){
-        energy -= loss;
+
+    public void loseEnergy(int loss) {
+        System.out.println(Time.getSecondsPassed() + "\t" + Time.secondsPassed);
+        if (Time.getSecondsPassed() % 5 == 0) {
+            while (!hasLostEnergy) {
+                energy -= loss;
+                hasLostEnergy = true;
+                break;
+            }
+        }
+        if (Time.getSecondsPassed() % 5 != 0) {
+            hasLostEnergy = false;
+        }
     }
 
-    
     /**
      * getter method for name
+     *
      * @return name of the Character
      */
     public String getName() {
@@ -112,12 +123,12 @@ public class Character {
      * @param newEnergi sets new value of energy
      */
     public void setEnergy(int newEnergi) {
-        if (maxEnergy < newEnergi){
+        if (maxEnergy < newEnergi) {
             energy = maxEnergy;
         } else {
-            energy = newEnergi; 
+            energy = newEnergi;
         }
-       
+
     }
 
     /**
@@ -125,38 +136,41 @@ public class Character {
      * @param newHealth sets a new value of health
      */
     public void setHealth(int newHealth) {
-        if (maxHealth < newHealth){
+        if (maxHealth < newHealth) {
             health = maxHealth;
         } else {
-            health = newHealth; 
+            health = newHealth;
         }
     }
+
     /**
-     * 
-    * @return energy of the character
-    */
+     *
+     * @return energy of the character
+     */
     public int getEnergy() {
         return energy;
     }
+
     /**
-     * 
+     *
      * @return health of the character
-    */
+     */
     public int getHealth() {
         return health;
     }
-    
+
     /**
-     * 
-    * @return energy of the character
-    */
+     *
+     * @return energy of the character
+     */
     public int getMaxEnergy() {
         return maxEnergy;
     }
+
     /**
-     * 
+     *
      * @return health of the character
-    */
+     */
     public int getMaxHealth() {
         return maxHealth;
     }

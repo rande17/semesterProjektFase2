@@ -88,7 +88,7 @@ public class GameFacade implements InterfaceGame {
     public String printHighscoreGUI() {
         return Game.getHighscoreFromData().toString();
     }
-    
+
     @Override
     public boolean checkExit(String dir) {
         return Game.getExitBool(dir);
@@ -116,26 +116,23 @@ public class GameFacade implements InterfaceGame {
 
     @Override
     public void damageToPlayer() {
-         Game.player.loseHealth(25);
+        Game.player.loseHealth(25);
     }
-    
+
     @Override
-    public void energyLossToPlayer(){
-        Game.player.loseEnergy(25);
+    public void energyLossToPlayer() {
+        Game.player.loseEnergy(5);
     }
-    
+
     @Override
-    public HashMap<String, String> getNPC(){
-    return Game.storeNPC();
+    public HashMap<String, String> getNPC() {
+        return Game.storeNPC();
     }
 
     @Override
     public void lose() {
         Game.lose();
     }
-    
-    
-    
-   
-    
+
+
 }
