@@ -211,6 +211,7 @@ public class Game {
        return npcMap;   
     } 
     
+ 
     //Initializing game
     public void initGame() {
 
