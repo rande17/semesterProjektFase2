@@ -6,6 +6,7 @@
 package GUI;
 
 import Game.GameFacade;
+import Game.Time;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -145,11 +146,9 @@ public class FXMLDocumentController implements Initializable {
             case H:
                 game.damageToPlayer();
                 break;
-            case J:
-                game.energyLossToPlayer();
-                break;
         }
         intersectsItem();
+        game.energyLossToPlayer();
         updateBars();
     }
 
@@ -226,7 +225,7 @@ public class FXMLDocumentController implements Initializable {
 
     public void spawnNPC() {
         game.getNPC();
-        
+
         if (!NPCDrawed) {
             NPCHashMap = game.getNPC();
             if (!NPCHashMap.isEmpty()) {
@@ -280,10 +279,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void showHelp(MouseEvent event) {
     }
-    
-    public void updateBars(){
+
+    public void updateBars() {
         //
-        health =  1.0 * game.playerHealth() / game.maxPlayerHealth();
+        health = 1.0 * game.playerHealth() / game.maxPlayerHealth();
         energy = 1.0 * game.playerEnergy() / game.maxPlayerEnergy();
         healthBar.setProgress(health);
 //        energyBar.setProgress(game.playerEnergy());
@@ -292,9 +291,9 @@ public class FXMLDocumentController implements Initializable {
         if (health == 0) {
             game.lose();
         }
-        if(energy == 0 ){
+        if (energy == 0) {
             game.lose();
         }
-        
+
     }
 }
