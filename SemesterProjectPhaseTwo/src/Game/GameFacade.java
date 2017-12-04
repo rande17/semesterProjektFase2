@@ -100,8 +100,8 @@ public class GameFacade implements InterfaceGame {
     }
 
     @Override
-    public int playerEnergi() {
-        return Game.player.getEnergi();
+    public int playerEnergy() {
+        return Game.player.getEnergy();
     }
 
     @Override
@@ -111,12 +111,17 @@ public class GameFacade implements InterfaceGame {
 
     @Override
     public int maxPlayerEnergy() {
-        return Game.player.getMaxEnergi();
+        return Game.player.getMaxEnergy();
     }
 
     @Override
     public void damageToPlayer() {
-         Game.player.LoseHealth(25);
+         Game.player.loseHealth(25);
+    }
+    
+    @Override
+    public void energyLossToPlayer(){
+        Game.player.loseEnergy(25);
     }
     
     @Override
