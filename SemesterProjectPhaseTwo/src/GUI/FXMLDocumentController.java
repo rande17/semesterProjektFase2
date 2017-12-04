@@ -145,6 +145,9 @@ public class FXMLDocumentController implements Initializable {
             case H:
                 game.damageToPlayer();
                 break;
+            case J:
+                game.energyLossToPlayer();
+                break;
         }
         intersectsItem();
         updateBars();
@@ -281,10 +284,15 @@ public class FXMLDocumentController implements Initializable {
     public void updateBars(){
         //
         health =  1.0 * game.playerHealth() / game.maxPlayerHealth();
-        energy = 1.0 * game.playerEnergi() / game.maxPlayerEnergy();
+        energy = 1.0 * game.playerEnergy() / game.maxPlayerEnergy();
         healthBar.setProgress(health);
-        energyBar.setProgress(game.playerEnergi());
+//        energyBar.setProgress(game.playerEnergy());
+        energyBar.setProgress(energy);
+
         if (health == 0) {
+            game.lose();
+        }
+        if(energy == 0 ){
             game.lose();
         }
         
