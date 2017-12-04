@@ -33,8 +33,8 @@
             <Button fx:id="helpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showHelp" text="Help" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="quitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quitGame" text="Quit" GridPane.columnIndex="1" />
             <Button fx:id="missionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMission" text="Mission" GridPane.rowIndex="1" />
-            <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ProgressBar progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ProgressBar fx:id="healthBar" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ProgressBar fx:id="energyBar" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="4" />
             <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="3" />
             <TextArea fx:id="textArea" editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />

@@ -89,15 +89,39 @@ public class GameFacade implements InterfaceGame {
         return Game.getHighscoreFromData().toString();
     }
     
-        @Override
+    @Override
     public boolean checkExit(String dir) {
         return Game.getExitBool(dir);
     }
 
     @Override
-    public HashMap<String, String> getNPC() {
-        return Game.storeNPC();
+    public int playerHealth() {
+        return Game.player.getHealth();
     }
 
+    @Override
+    public int playerEnergi() {
+        return Game.player.getEnergi();
+    }
 
+    @Override
+    public int maxPlayerHealth() {
+        return Game.player.getMaxHealth();
+    }
+
+    @Override
+    public int maxPlayerEnergy() {
+        return Game.player.getMaxEnergi();
+    }
+
+    @Override
+    public void damageToPlayer() {
+         Game.player.LoseHealth(25);
+    }
+
+    
+    
+    
+   
+    
 }

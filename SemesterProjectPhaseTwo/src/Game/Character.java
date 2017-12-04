@@ -12,6 +12,8 @@ public class Character {
 
     private int health;
     private int energi;
+    private int maxHealth;
+    private int maxEnergi;
 
     // Constructors, creates instance of Character
     public Character() {
@@ -41,6 +43,8 @@ public class Character {
         currentRoom = _currentRoom;
         health = _health;
         energi = _energi;
+        maxHealth = _health;
+        maxEnergi = _energi;
     }
     
     /**
@@ -104,7 +108,12 @@ public class Character {
      * @param newEnergi sets new value of energi
      */
     public void setEnergi(int newEnergi) {
-        energi = newEnergi;
+        if (maxEnergi < newEnergi){
+            energi = maxEnergi;
+        } else {
+            energi = newEnergi; 
+        }
+       
     }
 
     /**
@@ -112,20 +121,39 @@ public class Character {
      * @param newHealth sets a new value of health
      */
     public void setHealth(int newHealth) {
-        health = newHealth;
+        if (maxHealth < newHealth){
+            health = maxHealth;
+        } else {
+            health = newHealth; 
+        }
     }
-/**
- * 
- * @return energi of the character
- */
+    /**
+     * 
+    * @return energi of the character
+    */
     public int getEnergi() {
         return energi;
     }
-/**
- * 
- * @return health of the character
- */
+    /**
+     * 
+     * @return health of the character
+    */
     public int getHealth() {
         return health;
+    }
+    
+    /**
+     * 
+    * @return energi of the character
+    */
+    public int getMaxEnergi() {
+        return maxEnergi;
+    }
+    /**
+     * 
+     * @return health of the character
+    */
+    public int getMaxHealth() {
+        return maxHealth;
     }
 }

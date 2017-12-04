@@ -25,8 +25,11 @@ public interface InterfaceGame {
     public void quitGame();
     public String printMissions();
     public String printHighscoreGUI();
-    public void getCraftableItems();
+    public int playerHealth();
+    public int playerEnergi();
+    public int maxPlayerHealth();
+    public int maxPlayerEnergy();
+    public void damageToPlayer();
     public boolean checkExit(String dir);
-    public HashMap<String, String> getNPC();
-//    public String showHelp();
+    public void getCraftableItems();
 }
