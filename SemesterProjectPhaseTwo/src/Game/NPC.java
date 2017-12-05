@@ -140,4 +140,5 @@ public class NPC {
     public void setCurrentPosition(Room _currentPosition) {
         currentPosition = _currentPosition;
     }
+    
 }

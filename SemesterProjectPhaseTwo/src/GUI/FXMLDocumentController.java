@@ -232,9 +232,11 @@ public class FXMLDocumentController implements Initializable {
             if (!NPCHashMap.isEmpty()) {
 
                 Iterator iterator = NPCHashMap.entrySet().iterator();
-
-                while (iterator.hasNext()) {
+                
+                while (iterator.hasNext()) {  
                     HashMap.Entry entry = (HashMap.Entry) iterator.next();
+                    if (entry.getValue().equals(game.getRoom())) {
+                      
                     Circle NPC = new Circle();
                     Paint color = Color.rgb(255, 0, 0);
                     NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
@@ -245,6 +247,9 @@ public class FXMLDocumentController implements Initializable {
                     NPC.setFill(color);
                     NPC.setVisible(true);
                     background.getChildren().add(NPC);
+                    }
+                    
+               
                 }
                 NPCDrawed = true;
             }
@@ -252,7 +257,7 @@ public class FXMLDocumentController implements Initializable {
         }
 
     }
-
+    
     @FXML
     private void showInventory(ActionEvent event) {
         String inventory = "";
