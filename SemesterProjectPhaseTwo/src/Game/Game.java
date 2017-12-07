@@ -1,20 +1,18 @@
 package Game;
 
 import FileHandling.DataFacade;
-import acquaintance.InterfaceGame;
 import FileHandling.HighscoreManager;
 import FileHandling.Logger;
 import FileHandling.Save;
-import acquaintance.InterfaceData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -196,10 +194,10 @@ public class Game {
                 + "\nYou can craft items to help you survive, if you have the right components.");
 
         //create the bad npc
-        npc3.setName("Joseph Schitzel");
+        npc3.setName("Joseph Schnitzel");
         npc3.setCurrentRoom(mountain);
         npc3.setDescribtion("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
-        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
+        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schnitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
         npc3.addDialog("");
         npc3.setDamageValue(100);
 

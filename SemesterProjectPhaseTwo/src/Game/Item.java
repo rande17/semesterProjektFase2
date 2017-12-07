@@ -5,8 +5,6 @@
  */
 package Game;
 
-import java.util.Date;
-
 /**
  *
  * @author marti
