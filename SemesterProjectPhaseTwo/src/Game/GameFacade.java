@@ -59,11 +59,14 @@ public class GameFacade implements InterfaceGame {
     public String getRoom() {
         return Game.currentRoom.getShortDescription();
     }
+    
+
 
     @Override
     public String printInventory() {
         return Game.inventory.toString();
     }
+    
 
     @Override
     public String printMissions() {

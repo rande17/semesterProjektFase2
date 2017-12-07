@@ -37,14 +37,13 @@ public class CraftableItem extends Item {
         String craftableItems = "";
         Iterator iteratorCraftableItem = craftableList.entrySet().iterator();
 
-        while (iteratorCraftableItem.hasNext()) {
+        
             HashMap.Entry entry = (HashMap.Entry) iteratorCraftableItem.next();
             craftableItems += (String) entry.getKey();
-            craftableItems += ": ";
             craftableItems += "\n";
 
 
-        }
+        
         return craftableItems;
     }
    

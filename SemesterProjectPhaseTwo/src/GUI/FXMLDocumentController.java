@@ -154,13 +154,16 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void changeScene(String newScene) throws IOException {
-        System.out.println(root.toString());
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
-        System.out.println(root.toString());
         itemsDrawed = false;
         NPCDrawed = false;
         scene.setRoot(root);
+        while (!scene.getRoot().equals(root)) {
+
+        }
         scene.getRoot().requestFocus();
+        player = (Rectangle) root.lookup("#player");
+        
         if (!newScene.equals("craftMenu")) {
             player = (Rectangle) root.lookup("#player");
         }
@@ -282,10 +285,6 @@ public class FXMLDocumentController implements Initializable {
         textArea.setText(game.printMissions());
     }
 
-    @FXML
-    private void showHelp(MouseEvent event) {
-    }
-
     public void updateBars() {
         //
         health = 1.0 * game.playerHealth() / game.maxPlayerHealth();
@@ -301,7 +300,7 @@ public class FXMLDocumentController implements Initializable {
             game.lose();
         }
     }
-    public void changeSceneBK(String newScene) throws IOException {
+    public void changeSceneCraftMenu(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene = player.getScene();
         scene.setRoot(root);
@@ -309,6 +308,7 @@ public class FXMLDocumentController implements Initializable {
     }
     @FXML
     private void showCraftMenu(ActionEvent event) throws IOException {
-        changeSceneBK("craftMenu");
+        changeSceneCraftMenu("craftMenu");
+        
     }
 }
