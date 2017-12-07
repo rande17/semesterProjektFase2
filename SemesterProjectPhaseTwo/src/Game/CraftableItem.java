@@ -42,8 +42,6 @@ public class CraftableItem extends Item {
             craftableItems += (String) entry.getKey();
             craftableItems += "\n";
 
-
-        
         return craftableItems;
     }
    

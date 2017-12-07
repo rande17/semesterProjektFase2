@@ -664,20 +664,6 @@ public class Game {
      * @param command to craft item
      * @return 
      */
-    @Override
-    public String toString(){
-       if (inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")) {
-                inventory.dropItemInventory("Lumber");
-                inventory.dropItemInventory("Stick");
-                inventory.dropItemInventory("Flint");
-                if (craftableItem.craftableList.containsKey("Campfire")) {
-                    inventory.addItemInInventory(campfire);
-                    
-    }
-       }
-        return null;
-       
-    }
     
     static public void craftItem(Command command) {
         if (command.hasSecondWord()) {
