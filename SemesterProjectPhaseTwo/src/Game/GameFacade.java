@@ -7,7 +7,6 @@ package Game;
 
 import static Game.CommandWord.*;
 import acquaintance.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
