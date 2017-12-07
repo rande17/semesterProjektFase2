@@ -38,6 +38,8 @@ public class FXMLDocumentController implements Initializable {
 
     private static GameFacade game = new GameFacade();
     private int speed = 10;
+    private TextArea popupText;
+    boolean textDrawed = false;
     private GridPane roomGridPane;
     private Rectangle playerRectangle;
     static Scene scene;
@@ -162,7 +164,7 @@ public class FXMLDocumentController implements Initializable {
         }
         scene.getRoot().requestFocus();
         player = (Rectangle) root.lookup("#player");
-        
+
         if (!newScene.equals("craftMenu")) {
             player = (Rectangle) root.lookup("#player");
         }
@@ -191,6 +193,7 @@ public class FXMLDocumentController implements Initializable {
                             background.getChildren().remove(i);
                             game.goGUI(null);
                             itemsArray.remove(i);
+                            popUpText(itemID);
                         }
                     }
                 }
@@ -234,24 +237,23 @@ public class FXMLDocumentController implements Initializable {
             if (!NPCHashMap.isEmpty()) {
 
                 Iterator iterator = NPCHashMap.entrySet().iterator();
-                
-                while (iterator.hasNext()) {  
+
+                while (iterator.hasNext()) {
                     HashMap.Entry entry = (HashMap.Entry) iterator.next();
                     if (entry.getValue().equals(game.getRoom())) {
-                      
-                    Circle NPC = new Circle();
-                    Paint color = Color.rgb(255, 0, 0);
-                    NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
-                    NPC.setLayoutY(Math.random() * (background.getHeight() - 40));
-                    NPC.setRadius(20);
-                    NPC.setStroke(color);
-                    NPC.setId((String) (entry.getKey()));
-                    NPC.setFill(color);
-                    NPC.setVisible(true);
-                    background.getChildren().add(NPC);
+
+                        Circle NPC = new Circle();
+                        Paint color = Color.rgb(255, 0, 0);
+                        NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
+                        NPC.setLayoutY(Math.random() * (background.getHeight() - 40));
+                        NPC.setRadius(20);
+                        NPC.setStroke(color);
+                        NPC.setId((String) (entry.getKey()));
+                        NPC.setFill(color);
+                        NPC.setVisible(true);
+                        background.getChildren().add(NPC);
                     }
-                    
-               
+
                 }
                 NPCDrawed = true;
             }
@@ -259,7 +261,7 @@ public class FXMLDocumentController implements Initializable {
         }
 
     }
-    
+
     @FXML
     private void showInventory(ActionEvent event) {
         String inventory = "";
@@ -299,15 +301,44 @@ public class FXMLDocumentController implements Initializable {
             game.lose();
         }
     }
+
+    public void popUpText(String item) {
+        if (!textDrawed) {
+            openWindow();
+                popupText.setText(
+                        item + " has been added to inventory.");
+
+                background.getChildren().add(popupText);
+                textDrawed = true;
+            } else {
+                background.getChildren().remove(4);
+                textDrawed = false;
+            }
+        }
+    
+
+    private void openWindow() {
+        int helpTextWidth = 320;
+        int helpTextHeight;
+        popupText = new TextArea();
+        popupText.setFocusTraversable(false);
+        popupText.setEditable(false);
+        popupText.setMouseTransparent(true);
+        popupText.setPrefSize(helpTextWidth, 100);
+        popupText.setLayoutX((background.getWidth() / 2) - (helpTextWidth / 2));
+        popupText.setLayoutY(450);
+    }
+
     public void changeSceneCraftMenu(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene = player.getScene();
         scene.setRoot(root);
         scene.getRoot().requestFocus();
     }
+
     @FXML
     private void showCraftMenu(ActionEvent event) throws IOException {
         changeSceneCraftMenu("craftMenu");
-        
+
     }
 }
