@@ -143,7 +143,7 @@ public class Game {
         itemLocation.addItem(cave, new PickableItem("Shroom", "these shrooms look suspecius, but maybe the can be", 1));
         itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(cave, new PickableItem("Freshwater", "This is freshwater found in the jungle, maybe you can drink it", 2));
+        //itemLocation.addItem(cave, new PickableItem("Freshwater", "This is freshwater found in the jungle, maybe you can drink it", 2));
         itemLocation.addItem(cave, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(cave, new Item("GiantRock", "The giant rock dont look like it can be moved", 100));
 
