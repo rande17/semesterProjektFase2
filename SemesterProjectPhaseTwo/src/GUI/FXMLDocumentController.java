@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,7 +21,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -33,14 +35,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import javax.swing.Icon;
 
 /**
  *
  * @author rickie
  */
 public class FXMLDocumentController implements Initializable {
-
+    private String file = "GUI/Assets/items/string.png";
     private static GameFacade game = new GameFacade();
     private int speed = 10;
     private TextArea popupText;
@@ -58,9 +60,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private AnchorPane background;
     @FXML
-    private AnchorPane popupBackground;
-    @FXML
-    private Rectangle player;
+    private ImageView player;
     ArrayList itemsArray = new ArrayList(1);
     HashMap NPCHashMap;
 
@@ -72,15 +72,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button missionButton;
     @FXML
-    private Button quitDialog;
-    @FXML
     private TextArea textArea;
     @FXML
     private ProgressBar healthBar = new ProgressBar(game.maxPlayerHealth());
     @FXML
     private ProgressBar energyBar = new ProgressBar(game.maxPlayerEnergy());
 
-    private Rectangle npc3;
+    private ImageView npc3;
+    @FXML
+    private Button craftButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -121,7 +121,7 @@ public class FXMLDocumentController implements Initializable {
                 break;
 
             case L:
-                System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getHeight());
+                System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getFitHeight());
                 break;
             case H:
                 game.damageToPlayer();
@@ -142,22 +142,25 @@ public class FXMLDocumentController implements Initializable {
 
         }
         scene.getRoot().requestFocus();
-        player = (Rectangle) root.lookup("#player");
-
+        player = (ImageView) root.lookup("#player");
+        
+                Image value = new Image(file);
+        player.setImage(value);
         if (!newScene.equals("craftMenu")) {
-            player = (Rectangle) root.lookup("#player");
+            player = (ImageView) root.lookup("#player");
         }
     }
 
     public void intersectsItem() {
         double pxstart, pxend, pystart, pyend;
         pxstart = player.getLayoutX();
-        pxend = pxstart + player.getWidth();
+        pxend = pxstart + player.getFitWidth();
         pystart = player.getLayoutY();
-        pyend = pystart + player.getHeight();
+        pyend = pystart + player.getFitHeight();
         if (!itemsArray.isEmpty()) {
             for (int i = 0; i < itemsArray.size(); i++) {
-                Rectangle itemToCheck = (Rectangle) background.getChildren().get(i);
+                if (!background.getChildren().get(i).equals(player)) {
+                    ImageView itemToCheck = (ImageView) background.getChildren().get(i);
 
                 String itemID = itemToCheck.getId();
                 // System.out.println(itemID);
@@ -186,15 +189,16 @@ public class FXMLDocumentController implements Initializable {
             itemsArray = game.getItemsOnMap();
             if (!itemsArray.isEmpty()) {
                 for (int i = 0; i < itemsArray.size(); i++) {
-                    Rectangle item = new Rectangle();
+                    ImageView item = new ImageView();
+                    Image img = new Image("GUI/Assets/items/"+itemsArray.get(i).toString().trim().toLowerCase()+".png");
                     Paint color = Color.rgb(0, 0, 255);
                     item.setLayoutX(Math.random() * (background.getWidth() - 40));
                     item.setLayoutY(Math.random() * (background.getHeight() - 40));
-                    item.setHeight(20);
-                    item.setWidth(20);
-                    item.setStroke(color);
+                    item.setFitHeight(20);
+                    item.setFitWidth(20);
+                    item.setImage(img);
                     item.setId((String) itemsArray.get(i));
-                    item.setFill(color);
+
                     item.setVisible(true);
                     background.getChildren().add(item);
                 }
@@ -217,23 +221,23 @@ public class FXMLDocumentController implements Initializable {
             if (!NPCHashMap.isEmpty()) {
 
                 Iterator iterator = NPCHashMap.entrySet().iterator();
-
+                Image value = new Image(file);
                 while (iterator.hasNext()) {
                     HashMap.Entry entry = (HashMap.Entry) iterator.next();
                     if (entry.getValue().equals(game.getRoom())) {
 
-                        Rectangle NPC = new Rectangle();
+                        ImageView NPC = new ImageView();
                         Paint color = Color.rgb(255, 0, 0);
                         NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
                         NPC.setLayoutY(Math.random() * (background.getHeight() - 40));
-                        NPC.setHeight(15);
-                        NPC.setWidth(15);
-                        NPC.setStroke(color);
+                        NPC.setFitHeight(15);
+                        NPC.setFitWidth(15);
+                        NPC.setImage(value);
                         NPC.setId((String) (entry.getKey()));
                         if (NPC.getId().equals("Joseph Schnitzel")) {
                             npc3 = NPC;
                         }
-                        NPC.setFill(color);
+                        NPC.setImage(value);
                         NPC.setVisible(true);
                         background.getChildren().add(NPC);
                     }
@@ -246,7 +250,9 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    public void moveObject(Rectangle shapeToMove, String dir) throws IOException {
+    public void moveObject(ImageView shapeToMove, String dir) throws IOException {
+System.out.println(player.toString());
+        System.out.println(shapeToMove.toString());
         boolean playerIsObject = shapeToMove.equals(player);
 
         String direction = "";
@@ -258,7 +264,7 @@ public class FXMLDocumentController implements Initializable {
                         direction = "north";
                         go = true;
                         shapeToMove.setLayoutX(x);
-                        shapeToMove.setLayoutY(background.getHeight() - shapeToMove.getHeight());
+                        shapeToMove.setLayoutY(background.getHeight() - shapeToMove.getFitHeight());
                     }
                 } else {
                     shapeToMove.setLayoutY(shapeToMove.getLayoutY() - speed);
@@ -266,7 +272,7 @@ public class FXMLDocumentController implements Initializable {
                 break;
 
             case "DOWN":
-                if (shapeToMove.getLayoutY() >= background.getHeight() - speed - shapeToMove.getHeight()) {
+                if (shapeToMove.getLayoutY() >= background.getHeight() - speed - shapeToMove.getFitHeight()) {
                     if (game.checkExit("south")) {
                         direction = "south";
                         shapeToMove.setLayoutX(x);
@@ -285,7 +291,7 @@ public class FXMLDocumentController implements Initializable {
                     if (game.checkExit("west")) {
                         direction = "west";
                         go = true;
-                        shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getWidth());
+                        shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getFitWidth());
                         shapeToMove.setLayoutY(y);
                     }
                 } else {
@@ -294,7 +300,7 @@ public class FXMLDocumentController implements Initializable {
                 break;
 
             case "RIGHT":
-                if (shapeToMove.getLayoutX() >= background.getWidth() - speed - shapeToMove.getWidth()) {
+                if (shapeToMove.getLayoutX() >= background.getWidth() - speed - shapeToMove.getFitWidth()) {
                     if (game.checkExit("east")) {
                         direction = "east";
                         go = true;
@@ -318,7 +324,7 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    private void moveObjectNPC(Rectangle npc) throws IOException {
+    private void moveObjectNPC(ImageView npc) throws IOException {
         int moveRNG = (int) Math.floor(Math.random() * 5);
         String dir = "";
         switch (moveRNG) {
@@ -338,7 +344,7 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println("I didn't move");
         }
         // dir = "RIGHT"; //- debug line
-        moveObject(npc, dir);
+//        moveObject(npc, dir);
     }
 
     @FXML
@@ -445,5 +451,9 @@ public class FXMLDocumentController implements Initializable {
     private void showCraftMenu(ActionEvent event) throws IOException {
         changeSceneCraftMenu("craftMenu");
 
+    }
+
+    @FXML
+    private void showHelp(MouseEvent event) {
     }
 }
