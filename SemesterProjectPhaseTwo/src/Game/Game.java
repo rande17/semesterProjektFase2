@@ -1,7 +1,6 @@
 package Game;
 
 import FileHandling.DataFacade;
-import FileHandling.Save;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -357,7 +356,7 @@ public class Game {
         } else if (commandWord == CommandWord.MISSION) {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
-            saveGame();
+            data.saveGame(objectsToSave());
         } else if (commandWord == CommandWord.CRAFT) {
             craftItem(command);
         } else if (commandWord == CommandWord.WIN) {
@@ -891,12 +890,12 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    static private void saveGame() throws IOException, Throwable {
+    /*static private void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());
         save.saveGame();
     }
-
+    */
     static private String objectsToSave() {
         ArrayList saveObjectsJSON;
         saveObjectsJSON = new ArrayList(10);
@@ -907,7 +906,7 @@ public class Game {
         //saveObjectsJSON.add(npc2);
         //saveObjectsJSON.add(npc3);
 
-        return data.toJson(saveObjectsJSON);
+        return data.gsonToJson(saveObjectsJSON);
     }
 
     static String getHighscoreFromData() {
