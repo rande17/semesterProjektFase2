@@ -155,23 +155,31 @@ public class FXMLDocumentController implements Initializable {
         pxend = pxstart + player.getWidth();
         pystart = player.getLayoutY();
         pyend = pystart + player.getHeight();
+       // System.out.println(background.getChildren().toArray().length);
         if (!itemsArray.isEmpty()) {
-            for (int i = 0; i < itemsArray.size(); i++) {
+            for (int i = 0; i < background.getChildren().toArray().length; i++) {
+                String itemID = background.getChildren().get(i).getId();
+                
+                if (!itemID.equals("player") && !itemID.equals("popup")) {
                 Rectangle itemToCheck = (Rectangle) background.getChildren().get(i);
-
-                String itemID = itemToCheck.getId();
+                
+                //System.out.println(itemToCheck.toString());
+                itemID = itemToCheck.getId();
                 // System.out.println(itemID);
-                if (!itemID.equals("player")) {
+                
+                    
+               // System.out.println(itemToCheck.toString());
                     double ixstart = itemToCheck.getLayoutX();
                     double ixend = itemToCheck.getLayoutX() + itemToCheck.getWidth();
                     double iystart = itemToCheck.getLayoutY();
                     double iyend = itemToCheck.getLayoutY() + itemToCheck.getHeight();
                     if (pxstart >= ixstart && pxstart <= ixend && pystart >= iystart && pystart <= iyend) {
+                       // System.out.println(background.getChildren().get(i).toString());
+                            
                         if (game.takeItemGUI(itemID)) {
-                            System.out.println(background.getChildren().get(i).toString());
+                           // System.out.println(background.getChildren().get(i).toString());
                             background.getChildren().remove(i);
                             game.goGUI(null);
-                            itemsArray.remove(i);
                             textDrawed = false;
                             PickItemPopUpText(itemID);
                         }
@@ -287,6 +295,10 @@ public class FXMLDocumentController implements Initializable {
                         go = true;
                         shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getWidth());
                         shapeToMove.setLayoutY(y);
+                    }else if(game.getRoom().equalsIgnoreCase("airport")){
+                        textDrawed = false;
+                        LockItemPopUpText();
+                        
                     }
                 } else {
                     shapeToMove.setLayoutX(shapeToMove.getLayoutX() - speed);
@@ -392,10 +404,20 @@ public class FXMLDocumentController implements Initializable {
 
             background.getChildren().add(popupBackground);
             textDrawed = true;
+                                    
+        }
+    }
+    
+    public void LockItemPopUpText() {
+        if (!textDrawed) {
+            background.getChildren().remove(popupBackground);
+            openWindow();
 
-            if (textDrawed && game.gameTime() % 10000 == 0) {
-                background.getChildren().remove(popupBackground);
-            }
+            popupText.setText(
+                    " You cant get on the plane\n before you have your boardingpass");
+
+            background.getChildren().add(popupBackground);
+            textDrawed = true;
 
         }
     }
@@ -417,6 +439,7 @@ public class FXMLDocumentController implements Initializable {
         popupBackground.setLayoutX(150);
         popupBackground.setLayoutY(500);
         popupBackground.setOpacity(0.6);
+        popupBackground.setId("popup");
         
         popupText = new TextArea();
         popupText.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));

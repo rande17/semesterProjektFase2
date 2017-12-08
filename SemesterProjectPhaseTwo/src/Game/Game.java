@@ -108,7 +108,7 @@ public class Game {
 //        itemLocation.addItem(airport, new PickableItem("Boardingpass to Kenya: 426DB", "this is a boardingpass to Kenya", 1));
 //        itemLocation.addItem(airport, new PickableItem("Boardingpass to Russia: 139BA", "This boardingpass has expired", 1));
         //non pickable item
-        itemLocation.addItem(airport, new Item("Stop sign", "this is a shop", 100));
+        //itemLocation.addItem(airport, new Item("StopSign", "this is a shop", 100));
 
         //Initializing an item and putting it in a room beach
         itemLocation.addItem(beach, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
@@ -119,8 +119,8 @@ public class Game {
         itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
         itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
         //non pickable item
-        itemLocation.addItem(beach, new Item("Giant rock", "The giant rock dont look like it can be moved", 100));
-        itemLocation.addItem(beach, new Item("Giant log", "The giant log dont look like it can be moved", 100));
+        itemLocation.addItem(beach, new Item("GiantRock", "The giant rock dont look like it can be moved", 100));
+        itemLocation.addItem(beach, new Item("GiantLog", "The giant log dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room jungle
         itemLocation.addItem(jungle, new PickableItem("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1));
@@ -131,7 +131,7 @@ public class Game {
         itemLocation.addItem(jungle, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(jungle, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
         //non pickable item
-        itemLocation.addItem(jungle, new Item("Giant log", "The giant log dont look like it can be moved", 100));
+        itemLocation.addItem(jungle, new Item("GiantLog", "The giant log dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room mountain
         itemLocation.addItem(mountain, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
@@ -145,7 +145,7 @@ public class Game {
         itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(cave, new PickableItem("Freshwater", "This is freshwater found in the jungle, maybe you can drink it", 2));
         itemLocation.addItem(cave, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(cave, new Item("Giant rock", "The giant rock dont look like it can be moved", 100));
+        itemLocation.addItem(cave, new Item("GiantRock", "The giant rock dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room camp
         itemLocation.addItem(camp, new Item(""));
