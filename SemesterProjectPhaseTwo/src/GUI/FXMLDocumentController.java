@@ -189,7 +189,10 @@ public class FXMLDocumentController implements Initializable {
             if (!itemsArray.isEmpty()) {
                 for (int i = 0; i < itemsArray.size(); i++) {
                     ImageView item = new ImageView();
-                    Image img = new Image("GUI/Assets/items/" + itemsArray.get(i).toString().trim().toLowerCase() + ".png");
+                    String imgPath = "GUI/Assets/items/" + itemsArray.get(i).toString().trim().toLowerCase() + ".png";
+                     System.out.println(imgPath);
+                    Image img = new Image(imgPath);
+                   
                     Paint color = Color.rgb(0, 0, 255);
                     item.setLayoutX(Math.random() * (background.getWidth() - 40));
                     item.setLayoutY(Math.random() * (background.getHeight() - 40));
