@@ -53,6 +53,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private AnchorPane background;
     @FXML
+    private AnchorPane popupBackground;
+    @FXML
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
     HashMap NPCHashMap;
@@ -65,6 +67,8 @@ public class FXMLDocumentController implements Initializable {
     private Button quitButton;
     @FXML
     private Button missionButton;
+    @FXML
+    private Button quitDialog;
     @FXML
     private TextArea textArea;
     @FXML
@@ -193,7 +197,7 @@ public class FXMLDocumentController implements Initializable {
                             background.getChildren().remove(i);
                             game.goGUI(null);
                             itemsArray.remove(i);
-                            popUpText(itemID);
+                            PickItemPopUpText(itemID);
                         }
                     }
                 }
@@ -269,6 +273,10 @@ public class FXMLDocumentController implements Initializable {
         textArea.setText(inventory);
     }
 
+    private void quitDialog(ActionEvent event) {
+        background.getChildren().remove(popupText);
+    }
+
     @FXML
     private void showHelp(ActionEvent event) {
         String help = "";
@@ -302,31 +310,33 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    public void popUpText(String item) {
+    public void PickItemPopUpText(String item) {
         if (!textDrawed) {
             openWindow();
-                popupText.setText(
-                        item + " has been added to inventory.");
+            popupText.setText(
+                    item + " has been added to inventory.");
 
-                background.getChildren().add(popupText);
-                textDrawed = true;
-            } else {
-                background.getChildren().remove(4);
-                textDrawed = false;
+            background.getChildren().add(popupText);
+            textDrawed = true;
+
+            if (textDrawed = true && game.gameTime() % 10000 == 0) {
+                background.getChildren().remove(popupText);
             }
+
         }
-    
+    }
 
     private void openWindow() {
-        int helpTextWidth = 320;
+        int helpTextWidth = 350;
         int helpTextHeight;
+        
         popupText = new TextArea();
         popupText.setFocusTraversable(false);
         popupText.setEditable(false);
         popupText.setMouseTransparent(true);
-        popupText.setPrefSize(helpTextWidth, 100);
+        popupText.setPrefSize(helpTextWidth, 75);
         popupText.setLayoutX((background.getWidth() / 2) - (helpTextWidth / 2));
-        popupText.setLayoutY(450);
+        popupText.setLayoutY(500);
     }
 
     public void changeSceneCraftMenu(String newScene) throws IOException {

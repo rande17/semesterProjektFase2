@@ -101,6 +101,11 @@ public class GameFacade implements InterfaceGame {
     public int playerHealth() {
         return Game.player.getHealth();
     }
+    
+    @Override
+    public int gameTime(){
+        return Time.getSecondsPassed();
+    }
 
     @Override
     public int playerEnergy() {
