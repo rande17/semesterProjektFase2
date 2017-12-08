@@ -24,6 +24,11 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -63,8 +68,7 @@ public class FXMLDocumentController implements Initializable {
     private Button inventoryButton;
     @FXML
     private Button helpButton;
-    @FXML
-    private Button quitButton;
+
     @FXML
     private Button missionButton;
     @FXML
@@ -124,10 +128,9 @@ public class FXMLDocumentController implements Initializable {
                 break;
         }
         intersectsItem();
-        moveObjectNPC(npc3);
+        // moveObjectNPC(npc3);
         game.energyLossToPlayer();
 
-        
     }
 
     public void changeScene(String newScene) throws IOException {
@@ -169,6 +172,7 @@ public class FXMLDocumentController implements Initializable {
                             background.getChildren().remove(i);
                             game.goGUI(null);
                             itemsArray.remove(i);
+                            textDrawed = false;
                             PickItemPopUpText(itemID);
                         }
                     }
@@ -244,7 +248,7 @@ public class FXMLDocumentController implements Initializable {
 
     public void moveObject(Rectangle shapeToMove, String dir) throws IOException {
         boolean playerIsObject = shapeToMove.equals(player);
-        
+
         String direction = "";
         boolean go = false;
         switch (dir) {
@@ -305,9 +309,9 @@ public class FXMLDocumentController implements Initializable {
         if (playerIsObject) {
             if (go) {
                 go(direction);
-            player.setLayoutX(shapeToMove.getLayoutX());
-            player.setLayoutY(shapeToMove.getLayoutY());
-            
+                player.setLayoutX(shapeToMove.getLayoutX());
+                player.setLayoutY(shapeToMove.getLayoutY());
+
             }
         } else {
 
@@ -333,7 +337,7 @@ public class FXMLDocumentController implements Initializable {
             default:
                 System.out.println("I didn't move");
         }
-      // dir = "RIGHT"; //- debug line
+        // dir = "RIGHT"; //- debug line
         moveObject(npc, dir);
     }
 
@@ -345,7 +349,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void quitDialog(ActionEvent event) {
-        background.getChildren().remove(popupText);
+        background.getChildren().remove(popupBackground);
     }
 
     @FXML
@@ -372,7 +376,7 @@ public class FXMLDocumentController implements Initializable {
         healthBar.setProgress(health);
 //        energyBar.setProgress(game.playerEnergy());
         energyBar.setProgress(energy);
-       
+
         if (health == 0 || energy == 0) {
             game.lose();
         }
@@ -380,32 +384,54 @@ public class FXMLDocumentController implements Initializable {
 
     public void PickItemPopUpText(String item) {
         if (!textDrawed) {
+            background.getChildren().remove(popupBackground);
             openWindow();
+
             popupText.setText(
                     item + " has been added to inventory.");
 
-            background.getChildren().add(popupText);
+            background.getChildren().add(popupBackground);
             textDrawed = true;
 
-            if (textDrawed = true && game.gameTime() % 10000 == 0) {
-                background.getChildren().remove(popupText);
+            if (textDrawed && game.gameTime() % 10000 == 0) {
+                background.getChildren().remove(popupBackground);
             }
 
         }
     }
 
     private void openWindow() {
-        int helpTextWidth = 350;
-        int helpTextHeight;
+        Button quitButton = new Button("X");
+        
+        if (popupBackground == null) {
+            popupBackground = new AnchorPane();
+        }
+        
+        //Creating an eventhandler for backButton
+        quitButton.setOnAction((event) -> {
+            quitDialog(event);
+        });
+        
+        popupBackground.setPrefSize(10, 10);
+//        popupBackground.setLayoutX((background.getWidth() / 1) - (background.getHeight() / 2));
+        popupBackground.setLayoutX(150);
+        popupBackground.setLayoutY(500);
+        popupBackground.setOpacity(0.6);
         
         popupText = new TextArea();
+        popupText.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         popupText.setFocusTraversable(false);
         popupText.setEditable(false);
         popupText.setMouseTransparent(true);
-        popupText.setPrefSize(helpTextWidth, 80);
-        popupText.setLayoutX((background.getWidth() / 2) - (helpTextWidth / 2));
-        popupText.setLayoutY(500);
-        popupText.setOpacity(0.5);
+
+        popupText.setPrefSize(350, 75);
+        popupText.setLayoutX(0);
+        popupText.setLayoutY(0);
+        popupBackground.getChildren().add(popupText);
+        popupBackground.getChildren().add(quitButton);
+        quitButton.setLayoutX(320);
+        quitButton.setLayoutY(0);
+
     }
 
     public void changeSceneCraftMenu(String newScene) throws IOException {
