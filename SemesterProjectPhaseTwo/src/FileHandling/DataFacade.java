@@ -36,7 +36,7 @@ public class DataFacade implements InterfaceData{
     }
 
     @Override
-    public String toJson(Object src) {
+    public String gsonToJson(Object src) {
        return gson.toJson(src);
     }
 
@@ -44,6 +44,18 @@ public class DataFacade implements InterfaceData{
     public void addHighscore(String name, int score) {
         highscore.addHighscore(name, score);
     }
+
+    @Override
+    public void saveGame(String str) {
+        Save save = new Save("01");
+        save.addToSaveGame(str);
+        try {
+            save.saveGame();
+        } catch (Throwable ex) {
+            java.util.logging.Logger.getLogger(DataFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     
     
     
