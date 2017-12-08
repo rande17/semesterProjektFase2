@@ -22,13 +22,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -84,6 +83,7 @@ public class FXMLDocumentController implements Initializable {
         scene = player.getScene();
         populateItemsOnMap();
         spawnNPC();
+        
         switch (event.getCode()) {
             case O:
                 System.out.println(background.getChildrenUnmodifiable().toString());
@@ -242,11 +242,12 @@ public class FXMLDocumentController implements Initializable {
                     HashMap.Entry entry = (HashMap.Entry) iterator.next();
                     if (entry.getValue().equals(game.getRoom())) {
 
-                        Circle NPC = new Circle();
+                        Rectangle NPC = new Rectangle();
                         Paint color = Color.rgb(255, 0, 0);
                         NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
                         NPC.setLayoutY(Math.random() * (background.getHeight() - 40));
-                        NPC.setRadius(20);
+                        NPC.setHeight(15);
+                        NPC.setWidth(15);
                         NPC.setStroke(color);
                         NPC.setId((String) (entry.getKey()));
                         NPC.setFill(color);
@@ -260,6 +261,61 @@ public class FXMLDocumentController implements Initializable {
 
         }
 
+    }
+
+    public void moveObject(Rectangle shapeToMove, String dir) throws IOException {
+
+        switch (dir) {
+            case "UP":
+                if (shapeToMove.getLayoutY() <= 0) {
+                    if (game.checkExit("north")) {
+                        go("north");
+
+                        shapeToMove.setLayoutX(x);
+                        shapeToMove.setLayoutY(background.getHeight() - shapeToMove.getHeight());
+                    }
+                } else {
+                    shapeToMove.setLayoutY(shapeToMove.getLayoutY() - speed);
+                }
+                break;
+
+            case "DOWN":
+                if (shapeToMove.getLayoutY() >= background.getHeight() - speed) {
+                    if (game.checkExit("south")) {
+                        go("south");
+                        shapeToMove.setLayoutX(x);
+                        shapeToMove.setLayoutY(0);
+                    }
+                } else {
+                    shapeToMove.setLayoutY(shapeToMove.getLayoutY() + speed);
+                }
+                break;
+
+            case "LEFT":
+
+                if (shapeToMove.getLayoutX() <= 0) {
+                    if (game.checkExit("west")) {
+                        go("west");
+                        shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getWidth());
+                        shapeToMove.setLayoutY(y);
+                    }
+                } else {
+                    shapeToMove.setLayoutX(shapeToMove.getLayoutX() - speed);
+                }
+                break;
+
+            case "RIGHT":
+                if (shapeToMove.getLayoutX() >= shapeToMove.getWidth() - shapeToMove.getWidth()) {
+                    if (game.checkExit("east")) {
+                        go("east");
+                        shapeToMove.setLayoutX(0);
+                        shapeToMove.setLayoutY(y);
+                    }
+                } else {
+                    shapeToMove.setLayoutX(player.getLayoutX() + speed);
+                }
+                break;
+        }
     }
 
     @FXML
@@ -305,17 +361,16 @@ public class FXMLDocumentController implements Initializable {
     public void popUpText(String item) {
         if (!textDrawed) {
             openWindow();
-                popupText.setText(
-                        item + " has been added to inventory.");
+            popupText.setText(
+                    item + " has been added to inventory.");
 
-                background.getChildren().add(popupText);
-                textDrawed = true;
-            } else {
-                background.getChildren().remove(4);
-                textDrawed = false;
-            }
+            background.getChildren().add(popupText);
+            textDrawed = true;
+        } else {
+            background.getChildren().remove(4);
+            textDrawed = false;
         }
-    
+    }
 
     private void openWindow() {
         int helpTextWidth = 320;
