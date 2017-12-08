@@ -6,6 +6,10 @@
 package FileHandling;
 
 import acquaintance.InterfaceData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.IOException;
+import java.util.logging.Level;
 
 /**
  *
@@ -13,9 +17,34 @@ import acquaintance.InterfaceData;
  */
 public class DataFacade implements InterfaceData{
 
+    private HighscoreManager highscore = new HighscoreManager();
+    private  Logger log = new Logger();
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    
     @Override
     public String printHighscore() {
       return HighscoreManager.getHighscoreList();
     }
+
+    @Override
+    public void logWrite(String str) {
+        try {
+            log.write(str);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(DataFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public String toJson(Object src) {
+       return gson.toJson(src);
+    }
+
+    @Override
+    public void addHighscore(String name, int score) {
+        highscore.addHighscore(name, score);
+    }
+    
+    
     
 }

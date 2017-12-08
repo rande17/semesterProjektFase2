@@ -13,4 +13,7 @@ import java.util.ArrayList;
  */
 public interface InterfaceData {
     public String printHighscore();
+    public void logWrite (String str);
+    public String toJson(Object src);
+    public void addHighscore(String name, int score);
 }

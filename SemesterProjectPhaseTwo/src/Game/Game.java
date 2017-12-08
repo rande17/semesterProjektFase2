@@ -1,11 +1,7 @@
 package Game;
 
 import FileHandling.DataFacade;
-import FileHandling.HighscoreManager;
-import FileHandling.Logger;
 import FileHandling.Save;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,7 +48,6 @@ public class Game {
     private static DataFacade data = new DataFacade();
     static ItemLocation itemLocation = new ItemLocation();
     static Inventory inventory = new Inventory();
-    static HighscoreManager highscore = new HighscoreManager();
     static CraftableItem craftableItem = new CraftableItem();
     static Player player = new Player("Player", "???", currentRoom, 100, 100);
     static Score score = new Score();
@@ -67,8 +62,8 @@ public class Game {
     static NPC npc3 = new NPC();
 
     //file thats gonna be written to and the extension
-    static Logger log = new Logger();
-    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    
+    
 
     /**
      * Used to initialize different rooms and their respective items, and also
@@ -288,7 +283,7 @@ public class Game {
         Time time = new Time();
         printWelcome();
         time.start();
-        log.write(System.lineSeparator() + System.lineSeparator() + " >>>  Starting new game <<< " + System.lineSeparator() + System.lineSeparator());
+        data.logWrite(System.lineSeparator() + System.lineSeparator() + " >>>  Starting new game <<< " + System.lineSeparator() + System.lineSeparator());
 
         boolean finished = false;
 
@@ -336,7 +331,7 @@ public class Game {
 
         CommandWord commandWord = command.getCommandWord();
 
-        log.write(commandWord.toString() + " " + command.getSecondWord());
+        data.logWrite(commandWord.toString() + " " + command.getSecondWord());
 
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
@@ -912,7 +907,7 @@ public class Game {
         //saveObjectsJSON.add(npc2);
         //saveObjectsJSON.add(npc3);
 
-        return gson.toJson(saveObjectsJSON);
+        return data.toJson(saveObjectsJSON);
     }
 
     static String getHighscoreFromData() {
@@ -928,7 +923,7 @@ public class Game {
             System.out.println("You have won the game!" + "\n" + "You spend: " + 1 + " seconds playing the game!");
             System.out.println("Your score is: " + totalSum);
             System.out.println("your score has been added to highscore");
-            highscore.addHighscore(score.getName(), totalSum);
+            data.addHighscore(score.getName(), totalSum);
             System.out.println("");
             System.out.println("Current highscore list is: ");
             System.out.println(data.printHighscore());
@@ -940,7 +935,7 @@ public class Game {
             System.out.println("You have won the game!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
             System.out.println("Your score is: " + totalSum);
             System.out.println("your score has been added to highscore");
-            highscore.addHighscore(score.getName(), totalSum);
+            data.addHighscore(score.getName(), totalSum);
             System.out.println("");
             System.out.println("Current highscore list is: ");
             System.out.println(data.printHighscore());
