@@ -197,6 +197,7 @@ public class FXMLDocumentController implements Initializable {
                             background.getChildren().remove(i);
                             game.goGUI(null);
                             itemsArray.remove(i);
+                            textDrawed = false;
                             PickItemPopUpText(itemID);
                         }
                     }
@@ -312,32 +313,49 @@ public class FXMLDocumentController implements Initializable {
 
     public void PickItemPopUpText(String item) {
         if (!textDrawed) {
+            background.getChildren().remove(popupBackground);
             openWindow();
+           
             popupText.setText(
                     item + " has been added to inventory.");
-
-            background.getChildren().add(popupText);
+            
+            background.getChildren().add(popupBackground);
             textDrawed = true;
 
-            if (textDrawed = true && game.gameTime() % 10000 == 0) {
-                background.getChildren().remove(popupText);
+            if (textDrawed && game.gameTime() % 10000 == 0) {
+                background.getChildren().remove(popupBackground);
             }
 
         }
     }
 
     private void openWindow() {
-        int helpTextWidth = 350;
-        int helpTextHeight;
+        int TextWidth = 300;
+        int TextHeight;
+        if(popupBackground == null){
+        popupBackground = new AnchorPane();
+        }
         
+        popupBackground.setPrefSize(325, 75);
+        popupBackground.setLayoutX((background.getWidth() / 2) - (TextWidth / 2));
+        popupBackground.setLayoutY(300);
+        popupBackground.setOpacity(0.6);
+        
+ 
         popupText = new TextArea();
         popupText.setFocusTraversable(false);
         popupText.setEditable(false);
         popupText.setMouseTransparent(true);
-        popupText.setPrefSize(helpTextWidth, 75);
-        popupText.setLayoutX((background.getWidth() / 2) - (helpTextWidth / 2));
-        popupText.setLayoutY(500);
+        
+        popupText.setPrefSize(325, 75);
+        popupText.setLayoutX((background.getWidth() / 2) - (TextWidth / 1));
+        popupText.setLayoutY(200);
+        popupBackground.getChildren().add(popupText);
+        
+        
     }
+    
+
 
     public void changeSceneCraftMenu(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
