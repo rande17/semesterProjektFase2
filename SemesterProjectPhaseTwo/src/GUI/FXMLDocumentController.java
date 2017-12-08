@@ -53,6 +53,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private AnchorPane background;
     @FXML
+    private AnchorPane popupBackground;
+    @FXML
     private Rectangle player;
     ArrayList itemsArray = new ArrayList(1);
     HashMap NPCHashMap;
@@ -65,6 +67,8 @@ public class FXMLDocumentController implements Initializable {
     private Button quitButton;
     @FXML
     private Button missionButton;
+    @FXML
+    private Button quitDialog;
     @FXML
     private TextArea textArea;
     @FXML
@@ -86,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
         scene = player.getScene();
         populateItemsOnMap();
         spawnNPC();
-
+        updateBars();
         switch (event.getCode()) {
             case O:
                 System.out.println(background.getChildrenUnmodifiable().toString());
@@ -123,7 +127,7 @@ public class FXMLDocumentController implements Initializable {
         moveObjectNPC(npc3);
         game.energyLossToPlayer();
 
-        updateBars();
+        
     }
 
     public void changeScene(String newScene) throws IOException {
@@ -165,7 +169,7 @@ public class FXMLDocumentController implements Initializable {
                             background.getChildren().remove(i);
                             game.goGUI(null);
                             itemsArray.remove(i);
-                            popUpText(itemID);
+                            PickItemPopUpText(itemID);
                         }
                     }
                 }
@@ -240,6 +244,7 @@ public class FXMLDocumentController implements Initializable {
 
     public void moveObject(Rectangle shapeToMove, String dir) throws IOException {
         boolean playerIsObject = shapeToMove.equals(player);
+        
         String direction = "";
         boolean go = false;
         switch (dir) {
@@ -339,6 +344,10 @@ public class FXMLDocumentController implements Initializable {
         textArea.setText(inventory);
     }
 
+    private void quitDialog(ActionEvent event) {
+        background.getChildren().remove(popupText);
+    }
+
     @FXML
     private void showHelp(ActionEvent event) {
         String help = "";
@@ -363,16 +372,13 @@ public class FXMLDocumentController implements Initializable {
         healthBar.setProgress(health);
 //        energyBar.setProgress(game.playerEnergy());
         energyBar.setProgress(energy);
-
-        if (health == 0) {
-            game.lose();
-        }
-        if (energy == 0) {
+       
+        if (health == 0 || energy == 0) {
             game.lose();
         }
     }
 
-    public void popUpText(String item) {
+    public void PickItemPopUpText(String item) {
         if (!textDrawed) {
             openWindow();
             popupText.setText(
@@ -380,22 +386,26 @@ public class FXMLDocumentController implements Initializable {
 
             background.getChildren().add(popupText);
             textDrawed = true;
-        } else {
-            background.getChildren().remove(4);
-            textDrawed = false;
+
+            if (textDrawed = true && game.gameTime() % 10000 == 0) {
+                background.getChildren().remove(popupText);
+            }
+
         }
     }
 
     private void openWindow() {
-        int helpTextWidth = 320;
+        int helpTextWidth = 350;
         int helpTextHeight;
+        
         popupText = new TextArea();
         popupText.setFocusTraversable(false);
         popupText.setEditable(false);
         popupText.setMouseTransparent(true);
-        popupText.setPrefSize(helpTextWidth, 100);
+        popupText.setPrefSize(helpTextWidth, 80);
         popupText.setLayoutX((background.getWidth() / 2) - (helpTextWidth / 2));
-        popupText.setLayoutY(450);
+        popupText.setLayoutY(500);
+        popupText.setOpacity(0.5);
     }
 
     public void changeSceneCraftMenu(String newScene) throws IOException {

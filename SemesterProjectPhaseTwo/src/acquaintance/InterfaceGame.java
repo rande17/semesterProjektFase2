@@ -23,7 +23,7 @@ public interface InterfaceGame {
     public String printMissions();
     public String printHighscoreGUI();
     public String getCraftableItems();
-//    public String showHelp();
+//   public String showHelp();
     public int playerHealth();
     public int playerEnergy();
     public int maxPlayerHealth();
@@ -33,4 +33,5 @@ public interface InterfaceGame {
     public boolean checkExit(String dir);
     public HashMap<String, String> getNPC();
     public void lose();
+    public int gameTime();
 }
