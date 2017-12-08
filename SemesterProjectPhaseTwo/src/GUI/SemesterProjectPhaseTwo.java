@@ -9,16 +9,11 @@ import Game.Game;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author rickie
- */
 public class SemesterProjectPhaseTwo extends Application {
 
     Parent root;
@@ -35,10 +30,6 @@ public class SemesterProjectPhaseTwo extends Application {
         stage.setOnCloseRequest(e -> System.exit(0));
     }
 
-    /**
-     * @param args the command line arguments
-     * @throws java.lang.Throwable
-     */
     public static void main(String[] args) throws Throwable {
 
         Thread thread = new Thread() {
@@ -58,5 +49,4 @@ public class SemesterProjectPhaseTwo extends Application {
         launch(args);
 
     }
-
 }
