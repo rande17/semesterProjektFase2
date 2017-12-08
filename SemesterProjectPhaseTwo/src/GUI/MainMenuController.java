@@ -20,7 +20,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import acquaintance.InterfaceGame;
 
 /**
  * FXML Controller class
