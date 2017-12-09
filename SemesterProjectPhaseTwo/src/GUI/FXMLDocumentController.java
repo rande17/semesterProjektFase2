@@ -463,7 +463,7 @@ public class FXMLDocumentController implements Initializable {
             openWindow();
 
             popupText.setText(
-                    item + " could not be added to inventory due to lack of space.");
+                    item + " could not be added to inventory.");
 
             background.getChildren().add(popupBackground);
             textDrawed = true;
