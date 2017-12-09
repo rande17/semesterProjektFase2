@@ -36,4 +36,5 @@ public interface InterfaceGame {
     public int gameTime();
     public ArrayList getCraftableItemsArray();
     public String getCraftableItemDescribtion(String itemName);
+    public void craftItemGUI(String itemToCraft);
 }
