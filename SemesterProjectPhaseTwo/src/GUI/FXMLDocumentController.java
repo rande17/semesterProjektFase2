@@ -277,7 +277,7 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-public void moveObject(ImageView shapeToMove, String dir) throws IOException {
+    public void moveObject(ImageView shapeToMove, String dir) throws IOException {
         if (shapeToMove != null) {
             // System.out.println(player.toString());
             // System.out.println(shapeToMove.toString());
@@ -324,7 +324,6 @@ public void moveObject(ImageView shapeToMove, String dir) throws IOException {
 
                 case "LEFT":
                     imgPath = "GUI/Assets/Character/" + shapeToMove.getId().toString().trim().toLowerCase() + "left.png"; //.toString().trim().toLowerCase() + ".png";
-                    System.out.println(imgPath);
                     img = new Image(imgPath);
                     shapeToMove.setImage(img);
                     if (shapeToMove.getLayoutX() <= 0) {

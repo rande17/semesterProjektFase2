@@ -187,7 +187,7 @@ public class GameFacade implements InterfaceGame {
     public void unlockedEscapeIsland(){
         Game.UnlockedEscapeTheIsland();     
     }
-    
+
     @Override
     public void lockedEscapeIsland(){
         Game.lockedEscapeIsland();
