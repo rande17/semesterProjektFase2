@@ -197,7 +197,7 @@ public class GameFacade implements InterfaceGame {
     @Override
     public void dropItem(String itemToDrop) {
         Command command = new Command(DROP, itemToDrop);
-        Game.craftItem(command);
+        Game.dropItem(command);
     }
 
     @Override

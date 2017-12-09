@@ -73,15 +73,14 @@ public class InventoryController implements Initializable {
     private void dropItemButtonAction(ActionEvent event) {
         String itemName = dropItemChoice.getValue();
         inventoryMenu.dropItem(itemName);
+        inventoryTextArea.setText("You have dropped " + itemName);
         
     }
 
     @FXML
     private void dropChoice(MouseEvent event) { 
         ObservableList<String> e = FXCollections.observableArrayList(inventoryMenu.inventoryNames());
-        String inventory = "";
-        inventory += inventoryMenu.printInventory();
-        inventoryTextArea.setText(inventory);
+        inventoryItems();
         dropItemChoice.setItems(e);
     }
 
@@ -99,6 +98,10 @@ public class InventoryController implements Initializable {
 
     @FXML
     private void showInventoryAction(ActionEvent event) {
+        inventoryItems();
+    }
+    
+    private void inventoryItems(){
         String inventory = "";
         inventory += inventoryMenu.printInventory();
         inventoryTextArea.setText(inventory);

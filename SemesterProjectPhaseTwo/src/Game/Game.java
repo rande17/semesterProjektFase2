@@ -756,7 +756,7 @@ public class Game {
      *
      * @param command used for checking if an item exists in inventory
      */
-    static private void dropItem(Command command) {
+    static void dropItem(Command command) {
         HashMap newInventory = inventory.getInventory();
         Iterator itte = newInventory.entrySet().iterator();
         String seeItem;
