@@ -34,6 +34,8 @@ public interface InterfaceGame {
     public HashMap<String, String> getNPC();
     public void lose();
     public int gameTime();
+    public ArrayList inventoryNames();
+    public void dropItem(String item);
     public ArrayList getCraftableItemsArray();
     public String getCraftableItemDescribtion(String itemName);
     public void craftItemGUI(String itemToCraft);

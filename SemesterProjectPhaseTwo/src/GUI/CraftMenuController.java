@@ -8,19 +8,19 @@ package GUI;
 import static GUI.MainMenuController.scene;
 import Game.GameFacade;
 import java.io.IOException;
-import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
-import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class

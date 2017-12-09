@@ -45,7 +45,7 @@ public class GameFacade implements InterfaceGame {
     }
 
     @Override
-    public void craftItemGUI(String itemToCraft){
+    public void craftItemGUI(String itemToCraft) {
         Command command = new Command(CRAFT, itemToCraft);
         Game.craftItem(command);
     }
@@ -171,6 +171,20 @@ public class GameFacade implements InterfaceGame {
             }
         }
         return itemDescribtion;
+    }
 
+    @Override
+    public ArrayList inventoryNames() {
+        return Game.inventory.inventoryNames();
+    }
+
+    @Override
+    public void dropItem(String itemToDrop) {
+        Command command = new Command(DROP, itemToDrop);
+        try {
+            Game.processCommand(command);
+        } catch (Throwable ex) {
+            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

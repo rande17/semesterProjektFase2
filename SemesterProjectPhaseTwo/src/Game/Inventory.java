@@ -17,7 +17,7 @@ public class Inventory {
     private int currentQuantity = 0;
     private int inventoryMaxWeight = 10; //set default inventory weight 
     private int currentInventoryWeight = 0;
-    HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
+    private HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
     private HashMap<String, Integer> itemWeight = new HashMap<>();
 //constuctor  
 
@@ -56,7 +56,8 @@ public class Inventory {
     /**
      *
      * @param _item used for adding item to inventory
-     * @return true or false whether there is enough room for the item in inventory
+     * @return true or false whether there is enough room for the item in
+     * inventory
      */
     public boolean addItemInInventory(Item _item) {
         int quantity = 0;
@@ -169,17 +170,18 @@ public class Inventory {
     public void setinventoryMaxQuantity(int _InventoryMaxQuantity) {
         inventoryMaxQuantity = _InventoryMaxQuantity;
     }
-    
+
     public String getInventoryStatus() {
         String inventoryStatus = "Inventory weight: ";
         inventoryStatus += getCurrentInventoryWeight();
         inventoryStatus += "/";
         inventoryStatus += getInventoryMaxWeight();
         inventoryStatus += "\n";
-        
+
         return inventoryStatus;
-        
+
     }
+
     /**
      *
      * @param itemName get the item weight of a specific item
@@ -188,20 +190,37 @@ public class Inventory {
     public int getItemWeight(String itemName) {
         return itemWeight.get(itemName);
     }
+
     @Override
     public String toString() {
-        String inventoryString ="";
+        String inventoryString = "";
         Iterator iterator = inventory.entrySet().iterator();
         inventoryString += getInventoryStatus();
-        
-            while (iterator.hasNext()) {            
-                HashMap.Entry entry = (HashMap.Entry) iterator.next();
-                
-                inventoryString += (String)entry.getValue().toString();
-                inventoryString += "x ";
-                inventoryString += (String)entry.getKey();
-                inventoryString += "\n";
+
+        while (iterator.hasNext()) {
+            HashMap.Entry entry = (HashMap.Entry) iterator.next();
+
+            inventoryString += (String) entry.getValue().toString();
+            inventoryString += "x ";
+            inventoryString += (String) entry.getKey();
+            inventoryString += "\n";
         }
         return inventoryString;
     }
+
+    public ArrayList inventoryNames() {
+        ArrayList<String> list = new ArrayList<>();
+
+        Iterator iterator = inventory.entrySet().iterator();
+        int i = 0;
+
+        while (i < inventory.size()) {
+            HashMap.Entry entry = (HashMap.Entry) iterator.next();
+            list.add(i, (String) entry.getKey());
+            i++;
+        }
+
+        return list;
+    }
+
 }
