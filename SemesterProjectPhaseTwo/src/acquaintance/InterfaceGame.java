@@ -35,4 +35,5 @@ public interface InterfaceGame {
     public void lose();
     public int gameTime();
     public ArrayList getCraftableItemsArray();
+    public String getCraftableItemDescribtion(String itemName);
 }

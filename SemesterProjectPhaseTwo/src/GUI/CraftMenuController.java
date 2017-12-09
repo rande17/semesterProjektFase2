@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleGroup;
 
 /**
  * FXML Controller class
@@ -27,11 +28,11 @@ import javafx.scene.control.TextArea;
  * @author frede
  */
 public class CraftMenuController implements Initializable {
-
+    
     public static GameFacade game = new GameFacade();
-
+    
     Parent root;
-
+    
     @FXML
     private Button backButton;
     @FXML
@@ -40,12 +41,12 @@ public class CraftMenuController implements Initializable {
     private TextArea requirementsTextArea;
     @FXML
     private Button craftButton;
-    @FXML
-    private RadioButton buttonCraftCampfire;
-    @FXML
-    private RadioButton craftSpear;
     private boolean craftCampfire;
     private ArrayList craftingItems;
+    private boolean craftItemsAdded = false;
+    private ToggleGroup craftToggleGroup = new ToggleGroup();
+    @FXML
+    private ToggleGroup CraftToggle;
 
     /**
      * Initializes the controller class.
@@ -53,52 +54,62 @@ public class CraftMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        addButtonAndPrintCraftItems();
+//        addButtonAndPrintCraftItems();
+        populateShit();
     }
-
+    
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene = backButton.getScene();
         scene.setRoot(root);
         scene.getRoot().requestFocus();
     }
-
+    
     @FXML
     private void handleBackAction(ActionEvent event) throws IOException {
         changeScene(game.getRoom());
     }
-
+    
     @FXML
     private void handleCraftAction(ActionEvent event) {
-
-        if (craftCampfire == true) {
-
-        }
+        requirementsTextArea.setText("Unsupported operation");
     }
-
+    
     @FXML
     private void craftCampfire(ActionEvent event) {
         requirementsTextArea.setText("Items needed are: \nLumber, Stick and Flint");
     }
-
+    
     @FXML
     private void showSpearItems(ActionEvent event) {
         requirementsTextArea.setText("Items needed are: \nStick, Flint and Rope or Lian");
     }
-
+    
     public void addButtonAndPrintCraftItems() {
         Button testButton = new Button("Print items");
-
+        
         craftingItems = game.getCraftableItemsArray();
-        testButton.setOnAction((event) -> {
-            requirementsTextArea.clear();
-            for (int i = 0; i < craftingItems.size(); i++) {
-                requirementsTextArea.appendText((String) (craftingItems.get(i) + System.lineSeparator()));
-            }
-        });
-
         craftableItemsVBox.getChildren().add(testButton);
-
+        
     }
-
+    
+    public void populateShit() {
+        if (!craftItemsAdded) {
+            craftingItems = game.getCraftableItemsArray();
+            if (!craftingItems.isEmpty()) {
+                for (int i = 0; i < craftingItems.size(); i++) {
+                    RadioButton item = new RadioButton();
+                    item.setId((String) craftingItems.get(i) + "RadioButton");
+                    item.setText((String) craftingItems.get(i));
+                    item.setToggleGroup(craftToggleGroup);
+                    item.setOnAction((event) -> {
+                        requirementsTextArea.setText((String) (game.getCraftableItemDescribtion(item.getText())));
+                    });
+                    craftableItemsVBox.getChildren().add(item);
+                }
+            }
+            craftItemsAdded = true;
+        }
+    }
+    
 }
