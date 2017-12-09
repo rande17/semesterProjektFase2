@@ -28,11 +28,11 @@ import javafx.scene.control.ToggleGroup;
  * @author frede
  */
 public class CraftMenuController implements Initializable {
-    
+
     public static GameFacade game = new GameFacade();
-    
+
     Parent root;
-    
+
     @FXML
     private Button backButton;
     @FXML
@@ -51,27 +51,29 @@ public class CraftMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-//        addButtonAndPrintCraftItems();
         populateVBoxWithRadioButtons();
     }
-    
+
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene = backButton.getScene();
         scene.setRoot(root);
         scene.getRoot().requestFocus();
     }
-    
+
     @FXML
     private void handleBackAction(ActionEvent event) throws IOException {
         changeScene(game.getRoom());
     }
-    
+
     @FXML
     private void handleCraftAction(ActionEvent event) {
-        requirementsTextArea.setText("Unsupported operation");
+          RadioButton idOfSelectedRadioButton = (RadioButton)craftToggleGroup.getSelectedToggle();
+          String idOfCraftableItem;
+          idOfCraftableItem=(String)idOfSelectedRadioButton.getId().replace("RadioButton", "");
+          game.craftItemGUI(idOfCraftableItem);
     }
-    
+
     public void populateVBoxWithRadioButtons() {
         if (!craftItemsAdded) {
             craftingItems = game.getCraftableItemsArray();
@@ -90,5 +92,5 @@ public class CraftMenuController implements Initializable {
             craftItemsAdded = true;
         }
     }
-    
+
 }
