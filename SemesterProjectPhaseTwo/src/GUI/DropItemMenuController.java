@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,15 +67,18 @@ public class DropItemMenuController implements Initializable {
 
     @FXML
     private void dropItemButtonAction(ActionEvent event) {
+        String e = dropItemChoice.getValue();
+        dropItemMenu.dropItem(e);
+        
     }
 
     @FXML
     private void dropChoice(MouseEvent event) { 
+        ObservableList<String> e = FXCollections.observableArrayList(dropItemMenu.inventoryNames());
         String inventory = "";
         inventory += dropItemMenu.printInventory();
         inventoryTextArea.setText(inventory);
-        
-
+        dropItemChoice.setItems(e);
     }
     
 }

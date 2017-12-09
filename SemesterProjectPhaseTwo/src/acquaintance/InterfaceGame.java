@@ -7,6 +7,8 @@ package acquaintance;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -34,4 +36,6 @@ public interface InterfaceGame {
     public HashMap<String, String> getNPC();
     public void lose();
     public int gameTime();
+    public ArrayList inventoryNames();
+    public void dropItem(String item);
 }

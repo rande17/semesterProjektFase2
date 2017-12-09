@@ -9,8 +9,10 @@ import static Game.CommandWord.*;
 import acquaintance.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -141,6 +143,17 @@ public class GameFacade implements InterfaceGame {
     public void lose() {
         Game.lose();
     }
-
-
+    public ArrayList inventoryNames(){
+        return Game.inventory.inventoryNames();
+    }
+    
+    @Override
+    public void dropItem(String itemToDrop) {
+         Command command = new Command(DROP, itemToDrop);
+         try {
+            Game.processCommand(command);
+        } catch (Throwable ex) {
+            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
