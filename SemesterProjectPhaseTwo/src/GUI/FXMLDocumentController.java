@@ -160,11 +160,11 @@ public class FXMLDocumentController implements Initializable {
             for (int i = 0; i < background.getChildren().toArray().length; i++) {
                 String itemID = background.getChildren().get(i).getId();
                 
-                if (!itemID.equals("player") && !itemID.equals("popup")) {
+                if (itemID.contains("item")) {
                 ImageView itemToCheck = (ImageView) background.getChildren().get(i);
                 
                 //System.out.println(itemToCheck.toString());
-                itemID = itemToCheck.getId();
+                itemID = itemToCheck.getId().replace("item", "");
                 // System.out.println(itemID);
                 
                     
@@ -185,6 +185,9 @@ public class FXMLDocumentController implements Initializable {
                         }
                     }
                 }
+                
+                
+                
             }
         }
     }
@@ -205,7 +208,7 @@ public class FXMLDocumentController implements Initializable {
                     item.setFitHeight(20);
                     item.setFitWidth(20);
                     item.setImage(img);
-                    item.setId((String) itemsArray.get(i));
+                    item.setId((String) "item"+itemsArray.get(i));
 
                     item.setVisible(true);
                     background.getChildren().add(item);
