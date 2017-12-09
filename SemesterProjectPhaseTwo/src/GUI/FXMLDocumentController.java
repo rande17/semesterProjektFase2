@@ -86,6 +86,9 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // populateItemsOnMap();
+        String imgPath = "GUI/Assets/Character/" + player.getId().toString().trim().toLowerCase() + "down.png";
+        Image img = new Image(imgPath);
+        player.setImage(img);
     }
 
     @FXML
@@ -160,6 +163,7 @@ public class FXMLDocumentController implements Initializable {
         if (!itemsArray.isEmpty()) {
             for (int i = 0; i < background.getChildren().toArray().length; i++) {
                 String objectID = background.getChildren().get(i).getId();
+
                 if (objectID.contains("item")) {
 
                     ImageView objectToCheck = (ImageView) background.getChildren().get(i);
@@ -249,7 +253,7 @@ public class FXMLDocumentController implements Initializable {
 
                         ImageView NPC = new ImageView();
                         System.out.println(entry.getKey().toString());
-                        String imgPath = "GUI/Assets/Character/" + entry.getKey().toString().trim().toLowerCase() + ".png"; //.toString().trim().toLowerCase() + ".png";
+                        String imgPath = "GUI/Assets/Character/" + entry.getKey().toString().trim().toLowerCase() + "down.png"; //.toString().trim().toLowerCase() + ".png";
                         Image img = new Image(imgPath);
                         Paint color = Color.rgb(255, 0, 0);
                         NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
@@ -273,20 +277,25 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    public void moveObject(ImageView shapeToMove, String dir) throws IOException {
+public void moveObject(ImageView shapeToMove, String dir) throws IOException {
         if (shapeToMove != null) {
             // System.out.println(player.toString());
             // System.out.println(shapeToMove.toString());
             boolean playerIsObject = shapeToMove.equals(player);
-
+            String imgPath;
+            Image img;
             String direction = "";
             boolean go = false;
             switch (dir) {
                 case "UP":
+                    imgPath = "GUI/Assets/Character/" + shapeToMove.getId().toString().trim().toLowerCase() + "up.png";
+                    img = new Image(imgPath);
+                    shapeToMove.setImage(img);
                     if (shapeToMove.getLayoutY() <= 0) {
                         if (game.checkExit("north")) {
                             direction = "north";
                             go = true;
+
                             shapeToMove.setLayoutX(x);
                             shapeToMove.setLayoutY(background.getHeight() - shapeToMove.getFitHeight());
                         }
@@ -296,11 +305,15 @@ public class FXMLDocumentController implements Initializable {
                     break;
 
                 case "DOWN":
+                    imgPath = "GUI/Assets/Character/" + shapeToMove.getId().toString().trim().toLowerCase() + "down.png";
+                    img = new Image(imgPath);
+                    shapeToMove.setImage(img);
                     if (shapeToMove.getLayoutY() >= background.getHeight() - speed - shapeToMove.getFitHeight()) {
                         if (game.checkExit("south")) {
                             direction = "south";
                             shapeToMove.setLayoutX(x);
                             go = true;
+
                             shapeToMove.setLayoutY(0);
                             System.out.println(shapeToMove.getLayoutBounds().toString());
                         }
@@ -310,11 +323,15 @@ public class FXMLDocumentController implements Initializable {
                     break;
 
                 case "LEFT":
-
+                    imgPath = "GUI/Assets/Character/" + shapeToMove.getId().toString().trim().toLowerCase() + "left.png"; //.toString().trim().toLowerCase() + ".png";
+                    System.out.println(imgPath);
+                    img = new Image(imgPath);
+                    shapeToMove.setImage(img);
                     if (shapeToMove.getLayoutX() <= 0) {
                         if (game.checkExit("west")) {
                             direction = "west";
                             go = true;
+
                             shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getFitWidth());
                             shapeToMove.setLayoutY(y);
                         } else if (game.getRoom().equalsIgnoreCase("airport")) {
@@ -328,10 +345,14 @@ public class FXMLDocumentController implements Initializable {
                     break;
 
                 case "RIGHT":
+                    imgPath = "GUI/Assets/Character/" + shapeToMove.getId().toString().trim().toLowerCase() + "right.png"; //.toString().trim().toLowerCase() + ".png";
+                    img = new Image(imgPath);
+                    shapeToMove.setImage(img);
                     if (shapeToMove.getLayoutX() >= background.getWidth() - speed - shapeToMove.getFitWidth()) {
                         if (game.checkExit("east")) {
                             direction = "east";
                             go = true;
+
                             shapeToMove.setLayoutX(0);
                             shapeToMove.setLayoutY(y);
                         }
@@ -375,7 +396,8 @@ public class FXMLDocumentController implements Initializable {
         // dir = "RIGHT"; //- debug line
         moveObject(npc, dir);
     }
-
+    
+    
     @FXML
     private void showInventory(ActionEvent event) {
         String inventory = "";

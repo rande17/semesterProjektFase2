@@ -150,22 +150,8 @@ public class GameFacade implements InterfaceGame {
     public void win(){
         Game.win();
     }
+
     @Override
-    public ArrayList inventoryNames(){
-        return Game.inventory.inventoryNames();
-    }
-    
-    @Override
-    public void unlockedEscapeIsland(){
-        Game.UnlockedEscapeTheIsland();     
-    }
-    
-    @Override
-    public void lockedEscapeIsland(){
-        Game.lockedEscapeIsland();
-    }
-    
-        @Override
     public ArrayList getCraftableItemsArray() {
         ArrayList craftableItemsArrayList = new ArrayList(CraftableItem.craftableListArray.size());
         ArrayList craftableItemsNameArrayList = new ArrayList(CraftableItem.craftableListArray.size());
@@ -190,6 +176,21 @@ public class GameFacade implements InterfaceGame {
             }
         }
         return itemDescribtion;
+    }
+
+    @Override
+    public ArrayList inventoryNames() {
+        return Game.inventory.inventoryNames();
+    }
+
+    @Override
+    public void unlockedEscapeIsland(){
+        Game.UnlockedEscapeTheIsland();     
+    }
+    
+    @Override
+    public void lockedEscapeIsland(){
+        Game.lockedEscapeIsland();
     }
   
     
