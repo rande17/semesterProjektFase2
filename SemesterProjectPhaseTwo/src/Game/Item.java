@@ -14,7 +14,6 @@ public class Item {
     private String itemDescribtion;
     private int weight;
     private String name;
-    private String describtion;
 
     /**
      * constructer for item
@@ -35,7 +34,7 @@ public class Item {
     Item(String _name, String _description, int _weight) {
         name = _name;
         weight = _weight;
-        describtion = _description;
+        itemDescribtion = _description;
     }
 
     /**
