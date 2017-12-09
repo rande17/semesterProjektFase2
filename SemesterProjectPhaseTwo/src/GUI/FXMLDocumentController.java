@@ -36,10 +36,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-/**
- *
- * @author rickie
- */
 public class FXMLDocumentController implements Initializable {
 
     private static GameFacade game = new GameFacade();
@@ -177,7 +173,7 @@ public class FXMLDocumentController implements Initializable {
                     double ixend = itemToCheck.getLayoutX() + itemToCheck.getFitWidth();
                     double iystart = itemToCheck.getLayoutY();
                     double iyend = itemToCheck.getLayoutY() + itemToCheck.getFitHeight();
-                    if (pxstart >= ixstart && pxstart <= ixend && pystart >= iystart && pystart <= iyend) {
+                    if (pxstart + 30 >= ixstart && pxstart <= ixend && pystart + 30 >= iystart && pystart <= iyend) {
                        // System.out.println(background.getChildren().get(i).toString());
                             
                         if (game.takeItemGUI(itemID)) {
@@ -200,7 +196,7 @@ public class FXMLDocumentController implements Initializable {
                 for (int i = 0; i < itemsArray.size(); i++) {
                     ImageView item = new ImageView();
                     String imgPath = "GUI/Assets/items/" + itemsArray.get(i).toString().trim().toLowerCase() + ".png";
-                     System.out.println(imgPath);
+                    // System.out.println(imgPath);
                     Image img = new Image(imgPath);
                    
                     Paint color = Color.rgb(0, 0, 255);
@@ -239,7 +235,9 @@ public class FXMLDocumentController implements Initializable {
                     if (entry.getValue().equals(game.getRoom())) {
 
                         ImageView NPC = new ImageView();
-                        Paint color = Color.rgb(255, 0, 0);
+                        String imgPath = "GUI/Assets/Character/" + NPCHashMap.keySet().iterator().toString().trim().toLowerCase() + ".png"; //.toString().trim().toLowerCase() + ".png";
+                        Image img = new Image(imgPath);
+                        //Paint color = Color.rgb(255, 0, 0);
                         NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
                         NPC.setLayoutY(Math.random() * (background.getHeight() - 40));
                         NPC.setFitHeight(15);
