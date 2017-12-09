@@ -181,7 +181,7 @@ public class Game {
 
     public void createNPC() {
         //create the good npc
-        npc1.setName("BSChristiansen");
+        npc1.setName("BS_Christiansen");
         npc1.setCurrentRoom(jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, "
                 + "\nbut he is heavly injured on his right leg so he cant move ");
@@ -189,7 +189,7 @@ public class Game {
                 + "\nYou can craft items to help you survive, if you have the right components.");
 
         //create the bad npc
-        npc3.setName("Joseph Schnitzel");
+        npc3.setName("Joseph_Schnitzel");
         npc3.setCurrentRoom(mountain);
         npc3.setDescribtion("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
         npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schnitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
@@ -197,7 +197,7 @@ public class Game {
         npc3.setDamageValue(100);
 
         //create another npc
-        npc2.setName("Mysterious crab");
+        npc2.setName("Mysterious_Crab");
         npc2.setCurrentRoom(cave);
         npc2.setDescribtion("A mysterious crab that you dont really get why can talk");
         npc2.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them all mr.Crab and know this island like the back of my hand.... oh i mean claw"

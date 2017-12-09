@@ -235,13 +235,15 @@ public class FXMLDocumentController implements Initializable {
                     if (entry.getValue().equals(game.getRoom())) {
 
                         ImageView NPC = new ImageView();
-                        String imgPath = "GUI/Assets/Character/" + NPCHashMap.keySet().iterator().toString().trim().toLowerCase() + ".png"; //.toString().trim().toLowerCase() + ".png";
+                        System.out.println(entry.getKey().toString());
+                        String imgPath = "GUI/Assets/Character/" + entry.getKey().toString().trim().toLowerCase() + ".png"; //.toString().trim().toLowerCase() + ".png";
                         Image img = new Image(imgPath);
-                        //Paint color = Color.rgb(255, 0, 0);
+                        Paint color = Color.rgb(255, 0, 0);
                         NPC.setLayoutX(Math.random() * (background.getWidth() - 40));
                         NPC.setLayoutY(Math.random() * (background.getHeight() - 40));
-                        NPC.setFitHeight(15);
-                        NPC.setFitWidth(15);
+                        NPC.setFitHeight(35);
+                        NPC.setFitWidth(35);
+                        NPC.setImage(img);
                         NPC.setId((String) (entry.getKey()));
                         if (NPC.getId().equals("Joseph Schnitzel")) {
                             npc3 = NPC;
@@ -259,8 +261,8 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void moveObject(ImageView shapeToMove, String dir) throws IOException {
-        System.out.println(player.toString());
-        System.out.println(shapeToMove.toString());
+       // System.out.println(player.toString());
+       // System.out.println(shapeToMove.toString());
         boolean playerIsObject = shapeToMove.equals(player);
 
         String direction = "";
@@ -353,7 +355,7 @@ public class FXMLDocumentController implements Initializable {
                 dir = "RIGHT";
                 break;
             default:
-                System.out.println("I didn't move");
+               // System.out.println("I didn't move");
         }
         // dir = "RIGHT"; //- debug line
 //        moveObject(npc, dir);
@@ -459,7 +461,7 @@ public class FXMLDocumentController implements Initializable {
         popupBackground.getChildren().add(popupText);
         popupBackground.getChildren().add(quitButton);
         quitButton.setLayoutX(320);
-        quitButton.setLayoutY(0);
+        quitButton.setLayoutY(5);
 
     }
 
@@ -474,10 +476,6 @@ public class FXMLDocumentController implements Initializable {
     private void showCraftMenu(ActionEvent event) throws IOException {
         changeSceneCraftMenu("craftMenu");
 
-    }
-
-    @FXML
-    private void showHelp(MouseEvent event) {
     }
 
     @FXML
