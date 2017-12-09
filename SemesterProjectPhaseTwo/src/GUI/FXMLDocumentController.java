@@ -163,12 +163,6 @@ public class FXMLDocumentController implements Initializable {
                 String objectID = background.getChildren().get(i).getId();
 
                 if (objectID.contains("item")) {
-                    ImageView objectToCheck = (ImageView) background.getChildren().get(i);
-
-                    double oXStart = objectToCheck.getLayoutX();
-                    double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
-                    double oYStart = objectToCheck.getLayoutY();
-                    double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
 
                     ImageView objectToCheck = (ImageView) background.getChildren().get(i);
 
