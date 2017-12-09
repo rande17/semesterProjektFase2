@@ -42,6 +42,7 @@
                 <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="5" />
                 <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="4" />
                 <TextArea fx:id="textArea" editable="false" focusTraversable="false" mouseTransparent="true" onMouseClicked="#showHelp" prefHeight="435.0" prefWidth="205.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <Button fx:id="dropItemButton" mnemonicParsing="false" onAction="#showDropMenu" prefHeight="27.0" prefWidth="121.0" text="Drop Item" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
         </GridPane>
         <AnchorPane fx:id="background" maxWidth="600" prefHeight="600.0" prefWidth="600.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/cave.png'); -fx-background-size: stretch">

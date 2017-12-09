@@ -24,6 +24,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -79,8 +80,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button craftButton;
     @FXML
-    private Button dropItemButton;
-    @FXML
     private Button escapeButton;
 
     @Override
@@ -93,48 +92,50 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonAction(KeyEvent event) throws IOException, InterruptedException {
-        x = player.getLayoutX();
-        y = player.getLayoutY();
-        scene = player.getScene();
-        populateItemsOnMap();
-        spawnNPC();
-        updateBars();
-        switch (event.getCode()) {
-            case O:
-                System.out.println(background.getChildrenUnmodifiable().toString());
-                break;
-            case P:
-                populateItemsOnMap();
-                break;
-            case W:
-            case UP:
-                moveObject(player, "UP");
-                break;
-            case S:
-            case DOWN:
-                moveObject(player, "DOWN");
-                break;
-            case A:
-            case LEFT:
-                moveObject(player, "LEFT");
-                break;
+        if (player != null) {
+            x = player.getLayoutX();
+            y = player.getLayoutY();
+            scene = player.getScene();
+            populateItemsOnMap();
+            spawnNPC();
+            updateBars();
+            switch (event.getCode()) {
+                case O:
+                    System.out.println(background.getChildrenUnmodifiable().toString());
+                    break;
+                case P:
+                    populateItemsOnMap();
+                    break;
+                case W:
+                case UP:
+                    moveObject(player, "UP");
+                    break;
+                case S:
+                case DOWN:
+                    moveObject(player, "DOWN");
+                    break;
+                case A:
+                case LEFT:
+                    moveObject(player, "LEFT");
+                    break;
 
-            case D:
-            case RIGHT:
-                moveObject(player, "RIGHT");
-                break;
+                case D:
+                case RIGHT:
+                    moveObject(player, "RIGHT");
+                    break;
 
-            case L:
-                System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getFitHeight());
-                break;
-            case H:
-                game.damageToPlayer();
-                break;
+                case L:
+                    System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getFitHeight());
+                    break;
+                case H:
+                    game.damageToPlayer();
+                    break;
+            }
+            intersectWithObject();
+            moveObjectNPC(npc3);
+            game.energyLossToPlayer();
+
         }
-        intersectWithObject();
-        moveObjectNPC(npc3);
-        game.energyLossToPlayer();
-
     }
 
     public void changeScene(String newScene) throws IOException {
@@ -154,58 +155,60 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void intersectWithObject() {
-        double pxstart, pxend, pystart, pyend;
-        pxstart = player.getLayoutX();
-        pxend = pxstart + player.getFitWidth();
-        pystart = player.getLayoutY();
-        pyend = pystart + player.getFitHeight();
-        // System.out.println(background.getChildren().toArray().length);
-        if (!itemsArray.isEmpty()) {
-            for (int i = 0; i < background.getChildren().toArray().length; i++) {
-                String objectID = background.getChildren().get(i).getId();
+        if (player != null) {
+            double pxstart, pxend, pystart, pyend;
+            pxstart = player.getLayoutX();
+            pxend = pxstart + player.getFitWidth();
+            pystart = player.getLayoutY();
+            pyend = pystart + player.getFitHeight();
+            // System.out.println(background.getChildren().toArray().length);
+            if (!itemsArray.isEmpty()) {
+                for (int i = 0; i < background.getChildren().toArray().length; i++) {
+                    String objectID = background.getChildren().get(i).getId();
 
-                if (objectID.contains("item")) {
+                    if (objectID.contains("item")) {
 
-                    ImageView objectToCheck = (ImageView) background.getChildren().get(i);
+                        ImageView objectToCheck = (ImageView) background.getChildren().get(i);
 
-                    double oXStart = objectToCheck.getLayoutX();
-                    double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
-                    double oYStart = objectToCheck.getLayoutY();
-                    double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
-                    objectID = objectToCheck.getId().replace("item", "");
-                    // System.out.println(objectID);
+                        double oXStart = objectToCheck.getLayoutX();
+                        double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
+                        double oYStart = objectToCheck.getLayoutY();
+                        double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
+                        objectID = objectToCheck.getId().replace("item", "");
+                        // System.out.println(objectID);
 
-                    // System.out.println(objectToCheck.toString());
-                    if (pxstart + objectToCheck.getFitWidth() >= oXStart && pxstart <= oXEnd && pystart + objectToCheck.getFitHeight() >= oYStart && pystart <= oYEnd) {
-                        // System.out.println(background.getChildren().get(i).toString());
-
-                        if (game.takeItemGUI(objectID)) {
+                        // System.out.println(objectToCheck.toString());
+                        if (pxstart + objectToCheck.getFitWidth() >= oXStart && pxstart <= oXEnd && pystart + objectToCheck.getFitHeight() >= oYStart && pystart <= oYEnd) {
                             // System.out.println(background.getChildren().get(i).toString());
-                            background.getChildren().remove(i);
-                            game.goGUI(null);
-                            textDrawed = false;
-                            PickItemPopUpText(objectID);
-                        }else{
-                            System.out.println("TEST");
-                            textDrawed = false;
-                            PickItemFailedPopUpText(objectID);
+
+                            if (game.takeItemGUI(objectID)) {
+                                // System.out.println(background.getChildren().get(i).toString());
+                                background.getChildren().remove(i);
+                                game.goGUI(null);
+                                textDrawed = false;
+                                PickItemPopUpText(objectID);
+                            } else {
+                                System.out.println("TEST");
+                                textDrawed = false;
+                                PickItemFailedPopUpText(objectID);
+                            }
                         }
-                    }
-                } else if (objectID.contains("NPC")) {
+                    } else if (objectID.contains("NPC")) {
 
-                    ImageView objectToCheck = (ImageView) background.getChildren().get(i);
+                        ImageView objectToCheck = (ImageView) background.getChildren().get(i);
 
-                    double oXStart = objectToCheck.getLayoutX();
-                    double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
-                    double oYStart = objectToCheck.getLayoutY();
-                    double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
-                    objectID = objectToCheck.getId().replace("NPC", "");
-                    if (pxstart + objectToCheck.getFitWidth() >= oXStart && pxstart <= oXEnd && pystart + objectToCheck.getFitHeight() >= oYStart && pystart <= oYEnd) {
+                        double oXStart = objectToCheck.getLayoutX();
+                        double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
+                        double oYStart = objectToCheck.getLayoutY();
+                        double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
+                        objectID = objectToCheck.getId().replace("NPC", "");
+                        if (pxstart + objectToCheck.getFitWidth() >= oXStart && pxstart <= oXEnd && pystart + objectToCheck.getFitHeight() >= oYStart && pystart <= oYEnd) {
+
+                        }
 
                     }
 
                 }
-
             }
         }
     }
@@ -237,9 +240,18 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void go(String dir) throws IOException {
+        System.out.println(game.getRoom().equals("airport"));
+        if (game.getRoom().equals("airport")) {
+            game.goGUI(dir);
+            changeScene("splashscreen1");
+        } else {
+            game.goGUI(dir);
+            changeScene(game.getRoom());
+        }
+        
 
-        game.goGUI(dir);
-        changeScene(game.getRoom());
+        //   changeScene("splashscreen1");
+        // changeScene(game.getRoom());
     }
 
     public void spawnNPC() {
@@ -367,9 +379,11 @@ public class FXMLDocumentController implements Initializable {
             if (playerIsObject) {
                 if (go) {
                     go(direction);
-                    player.setLayoutX(shapeToMove.getLayoutX());
-                    player.setLayoutY(shapeToMove.getLayoutY());
+                    if (player != null) {
+                        player.setLayoutX(shapeToMove.getLayoutX());
+                        player.setLayoutY(shapeToMove.getLayoutY());
 
+                    }
                 }
             } else {
 
@@ -399,13 +413,10 @@ public class FXMLDocumentController implements Initializable {
         // dir = "RIGHT"; //- debug line
         moveObject(npc, dir);
     }
-    
-    
+
     @FXML
-    private void showInventory(ActionEvent event) {
-        String inventory = "";
-        inventory += game.printInventory();
-        textArea.setText(inventory);
+    private void showInventory(ActionEvent event) throws IOException {
+        changeSceneCraftMenu("InventoryGUI");
     }
 
     private void quitDialog(ActionEvent event) {
@@ -455,8 +466,7 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
-    
-    
+
     public void PickItemFailedPopUpText(String item) {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
@@ -470,7 +480,6 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
-    
 
     public void LockItemPopUpText() {
         if (!textDrawed) {
@@ -485,12 +494,11 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
-    
-        private void winGame(ActionEvent event){
+
+    private void winGame(ActionEvent event) {
         game.win();
     }
 
-    
     public void escapePopUpText() {
 
         Button yesButton = new Button("Yes");
@@ -500,14 +508,12 @@ public class FXMLDocumentController implements Initializable {
             winGame(event);
             background.getChildren().remove(popupBackground);
         });
-        
+
         noButton.setOnAction((event) -> {
             quitDialog(event);
         });
-        
-      
-    
-        if (!textDrawed) {
+
+        if (textDrawed) {
             background.getChildren().remove(popupBackground);
             game.unlockedEscapeIsland();
             openWindow();
@@ -525,7 +531,8 @@ public class FXMLDocumentController implements Initializable {
             background.getChildren().add(popupBackground);
             textDrawed = true;
 
-        }   if (textDrawed) {
+        }
+        if (!textDrawed) {
             background.getChildren().remove(popupBackground);
             game.lockedEscapeIsland();
             openWindow();
@@ -536,7 +543,6 @@ public class FXMLDocumentController implements Initializable {
             background.getChildren().add(popupBackground);
             textDrawed = true;
 
-            
         }
     }
 
@@ -588,12 +594,6 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    @FXML
-    private void showDropMenu(ActionEvent event) throws IOException {
-        changeSceneCraftMenu("dropItemMenu");
-    }
-
-    @FXML
     private void EscapeIslandOnAction(ActionEvent event) {
         escapePopUpText();
     }

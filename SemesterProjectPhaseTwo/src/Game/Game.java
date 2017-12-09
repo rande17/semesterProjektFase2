@@ -5,9 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -98,8 +100,8 @@ public class Game {
 
     public void createItem() {
         //Initializing an item and putting it in a room airport
-        itemLocation.addItem(airport, new PickableItem("Bottle", "This is a bottle that have been left behind by someone", 2));
-        itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii: 126AB", 1));
+        itemLocation.addItem(airport, new PickableItem("Bottle", "This is a bottle that have been left behind by someone", 2, false));
+        itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii: 126AB", 1, false));
 //        itemLocation.addItem(airport, new PickableItem("Boardingpass to Hawaii: 126AB", "This is a boardingpass to get on the plane to Hawaii", 1));
 //        itemLocation.addItem(airport, new PickableItem("Boardingpass to Kenya: 426DB", "this is a boardingpass to Kenya", 1));
 //        itemLocation.addItem(airport, new PickableItem("Boardingpass to Russia: 139BA", "This boardingpass has expired", 1));
@@ -107,50 +109,50 @@ public class Game {
         //itemLocation.addItem(airport, new Item("StopSign", "this is a shop", 100));
 
         //Initializing an item and putting it in a room beach
-        itemLocation.addItem(beach, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(beach, new PickableItem("Fish", "Why are you inspecting this item, its GOD damn fish", 1));
-        itemLocation.addItem(beach, new PickableItem("Fish", "Why are you inspecting this item, its GOD damn fish", 1));
-        itemLocation.addItem(beach, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(beach, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash ", 2));
-        itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
-        itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
+        itemLocation.addItem(beach, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(beach, new PickableItem("Fish", "Why are you inspecting this item, its GOD damn fish", 1, true));
+        itemLocation.addItem(beach, new PickableItem("Fish", "Why are you inspecting this item, its GOD damn fish", 1, true));
+        itemLocation.addItem(beach, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(beach, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash ", 2, false));
+        itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1, false));
+        itemLocation.addItem(beach, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1, false));
         //non pickable item
         itemLocation.addItem(beach, new Item("GiantRock", "The giant rock dont look like it can be moved", 100));
         itemLocation.addItem(beach, new Item("GiantLog", "The giant log dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room jungle
-        itemLocation.addItem(jungle, new PickableItem("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1));
-        itemLocation.addItem(jungle, new PickableItem("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1));
-        itemLocation.addItem(jungle, new PickableItem("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3));
-        itemLocation.addItem(jungle, new PickableItem("Lian", "This is a lian from the jungle, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(jungle, new PickableItem("Lian", "This is a lian from the jungle, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(jungle, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(jungle, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
+        itemLocation.addItem(jungle, new PickableItem("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1, true));
+        itemLocation.addItem(jungle, new PickableItem("Berry", "this is berries, maybe its poisonous try ur luck!! ", 1, true));
+        itemLocation.addItem(jungle, new PickableItem("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3, false));
+        itemLocation.addItem(jungle, new PickableItem("Lian", "This is a lian from the jungle, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(jungle, new PickableItem("Lian", "This is a lian from the jungle, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(jungle, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(jungle, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1, false));
         //non pickable item
         itemLocation.addItem(jungle, new Item("GiantLog", "The giant log dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room mountain
-        itemLocation.addItem(mountain, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1));
-        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1));
-        itemLocation.addItem(mountain, new PickableItem("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3));
+        itemLocation.addItem(mountain, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
+        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
+        itemLocation.addItem(mountain, new PickableItem("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3, false));
 
         //Initializing an item and putting it in a room cave
-        itemLocation.addItem(cave, new PickableItem("Shroom", "these shrooms look suspecius, but maybe the can be", 1));
-        itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(cave, new PickableItem("Waterbottle", "This is freshwater found in the jungle, maybe you can drink it", 2));
-        itemLocation.addItem(cave, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(cave, new PickableItem("Shroom", "these shrooms look suspecius, but maybe the can be", 1, true));
+        itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(cave, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(cave, new PickableItem("Waterbottle", "This is freshwater found in the jungle, maybe you can drink it", 2, true));
+        itemLocation.addItem(cave, new PickableItem("Flint", "This a flint, maybe it can be used to create something more usefull", 2, false));
         itemLocation.addItem(cave, new Item("GiantRock", "The giant rock dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room camp
-        itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
-        itemLocation.addItem(camp, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
+        itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
+        itemLocation.addItem(camp, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1, false));
 
         //Initializing an item and putting it in a room seaBottom
-        itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 0));
-        itemLocation.addItem(seaBottom, new PickableItem("WaterBottle", "This is a water bottle from the plan crash ", 1));
-        itemLocation.addItem(seaBottom, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash", 2));
+        itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 0, false));
+        itemLocation.addItem(seaBottom, new PickableItem("WaterBottle", "This is a water bottle from the plan crash ", 1, true));
+        itemLocation.addItem(seaBottom, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash", 2, false));
 
     }
 
@@ -365,6 +367,8 @@ public class Game {
         } else if (commandWord == CommandWord.ESCAPE) {
             UnlockedEscapeTheIsland();
             lockedEscapeIsland();
+        } else if (commandWord == CommandWord.USE){
+            useItem(command);
         }
 
         //setting the condition to complete the missions.
@@ -665,9 +669,9 @@ public class Game {
                 System.out.println("This is a list of the games craftable items and their recipes:");
                 System.out.println("Campfire: Lumber, Stick and Flint" + "\n" + "Spear: Stick, Fint and Rope or Lian" + "\n" + "Axe: Stick, Stone and Rope or Lian" + "\n" + "Raft: Lumber, Stick and Rope or Lian");
             } else if (craft.equalsIgnoreCase("Campfire") && inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")) {
-                inventory.dropItemInventory("Lumber");
-                inventory.dropItemInventory("Stick");
-                inventory.dropItemInventory("Flint");
+                inventory.removeItemInventory("Lumber");
+                inventory.removeItemInventory("Stick");
+                inventory.removeItemInventory("Flint");
                 if (craftableItem.craftableListArray.contains(campfire)) {
                     inventory.addItemInInventory(campfire);
                     System.out.println("A Campfire is added to your inventory");
@@ -675,12 +679,12 @@ public class Game {
 
             } else if (craft.equalsIgnoreCase("Spear") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Flint")
                     && (inventory.getInventory().containsKey("Lian") || inventory.getInventory().containsKey("Rope"))) {
-                inventory.dropItemInventory("Stick");
-                inventory.dropItemInventory("Flint");
+                inventory.removeItemInventory("Stick");
+                inventory.removeItemInventory("Flint");
                 if (inventory.getInventory().containsKey("Rope")) {
-                    inventory.dropItemInventory("Rope");
+                    inventory.removeItemInventory("Rope");
                 } else {
-                    inventory.dropItemInventory("Lian");
+                    inventory.removeItemInventory("Lian");
                 }
                 if (craftableItem.craftableListArray.contains(spear)) {
                     inventory.addItemInInventory(spear);
@@ -689,12 +693,12 @@ public class Game {
 
             } else if (craft.equalsIgnoreCase("Axe") && inventory.getInventory().containsKey("Stick") && inventory.getInventory().containsKey("Stone")
                     && (inventory.getInventory().containsKey("Lian") | inventory.getInventory().containsKey("Rope"))) {
-                inventory.dropItemInventory("Stick");
-                inventory.dropItemInventory("Stone");
+                inventory.removeItemInventory("Stick");
+                inventory.removeItemInventory("Stone");
                 if (inventory.getInventory().containsKey("Rope")) {
-                    inventory.dropItemInventory("Rope");
+                    inventory.removeItemInventory("Rope");
                 } else {
-                    inventory.dropItemInventory("Lian");
+                    inventory.removeItemInventory("Lian");
                 }
                 if (craftableItem.craftableListArray.contains(axe)) {
                     inventory.addItemInInventory(axe);
@@ -703,12 +707,12 @@ public class Game {
 
             } else if (craft.equalsIgnoreCase("Raft") && inventory.getInventory().containsKey("Lumber") && inventory.getInventory().containsKey("Stick")
                     && (inventory.getInventory().containsKey("Lian") || inventory.getInventory().containsKey("Rope"))) {
-                inventory.dropItemInventory("Lumber");
-                inventory.dropItemInventory("Stick");
+                inventory.removeItemInventory("Lumber");
+                inventory.removeItemInventory("Stick");
                 if (inventory.getInventory().containsKey("Rope")) {
-                    inventory.dropItemInventory("Rope");
+                    inventory.removeItemInventory("Rope");
                 } else {
-                    inventory.dropItemInventory("Lian");
+                    inventory.removeItemInventory("Lian");
                 }
                 if (craftableItem.craftableListArray.contains(raft)) {
                     inventory.addItemInInventory(raft);
@@ -770,7 +774,7 @@ public class Game {
             }
         }
         if (!indexItem.equals("")) {
-            inventory.dropItemInventory(indexItem);
+            inventory.removeItemInventory(indexItem);
             System.out.println("You have dropped: " + indexItem);
             itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem)));
 
@@ -932,5 +936,35 @@ public class Game {
         System.out.println("You have lost the game!!!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
         System.exit(0);
 
+    }
+    
+    static boolean useItem(Command command){
+        HashMap newInventory = inventory.getInventory();
+        Iterator itte = newInventory.entrySet().iterator();
+        String seeItem;
+//        int indexItem = -1;
+        String indexItem = "";
+        String useItem = "debug";
+
+        while (itte.hasNext()) {
+            HashMap.Entry liste = (HashMap.Entry) itte.next();
+            String itemName = (String) liste.getKey();
+            if (itemName.equalsIgnoreCase(command.getSecondWord())) {
+                useItem = itemName;
+                indexItem = itemName;
+                break;
+            }
+        }
+        if (!indexItem.equals("") && inventory.getUseable(indexItem)) {
+            inventory.removeItemInventory(indexItem);
+            System.out.println("You have dropped: " + indexItem);
+            itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem)));
+            player.setEnergy(player.getEnergy() + 10);
+            player.setHealth(player.getHealth() + 5);
+            
+            
+            return true;
+        }
+        return false;
     }
 }

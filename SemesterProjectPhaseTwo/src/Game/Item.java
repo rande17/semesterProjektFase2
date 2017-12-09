@@ -14,7 +14,7 @@ public class Item {
     private String itemDescribtion;
     private int weight;
     private String name;
-
+    private boolean useable;
     /**
      * constructer for item
      * @param _name of item
@@ -35,6 +35,13 @@ public class Item {
         name = _name;
         weight = _weight;
         itemDescribtion = _description;
+    }
+    
+    Item(String _name, String _description, int _weight, boolean _useable) {
+        name = _name;
+        weight = _weight;
+        itemDescribtion = _description;
+        useable = _useable;
     }
 
     /**
@@ -68,4 +75,8 @@ public class Item {
     public String getName() {
         return name;
     }
+    
+    public boolean getUseable(){
+      return useable;  
+    } 
 }
