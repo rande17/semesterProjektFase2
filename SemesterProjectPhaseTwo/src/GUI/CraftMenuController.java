@@ -41,12 +41,9 @@ public class CraftMenuController implements Initializable {
     private TextArea requirementsTextArea;
     @FXML
     private Button craftButton;
-    private boolean craftCampfire;
     private ArrayList craftingItems;
     private boolean craftItemsAdded = false;
     private ToggleGroup craftToggleGroup = new ToggleGroup();
-    @FXML
-    private ToggleGroup CraftToggle;
 
     /**
      * Initializes the controller class.
@@ -55,7 +52,7 @@ public class CraftMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 //        addButtonAndPrintCraftItems();
-        populateShit();
+        populateVBoxWithRadioButtons();
     }
     
     public void changeScene(String newScene) throws IOException {
@@ -75,25 +72,7 @@ public class CraftMenuController implements Initializable {
         requirementsTextArea.setText("Unsupported operation");
     }
     
-    @FXML
-    private void craftCampfire(ActionEvent event) {
-        requirementsTextArea.setText("Items needed are: \nLumber, Stick and Flint");
-    }
-    
-    @FXML
-    private void showSpearItems(ActionEvent event) {
-        requirementsTextArea.setText("Items needed are: \nStick, Flint and Rope or Lian");
-    }
-    
-    public void addButtonAndPrintCraftItems() {
-        Button testButton = new Button("Print items");
-        
-        craftingItems = game.getCraftableItemsArray();
-        craftableItemsVBox.getChildren().add(testButton);
-        
-    }
-    
-    public void populateShit() {
+    public void populateVBoxWithRadioButtons() {
         if (!craftItemsAdded) {
             craftingItems = game.getCraftableItemsArray();
             if (!craftingItems.isEmpty()) {
