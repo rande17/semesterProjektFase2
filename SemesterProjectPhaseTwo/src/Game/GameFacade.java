@@ -43,6 +43,12 @@ public class GameFacade implements InterfaceGame {
 //        }
         return returnbool;
     }
+    
+    @Override
+    public void craftItemGUI(String itemToCraft){
+        Command command = new Command(CRAFT, itemToCraft);
+        Game.craftItem(command);
+    }
 
     @Override
     public void goGUI(String dir) {
