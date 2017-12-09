@@ -127,7 +127,7 @@ public class FXMLDocumentController implements Initializable {
                 game.damageToPlayer();
                 break;
         }
-        intersectsItem();
+        intersectWithObject();
         moveObjectNPC(npc3);
         game.energyLossToPlayer();
 
@@ -149,7 +149,7 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    public void intersectsItem() {
+    public void intersectWithObject() {
         double pxstart, pxend, pystart, pyend;
         pxstart = player.getLayoutX();
         pxend = pxstart + player.getFitWidth();
@@ -158,31 +158,36 @@ public class FXMLDocumentController implements Initializable {
         // System.out.println(background.getChildren().toArray().length);
         if (!itemsArray.isEmpty()) {
             for (int i = 0; i < background.getChildren().toArray().length; i++) {
-                String itemID = background.getChildren().get(i).getId();
+                String objectID = background.getChildren().get(i).getId();
+                ImageView objectToCheck = (ImageView) background.getChildren().get(i);
 
-                if (itemID.contains("item")) {
-                    ImageView itemToCheck = (ImageView) background.getChildren().get(i);
+                double oXStart = objectToCheck.getLayoutX();
+                double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
+                double oYStart = objectToCheck.getLayoutY();
+                double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
+                if (objectID.contains("item")) {
 
-                    //System.out.println(itemToCheck.toString());
-                    itemID = itemToCheck.getId().replace("item", "");
-                    // System.out.println(itemID);
+                    objectID = objectToCheck.getId().replace("item", "");
+                    // System.out.println(objectID);
 
-                    // System.out.println(itemToCheck.toString());
-                    double ixstart = itemToCheck.getLayoutX();
-                    double ixend = itemToCheck.getLayoutX() + itemToCheck.getFitWidth();
-                    double iystart = itemToCheck.getLayoutY();
-                    double iyend = itemToCheck.getLayoutY() + itemToCheck.getFitHeight();
-                    if (pxstart + 30 >= ixstart && pxstart <= ixend && pystart + 30 >= iystart && pystart <= iyend) {
+                    // System.out.println(objectToCheck.toString());
+                    if (pxstart + objectToCheck.getFitWidth() >= oXStart && pxstart <= oXEnd && pystart + objectToCheck.getFitHeight() >= oYStart && pystart <= oYEnd) {
                         // System.out.println(background.getChildren().get(i).toString());
 
-                        if (game.takeItemGUI(itemID)) {
+                        if (game.takeItemGUI(objectID)) {
                             // System.out.println(background.getChildren().get(i).toString());
                             background.getChildren().remove(i);
                             game.goGUI(null);
                             textDrawed = false;
-                            PickItemPopUpText(itemID);
+                            PickItemPopUpText(objectID);
                         }
                     }
+                } else if (objectID.contains("NPC")) {
+                    objectID = objectToCheck.getId().replace("NPC", "");
+                    if (pxstart + objectToCheck.getFitWidth() >= oXStart && pxstart <= oXEnd && pystart + objectToCheck.getFitHeight() >= oYStart && pystart <= oYEnd) {
+
+                    }
+
                 }
 
             }
