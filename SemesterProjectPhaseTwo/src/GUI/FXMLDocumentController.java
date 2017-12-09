@@ -83,6 +83,8 @@ public class FXMLDocumentController implements Initializable {
     private Button quitButton;
     @FXML
     private Button craftButton;
+    @FXML
+    private Button dropItemButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -478,5 +480,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void showHelp(MouseEvent event) {
+    }
+
+    @FXML
+    private void showDropMenu(ActionEvent event) throws IOException {
+        changeSceneCraftMenu("dropItemMenu");
     }
 }
