@@ -181,7 +181,7 @@ public class Game {
 
     public void createNPC() {
         //create the good npc
-        npc1.setName("BS Christiansen");
+        npc1.setName("BSChristiansen");
         npc1.setCurrentRoom(jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, "
                 + "\nbut he is heavly injured on his right leg so he cant move ");
