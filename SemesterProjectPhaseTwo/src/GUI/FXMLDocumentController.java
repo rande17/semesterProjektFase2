@@ -24,7 +24,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -129,7 +128,7 @@ public class FXMLDocumentController implements Initializable {
                 game.damageToPlayer();
                 break;
         }
-        intersectsItem();
+        intersectWithObject();
         moveObjectNPC(npc3);
         game.energyLossToPlayer();
 
@@ -151,45 +150,54 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    public void intersectsItem() {
+    public void intersectWithObject() {
         double pxstart, pxend, pystart, pyend;
         pxstart = player.getLayoutX();
         pxend = pxstart + player.getFitWidth();
         pystart = player.getLayoutY();
         pyend = pystart + player.getFitHeight();
-       // System.out.println(background.getChildren().toArray().length);
+        // System.out.println(background.getChildren().toArray().length);
         if (!itemsArray.isEmpty()) {
             for (int i = 0; i < background.getChildren().toArray().length; i++) {
-                String itemID = background.getChildren().get(i).getId();
-                
-                if (itemID.contains("item")) {
-                ImageView itemToCheck = (ImageView) background.getChildren().get(i);
-                
-                //System.out.println(itemToCheck.toString());
-                itemID = itemToCheck.getId().replace("item", "");
-                // System.out.println(itemID);
-                
-                    
-               // System.out.println(itemToCheck.toString());
-                    double ixstart = itemToCheck.getLayoutX();
-                    double ixend = itemToCheck.getLayoutX() + itemToCheck.getFitWidth();
-                    double iystart = itemToCheck.getLayoutY();
-                    double iyend = itemToCheck.getLayoutY() + itemToCheck.getFitHeight();
-                    if (pxstart + 30 >= ixstart && pxstart <= ixend && pystart + 30 >= iystart && pystart <= iyend) {
-                       // System.out.println(background.getChildren().get(i).toString());
-                            
-                        if (game.takeItemGUI(itemID)) {
-                           // System.out.println(background.getChildren().get(i).toString());
+                String objectID = background.getChildren().get(i).getId();
+                if (objectID.contains("item")) {
+
+                    ImageView objectToCheck = (ImageView) background.getChildren().get(i);
+
+                    double oXStart = objectToCheck.getLayoutX();
+                    double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
+                    double oYStart = objectToCheck.getLayoutY();
+                    double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
+                    objectID = objectToCheck.getId().replace("item", "");
+                    // System.out.println(objectID);
+
+                    // System.out.println(objectToCheck.toString());
+                    if (pxstart + objectToCheck.getFitWidth() >= oXStart && pxstart <= oXEnd && pystart + objectToCheck.getFitHeight() >= oYStart && pystart <= oYEnd) {
+                        // System.out.println(background.getChildren().get(i).toString());
+
+                        if (game.takeItemGUI(objectID)) {
+                            // System.out.println(background.getChildren().get(i).toString());
                             background.getChildren().remove(i);
                             game.goGUI(null);
                             textDrawed = false;
-                            PickItemPopUpText(itemID);
+                            PickItemPopUpText(objectID);
                         }
                     }
+                } else if (objectID.contains("NPC")) {
+
+                    ImageView objectToCheck = (ImageView) background.getChildren().get(i);
+
+                    double oXStart = objectToCheck.getLayoutX();
+                    double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
+                    double oYStart = objectToCheck.getLayoutY();
+                    double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
+                    objectID = objectToCheck.getId().replace("NPC", "");
+                    if (pxstart + objectToCheck.getFitWidth() >= oXStart && pxstart <= oXEnd && pystart + objectToCheck.getFitHeight() >= oYStart && pystart <= oYEnd) {
+
+                    }
+
                 }
-                
-                
-                
+
             }
         }
     }
@@ -201,16 +209,16 @@ public class FXMLDocumentController implements Initializable {
                 for (int i = 0; i < itemsArray.size(); i++) {
                     ImageView item = new ImageView();
                     String imgPath = "GUI/Assets/items/" + itemsArray.get(i).toString().trim().toLowerCase() + ".png";
-                    // System.out.println(imgPath);
+//                    System.out.println(imgPath);
                     Image img = new Image(imgPath);
-                   
+
                     Paint color = Color.rgb(0, 0, 255);
                     item.setLayoutX(Math.random() * (background.getWidth() - 40));
                     item.setLayoutY(Math.random() * (background.getHeight() - 40));
                     item.setFitHeight(20);
                     item.setFitWidth(20);
                     item.setImage(img);
-                    item.setId((String) "item"+itemsArray.get(i));
+                    item.setId((String) "item" + itemsArray.get(i));
 
                     item.setVisible(true);
                     background.getChildren().add(item);
@@ -250,7 +258,7 @@ public class FXMLDocumentController implements Initializable {
                         NPC.setFitWidth(35);
                         NPC.setImage(img);
                         NPC.setId((String) (entry.getKey()));
-                        if (NPC.getId().equals("Joseph Schnitzel")) {
+                        if (NPC.getId().equals("Joseph_Schnitzel")) {
                             npc3 = NPC;
                         }
                         NPC.setVisible(true);
@@ -266,80 +274,82 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void moveObject(ImageView shapeToMove, String dir) throws IOException {
-       // System.out.println(player.toString());
-       // System.out.println(shapeToMove.toString());
-        boolean playerIsObject = shapeToMove.equals(player);
+        if (shapeToMove != null) {
+            // System.out.println(player.toString());
+            // System.out.println(shapeToMove.toString());
+            boolean playerIsObject = shapeToMove.equals(player);
 
-        String direction = "";
-        boolean go = false;
-        switch (dir) {
-            case "UP":
-                if (shapeToMove.getLayoutY() <= 0) {
-                    if (game.checkExit("north")) {
-                        direction = "north";
-                        go = true;
-                        shapeToMove.setLayoutX(x);
-                        shapeToMove.setLayoutY(background.getHeight() - shapeToMove.getFitHeight());
+            String direction = "";
+            boolean go = false;
+            switch (dir) {
+                case "UP":
+                    if (shapeToMove.getLayoutY() <= 0) {
+                        if (game.checkExit("north")) {
+                            direction = "north";
+                            go = true;
+                            shapeToMove.setLayoutX(x);
+                            shapeToMove.setLayoutY(background.getHeight() - shapeToMove.getFitHeight());
+                        }
+                    } else {
+                        shapeToMove.setLayoutY(shapeToMove.getLayoutY() - speed);
                     }
-                } else {
-                    shapeToMove.setLayoutY(shapeToMove.getLayoutY() - speed);
-                }
-                break;
+                    break;
 
-            case "DOWN":
-                if (shapeToMove.getLayoutY() >= background.getHeight() - speed - shapeToMove.getFitHeight()) {
-                    if (game.checkExit("south")) {
-                        direction = "south";
-                        shapeToMove.setLayoutX(x);
-                        go = true;
-                        shapeToMove.setLayoutY(0);
-                        System.out.println(shapeToMove.getLayoutBounds().toString());
+                case "DOWN":
+                    if (shapeToMove.getLayoutY() >= background.getHeight() - speed - shapeToMove.getFitHeight()) {
+                        if (game.checkExit("south")) {
+                            direction = "south";
+                            shapeToMove.setLayoutX(x);
+                            go = true;
+                            shapeToMove.setLayoutY(0);
+                            System.out.println(shapeToMove.getLayoutBounds().toString());
+                        }
+                    } else {
+                        shapeToMove.setLayoutY(shapeToMove.getLayoutY() + speed);
                     }
-                } else {
-                    shapeToMove.setLayoutY(shapeToMove.getLayoutY() + speed);
-                }
-                break;
+                    break;
 
-            case "LEFT":
+                case "LEFT":
 
-                if (shapeToMove.getLayoutX() <= 0) {
-                    if (game.checkExit("west")) {
-                        direction = "west";
-                        go = true;
-                        shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getFitWidth());
-                        shapeToMove.setLayoutY(y);
-                    }else if(game.getRoom().equalsIgnoreCase("airport")){
-                        textDrawed = false;
-                        LockItemPopUpText();
-                        
+                    if (shapeToMove.getLayoutX() <= 0) {
+                        if (game.checkExit("west")) {
+                            direction = "west";
+                            go = true;
+                            shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getFitWidth());
+                            shapeToMove.setLayoutY(y);
+                        } else if (game.getRoom().equalsIgnoreCase("airport")) {
+                            textDrawed = false;
+                            LockItemPopUpText();
+
+                        }
+                    } else {
+                        shapeToMove.setLayoutX(shapeToMove.getLayoutX() - speed);
                     }
-                } else {
-                    shapeToMove.setLayoutX(shapeToMove.getLayoutX() - speed);
-                }
-                break;
+                    break;
 
-            case "RIGHT":
-                if (shapeToMove.getLayoutX() >= background.getWidth() - speed - shapeToMove.getFitWidth()) {
-                    if (game.checkExit("east")) {
-                        direction = "east";
-                        go = true;
-                        shapeToMove.setLayoutX(0);
-                        shapeToMove.setLayoutY(y);
+                case "RIGHT":
+                    if (shapeToMove.getLayoutX() >= background.getWidth() - speed - shapeToMove.getFitWidth()) {
+                        if (game.checkExit("east")) {
+                            direction = "east";
+                            go = true;
+                            shapeToMove.setLayoutX(0);
+                            shapeToMove.setLayoutY(y);
+                        }
+                    } else {
+                        shapeToMove.setLayoutX(shapeToMove.getLayoutX() + speed);
                     }
-                } else {
-                    shapeToMove.setLayoutX(shapeToMove.getLayoutX() + speed);
+                    break;
+            }
+            if (playerIsObject) {
+                if (go) {
+                    go(direction);
+                    player.setLayoutX(shapeToMove.getLayoutX());
+                    player.setLayoutY(shapeToMove.getLayoutY());
+
                 }
-                break;
-        }
-        if (playerIsObject) {
-            if (go) {
-                go(direction);
-                player.setLayoutX(shapeToMove.getLayoutX());
-                player.setLayoutY(shapeToMove.getLayoutY());
+            } else {
 
             }
-        } else {
-
         }
     }
 
@@ -360,10 +370,10 @@ public class FXMLDocumentController implements Initializable {
                 dir = "RIGHT";
                 break;
             default:
-               // System.out.println("I didn't move");
+            // System.out.println("I didn't move");
         }
         // dir = "RIGHT"; //- debug line
-//        moveObject(npc, dir);
+        moveObject(npc, dir);
     }
 
     @FXML
@@ -417,10 +427,10 @@ public class FXMLDocumentController implements Initializable {
 
             background.getChildren().add(popupBackground);
             textDrawed = true;
-                                    
+
         }
     }
-    
+
     public void LockItemPopUpText() {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
@@ -507,7 +517,7 @@ public class FXMLDocumentController implements Initializable {
         popupBackground.setLayoutY(500);
         popupBackground.setOpacity(0.6);
         popupBackground.setId("popup");
-        
+
         popupText = new TextArea();
         popupText.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         popupText.setFocusTraversable(false);
