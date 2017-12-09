@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author rickie
  */
 public class GameFacade implements InterfaceGame {
-
+    
     @Override
     public ArrayList getItemsOnMap() {
         ArrayList itemArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
@@ -29,7 +29,7 @@ public class GameFacade implements InterfaceGame {
         }
         return itemNameArrayList;
     }
-
+    
     @Override
     public boolean takeItemGUI(String itemToTake) {
         boolean returnbool;
@@ -43,7 +43,7 @@ public class GameFacade implements InterfaceGame {
 //        }
         return returnbool;
     }
-
+    
     @Override
     public void goGUI(String dir) {
         Command command = new Command(GO, dir);
@@ -53,94 +53,102 @@ public class GameFacade implements InterfaceGame {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     public String getRoom() {
         return Game.currentRoom.getShortDescription();
     }
     
-
-
     @Override
     public String printInventory() {
         return Game.inventory.toString();
     }
     
-
     @Override
     public String printMissions() {
         return Game.allMissions.toString();
     }
-
+    
     @Override
     public String showHelp() {
         return Game.printHelp();
     }
-
+    
     @Override
     public void quitGame() {
         System.exit(0);
     }
-
+    
     @Override
     public String getCraftableItems() {
-        return CraftableItem.craftableList.toString();
+//        return CraftableItem.craftableList.toString();
+        throw new UnsupportedOperationException("Unsupported operation");
     }
-
+    
     @Override
     public String printHighscoreGUI() {
         return Game.getHighscoreFromData().toString();
     }
-
+    
     @Override
     public boolean checkExit(String dir) {
         return Game.getExitBool(dir);
     }
-
+    
     @Override
     public int playerHealth() {
         return Game.player.getHealth();
     }
     
     @Override
-    public int gameTime(){
+    public int gameTime() {
         return Time.getSecondsPassed();
     }
-
+    
     @Override
     public int playerEnergy() {
         return Game.player.getEnergy();
     }
-
+    
     @Override
     public int maxPlayerHealth() {
         return Game.player.getMaxHealth();
     }
-
+    
     @Override
     public int maxPlayerEnergy() {
         return Game.player.getMaxEnergy();
     }
-
+    
     @Override
     public void damageToPlayer() {
         Game.player.loseHealth(25);
     }
-
+    
     @Override
     public void energyLossToPlayer() {
         Game.player.loseEnergy(5);
     }
-
+    
     @Override
     public HashMap<String, String> getNPC() {
         return Game.storeNPC();
     }
-
+    
     @Override
     public void lose() {
         Game.lose();
     }
-
-
+    
+    @Override
+    public ArrayList getCraftableItemsArray() {
+        ArrayList craftableItemsArrayList = new ArrayList(CraftableItem.craftableListArray.size());
+        ArrayList craftableItemsNameArrayList = new ArrayList(CraftableItem.craftableListArray.size());
+        craftableItemsArrayList = CraftableItem.craftableListArray;
+        for (int i = 0; i < craftableItemsArrayList.size(); i++) {
+            Item item = (Item) craftableItemsArrayList.get(i);
+            craftableItemsNameArrayList.add(item.getName());
+        }
+        return craftableItemsNameArrayList;
+    }
 }
