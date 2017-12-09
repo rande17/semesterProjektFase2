@@ -156,11 +156,14 @@ public class Game {
 
     public void putCraftableItemInHashmap() {
 
-        craftableItem.craftableList.put("Campfire", campfire);
-        craftableItem.craftableList.put("Raft", raft);
-        craftableItem.craftableList.put("Axe", axe);
-        craftableItem.craftableList.put("Spear", spear);
-
+//        craftableItem.craftableList.put("Campfire", campfire);
+//        craftableItem.craftableList.put("Raft", raft);
+//        craftableItem.craftableList.put("Axe", axe);
+//        craftableItem.craftableList.put("Spear", spear);
+        craftableItem.craftableListArray.add(campfire);
+        craftableItem.craftableListArray.add(raft);
+        craftableItem.craftableListArray.add(axe);
+        craftableItem.craftableListArray.add(spear);
     }
 
     public void createMissions() {
@@ -665,7 +668,7 @@ public class Game {
                 inventory.dropItemInventory("Lumber");
                 inventory.dropItemInventory("Stick");
                 inventory.dropItemInventory("Flint");
-                if (craftableItem.craftableList.containsKey("Campfire")) {
+                if (craftableItem.craftableListArray.contains(campfire)) {
                     inventory.addItemInInventory(campfire);
                     System.out.println("A Campfire is added to your inventory");
                 }
@@ -679,7 +682,7 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                if (craftableItem.craftableList.containsKey("Spear")) {
+                if (craftableItem.craftableListArray.contains(spear)) {
                     inventory.addItemInInventory(spear);
                     System.out.println("A Spear is added to your inventory");
                 }
@@ -693,7 +696,7 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                if (craftableItem.craftableList.containsKey("Axe")) {
+                if (craftableItem.craftableListArray.contains(axe)) {
                     inventory.addItemInInventory(axe);
                     System.out.println("An axe is added to your inventory");
                 }
@@ -707,7 +710,7 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                if (craftableItem.craftableList.containsKey("Raft")) {
+                if (craftableItem.craftableListArray.contains(raft)) {
                     inventory.addItemInInventory(raft);
                     System.out.println("Raft has been added to inventory");
                 }
