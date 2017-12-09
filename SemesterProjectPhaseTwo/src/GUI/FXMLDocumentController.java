@@ -185,6 +185,10 @@ public class FXMLDocumentController implements Initializable {
                             game.goGUI(null);
                             textDrawed = false;
                             PickItemPopUpText(objectID);
+                        }else{
+                            System.out.println("TEST");
+                            textDrawed = false;
+                            PickItemFailedPopUpText(objectID);
                         }
                     }
                 } else if (objectID.contains("NPC")) {
@@ -451,6 +455,22 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
+    
+    
+    public void PickItemFailedPopUpText(String item) {
+        if (!textDrawed) {
+            background.getChildren().remove(popupBackground);
+            openWindow();
+
+            popupText.setText(
+                    item + " could not be added to inventory due to lack of space.");
+
+            background.getChildren().add(popupBackground);
+            textDrawed = true;
+
+        }
+    }
+    
 
     public void LockItemPopUpText() {
         if (!textDrawed) {
