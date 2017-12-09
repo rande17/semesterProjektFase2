@@ -565,12 +565,12 @@ public class FXMLDocumentController implements Initializable {
         popupText.setEditable(false);
         popupText.setMouseTransparent(true);
 
-        popupText.setPrefSize(350, 75);
+        popupText.setPrefSize(380, 75);
         popupText.setLayoutX(0);
         popupText.setLayoutY(0);
         popupBackground.getChildren().add(popupText);
         popupBackground.getChildren().add(quitButton);
-        quitButton.setLayoutX(320);
+        quitButton.setLayoutX(350);
         quitButton.setLayoutY(5);
 
     }
