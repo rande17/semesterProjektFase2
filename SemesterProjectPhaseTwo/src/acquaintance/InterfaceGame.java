@@ -35,7 +35,10 @@ public interface InterfaceGame {
     public boolean checkExit(String dir);
     public HashMap<String, String> getNPC();
     public void lose();
+    public void win();
     public int gameTime();
     public ArrayList inventoryNames();
     public void dropItem(String item);
+    public void unlockedEscapeIsland();
+    public void lockedEscapeIsland();
 }

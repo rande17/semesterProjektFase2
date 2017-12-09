@@ -143,9 +143,24 @@ public class GameFacade implements InterfaceGame {
     public void lose() {
         Game.lose();
     }
+    
+    @Override
+    public void win(){
+        Game.win();
+    }
+    @Override
     public ArrayList inventoryNames(){
         return Game.inventory.inventoryNames();
     }
+    
+    public void unlockedEscapeIsland(){
+        Game.UnlockedEscapeTheIsland();     
+    }
+    
+    public void lockedEscapeIsland(){
+        Game.lockedEscapeIsland();
+    }
+  
     
     @Override
     public void dropItem(String itemToDrop) {

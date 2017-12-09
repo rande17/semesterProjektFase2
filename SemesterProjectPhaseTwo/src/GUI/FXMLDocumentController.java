@@ -81,6 +81,8 @@ public class FXMLDocumentController implements Initializable {
     private Button craftButton;
     @FXML
     private Button dropItemButton;
+    @FXML
+    private Button escapeButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -432,6 +434,60 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
+    
+        private void winGame(ActionEvent event){
+        game.win();
+    }
+
+    
+    public void escapePopUpText() {
+
+        Button yesButton = new Button("Yes");
+        Button noButton = new Button("No");
+
+        yesButton.setOnAction((event) -> {
+            winGame(event);
+            background.getChildren().remove(popupBackground);
+        });
+        
+        noButton.setOnAction((event) -> {
+            quitDialog(event);
+        });
+        
+      
+    
+        if (!textDrawed) {
+            background.getChildren().remove(popupBackground);
+            game.unlockedEscapeIsland();
+            openWindow();
+
+            popupText.setText(
+                    " Are you sure you want to leave: Yes or no");
+
+            popupBackground.getChildren().add(yesButton);
+            popupBackground.getChildren().add(noButton);
+            yesButton.setLayoutX(10);
+            yesButton.setLayoutY(40);
+            noButton.setLayoutX(65);
+            noButton.setLayoutY(40);
+
+            background.getChildren().add(popupBackground);
+            textDrawed = true;
+
+        }   if (textDrawed) {
+            background.getChildren().remove(popupBackground);
+            game.lockedEscapeIsland();
+            openWindow();
+
+            popupText.setText(
+                    " You haven't unlocked this command yet");
+
+            background.getChildren().add(popupBackground);
+            textDrawed = true;
+
+            
+        }
+    }
 
     private void openWindow() {
         Button quitButton = new Button("X");
@@ -484,5 +540,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void showDropMenu(ActionEvent event) throws IOException {
         changeSceneCraftMenu("dropItemMenu");
+    }
+
+    @FXML
+    private void EscapeIslandOnAction(ActionEvent event) {
+        escapePopUpText();
     }
 }

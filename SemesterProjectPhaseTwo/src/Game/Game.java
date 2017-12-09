@@ -26,16 +26,15 @@ public class Game {
     static private String name;
     static private boolean hasTalkedWithEvilGuy = false;
 
-    
-
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
     public Game() {
         initGame();
         parser = new Parser();
     }
-        public static boolean getExitBool(String dir){
-        
+
+    public static boolean getExitBool(String dir) {
+
         return (currentRoom.getExit(dir) != null);
     }
 
@@ -61,9 +60,6 @@ public class Game {
     static NPC npc3 = new NPC();
 
     //file thats gonna be written to and the extension
-    
-    
-
     /**
      * Used to initialize different rooms and their respective items, and also
      * set the currentRoom
@@ -148,9 +144,9 @@ public class Game {
         itemLocation.addItem(cave, new Item("GiantRock", "The giant rock dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room camp
-         itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(camp, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
-        
+
         //Initializing an item and putting it in a room seaBottom
         itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 0));
         itemLocation.addItem(seaBottom, new PickableItem("WaterBottle", "This is a water bottle from the plan crash ", 1));
@@ -204,16 +200,15 @@ public class Game {
                 + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
                 + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
     }
-    
+
     static HashMap<String, String> storeNPC() {
         HashMap<String, String> npcMap = new HashMap<>();
-        npcMap.put(npc1.getName(),npc1.getCurrentRoom().getShortDescription());
+        npcMap.put(npc1.getName(), npc1.getCurrentRoom().getShortDescription());
         npcMap.put(npc2.getName(), npc2.getCurrentRoom().getShortDescription());
         npcMap.put(npc3.getName(), npc3.getCurrentRoom().getShortDescription());
-       return npcMap;   
-    } 
-    
- 
+        return npcMap;
+    }
+
     //Initializing game
     public void initGame() {
 
@@ -365,7 +360,8 @@ public class Game {
         } else if (commandWord == CommandWord.LOSE) {
             lose();
         } else if (commandWord == CommandWord.ESCAPE) {
-            escapeTheIsland();
+            UnlockedEscapeTheIsland();
+            lockedEscapeIsland();
         }
 
         //setting the condition to complete the missions.
@@ -657,9 +653,8 @@ public class Game {
     /**
      *
      * @param command to craft item
-     * @return 
+     * @return
      */
-    
     static public void craftItem(Command command) {
         if (command.hasSecondWord()) {
             String craft = command.getSecondWord();
@@ -806,28 +801,15 @@ public class Game {
     }
 
     //command to leave the island if you choose to stay to complete more quest for at better highscore
-    static private void escapeTheIsland() {
-        while (currentRoom == beach) {
-            if (allMissions.missionStatus.get("Escape the island") == true) {
-
-                Scanner scan = new Scanner(System.in); //create new scanner
-                System.out.println("");
-                System.out.println("- Are you sure you want to leave: Yes or no");
-                System.out.println("");
-                String input = scan.nextLine(); //Waits for input
-                while (input.equalsIgnoreCase("yes")) {
-                    win();
-                    break;
-                }
-//                while (input.equalsIgnoreCase("no")) {
-//                break;
-//                }
-
-            }
-            break;
+    static void UnlockedEscapeTheIsland() {
+        if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
+            win();
         }
+    }
+
+    static void lockedEscapeIsland() {
         if (allMissions.missionStatus.get("Escape the island") == false) {
-            System.out.println("- You cant use this command yet");
+            System.out.println("You haven't unlocked this command yet");
         }
     }
 
@@ -896,7 +878,7 @@ public class Game {
         save.addToSaveGame(objectsToSave());
         save.saveGame();
     }
-    */
+     */
     static private String objectsToSave() {
         ArrayList saveObjectsJSON;
         saveObjectsJSON = new ArrayList(10);
