@@ -24,7 +24,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -171,6 +170,12 @@ public class FXMLDocumentController implements Initializable {
                     double oYStart = objectToCheck.getLayoutY();
                     double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
 
+                    ImageView objectToCheck = (ImageView) background.getChildren().get(i);
+
+                    double oXStart = objectToCheck.getLayoutX();
+                    double oXEnd = objectToCheck.getLayoutX() + objectToCheck.getFitWidth();
+                    double oYStart = objectToCheck.getLayoutY();
+                    double oYEnd = objectToCheck.getLayoutY() + objectToCheck.getFitHeight();
                     objectID = objectToCheck.getId().replace("item", "");
                     // System.out.println(objectID);
 
@@ -187,6 +192,7 @@ public class FXMLDocumentController implements Initializable {
                         }
                     }
                 } else if (objectID.contains("NPC")) {
+
                     ImageView objectToCheck = (ImageView) background.getChildren().get(i);
 
                     double oXStart = objectToCheck.getLayoutX();
@@ -211,7 +217,7 @@ public class FXMLDocumentController implements Initializable {
                 for (int i = 0; i < itemsArray.size(); i++) {
                     ImageView item = new ImageView();
                     String imgPath = "GUI/Assets/items/" + itemsArray.get(i).toString().trim().toLowerCase() + ".png";
-                    // System.out.println(imgPath);
+//                    System.out.println(imgPath);
                     Image img = new Image(imgPath);
 
                     Paint color = Color.rgb(0, 0, 255);

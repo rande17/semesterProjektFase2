@@ -9,10 +9,8 @@ import static Game.CommandWord.*;
 import acquaintance.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
 
 /**
  *
@@ -47,6 +45,12 @@ public class GameFacade implements InterfaceGame {
     }
 
     @Override
+    public void craftItemGUI(String itemToCraft) {
+        Command command = new Command(CRAFT, itemToCraft);
+        Game.craftItem(command);
+    }
+
+    @Override
     public void goGUI(String dir) {
         Command command = new Command(GO, dir);
         try {
@@ -60,14 +64,11 @@ public class GameFacade implements InterfaceGame {
     public String getRoom() {
         return Game.currentRoom.getShortDescription();
     }
-    
-
 
     @Override
     public String printInventory() {
         return Game.inventory.toString();
     }
-    
 
     @Override
     public String printMissions() {
@@ -86,7 +87,8 @@ public class GameFacade implements InterfaceGame {
 
     @Override
     public String getCraftableItems() {
-        return CraftableItem.craftableList.toString();
+//        return CraftableItem.craftableList.toString();
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
@@ -103,9 +105,9 @@ public class GameFacade implements InterfaceGame {
     public int playerHealth() {
         return Game.player.getHealth();
     }
-    
+
     @Override
-    public int gameTime(){
+    public int gameTime() {
         return Time.getSecondsPassed();
     }
 
@@ -143,14 +145,43 @@ public class GameFacade implements InterfaceGame {
     public void lose() {
         Game.lose();
     }
-    public ArrayList inventoryNames(){
+
+    @Override
+    public ArrayList getCraftableItemsArray() {
+        ArrayList craftableItemsArrayList = new ArrayList(CraftableItem.craftableListArray.size());
+        ArrayList craftableItemsNameArrayList = new ArrayList(CraftableItem.craftableListArray.size());
+        craftableItemsArrayList = CraftableItem.craftableListArray;
+        for (int i = 0; i < craftableItemsArrayList.size(); i++) {
+            Item item = (Item) craftableItemsArrayList.get(i);
+            craftableItemsNameArrayList.add(item.getName());
+        }
+        return craftableItemsNameArrayList;
+    }
+
+    @Override
+    public String getCraftableItemDescribtion(String itemName) {
+        ArrayList craftArray = new ArrayList(CraftableItem.craftableListArray.size());
+        craftArray = CraftableItem.craftableListArray;
+        String itemDescribtion = "";
+        for (int i = 0; i < craftArray.size(); i++) {
+            Item item = (Item) craftArray.get(i);
+            if (item.getName().equals(itemName)) {
+                itemDescribtion = item.getItemDescribtion();
+                break;
+            }
+        }
+        return itemDescribtion;
+    }
+
+    @Override
+    public ArrayList inventoryNames() {
         return Game.inventory.inventoryNames();
     }
-    
+
     @Override
     public void dropItem(String itemToDrop) {
-         Command command = new Command(DROP, itemToDrop);
-         try {
+        Command command = new Command(DROP, itemToDrop);
+        try {
             Game.processCommand(command);
         } catch (Throwable ex) {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);

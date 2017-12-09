@@ -26,16 +26,15 @@ public class Game {
     static private String name;
     static private boolean hasTalkedWithEvilGuy = false;
 
-    
-
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
     public Game() {
         initGame();
         parser = new Parser();
     }
-        public static boolean getExitBool(String dir){
-        
+
+    public static boolean getExitBool(String dir) {
+
         return (currentRoom.getExit(dir) != null);
     }
 
@@ -61,9 +60,6 @@ public class Game {
     static NPC npc3 = new NPC();
 
     //file thats gonna be written to and the extension
-    
-    
-
     /**
      * Used to initialize different rooms and their respective items, and also
      * set the currentRoom
@@ -148,9 +144,9 @@ public class Game {
         itemLocation.addItem(cave, new Item("GiantRock", "The giant rock dont look like it can be moved", 100));
 
         //Initializing an item and putting it in a room camp
-         itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
+        itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2));
         itemLocation.addItem(camp, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1));
-        
+
         //Initializing an item and putting it in a room seaBottom
         itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 0));
         itemLocation.addItem(seaBottom, new PickableItem("WaterBottle", "This is a water bottle from the plan crash ", 1));
@@ -160,11 +156,14 @@ public class Game {
 
     public void putCraftableItemInHashmap() {
 
-        craftableItem.craftableList.put("Campfire", campfire);
-        craftableItem.craftableList.put("Raft", raft);
-        craftableItem.craftableList.put("Axe", axe);
-        craftableItem.craftableList.put("Spear", spear);
-
+//        craftableItem.craftableList.put("Campfire", campfire);
+//        craftableItem.craftableList.put("Raft", raft);
+//        craftableItem.craftableList.put("Axe", axe);
+//        craftableItem.craftableList.put("Spear", spear);
+        craftableItem.craftableListArray.add(campfire);
+        craftableItem.craftableListArray.add(raft);
+        craftableItem.craftableListArray.add(axe);
+        craftableItem.craftableListArray.add(spear);
     }
 
     public void createMissions() {
@@ -204,16 +203,15 @@ public class Game {
                 + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
                 + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
     }
-    
+
     static HashMap<String, String> storeNPC() {
         HashMap<String, String> npcMap = new HashMap<>();
-        npcMap.put(npc1.getName(),npc1.getCurrentRoom().getShortDescription());
+        npcMap.put(npc1.getName(), npc1.getCurrentRoom().getShortDescription());
         npcMap.put(npc2.getName(), npc2.getCurrentRoom().getShortDescription());
         npcMap.put(npc3.getName(), npc3.getCurrentRoom().getShortDescription());
-       return npcMap;   
-    } 
-    
- 
+        return npcMap;
+    }
+
     //Initializing game
     public void initGame() {
 
@@ -657,9 +655,8 @@ public class Game {
     /**
      *
      * @param command to craft item
-     * @return 
+     * @return
      */
-    
     static public void craftItem(Command command) {
         if (command.hasSecondWord()) {
             String craft = command.getSecondWord();
@@ -670,7 +667,7 @@ public class Game {
                 inventory.dropItemInventory("Lumber");
                 inventory.dropItemInventory("Stick");
                 inventory.dropItemInventory("Flint");
-                if (craftableItem.craftableList.containsKey("Campfire")) {
+                if (craftableItem.craftableListArray.contains(campfire)) {
                     inventory.addItemInInventory(campfire);
                     System.out.println("A Campfire is added to your inventory");
                 }
@@ -684,7 +681,7 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                if (craftableItem.craftableList.containsKey("Spear")) {
+                if (craftableItem.craftableListArray.contains(spear)) {
                     inventory.addItemInInventory(spear);
                     System.out.println("A Spear is added to your inventory");
                 }
@@ -698,7 +695,7 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                if (craftableItem.craftableList.containsKey("Axe")) {
+                if (craftableItem.craftableListArray.contains(axe)) {
                     inventory.addItemInInventory(axe);
                     System.out.println("An axe is added to your inventory");
                 }
@@ -712,7 +709,7 @@ public class Game {
                 } else {
                     inventory.dropItemInventory("Lian");
                 }
-                if (craftableItem.craftableList.containsKey("Raft")) {
+                if (craftableItem.craftableListArray.contains(raft)) {
                     inventory.addItemInInventory(raft);
                     System.out.println("Raft has been added to inventory");
                 }
@@ -896,7 +893,7 @@ public class Game {
         save.addToSaveGame(objectsToSave());
         save.saveGame();
     }
-    */
+     */
     static private String objectsToSave() {
         ArrayList saveObjectsJSON;
         saveObjectsJSON = new ArrayList(10);

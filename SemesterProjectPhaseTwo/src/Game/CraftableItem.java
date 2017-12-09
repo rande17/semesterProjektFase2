@@ -5,11 +5,8 @@
  */
 package Game;
 
-import static Game.Game.inventory;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
+ 
 /**
  *
  * @author Nicolai
@@ -17,12 +14,13 @@ import java.util.Iterator;
 public class CraftableItem extends Item {
 
     //HashMap used for making a itemlist of each room
-    static HashMap<String, Item> craftableList = new HashMap<>();
+//    static HashMap<String, Item> craftableList = new HashMap<>();
+    static ArrayList<Item> craftableListArray = new ArrayList<>();
 //    private String name;
-    static Item campfire = new CraftableItem("Campfire", "Campfire: Lumber, Stick and Flint", 3);
-    static Item spear = new CraftableItem("Spear", "Spear: Stick, Fint and Rope or Lian", 3);
-    static Item axe = new CraftableItem("Axe", "Axe: Stick, Stone and Rope or Lian", 3);
-    static Item raft = new CraftableItem("Raft", "Raft: Lumber, Stick and Rope or Lian", 3);
+//    static Item campfire = new CraftableItem("Campfire", "Campfire: Lumber, Stick and Flint", 3);
+//    static Item spear = new CraftableItem("Spear", "Spear: Stick, Fint and Rope or Lian", 3);
+//    static Item axe = new CraftableItem("Axe", "Axe: Stick, Stone and Rope or Lian", 3);
+//    static Item raft = new CraftableItem("Raft", "Raft: Lumber, Stick and Rope or Lian", 3);
 
     public CraftableItem() {
 
@@ -32,17 +30,17 @@ public class CraftableItem extends Item {
         super(name, description, weight);
     }
 
-    @Override
-    public String toString() {
-        String craftableItems = "";
-        Iterator iteratorCraftableItem = craftableList.entrySet().iterator();
-
-        
-            HashMap.Entry entry = (HashMap.Entry) iteratorCraftableItem.next();
-            craftableItems += (String) entry.getKey();
-            craftableItems += "\n";
-
-        return craftableItems;
-    }
+//    @Override
+//    public String toString() {
+//        String craftableItems = "";
+//        Iterator iteratorCraftableItem = craftableList.entrySet().iterator();
+//
+//        
+//            HashMap.Entry entry = (HashMap.Entry) iteratorCraftableItem.next();
+//            craftableItems += (String) entry.getKey();
+//            craftableItems += "\n";
+//
+//        return craftableItems;
+//    }
    
 }
