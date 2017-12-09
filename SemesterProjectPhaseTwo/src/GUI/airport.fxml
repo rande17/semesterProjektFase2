@@ -42,9 +42,9 @@
         </GridPane>
         <AnchorPane fx:id="background" maxWidth="600" prefHeight="600.0" prefWidth="600.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/airport.png'); -fx-background-size: stretch">
             <children>
-                <ImageView fx:id="player" fitHeight="10.0" fitWidth="10.0" layoutX="300.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="player" fitHeight="40.0" fitWidth="40.0" layoutX="300.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@Assets/items/egg.png" />
+                        <Image url="@Assets/Character/playerFront.png" />
                     </image>
                 </ImageView> 
             </children>
