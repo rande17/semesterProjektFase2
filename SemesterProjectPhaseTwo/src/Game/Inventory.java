@@ -19,6 +19,7 @@ public class Inventory {
     private int currentInventoryWeight = 0;
     private HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
     private HashMap<String, Integer> itemWeight = new HashMap<>();
+    private HashMap<String, Boolean> useableItems = new HashMap<>();
 //constuctor  
 
     Inventory() {
@@ -64,8 +65,10 @@ public class Inventory {
         String itemInInventory = "";
         String itemName = _item.getName();
         int weightOfItem = _item.getWeight();
-
+        boolean useable = _item.getUseable();
+        
         itemWeight.put(itemName, weightOfItem);
+        useableItems.put(itemName, useable);
         /*currentQuantity < inventoryMaxQuantity */
         if ((weightOfItem + currentInventoryWeight) <= inventoryMaxWeight) {
             if (inventory.containsKey(itemName)) {
@@ -112,7 +115,7 @@ public class Inventory {
      *
      * @param _string used for ether remove or decrease number of items
      */
-    public void dropItemInventory(String _string) {
+    public void removeItemInventory(String _string) {
         int quantity = inventory.get(_string) - 1;
 
         if (inventory.get(_string) <= 1) {
@@ -127,9 +130,20 @@ public class Inventory {
 
     }
 
-    public void useItem() {
-    }
+   /* public void useItem(String _string) {
+        int quantity = inventory.get(_string) - 1;
 
+        if (inventory.get(_string) <= 1) {
+            inventory.remove(_string);
+
+        } else {
+            inventory.replace(_string, quantity);
+
+        }
+        currentInventoryWeight -= itemWeight.get(_string);
+        currentQuantity = currentQuantity - 1;
+    }
+*/
     //method to show inventory
     public void showInventory() {
         System.out.println(inventory + "\n");
@@ -222,5 +236,8 @@ public class Inventory {
 
         return list;
     }
-
+    
+    public boolean getUseable(String str){
+        return useableItems.get(str);
+    }
 }

@@ -24,6 +24,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -78,8 +79,6 @@ public class FXMLDocumentController implements Initializable {
     private Button quitButton;
     @FXML
     private Button craftButton;
-    @FXML
-    private Button dropItemButton;
     @FXML
     private Button escapeButton;
 
@@ -416,10 +415,8 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void showInventory(ActionEvent event) {
-        String inventory = "";
-        inventory += game.printInventory();
-        textArea.setText(inventory);
+    private void showInventory(ActionEvent event) throws IOException {
+        changeSceneCraftMenu("InventoryGUI");
     }
 
     private void quitDialog(ActionEvent event) {
@@ -597,12 +594,6 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    @FXML
-    private void showDropMenu(ActionEvent event) throws IOException {
-        changeSceneCraftMenu("dropItemMenu");
-    }
-
-    @FXML
     private void EscapeIslandOnAction(ActionEvent event) {
         escapePopUpText();
     }

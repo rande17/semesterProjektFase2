@@ -197,10 +197,12 @@ public class GameFacade implements InterfaceGame {
     @Override
     public void dropItem(String itemToDrop) {
         Command command = new Command(DROP, itemToDrop);
-        try {
-            Game.processCommand(command);
-        } catch (Throwable ex) {
-            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Game.craftItem(command);
+    }
+
+    @Override
+    public boolean useItem(String itemToUse) {
+        Command command = new Command(DROP, itemToUse);
+        return Game.useItem(command);
     }
 }
