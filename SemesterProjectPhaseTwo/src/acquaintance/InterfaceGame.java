@@ -36,12 +36,13 @@ public interface InterfaceGame {
     public int gameTime();
     public ArrayList inventoryNames();
     public void dropItem(String item);
-    public void unlockedEscapeIsland();
-    public void lockedEscapeIsland();
     public ArrayList getCraftableItemsArray();
     public String getCraftableItemDescribtion(String itemName);
     public void craftItemGUI(String itemToCraft);
     public void submitHighScore(String playerName);
     public boolean useItem(String itemToUse);
     public void saveGameGUI();
+    public boolean unlockedEscapeIsland();
+    public boolean lockedEscapeIsland();
+    
 }

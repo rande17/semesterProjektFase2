@@ -830,19 +830,20 @@ public class Game {
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
      */
-    static void UnlockedEscapeTheIsland() {
-        //  if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
-        win();
-        //  }
+    static boolean UnlockedEscapeTheIsland() {
+        if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
+            win();
+            return false;
+        }
+        return true;
     }
 
-    /**
-     * Method that locks possibility to escape the island
-     */
-    static void lockedEscapeIsland() {
+    static boolean lockedEscapeIsland() {
         if (allMissions.missionStatus.get("Escape the island") == false) {
             System.out.println("You haven't unlocked this command yet");
+            return false;
         }
+        return true;
     }
 
     /**
@@ -1048,8 +1049,6 @@ public class Game {
 
         }
     }
-
-
 
     /**
      *
