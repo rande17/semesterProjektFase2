@@ -281,10 +281,9 @@ public class Game {
     }
 
     /**
-     * Method is initialized when game is run. 
-     * Runs welcomemessage
-     * Contains a while loop that checks if the game is finished. The condition
-     * is set to false when the game starts.
+     * Method is initialized when game is run. Runs welcomemessage Contains a
+     * while loop that checks if the game is finished. The condition is set to
+     * false when the game starts.
      *
      * @throws FileNotFoundException
      * @throws IOException
@@ -447,7 +446,7 @@ public class Game {
     }
 
     /**
-     * 
+     *
      * @return Method that returns help message when using the help command
      */
     static String printHelp() {
@@ -496,7 +495,6 @@ public class Game {
 
 // Method used for showing contents in inventory
 //    private void showInventory(Command command) {
-    
     /**
      * Method that runs through Inventory HashMap and prints content
      */
@@ -511,8 +509,8 @@ public class Game {
     }
 
     /**
-     * Method used for inspecting room
-     * Detects prints info on both items and NPCs present in the room 
+     * Method used for inspecting room Detects prints info on both items and
+     * NPCs present in the room
      */
     static private void inspectRoom() {
         ArrayList items = itemLocation.getItems(currentRoom);
@@ -549,15 +547,8 @@ public class Game {
     }
 
     /**
-     * Method used for taking and placing an item in inventory
-     *
-     * @param command used for checking if an item exists in current room
-     * @return
-     */
-    /**
-     * 
-     * @param command used for takeing items and adding them to inventory
-     * it checks if the item exits in current room and if its pickable or
+     * @param command used for takeing items and adding them to inventory it
+     * checks if the item exits in current room and if its pickable or
      * nonpickable
      * @return boolean, whether if you can or cannot take item
      */
@@ -580,7 +571,6 @@ public class Game {
             if (addToInventory instanceof PickableItem) {
                 if (inventory.addItemInInventory(addToInventory) == true) {
                     System.out.println("Item has been added to inventory: " + addToInventory.getName());
-//                    inventory.addItemInInventoryBoolean(addToInventory);
                     currentRoomItem.remove(indexItem);
                     return true;
                 }
@@ -598,7 +588,8 @@ public class Game {
     }
 
     /**
-     * 
+     * Method that checks if a NPC is present in current room. If yes, it prints
+     * the dialog. If no, it prints that no one is present
      */
     static private void TalkTo() {
         if (npc1.getCurrentRoom() == currentRoom) {
@@ -606,7 +597,6 @@ public class Game {
             System.out.println(npc1.getDialog(0));
             System.out.println("");
             woundedSurvivor();
-
         } else if (npc2.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
             pregnant();
@@ -621,7 +611,7 @@ public class Game {
     }
 
     /**
-     * force dialog with npc3, if player is in same room
+     * Method: force dialog with npc3, if player is in same room
      */
     static private void forceDialog() {
         if (hasTalkedWithEvilGuy == false) {
@@ -634,7 +624,7 @@ public class Game {
     }
 
     /**
-     * creates a dialog for npc1
+     * Method that contains dialog for NPC1 (BS Christiansen)
      */
     static public void woundedSurvivor() {
         System.out.println("Maybe you could bring me some food and something to defend myself now that i cant move");
@@ -654,7 +644,7 @@ public class Game {
     }
 
     /**
-     * Creates question when talking with npc2
+     * Method that creates question when talking with npc2 (crab)
      */
     static public void pregnant() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
@@ -667,11 +657,11 @@ public class Game {
         } else { //If the input is anything else
             System.out.println("This is a yes or no question.");
         }
-
     }
 
     /**
-     * creates a short dialog when talking to npc3
+     * Method that contains a short dialog when talking to npc3 (Joseph
+     * Schnitzel)
      */
     static public void evilGuyDialog() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
@@ -685,13 +675,14 @@ public class Game {
             System.out.println("");
             player.loseHealth(npc3.getDamageValue());
         }
-
     }
 
     /**
      *
-     * @param command to craft item
-     * @return
+     * @param command for crafting items the method checks typing the command +
+     * a second word (item name) then checks whether inventory contains the item
+     * you need to craft the wanted craftitem. If yes, the craftitem is added to
+     * inventory and the items used is removed. If no, crafting is unsuccessful.
      */
     static public void craftItem(Command command) {
         if (command.hasSecondWord()) {
@@ -759,7 +750,7 @@ public class Game {
     }
 
     /* 
-    * Method used for showing missions
+     * Method used for showing missions and mission status
      */
     static private void showMissions() {
 
@@ -812,23 +803,20 @@ public class Game {
         } else {
             System.out.println("Can't drop item that isn't in inventory " + command.getSecondWord());
         }
-
     }
 
-    //set it so you cant go to the beach before you have the boardingpass
+    /**
+     * Method that checks if the next room is locked or not and if the
+     * commandword go it followed by a legal direction
+     *
+     * @param command is an object of the Command class and is used for checking
+     * if the GO comamnd is used correctly.
+     */
     private static void lockRoom(Command command) {
-//        System.out.println(inventory.getInventory().containsKey("Boardingpass"));
-//        System.out.println(command.getSecondWord());
-//        System.out.println(command.getCommandWord().name());
         if (command.getCommandWord().name().equalsIgnoreCase(CommandWord.GO.toString())) {
-//            if (inventory.getInventory().containsKey("Boardingpass") == false && command.getSecondWord().equalsIgnoreCase("west")) {
             if (inventory.getInventory().containsKey("Boardingpass") == false) {
-//                airport.setExit("west", airport);                                 // This lines prints out the exit for some reason, which is not good
                 System.out.println("You have no boardingpass, please return when you do!!!");
             }
-//            else {
-//                airport.setExit("west", beach);
-//                System.out.println("Exits: west");
         }
 
         if (inventory.getInventory().containsKey("Boardingpass") && !hasBoardingpass) {
@@ -838,20 +826,28 @@ public class Game {
         }
     }
 
-    //command to leave the island if you choose to stay to complete more quest for at better highscore
+    /**
+     * Method that unlocks the possibility to escape the island. It checks if
+     * current room is beach and if mission is completed
+     */
     static void UnlockedEscapeTheIsland() {
         //  if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
         win();
         //  }
     }
 
+    /**
+     * Method that locks possibility to escape the island
+     */
     static void lockedEscapeIsland() {
         if (allMissions.missionStatus.get("Escape the island") == false) {
             System.out.println("You haven't unlocked this command yet");
         }
     }
 
-    //calculate point for each mission completed
+    /**
+     * Method that calculates points for completed missions
+     */
     static private void calculateMissionScore() {
 
         HashMap<String, Boolean> missionStatus = allMissions.missionStatus;
@@ -864,12 +860,17 @@ public class Game {
         }
     }
 
-    //method to set the name of the highscore
+    /**
+     * Method used to set player name for a highscore
+     *
+     * @param _playerName used to store a name entered by the player
+     */
     static void setHighscoreName(String _playerName) {
         String name = _playerName;
-        //create Scanner
+
         System.out.println(name + "Game");
         if (name == null) {
+            //create Scanner
             Scanner input = new Scanner(System.in);
             //prompt the user to enter the name their highscore
             System.out.println("");
@@ -885,6 +886,9 @@ public class Game {
         }
     }
 
+    /**
+     * Method used to handle lose condition
+     */
     static private void loseCondition() {
         if (player.getHealth() <= 0) {
             lose();
@@ -910,6 +914,7 @@ public class Game {
     }
 
     /**
+     * Method used to save game
      *
      * @throws IOException
      * @throws Throwable
@@ -920,6 +925,10 @@ public class Game {
         save.saveGame();
     }
 
+    /**
+     *
+     * @return
+     */
     static private String objectsToSave() {
         ArrayList saveObjectsJSON;
         saveObjectsJSON = new ArrayList(10);
@@ -933,9 +942,13 @@ public class Game {
         return data.objectToJson(saveObjectsJSON);
     }
 
+    /**
+     * Method used to load a saved game file, to be able to continue that
+     * specific game
+     */
     static private void loadGame() {
         ArrayList loadData = data.loadGame();
-        
+
         //inventory
         LinkedTreeMap inventoryMap = (LinkedTreeMap) loadData.get(0);
         for (Iterator it = inventoryMap.entrySet().iterator(); it.hasNext(); it.next()) {
@@ -950,21 +963,28 @@ public class Game {
                     String nextItem = itemsToAdd.substring(0, itemsToAdd.indexOf(","));
                     itemsToAdd = itemsToAdd.substring(itemsToAdd.indexOf(",") + 1, itemsToAdd.length());
                     Item item;
-//                    item = new PickableItem(nextItem, "", 1);
-//                    inventory.addItemInInventory(item);
+                    //          item = new PickableItem(nextItem, "", 1);
+                    //          inventory.addItemInInventory(item);
                 }
- //               Item item = new PickableItem(itemsToAdd, "", 1);
-  //              inventory.addItemInInventory(item);
+                //          Item item = new PickableItem(itemsToAdd, "", 1);
+                //          inventory.addItemInInventory(item);
             }
         }
-        
-   }
 
+    }
+
+    /**
+     *
+     * @return Highscore string that show stored highscores
+     */
     static String getHighscoreFromData() {
         String highscoreString = data.printHighscore();
         return highscoreString;
     }
 
+    /**
+     * Method used to handle actions when game is won
+     */
     static void win() {
         String name = score.getName();
         if (Time.getSecondsPassed() < 1) {
@@ -978,7 +998,6 @@ public class Game {
             System.out.println("");
             System.out.println("Current highscore list is: ");
             System.out.println(data.printHighscore());
-            //System.exit(0);
         } else {
             calculateMissionScore();
             setHighscoreName(name);
@@ -990,16 +1009,24 @@ public class Game {
             System.out.println("");
             System.out.println("Current highscore list is: ");
             System.out.println(data.printHighscore());
-            //System.exit(0);
         }
     }
 
+    /**
+     * Method used when game is lost
+     */
     static void lose() {
         System.out.println("You have lost the game!!!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
         System.exit(0);
 
     }
 
+    /**
+     * Method for using items stored in inventory
+     *
+     * @param command used to check if USE command is used correctly
+     * @return boolean, whether if item is used or not
+     */
     static boolean useItem(Command command) {
         HashMap newInventory = inventory.getInventory();
         Iterator itte = newInventory.entrySet().iterator();
