@@ -38,18 +38,29 @@ public class Score implements Serializable {
         score += addToScore;
     }
 
+    /**
+     * getter method used to get the name of score
+     * 
+     * @return name of the score
+     */
     public String getName() {
         return name;
     }
 
     /**
+     * setter method used to set a name for score
      *
-     * @param newName sets new name of score
+     * @param newName is the name of score
      */
     public void setName(String newName) {
         name = newName;
     }
 
+    /**
+     * getter method used to get the currentscore
+     *
+     * @return score which is the currentscore
+     */
     public int getCurrentScore() {
         return score;
     }
