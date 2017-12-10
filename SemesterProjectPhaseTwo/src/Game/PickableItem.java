@@ -40,6 +40,10 @@ public class PickableItem extends Item {
         
     }
 
+    PickableItem(String name, int weight, Date _respawnTime, boolean _useable) {
+        super(name, "", weight, _useable);
+    }
+
     /**
      *
      * @return returns respawn time for given Pickable Item
