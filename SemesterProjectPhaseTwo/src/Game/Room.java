@@ -13,9 +13,9 @@ public class Room {
     private String description;
     private HashMap<String, Room> exits; //ask Rande << just an initialization of a HashMap with the identifier exits, that takes a String object as the first object and a Room as the second object, hope it makes sense
 
-    
     /**
      * Constructor connect the new room with the description
+     *
      * @param _description sets room describtion
      */
     public Room(String _description) {
@@ -23,9 +23,9 @@ public class Room {
         exits = new HashMap<String, Room>();
     }
 
-    
     /**
      * Connect current room with neighbor room from compass directions
+     *
      * @param direction set exit direction
      * @param neighbor sets the rooms/room that is neighbors
      */
@@ -54,11 +54,11 @@ public class Room {
         return returnString;
     }
 
-    
     /**
-     * for given direction the funktion returns the room
+     * for given direction the function returns the room
+     *
      * @param direction gets the direction
-     * @return 
+     * @return
      */
     public Room getExit(String direction) {
         return exits.get(direction);

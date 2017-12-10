@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author rickie
  */
 public class GameFacade implements InterfaceGame {
-
+    
     @Override
     public ArrayList getItemsOnMap() {
         ArrayList itemArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
@@ -139,9 +139,9 @@ public class GameFacade implements InterfaceGame {
     public void lose() {
         Game.lose();
     }
-    
+
     @Override
-    public void win(){
+    public void win() {
         Game.win();
     }
 
@@ -178,16 +178,15 @@ public class GameFacade implements InterfaceGame {
     }
 
     @Override
-    public void unlockedEscapeIsland(){
-        Game.UnlockedEscapeTheIsland();     
+    public void unlockedEscapeIsland() {
+        Game.UnlockedEscapeTheIsland();
     }
 
     @Override
-    public void lockedEscapeIsland(){
+    public void lockedEscapeIsland() {
         Game.lockedEscapeIsland();
     }
-  
-    
+
     @Override
     public void dropItem(String itemToDrop) {
         Command command = new Command(DROP, itemToDrop);
@@ -205,5 +204,15 @@ public class GameFacade implements InterfaceGame {
         System.out.println(playerName + "Facade");
         Game.setHighscoreName(playerName);
         Game.win();
+    }
+
+    @Override
+    public void saveGameGUI() {
+        Command command = new Command(SAVE, null);
+        try {
+            Game.processCommand(command);
+        } catch (Throwable ex) {
+            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -20,7 +20,7 @@ public class NPC {
     private String name;
 
     //int used to store how much damage the NPC does
-    private int dmgValue;
+    private int damageValue;
 
     //ArrayList used to store all dialog options of the NPC;
     private ArrayList<String> dialog = new ArrayList<String>();
@@ -32,12 +32,15 @@ public class NPC {
 
     Room currentRoom;
 
-    // no args Constructor, creates NPC's
+    /**
+     * no-args constructor for npc
+     */
     public NPC() {
     }
 
-    //Constructor that set the name and location of the NPC's while creating it
     /**
+     * Constructor that sets the name and location of the NPC while creating it
+     *
      * @param _name used to set the name
      * @param _currentPosition used to set spawning location
      */
@@ -48,26 +51,29 @@ public class NPC {
     }
 
     /**
+     * a method used for adding dialog to a NPC
      *
-     * @param _dialog used to add a dialog option to the NPC
+     * @param _dialog the dialog that is added
      */
     public void addDialog(String _dialog) {
         dialog.add(_dialog);
     }
 
     /**
+     * setter method to set a name for a NPC
      *
-     * @param _name sets name of NPC
+     * @param _name the new name of the npc
      */
     public void setName(String _name) {
         name = _name;
     }
 
     /**
+     * getter method to get the dialog of a NPC
      *
      * @param i used to get the dialog option at this index
      * @return gives the dialog option at index i if it exists otherwise it
-     * return a default string defined in here
+     * returns a default string defined in here
      */
     public String getDialog(int i) {
         if (i > 0 && i < dialog.size()) {
@@ -77,30 +83,36 @@ public class NPC {
     }
 
     /**
-     * @param _dmgValue sets how much damage this NPC should do
+     * setter method used to set a damagevalue for a NPC
+     *
+     * @param _damageValue is the amount of damage
      */
-    public void setDamageValue(int _dmgValue) {
-        dmgValue = _dmgValue;
+    public void setDamageValue(int _damageValue) {
+        damageValue = _damageValue;
     }
 
     /**
-     * @return returns how much damage this NPC should do
+     * getter method used for get the damageValue of a NPC
+     *
+     * @return the damageValue for the NPC
      */
     public int getDamageValue() {
-
-        return dmgValue;
+        return damageValue;
     }
 
     /**
-     * @param _desc sets the describtion of the NPC, should be some defining
-     * features of the characther
+     * setter method used for setting the describtion for a NPC
+     *
+     * @param _desc is the describtion
      */
     public void setDescribtion(String _desc) {
         desc = _desc;
     }
 
     /**
-     * @return gets the description of the NPC
+     * getter method used to get the describtion for a NPC
+     *
+     * @return desc which is the describtion
      */
     public String getDescribtion() {
         return desc;
@@ -112,20 +124,26 @@ public class NPC {
     }
 
     /**
-     * @return gets the NPC's name
+     * getter method used to get the name of a NPC
+     *
+     * @return name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return gets the room the NPC is in
+     * Getter method used to get the currentroom of the NPC
+     *
+     * @return currentPosition of the NPC
      */
     public Room getCurrentRoom() {
         return currentPosition;
     }
 
     /**
+     * Setter method used to set the currentroom of a NPC
+     *
      * @param goToRoom moves the NPC to another room
      */
     public void setCurrentRoom(Room goToRoom) {
@@ -133,11 +151,10 @@ public class NPC {
     }
 
     /**
-     *
      * @param _currentPosition
      */
     public void setCurrentPosition(Room _currentPosition) {
         currentPosition = _currentPosition;
     }
-    
+
 }

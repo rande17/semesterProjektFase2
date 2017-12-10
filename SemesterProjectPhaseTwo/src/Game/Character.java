@@ -3,11 +3,19 @@ package Game;
 public class Character {
 
     // Data field
-    // String, refers to name of the Character
+    /**
+     * a string which refers to the name of the character
+     */
     private String name;
-    // String, refers to the describtion of the Character
-    private String desc;
-    // Room, refers to the Characters current room
+
+    /**
+     * a string which refers to the describtion of the character
+     */
+    private String describtion;
+
+    /**
+     * a room variable which holds the currentRoom of the character
+     */
     private Room currentRoom;
 
     private int health;
@@ -21,6 +29,7 @@ public class Character {
     }
 
     /**
+     * a constructor for making a character
      *
      * @param _name sets the name of the character
      * @param _currentRoom sets the room of the character
@@ -31,6 +40,7 @@ public class Character {
     }
 
     /**
+     * a constructor with more parameters for making a character
      *
      * @param _name sets the name of the Character instance
      * @param _desc sets the describtion of the Character instance
@@ -40,7 +50,7 @@ public class Character {
      */
     public Character(String _name, String _desc, Room _currentRoom, int _health, int _energy) {
         name = _name;
-        desc = _desc;
+        describtion = _desc;
         currentRoom = _currentRoom;
         health = _health;
         energy = _energy;
@@ -49,6 +59,7 @@ public class Character {
     }
 
     /**
+     * A method that subtracts the damage specified in the parameterlist
      *
      * @param dmg sets the dmg the character is going to lose
      */
@@ -56,6 +67,11 @@ public class Character {
         health -= dmg;
     }
 
+    /**
+     * A method that subtracts the energy specified in the parameterlist
+     *
+     * @param loss is the amount which is to be lost
+     */
     public void loseEnergy(int loss) {
         if (Time.getSecondsPassed() % 45 == 0) {
             while (!hasLostEnergy) {
@@ -83,7 +99,7 @@ public class Character {
      * @return describtion of the Character
      */
     public String getDescribtion() {
-        return desc;
+        return describtion;
     }
 
     // Method, set Character name
@@ -96,7 +112,7 @@ public class Character {
      * @param _desc sets describtion
      */
     public void setDescribtion(String _desc) {
-        _desc = desc;
+        _desc = describtion;
 
     }
 
@@ -119,13 +135,13 @@ public class Character {
 
     /**
      *
-     * @param newEnergi sets new value of energy
+     * @param newEnergy sets new value of energy
      */
-    public void setEnergy(int newEnergi) {
-        if (maxEnergy < newEnergi) {
+    public void setEnergy(int newEnergy) {
+        if (maxEnergy < newEnergy) {
             energy = maxEnergy;
         } else {
-            energy = newEnergi;
+            energy = newEnergy;
         }
 
     }
@@ -159,8 +175,8 @@ public class Character {
     }
 
     /**
-     *
-     * @return energy of the character
+     * 
+     * @return maxEnergy of the character
      */
     public int getMaxEnergy() {
         return maxEnergy;
@@ -168,7 +184,7 @@ public class Character {
 
     /**
      *
-     * @return health of the character
+     * @return maxHealth of the character
      */
     public int getMaxHealth() {
         return maxHealth;
