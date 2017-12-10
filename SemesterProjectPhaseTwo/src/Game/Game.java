@@ -440,7 +440,10 @@ public class Game {
         return wantToQuit;
     }
 
-    /* A method to print a message that show the different commands everytime the command help is used */
+    /**
+     * 
+     * @return Method that returns help message when using the help command
+     */
     static String printHelp() {
         String helpDialog = "You are lost. You are alone." + "\n" + "You wander around on this" + "\n" + "god forsaken island."
                 + "\n" + "\n" + "You move around using" + "\n" + "W A S D or the arrows";
@@ -487,6 +490,10 @@ public class Game {
 
 // Method used for showing contents in inventory
 //    private void showInventory(Command command) {
+    
+    /**
+     * Method that runs through Inventory HashMap and prints content
+     */
     static private void showInventory() {
 
         HashMap<String, Integer> inventoryHM = inventory.getInventory();
@@ -497,8 +504,10 @@ public class Game {
         }
     }
 
-    //Method used for inspecting room and showing items in that room
-//    private void inspectRoom(Command command){
+    /**
+     * Method used for inspecting room
+     * Detects prints info on both items and NPCs present in the room 
+     */
     static private void inspectRoom() {
         ArrayList items = itemLocation.getItems(currentRoom);
         Item seeItem;
@@ -506,7 +515,6 @@ public class Game {
         for (int i = 0; i < items.size(); i++) {
 
             seeItem = (Item) items.get(i);
-//            System.out.println(seeItem.getName());
             itemList += seeItem.getName();
             if (i < items.size() - 1) {
                 itemList = itemList + ", ";
@@ -539,6 +547,13 @@ public class Game {
      *
      * @param command used for checking if an item exists in current room
      * @return
+     */
+    /**
+     * 
+     * @param command used for takeing items and adding them to inventory
+     * it checks if the item exits in current room and if its pickable or
+     * nonpickable
+     * @return boolean, whether if you can or cannot take item
      */
     public static boolean takeItem(Command command) {
         ArrayList currentRoomItem = itemLocation.getItems(currentRoom);
@@ -576,6 +591,9 @@ public class Game {
         }
     }
 
+    /**
+     * 
+     */
     static private void TalkTo() {
         if (npc1.getCurrentRoom() == currentRoom) {
             System.out.println(npc1.getDescribtion() + ", yet he still gives you good advice:\n");
