@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -497,24 +499,34 @@ public class FXMLDocumentController implements Initializable {
     private void winGame(ActionEvent event) {
         game.win();
     }
+    private void changeToWinScreen() throws IOException {
+            changeScene("winscreen");
+    }
 
-    public void escapePopUpText() {
+   public void escapePopUpText() {
 
         Button yesButton = new Button("Yes");
         Button noButton = new Button("No");
 
         yesButton.setOnAction((event) -> {
-            winGame(event);
-            background.getChildren().remove(popupBackground);
+            try {
+                changeToWinScreen();
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+            //winGame(event);
+            //background.getChildren().remove(popupBackground);
         });
 
         noButton.setOnAction((event) -> {
             quitDialog(event);
         });
 
-        if (textDrawed) {
+        System.out.println(game.unlockedEscapeIsland());
+        if (!game.unlockedEscapeIsland()) {
             background.getChildren().remove(popupBackground);
-            game.unlockedEscapeIsland();
+            textDrawed = false;
             openWindow();
 
             popupText.setText(
@@ -530,10 +542,11 @@ public class FXMLDocumentController implements Initializable {
             background.getChildren().add(popupBackground);
             textDrawed = true;
 
-        }
-        if (!textDrawed) {
+        }else if (!game.lockedEscapeIsland()) {
+
             background.getChildren().remove(popupBackground);
-            game.lockedEscapeIsland();
+            textDrawed = false;
+
             openWindow();
 
             popupText.setText(
@@ -544,7 +557,6 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
-
     private void openWindow() {
         Button quitButton = new Button("X");
 
@@ -599,7 +611,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void EscapeIslandOnAction(ActionEvent event) throws IOException {
-        changeScene("winscreen");
+//        changeScene("winscreen");
+          escapePopUpText();
     }
 
     @FXML
