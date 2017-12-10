@@ -86,12 +86,6 @@ public class GameFacade implements InterfaceGame {
     }
 
     @Override
-    public String getCraftableItems() {
-//        return CraftableItem.craftableList.toString();
-        throw new UnsupportedOperationException("Unsupported operation");
-    }
-
-    @Override
     public String printHighscoreGUI() {
         return Game.getHighscoreFromData().toString();
     }
