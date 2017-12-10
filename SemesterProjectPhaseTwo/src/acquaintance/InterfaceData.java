@@ -5,6 +5,8 @@
  */
 package acquaintance;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Martin Sorensen
@@ -12,7 +14,9 @@ package acquaintance;
 public interface InterfaceData {
     public String printHighscore();
     public void logWrite (String str);
-    public String gsonToJson(Object src);
+    public String objectToJson(Object src);
     public void addHighscore(String name, int score);
     public void saveGame(String str);
+    public ArrayList loadGame();
 }
+

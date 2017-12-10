@@ -594,7 +594,13 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    private void EscapeIslandOnAction(ActionEvent event) {
-        escapePopUpText();
+    @FXML
+    private void showDropMenu(ActionEvent event) throws IOException {
+        changeSceneCraftMenu("dropItemMenu");
+    }
+
+    @FXML
+    private void EscapeIslandOnAction(ActionEvent event) throws IOException {
+        changeScene("winscreen");
     }
 }
