@@ -16,7 +16,7 @@ public interface InterfaceGame {
     public ArrayList getItemsOnMap();
     public boolean takeItemGUI(String itemToTake);
     public void goGUI(String dir);
-    public String getRoom();
+    public String getRoomDescribtion();
     public String printInventory();
     public String showHelp();
     public void quitGame();

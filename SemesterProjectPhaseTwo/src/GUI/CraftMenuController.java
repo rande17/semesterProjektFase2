@@ -63,7 +63,7 @@ public class CraftMenuController implements Initializable {
 
     @FXML
     private void handleBackAction(ActionEvent event) throws IOException {
-        changeScene(game.getRoom());
+        changeScene(game.getRoomDescribtion());
     }
 
     @FXML

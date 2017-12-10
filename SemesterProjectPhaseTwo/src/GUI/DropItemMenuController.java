@@ -60,7 +60,7 @@ public class DropItemMenuController implements Initializable {
 
     @FXML
     private void handleBackAction(ActionEvent event) throws IOException {
-        changeScene(dropItemMenu.getRoom());
+        changeScene(dropItemMenu.getRoomDescribtion());
     }
 
     @FXML

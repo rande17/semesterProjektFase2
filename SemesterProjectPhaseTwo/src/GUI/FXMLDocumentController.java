@@ -242,17 +242,17 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void go(String dir) throws IOException {
-        System.out.println(game.getRoom().equals("airport"));
-        if (game.getRoom().equals("airport")) {
+        System.out.println(game.getRoomDescribtion().equals("airport"));
+        if (game.getRoomDescribtion().equals("airport")) {
             game.goGUI(dir);
             changeScene("splashscreen1");
         } else {
             game.goGUI(dir);
-            changeScene(game.getRoom());
+            changeScene(game.getRoomDescribtion());
         }
 
         //   changeScene("splashscreen1");
-        // changeScene(game.getRoom());
+        // changeScene(game.getRoomDescribtion());
     }
 
     public void spawnNPC() {
@@ -266,7 +266,7 @@ public class FXMLDocumentController implements Initializable {
 
                 while (iterator.hasNext()) {
                     HashMap.Entry entry = (HashMap.Entry) iterator.next();
-                    if (entry.getValue().equals(game.getRoom())) {
+                    if (entry.getValue().equals(game.getRoomDescribtion())) {
 
                         ImageView NPC = new ImageView();
                         System.out.println(entry.getKey().toString());
@@ -348,7 +348,7 @@ public class FXMLDocumentController implements Initializable {
 
                             shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getFitWidth());
                             shapeToMove.setLayoutY(y);
-                        } else if (game.getRoom().equalsIgnoreCase("airport")) {
+                        } else if (game.getRoomDescribtion().equalsIgnoreCase("airport")) {
                             textDrawed = false;
                             LockItemPopUpText();
 
