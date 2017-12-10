@@ -199,4 +199,11 @@ public class GameFacade implements InterfaceGame {
         Command command = new Command(DROP, itemToUse);
         return Game.useItem(command);
     }
+
+    @Override
+    public void submitHighScore(String playerName) {
+        System.out.println(playerName + "Facade");
+        Game.setHighscoreName(playerName);
+        Game.win();
+    }
 }

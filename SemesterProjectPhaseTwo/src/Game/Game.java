@@ -1,15 +1,17 @@
 package Game;
 
 import FileHandling.DataFacade;
+import FileHandling.Save;
+import com.google.gson.internal.LinkedTreeMap;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -27,18 +29,6 @@ public class Game {
     private static Room airport, beach, jungle, mountain, cave, camp, seaBottom;
     static private String name;
     static private boolean hasTalkedWithEvilGuy = false;
-
-    /* Constructor that runs the method createRooms and set our variable parser
-       equal to the Parser method in the Parser class */
-    public Game() {
-        initGame();
-        parser = new Parser();
-    }
-
-    public static boolean getExitBool(String dir) {
-
-        return (currentRoom.getExit(dir) != null);
-    }
 
     /* Private method createRoom which means we can only use createRoom in the Game class */
  /* In the method body we set the names of the rooms, create the rooms by using the Room 
@@ -61,13 +51,25 @@ public class Game {
     static NPC npc2 = new NPC();
     static NPC npc3 = new NPC();
 
+    /* Constructor that runs the method createRooms and set our variable parser
+       equal to the Parser method in the Parser class */
+    public Game() {
+        initGame();
+        parser = new Parser();
+    }
+
+    public static boolean getExitBool(String dir) {
+
+        return (currentRoom.getExit(dir) != null);
+    }
+
     //file thats gonna be written to and the extension
     /**
      * Used to initialize different rooms and their respective items, and also
      * set the currentRoom
      */
     private void createRooms() {
-//        Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
+//      Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
 
         airport = new Room("airport");
         beach = new Room("beach");
@@ -77,7 +79,7 @@ public class Game {
         camp = new Room("camp");
         seaBottom = new Room("seabuttom");
 
-        //Setting the the exit
+        //Setting the the exits in different rooms
         beach.setExit("north", jungle);
         beach.setExit("south", seaBottom);
         beach.setExit("west", camp);
@@ -94,18 +96,17 @@ public class Game {
 
         seaBottom.setExit("north", beach);
 
+        // Starting room
         currentRoom = airport;
-
     }
 
+    /**
+     * Initializes pickable & non pickable items and adding them to rooms
+     */
     public void createItem() {
         //Initializing an item and putting it in a room airport
         itemLocation.addItem(airport, new PickableItem("Bottle", "This is a bottle that have been left behind by someone", 2, false));
         itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii: 126AB", 1, false));
-//        itemLocation.addItem(airport, new PickableItem("Boardingpass to Hawaii: 126AB", "This is a boardingpass to get on the plane to Hawaii", 1));
-//        itemLocation.addItem(airport, new PickableItem("Boardingpass to Kenya: 426DB", "this is a boardingpass to Kenya", 1));
-//        itemLocation.addItem(airport, new PickableItem("Boardingpass to Russia: 139BA", "This boardingpass has expired", 1));
-        //non pickable item
         //itemLocation.addItem(airport, new Item("StopSign", "this is a shop", 100));
 
         //Initializing an item and putting it in a room beach
@@ -134,7 +135,6 @@ public class Game {
         //Initializing an item and putting it in a room mountain
         itemLocation.addItem(mountain, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
         itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
-        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
         itemLocation.addItem(mountain, new PickableItem("Lumber", "This is a log of tree, maybe it can be used to craft something to get away from this island ", 3, false));
 
         //Initializing an item and putting it in a room cave
@@ -148,29 +148,30 @@ public class Game {
         //Initializing an item and putting it in a room camp
         itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
         itemLocation.addItem(camp, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1, false));
+        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
 
         //Initializing an item and putting it in a room seaBottom
         itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 0, false));
         itemLocation.addItem(seaBottom, new PickableItem("WaterBottle", "This is a water bottle from the plan crash ", 1, true));
         itemLocation.addItem(seaBottom, new PickableItem("Rope", "This is some rope that has been washed up on the beach shore from the plane crash", 2, false));
-
     }
 
-    public void putCraftableItemInHashmap() {
+    /**
+     * Crafted items added to ArrayList
+     */
+    public void putCraftableItemInArrayList() {
 
-//        craftableItem.craftableList.put("Campfire", campfire);
-//        craftableItem.craftableList.put("Raft", raft);
-//        craftableItem.craftableList.put("Axe", axe);
-//        craftableItem.craftableList.put("Spear", spear);
         craftableItem.craftableListArray.add(campfire);
         craftableItem.craftableListArray.add(raft);
         craftableItem.craftableListArray.add(axe);
         craftableItem.craftableListArray.add(spear);
     }
 
+    /**
+     * Creating missions and putting and putting them in the game
+     */
     public void createMissions() {
 
-        //Creating missions and putting and putting them in the game
         allMissions.addMission(airport, "Find your boardingpass");
         allMissions.addMission(airport, "Picking up first item");
         allMissions.addMission(beach, "Pick up food");
@@ -180,8 +181,13 @@ public class Game {
         allMissions.addMission(camp, "Escape the island");
     }
 
+    /**
+     * Initializing NPCs, with name, current room position, desribtion and
+     * dialog
+     */
     public void createNPC() {
         //create the good npc
+        createMissions();
         npc1.setName("BS_Christiansen");
         npc1.setCurrentRoom(jungle);
         npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, "
@@ -206,6 +212,10 @@ public class Game {
                 + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
     }
 
+    /**
+     *
+     * @return HashMap containing all NPCs
+     */
     static HashMap<String, String> storeNPC() {
         HashMap<String, String> npcMap = new HashMap<>();
         npcMap.put(npc1.getName(), npc1.getCurrentRoom().getShortDescription());
@@ -214,25 +224,26 @@ public class Game {
         return npcMap;
     }
 
-    //Initializing game
+    /**
+     * Initializing Game
+     */
     public void initGame() {
 
         createRooms();
         createItem();
         createMissions();
         createNPC();
-        putCraftableItemInHashmap();
-
+        putCraftableItemInArrayList();
     }
 
     /**
-     * this method is responisble for moving the npc3
+     * Method that handles NPC movement
      */
     static private void npcPath() {
 //        Random picker = new Random();
 //        Room[] roomString = {beach, jungle, mountain};
-//            int indexOfRoomString = picker.nextInt(roomString.length);
-//            npc3.setCurrentRoom(roomString[indexOfRoomString]);
+//        int indexOfRoomString = picker.nextInt(roomString.length);
+//        npc3.setCurrentRoom(roomString[indexOfRoomString]);
 
         if (Time.secondsPassed % 45 == 0) {
             Random picker = new Random();
@@ -270,10 +281,10 @@ public class Game {
     }
 
     /**
-     * A method that is initialized when we start the game, that first print out
-     * a message with the printWelcome method and then checks if the game is
-     * finished or not with a while loop where finished is set to false when the
-     * game start
+     * Method is initialized when game is run. 
+     * Runs welcomemessage
+     * Contains a while loop that checks if the game is finished. The condition
+     * is set to false when the game starts.
      *
      * @throws FileNotFoundException
      * @throws IOException
@@ -358,6 +369,8 @@ public class Game {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
             data.saveGame(objectsToSave());
+        } else if (commandWord == CommandWord.LOAD) {
+            loadGame();
         } else if (commandWord == CommandWord.CRAFT) {
             craftItem(command);
         } else if (commandWord == CommandWord.WIN) {
@@ -367,7 +380,7 @@ public class Game {
         } else if (commandWord == CommandWord.ESCAPE) {
             UnlockedEscapeTheIsland();
             lockedEscapeIsland();
-        } else if (commandWord == CommandWord.USE){
+        } else if (commandWord == CommandWord.USE) {
             useItem(command);
         }
 
@@ -776,7 +789,7 @@ public class Game {
         if (!indexItem.equals("")) {
             inventory.removeItemInventory(indexItem);
             System.out.println("You have dropped: " + indexItem);
-            itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem)));
+            itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem), inventory.getUseable(indexItem)));
 
         } else {
             System.out.println("Can't drop item that isn't in inventory " + command.getSecondWord());
@@ -809,9 +822,9 @@ public class Game {
 
     //command to leave the island if you choose to stay to complete more quest for at better highscore
     static void UnlockedEscapeTheIsland() {
-        if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
-            win();
-        }
+        //  if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
+        win();
+        //  }
     }
 
     static void lockedEscapeIsland() {
@@ -834,15 +847,18 @@ public class Game {
     }
 
     //method to set the name of the highscore
-    static private void setHighscoreName() {
-
+    static void setHighscoreName(String _playerName) {
+        String name = _playerName;
         //create Scanner
-        Scanner input = new Scanner(System.in);
-        //prompt the user to enter the name their highscore
-        System.out.println("");
-        System.out.println("Please enter your highscore name:");
-        String name = input.next();
-
+        System.out.println(name + "Game");
+        if (name == null) {
+            Scanner input = new Scanner(System.in);
+            //prompt the user to enter the name their highscore
+            System.out.println("");
+            System.out.println("Please enter your highscore name:");
+            name = input.next();
+        }
+//        String name = playerName;
         if (!(name.length() <= 16)) {
             String substringOfName = name.substring(0, 15);
             score.setName(substringOfName);
@@ -880,24 +896,51 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    /*static private void saveGame() throws IOException, Throwable {
+    static private void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());
         save.saveGame();
     }
-     */
+
     static private String objectsToSave() {
         ArrayList saveObjectsJSON;
         saveObjectsJSON = new ArrayList(10);
         saveObjectsJSON.add(inventory);
         saveObjectsJSON.add(itemLocation);
         saveObjectsJSON.add(allMissions);
-        //saveObjectsJSON.add(npc1);
-        //saveObjectsJSON.add(npc2);
-        //saveObjectsJSON.add(npc3);
+        // saveObjectsJSON.add(npc1);
+        // saveObjectsJSON.add(npc2);
+        // saveObjectsJSON.add(npc3);
 
-        return data.gsonToJson(saveObjectsJSON);
+        return data.objectToJson(saveObjectsJSON);
     }
+
+    static private void loadGame() {
+        ArrayList loadData = data.loadGame();
+        
+        //inventory
+        LinkedTreeMap inventoryMap = (LinkedTreeMap) loadData.get(0);
+        for (Iterator it = inventoryMap.entrySet().iterator(); it.hasNext(); it.next()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            String key = (String) entry.getKey();
+            if (key.equals("inventory")) {
+                LinkedTreeMap inventoryItems = (LinkedTreeMap) entry.getValue();
+                String itemsToAdd = inventoryItems.keySet().toString();
+                itemsToAdd = itemsToAdd.replace("[", "");
+                itemsToAdd = itemsToAdd.replace("]", "");
+                while (itemsToAdd.indexOf(",") > 0) {
+                    String nextItem = itemsToAdd.substring(0, itemsToAdd.indexOf(","));
+                    itemsToAdd = itemsToAdd.substring(itemsToAdd.indexOf(",") + 1, itemsToAdd.length());
+                    Item item;
+//                    item = new PickableItem(nextItem, "", 1);
+//                    inventory.addItemInInventory(item);
+                }
+ //               Item item = new PickableItem(itemsToAdd, "", 1);
+  //              inventory.addItemInInventory(item);
+            }
+        }
+        
+   }
 
     static String getHighscoreFromData() {
         String highscoreString = data.printHighscore();
@@ -905,9 +948,10 @@ public class Game {
     }
 
     static void win() {
+        String name = score.getName();
         if (Time.getSecondsPassed() < 1) {
             calculateMissionScore();
-            setHighscoreName();
+            setHighscoreName(name);
             int totalSum = score.getCurrentScore() + (10000 / 1);
             System.out.println("You have won the game!" + "\n" + "You spend: " + 1 + " seconds playing the game!");
             System.out.println("Your score is: " + totalSum);
@@ -916,10 +960,10 @@ public class Game {
             System.out.println("");
             System.out.println("Current highscore list is: ");
             System.out.println(data.printHighscore());
-            System.exit(0);
+            //System.exit(0);
         } else {
             calculateMissionScore();
-            setHighscoreName();
+            setHighscoreName(name);
             int totalSum = score.getCurrentScore() + (10000 / Time.getSecondsPassed());
             System.out.println("You have won the game!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
             System.out.println("Your score is: " + totalSum);
@@ -928,7 +972,7 @@ public class Game {
             System.out.println("");
             System.out.println("Current highscore list is: ");
             System.out.println(data.printHighscore());
-            System.exit(0);
+            //System.exit(0);
         }
     }
 
@@ -937,8 +981,8 @@ public class Game {
         System.exit(0);
 
     }
-    
-    static boolean useItem(Command command){
+
+    static boolean useItem(Command command) {
         HashMap newInventory = inventory.getInventory();
         Iterator itte = newInventory.entrySet().iterator();
         String seeItem;
@@ -961,8 +1005,7 @@ public class Game {
             itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem)));
             player.setEnergy(player.getEnergy() + 10);
             player.setHealth(player.getHealth() + 5);
-            
-            
+
             return true;
         }
         return false;
