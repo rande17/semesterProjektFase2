@@ -81,6 +81,8 @@ public class FXMLDocumentController implements Initializable {
     private Button craftButton;
     @FXML
     private Button escapeButton;
+    @FXML
+    private Button saveButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -248,7 +250,6 @@ public class FXMLDocumentController implements Initializable {
             game.goGUI(dir);
             changeScene(game.getRoomDescribtion());
         }
-        
 
         //   changeScene("splashscreen1");
         // changeScene(game.getRoomDescribtion());
@@ -594,7 +595,6 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    @FXML
     private void showDropMenu(ActionEvent event) throws IOException {
         changeSceneCraftMenu("dropItemMenu");
     }
@@ -602,5 +602,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void EscapeIslandOnAction(ActionEvent event) throws IOException {
         changeScene("winscreen");
+    }
+
+    @FXML
+    private void showHelp(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleSaveAction(ActionEvent event) {
+        game.saveGameGUI();
+        textArea.setText("Game saved");
     }
 }

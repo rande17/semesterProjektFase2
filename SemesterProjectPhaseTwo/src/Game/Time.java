@@ -27,19 +27,29 @@ public class Time {
         }
     };
 
-    // no args constructer
+    /**
+     * no-args constructor for time
+     */
     public Time() {
 
     }
-    //get secondspassed
+
+    /**
+     * getter method used to get amount of secondspassed
+     *
+     * @return int secondspassed
+     */
     public static int getSecondsPassed() {
         return secondsPassed;
     }
-   
+
     public void start() {
         myTimer.scheduleAtFixedRate(timerTask, 1000, 1000);
     }
 
+    /**
+     * method used for stopping the timer
+     */
     public void stopTime() {
         myTimer.cancel();
     }

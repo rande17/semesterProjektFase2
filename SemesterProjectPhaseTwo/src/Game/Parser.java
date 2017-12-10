@@ -12,13 +12,20 @@ public class Parser { // transformering fra udstruktureret data til struktureret
     private CommandWords commands;
     private Scanner reader;
 
-    // Constructor
+    /**
+     * no-args constructor for parser
+     */
     public Parser() { // Methode
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
 
     // Metode, get command, input reads input line.
+    /**
+     * getter method used to get a command from input
+     *
+     * @return new Command with input arguments
+     */
     public Command getCommand() {
         String inputLine;
         String word1 = null;
@@ -39,6 +46,9 @@ public class Parser { // transformering fra udstruktureret data til struktureret
     }
 
     // metode, show commands, uden return
+    /**
+     * method used to show all commands
+     */
     public void showCommands() {
         commands.showAll();
     }

@@ -213,7 +213,7 @@ public class GameFacade implements InterfaceGame {
      * Method used to win the game
      */
     @Override
-    public void win(){
+    public void win() {
         Game.win();
     }
 
@@ -267,15 +267,15 @@ public class GameFacade implements InterfaceGame {
      * current room is beach and if mission is completed
      */
     @Override
-    public void unlockedEscapeIsland(){
-        Game.UnlockedEscapeTheIsland();     
+    public void unlockedEscapeIsland() {
+        Game.UnlockedEscapeTheIsland();
     }
 
     /**
      * Method that locks possibility to escape the island
      */
     @Override
-    public void lockedEscapeIsland(){
+    public void lockedEscapeIsland() {
         Game.lockedEscapeIsland();
     }
   
@@ -309,5 +309,15 @@ public class GameFacade implements InterfaceGame {
         System.out.println(playerName + "Facade");
         Game.setHighscoreName(playerName);
         Game.win();
+    }
+
+    @Override
+    public void saveGameGUI() {
+        Command command = new Command(SAVE, null);
+        try {
+            Game.processCommand(command);
+        } catch (Throwable ex) {
+            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

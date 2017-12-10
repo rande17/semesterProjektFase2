@@ -43,4 +43,5 @@ public interface InterfaceGame {
     public void craftItemGUI(String itemToCraft);
     public void submitHighScore(String playerName);
     public boolean useItem(String itemToUse);
+    public void saveGameGUI();
 }
