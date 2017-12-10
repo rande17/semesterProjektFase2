@@ -27,7 +27,7 @@ public class CraftableItem extends Item {
     }
 
     public CraftableItem(String name, String description, int weight) {
-        super(name, description, weight);
+        super(name, description, weight, false);
     }
 
 //    @Override

@@ -22,7 +22,6 @@ public interface InterfaceGame {
     public void quitGame();
     public String printMissions();
     public String printHighscoreGUI();
-    public String getCraftableItems();
 //   public String showHelp();
     public int playerHealth();
     public int playerEnergy();
@@ -43,4 +42,5 @@ public interface InterfaceGame {
     public String getCraftableItemDescribtion(String itemName);
     public void craftItemGUI(String itemToCraft);
     public void submitHighScore(String playerName);
+    public boolean useItem(String itemToUse);
 }
