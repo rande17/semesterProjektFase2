@@ -341,3 +341,140 @@ quit null
  >>>  Starting new game <<< 
 
 
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+save null
+load null
+go null
+go null
+go west
+go null
+go null
+go null
+go null
+go null
+go south
+go null
+inspect null
+take backpack
+show null
+inspect null
+go null
+inspect null
+inspect null
+go null
+inspect null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+go null
+go null
+go west
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go north
+go north
+? null
+go null
+go south
+go north
+go south
+go south
+go south
+go north
+go north
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go north
+go north
+? null
+go south
+go south
+go south
+go north
+go null
+go north
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go north
+go north
+? null
+go south
+go south
+go south
+go north
+go north
+go north
+go south
+go south
+go west
+go null
+go east
+go null
+go null
+go south
+go north
+go north
+go null
+go north
+go south
+go south
+go south
+go north
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go north
+go north
+? null
+? null
+? null
+? null
+go south
+go null
+go south
+go null
+go south
+go north
+go null
+go north
+go north
+go south
+go south
+go south
+go north
+go north
+go north
+go null

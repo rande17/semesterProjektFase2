@@ -1035,7 +1035,7 @@ public class Game {
                 int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());
                 boolean itemUseable = Boolean.getBoolean(itemT.get("useable").toString());
 
-                itemLocationToAdd = new Item(itemName, itemDesc, itemWeight, itemUseable);
+                itemLocationToAdd = new PickableItem(itemName, itemDesc, itemWeight, itemUseable);
                 System.out.println(j);
                 itemLocation.addItem(roomsList.get(j), itemLocationToAdd);
 
