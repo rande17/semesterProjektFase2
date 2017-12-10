@@ -203,4 +203,11 @@ public class GameFacade implements InterfaceGame {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public void submitHighScore(String playerName) {
+        System.out.println(playerName + "Facade");
+        Game.setHighscoreName(playerName);
+        Game.win();
+    }
 }

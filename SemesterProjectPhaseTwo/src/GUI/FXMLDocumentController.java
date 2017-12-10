@@ -603,7 +603,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void EscapeIslandOnAction(ActionEvent event) {
-        escapePopUpText();
+    private void EscapeIslandOnAction(ActionEvent event) throws IOException {
+        changeScene("winscreen");
     }
 }

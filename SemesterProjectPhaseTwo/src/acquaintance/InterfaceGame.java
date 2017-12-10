@@ -42,4 +42,5 @@ public interface InterfaceGame {
     public ArrayList getCraftableItemsArray();
     public String getCraftableItemDescribtion(String itemName);
     public void craftItemGUI(String itemToCraft);
+    public void submitHighScore(String playerName);
 }

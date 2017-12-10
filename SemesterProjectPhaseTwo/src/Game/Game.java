@@ -1,13 +1,17 @@
 package Game;
 
 import FileHandling.DataFacade;
+import FileHandling.Save;
+import com.google.gson.internal.LinkedTreeMap;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -356,6 +360,8 @@ public class Game {
             showMissions();
         } else if (commandWord == CommandWord.SAVE) {
             data.saveGame(objectsToSave());
+        } else if (commandWord == CommandWord.LOAD) {
+            loadGame();
         } else if (commandWord == CommandWord.CRAFT) {
             craftItem(command);
         } else if (commandWord == CommandWord.WIN) {
@@ -805,9 +811,9 @@ public class Game {
 
     //command to leave the island if you choose to stay to complete more quest for at better highscore
     static void UnlockedEscapeTheIsland() {
-        if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
-            win();
-        }
+        //  if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
+        win();
+        //  }
     }
 
     static void lockedEscapeIsland() {
@@ -830,15 +836,18 @@ public class Game {
     }
 
     //method to set the name of the highscore
-    static private void setHighscoreName() {
-
+    static void setHighscoreName(String _playerName) {
+        String name = _playerName;
         //create Scanner
-        Scanner input = new Scanner(System.in);
-        //prompt the user to enter the name their highscore
-        System.out.println("");
-        System.out.println("Please enter your highscore name:");
-        String name = input.next();
-
+        System.out.println(name + "Game");
+        if (name == null) {
+            Scanner input = new Scanner(System.in);
+            //prompt the user to enter the name their highscore
+            System.out.println("");
+            System.out.println("Please enter your highscore name:");
+            name = input.next();
+        }
+//        String name = playerName;
         if (!(name.length() <= 16)) {
             String substringOfName = name.substring(0, 15);
             score.setName(substringOfName);
@@ -876,24 +885,51 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    /*static private void saveGame() throws IOException, Throwable {
+    static private void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());
         save.saveGame();
     }
-     */
+
     static private String objectsToSave() {
         ArrayList saveObjectsJSON;
         saveObjectsJSON = new ArrayList(10);
         saveObjectsJSON.add(inventory);
         saveObjectsJSON.add(itemLocation);
         saveObjectsJSON.add(allMissions);
-        //saveObjectsJSON.add(npc1);
-        //saveObjectsJSON.add(npc2);
-        //saveObjectsJSON.add(npc3);
+        // saveObjectsJSON.add(npc1);
+        // saveObjectsJSON.add(npc2);
+        // saveObjectsJSON.add(npc3);
 
-        return data.gsonToJson(saveObjectsJSON);
+        return data.objectToJson(saveObjectsJSON);
     }
+
+    static private void loadGame() {
+        ArrayList loadData = data.loadGame();
+        
+        //inventory
+        LinkedTreeMap inventoryMap = (LinkedTreeMap) loadData.get(0);
+        for (Iterator it = inventoryMap.entrySet().iterator(); it.hasNext(); it.next()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            String key = (String) entry.getKey();
+            if (key.equals("inventory")) {
+                LinkedTreeMap inventoryItems = (LinkedTreeMap) entry.getValue();
+                String itemsToAdd = inventoryItems.keySet().toString();
+                itemsToAdd = itemsToAdd.replace("[", "");
+                itemsToAdd = itemsToAdd.replace("]", "");
+                while (itemsToAdd.indexOf(",") > 0) {
+                    String nextItem = itemsToAdd.substring(0, itemsToAdd.indexOf(","));
+                    itemsToAdd = itemsToAdd.substring(itemsToAdd.indexOf(",") + 1, itemsToAdd.length());
+                    Item item;
+                    item = new PickableItem(nextItem, "", 1);
+                    inventory.addItemInInventory(item);
+                }
+                Item item = new PickableItem(itemsToAdd, "", 1);
+                inventory.addItemInInventory(item);
+            }
+        }
+        
+   }
 
     static String getHighscoreFromData() {
         String highscoreString = data.printHighscore();
@@ -901,9 +937,10 @@ public class Game {
     }
 
     static void win() {
+        String name = score.getName();
         if (Time.getSecondsPassed() < 1) {
             calculateMissionScore();
-            setHighscoreName();
+            setHighscoreName(name);
             int totalSum = score.getCurrentScore() + (10000 / 1);
             System.out.println("You have won the game!" + "\n" + "You spend: " + 1 + " seconds playing the game!");
             System.out.println("Your score is: " + totalSum);
@@ -912,10 +949,10 @@ public class Game {
             System.out.println("");
             System.out.println("Current highscore list is: ");
             System.out.println(data.printHighscore());
-            System.exit(0);
+            //System.exit(0);
         } else {
             calculateMissionScore();
-            setHighscoreName();
+            setHighscoreName(name);
             int totalSum = score.getCurrentScore() + (10000 / Time.getSecondsPassed());
             System.out.println("You have won the game!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
             System.out.println("Your score is: " + totalSum);
@@ -924,7 +961,7 @@ public class Game {
             System.out.println("");
             System.out.println("Current highscore list is: ");
             System.out.println(data.printHighscore());
-            System.exit(0);
+            //System.exit(0);
         }
     }
 

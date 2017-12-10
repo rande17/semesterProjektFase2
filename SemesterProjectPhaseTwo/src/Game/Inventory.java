@@ -80,7 +80,7 @@ public class Inventory {
             return true;
 
         } else {
-            System.out.println("You can't pickup this item");
+            System.out.println("You can't pickup this item :P");
         }
         return false;
     }
