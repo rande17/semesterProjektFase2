@@ -7,7 +7,6 @@ package Game;
 
 import static Game.CommandWord.*;
 import acquaintance.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
  * @author rickie
  */
 public class GameFacade implements InterfaceGame {
-
+    
     @Override
     public ArrayList getItemsOnMap() {
         ArrayList itemArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
