@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
     <children>
         <GridPane layoutX="600.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0">
             <columnConstraints>
@@ -42,6 +37,7 @@
                 <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="5" />
                 <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="4" />
                 <TextArea fx:id="textArea" editable="false" focusTraversable="false" mouseTransparent="true" onMouseClicked="#showHelp" prefHeight="435.0" prefWidth="205.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <Button fx:id="saveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaveAction" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
         </GridPane>
         <AnchorPane fx:id="background" maxWidth="600" prefHeight="600.0" prefWidth="600.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/jungle.png'); -fx-background-size: stretch">

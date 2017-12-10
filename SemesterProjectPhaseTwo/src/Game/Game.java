@@ -896,7 +896,7 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    static private void saveGame() throws IOException, Throwable {
+    static  void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());
         save.saveGame();
