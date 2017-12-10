@@ -603,10 +603,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void showHelp(MouseEvent event) {
-    }
-
-    @FXML
     private void handleSaveAction(ActionEvent event) {
         game.saveGameGUI();
         textArea.setText("Game saved");
