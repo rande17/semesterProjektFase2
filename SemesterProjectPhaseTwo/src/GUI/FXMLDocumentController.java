@@ -216,7 +216,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void populateItemsOnMap() {
-        if (!itemsDrawed) {
+        if (!itemsDrawed && background.getHeight() > 0) {
             itemsArray = game.getItemsOnMap();
             if (!itemsArray.isEmpty()) {
                 for (int i = 0; i < itemsArray.size(); i++) {
@@ -258,7 +258,7 @@ public class FXMLDocumentController implements Initializable {
     public void spawnNPC() {
         game.getNPC();
 
-        if (!NPCDrawed) {
+        if (!NPCDrawed && background.getWidth() > 0) {
             NPCHashMap = game.getNPC();
             if (!NPCHashMap.isEmpty()) {
 
@@ -295,7 +295,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void moveObject(ImageView shapeToMove, String dir) throws IOException {
-        if (shapeToMove != null) {
+        if (shapeToMove != null && background.getHeight() > 0) {
             // System.out.println(player.toString());
             // System.out.println(shapeToMove.toString());
             boolean playerIsObject = shapeToMove.equals(player);
@@ -328,11 +328,9 @@ public class FXMLDocumentController implements Initializable {
                     if (shapeToMove.getLayoutY() >= background.getHeight() - speed - shapeToMove.getFitHeight()) {
                         if (game.checkExit("south")) {
                             direction = "south";
-                            shapeToMove.setLayoutX(x);
                             go = true;
-
+                            shapeToMove.setLayoutX(x);
                             shapeToMove.setLayoutY(0);
-                            System.out.println(shapeToMove.getLayoutBounds().toString());
                         }
                     } else {
                         shapeToMove.setLayoutY(shapeToMove.getLayoutY() + speed);
