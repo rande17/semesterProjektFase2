@@ -281,10 +281,9 @@ public class Game {
     }
 
     /**
-     * Method is initialized when game is run. 
-     * Runs welcomemessage
-     * Contains a while loop that checks if the game is finished. The condition
-     * is set to false when the game starts.
+     * Method is initialized when game is run. Runs welcomemessage Contains a
+     * while loop that checks if the game is finished. The condition is set to
+     * false when the game starts.
      *
      * @throws FileNotFoundException
      * @throws IOException
@@ -917,30 +916,106 @@ public class Game {
 
     static private void loadGame() {
         ArrayList loadData = data.loadGame();
-        
+        //System.out.println(loadData.toString());
+        //System.out.println(saveMap.toString());
+
         //inventory
-        LinkedTreeMap inventoryMap = (LinkedTreeMap) loadData.get(0);
-        for (Iterator it = inventoryMap.entrySet().iterator(); it.hasNext(); it.next()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            String key = (String) entry.getKey();
-            if (key.equals("inventory")) {
-                LinkedTreeMap inventoryItems = (LinkedTreeMap) entry.getValue();
-                String itemsToAdd = inventoryItems.keySet().toString();
-                itemsToAdd = itemsToAdd.replace("[", "");
-                itemsToAdd = itemsToAdd.replace("]", "");
-                while (itemsToAdd.indexOf(",") > 0) {
-                    String nextItem = itemsToAdd.substring(0, itemsToAdd.indexOf(","));
-                    itemsToAdd = itemsToAdd.substring(itemsToAdd.indexOf(",") + 1, itemsToAdd.length());
-                    Item item;
-//                    item = new PickableItem(nextItem, "", 1);
-//                    inventory.addItemInInventory(item);
-                }
- //               Item item = new PickableItem(itemsToAdd, "", 1);
-  //              inventory.addItemInInventory(item);
+        LinkedTreeMap saveMap = (LinkedTreeMap) loadData.get(0);
+        LinkedTreeMap inventoryItemWeight = (LinkedTreeMap) saveMap.get("itemWeight");
+        LinkedTreeMap inventoryItemQuantity = (LinkedTreeMap) saveMap.get("inventory");
+        String inventoryItemQuantityString = inventoryItemQuantity.toString();
+        inventoryItemQuantityString = inventoryItemQuantityString.replace("{", "");
+        inventoryItemQuantityString = inventoryItemQuantityString.replace("}", "");
+        inventoryItemQuantityString = inventoryItemQuantityString.replace("[", "");
+        inventoryItemQuantityString = inventoryItemQuantityString.replace("]", "");
+        inventoryItemQuantityString = inventoryItemQuantityString.replace(" ", "");
+        String itemListString = inventoryItemWeight.toString();
+        itemListString = itemListString.replace("{", "");
+        itemListString = itemListString.replace("}", "");
+        itemListString = itemListString.replace("[", "");
+        itemListString = itemListString.replace("]", "");
+        itemListString = itemListString.replace(" ", "");
+
+        for (int i = 0; i < inventoryItemWeight.size(); i++) {
+            String itemSet;
+            double itemQuantity;
+            if (itemListString.contains(",")) {
+                itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.indexOf(",")));
+                inventoryItemQuantityString = inventoryItemQuantityString.substring(0, inventoryItemQuantityString.indexOf(","));
+                itemSet = itemListString.substring(0, itemListString.indexOf(","));
+                itemListString = itemListString.substring(itemListString.indexOf(",") + 1, itemListString.length());
+            } else {
+                itemSet = itemListString;
+                itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.length()));
+            }
+            String itemName = itemSet.substring(0, itemSet.indexOf("="));
+            int itemWeight = Double.valueOf(itemSet.substring(itemSet.indexOf("=") + 1, itemSet.length())).intValue();
+            while (itemQuantity > 0) {
+                Item item = new Item(itemName, "", itemWeight, true);
+                inventory.addItemInInventory(item);
+                itemQuantity--;
             }
         }
-        
-   }
+
+        //itemList
+        saveMap = (LinkedTreeMap) loadData.get(1);
+        LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap.get("itemList");
+        String rooms = itemLocationOnMap.keySet().toString();
+        System.out.println();
+        rooms = rooms.replace("{", "");
+        rooms = rooms.replace("}", "");
+        rooms = rooms.replace("[", "");
+        rooms = rooms.replace("]", "");
+        rooms = rooms.replace(" ", "");
+
+        ArrayList<Room> roomsList = new ArrayList(itemLocationOnMap.size());
+
+        roomsList.add(seaBottom);
+        roomsList.add(jungle);
+        roomsList.add(mountain);
+        roomsList.add(camp);
+        roomsList.add(airport);
+        roomsList.add(beach);
+        roomsList.add(cave);
+
+        int j = 0;
+        System.out.println(itemLocationOnMap.toString());
+        for (int h = 0; h <= itemLocationOnMap.size() - 1; h++) {
+            String itemToAdd;
+
+            if (rooms.contains(",")) {
+                itemToAdd = rooms.substring(0, rooms.indexOf(","));
+            }else{
+                itemToAdd = rooms;
+            }
+             
+            System.out.println(itemToAdd);
+            System.out.println("before substr: " + rooms);
+            rooms = rooms.substring(rooms.indexOf(",") + 1, rooms.length());
+            System.out.println("after substr: " + rooms);
+            ArrayList itemInRoom = (ArrayList) itemLocationOnMap.get(itemToAdd);
+            for (int i = 0; i < itemInRoom.size(); i++) {
+                Item itemLocationToAdd;
+                LinkedTreeMap itemT = (LinkedTreeMap) itemInRoom.get(i);
+                
+                String itemName = itemT.get("name").toString();
+                String itemDesc = itemT.get("itemDescribtion").toString();
+                int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());
+                boolean itemUseable = Boolean.getBoolean(itemT.get("useable").toString());
+                
+                itemLocationToAdd = new Item(itemName,itemDesc ,itemWeight , itemUseable);
+                System.out.println(j);
+                itemLocation.addItem(roomsList.get(j), itemLocationToAdd);
+
+            }
+            j++;
+            System.out.println(itemInRoom);
+            // Item itemT = (Item) itemInRoom.get(0);
+            // itemAdd = new Item(itemToAdd.substring(0, itemToAdd.indexOf("=")), "", Integer.parseInt(itemToAdd.substring(itemToAdd.indexOf("=") + 1, itemToAdd.indexOf("=") + 2)));
+            // inventoryItemWeight = inventoryItemWeight.substring(inventoryItemWeight.indexOf(",") + 1, inventoryItemWeight.length());
+
+        }
+    }
 
     static String getHighscoreFromData() {
         String highscoreString = data.printHighscore();
