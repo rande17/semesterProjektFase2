@@ -40,7 +40,7 @@ public class PickableItem extends Item {
         
     }
 
-    PickableItem(String name, int weight, Date _respawnTime, boolean _useable) {
+    PickableItem(String name, int weight, boolean _useable) {
         super(name, "", weight, _useable);
     }
 
