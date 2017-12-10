@@ -19,25 +19,33 @@ public class Mission {
 //    HashMap<String, String> missionInfo = new HashMap();
 
     Score score = new Score();
-    
+
     private String name;
 
-    //constructor
+    /**
+     * no-args constructor for mission
+     */
     public Mission() {
     }
 
     /**
+     * adds a mission to a missionstatus hashmap
      *
      * @param room sets the room of the mission do not work atm
-     * @param name sets the name of the mission
-     * @param describtion set the describtion of the mission
+     * @param _name sets the name of the mission
      */
     public void addMission(Room room, String _name) {
-        name=_name;
+        name = _name;
         missionStatus.put(name, false);
 
     }
-    private String getName(){
+
+    /**
+     * getter method to get name of mission
+     *
+     * @return the name of the mission
+     */
+    private String getName() {
         return name;
     }
 
@@ -80,7 +88,7 @@ public class Mission {
             }
             missionStatusString += "\n";
 
-           }
+        }
         return missionStatusString;
     }
 }
