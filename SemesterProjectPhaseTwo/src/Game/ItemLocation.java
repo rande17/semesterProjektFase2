@@ -56,4 +56,8 @@ public class ItemLocation {
     public void setItem(Room _room, ArrayList itemsInRoom) {
         itemList.replace(_room, itemsInRoom);
     }
+    
+    public void emptyItemLocation(){
+        itemList = null;
+    }
 }
