@@ -148,7 +148,7 @@ public class Game {
         //Initializing an item and putting it in a room camp
         itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
         itemLocation.addItem(camp, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1, false));
-        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
+        itemLocation.addItem(camp, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
 
         //Initializing an item and putting it in a room seaBottom
         itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 0, false));
