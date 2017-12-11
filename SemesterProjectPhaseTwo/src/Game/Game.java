@@ -43,7 +43,7 @@ public class Game {
     static Score score = new Score();
     static Item debug = new Item("debug");
     static Item campfire = new CraftableItem("Campfire", "Campfire: Lumber, Stick and Flint", 3);
-    static Item spear = new CraftableItem("Spear", "Spear: Stick, Fint and Rope or Lian", 3);
+    static Item spear = new CraftableItem("Spear", "Spear: Stick, Flint and Rope or Lian", 3);
     static Item axe = new CraftableItem("Axe", "Axe: Stick, Stone and Rope or Lian", 3);
     static Item raft = new CraftableItem("Raft", "Raft: Lumber, Stick and Rope or Lian", 3);
     static Mission allMissions = new Mission();
