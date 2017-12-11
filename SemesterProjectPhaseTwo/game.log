@@ -3,244 +3,16 @@
  >>>  Starting new game <<< 
 
 
+go null
+go west
+go null
+go null
 save null
 
 
  >>>  Starting new game <<< 
 
 
-go null
-go null
-save null
-? null
-quit null
-
-
- >>>  Starting new game <<< 
-
-
-
-
- >>>  Starting new game <<< 
-
-
-show null
-load null
-
-
- >>>  Starting new game <<< 
-
-
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-? null
-? null
-? null
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-? null
-help null
-show null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-? null
-load null
-show null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-show null
-
-
- >>>  Starting new game <<< 
-
-
-load null
-show null
-? bottle
-take bottle
-
-
- >>>  Starting new game <<< 
-
-
-load null
-show null
-inspect null
-
-
- >>>  Starting new game <<< 
-
-
 load null
 
 
@@ -249,139 +21,35 @@ load null
 
 go null
 go west
-
-
- >>>  Starting new game <<< 
-
-
 go null
-go west
-
-
- >>>  Starting new game <<< 
-
-
 go null
-go west
-
-
- >>>  Starting new game <<< 
-
-
-save null
-quit null
-
-
- >>>  Starting new game <<< 
-
-
+go south
 go null
-go west
-save null
-
-
- >>>  Starting new game <<< 
-
-
-go null
-go west
-save null
-
-
- >>>  Starting new game <<< 
-
-
-go null
-go west
-save null
-
-
- >>>  Starting new game <<< 
-
-
-go null
-go west
-save null
-
-
- >>>  Starting new game <<< 
-
-
-go null
-save null
-go west
-go west
-go east
 go north
-go east
-go west
+go null
+go null
 go north
 ? null
-
-
- >>>  Starting new game <<< 
-
-
-save null
-quit null
-
-
- >>>  Starting new game <<< 
-
-
-
-
- >>>  Starting new game <<< 
-
-
-save null
-quit null
-
-
- >>>  Starting new game <<< 
-
-
-
-
- >>>  Starting new game <<< 
-
-
-load null
-
-
- >>>  Starting new game <<< 
-
-
-save null
-load null
-go null
-go null
-go west
-go null
+? null
+go south
+go north
 go null
 go null
 go null
 go null
 go south
-go null
-inspect null
-take backpack
-show null
-inspect null
-go null
-inspect null
-inspect null
-go null
-inspect null
+? null
 
 
  >>>  Starting new game <<< 
 
 
-load null
-go null
 go null
 go west
+go north
+go south
+go north
+go south
 
 
  >>>  Starting new game <<< 

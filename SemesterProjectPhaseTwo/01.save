@@ -134,12 +134,6 @@
           "useable": false
         },
         {
-          "itemDescribtion": "This is a small stick, maybe it can be used to create something more usefull",
-          "weight": 1,
-          "name": "Stick",
-          "useable": false
-        },
-        {
           "itemDescribtion": "The giant rock dont look like it can be moved",
           "weight": 100,
           "name": "GiantRock",
@@ -175,12 +169,6 @@
           "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
           "weight": 2,
           "name": "Stone",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is a small stick, maybe it can be used to create something more usefull",
-          "weight": 1,
-          "name": "Stick",
           "useable": false
         },
         {
@@ -244,7 +232,7 @@
     "missionStatus": {
       "Eat the shrooms": false,
       "Find survivors": false,
-      "Pick up food": true,
+      "Pick up food": false,
       "prepare to escape the island": false,
       "Picking up first item": true,
       "Find your boardingpass": true,

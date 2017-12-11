@@ -9,9 +9,9 @@ public class Character {
     private String name;
 
     /**
-     * a string which refers to the describtion of the character
+     * a string which refers to the description of the character
      */
-    private String describtion;
+    private String description;
 
     /**
      * a room variable which holds the currentRoom of the character
@@ -43,14 +43,14 @@ public class Character {
      * a constructor with more parameters for making a character
      *
      * @param _name sets the name of the Character instance
-     * @param _desc sets the describtion of the Character instance
+     * @param _description sets the description of the Character instance
      * @param _currentRoom sets the current room of the Character
      * @param _health sets the health of the character
      * @param _energy sets the energy of the character
      */
-    public Character(String _name, String _desc, Room _currentRoom, int _health, int _energy) {
+    public Character(String _name, String _description, Room _currentRoom, int _health, int _energy) {
         name = _name;
-        describtion = _desc;
+        description = _description;
         currentRoom = _currentRoom;
         health = _health;
         energy = _energy;
@@ -70,12 +70,12 @@ public class Character {
     /**
      * A method that subtracts the energy specified in the parameterlist
      *
-     * @param loss is the amount which is to be lost
+     * @param energyLoss is the amount which is to be lost
      */
-    public void loseEnergy(int loss) {
+    public void loseEnergy(int energyLoss) {
         if (Time.getSecondsPassed() % 45 == 0) {
             while (!hasLostEnergy) {
-                energy -= loss;
+                energy -= energyLoss;
                 hasLostEnergy = true;
                 break;
             }
@@ -96,10 +96,10 @@ public class Character {
 
     /**
      *
-     * @return describtion of the Character
+     * @return description of the Character
      */
-    public String getDescribtion() {
-        return describtion;
+    public String getDescription() {
+        return description;
     }
 
     // Method, set Character name
@@ -107,12 +107,12 @@ public class Character {
     }
 
     /**
-     * Method, set Character describtion
+     * Method, set Character description
      *
-     * @param _desc sets describtion
+     * @param _desc sets description
      */
-    public void setDescribtion(String _desc) {
-        _desc = describtion;
+    public void setDescription(String _desc) {
+        _desc = description;
 
     }
 
