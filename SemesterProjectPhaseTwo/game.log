@@ -341,3 +341,13 @@ quit null
  >>>  Starting new game <<< 
 
 
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go west
+go east
