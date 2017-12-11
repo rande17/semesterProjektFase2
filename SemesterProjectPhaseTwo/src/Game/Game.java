@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -27,14 +25,7 @@ public class Game {
     static private Parser parser;
     static Room currentRoom;
     private static Room airport, beach, jungle, mountain, cave, camp, seaBottom;
-    static private String name;
     static private boolean hasTalkedWithEvilGuy = false;
-
-    /* Private method createRoom which means we can only use createRoom in the Game class */
- /* In the method body we set the names of the rooms, create the rooms by using the Room 
-       constructor from the Room class and then set where you can move to  from the different rooms by
-       using the method setExit from the Room class */
- /* The currentRoom is also given a value which is the start location = outside */
     private static DataFacade data = new DataFacade();
     static ItemLocation itemLocation = new ItemLocation();
     static Inventory inventory = new Inventory();
@@ -58,9 +49,9 @@ public class Game {
         parser = new Parser();
     }
 
-    public static boolean getExitBool(String dir) {
+    public static boolean getExitBool(String direction) {
 
-        return (currentRoom.getExit(dir) != null);
+        return (currentRoom.getExit(direction) != null);
     }
 
     //file thats gonna be written to and the extension
@@ -177,7 +168,7 @@ public class Game {
         allMissions.addMission(beach, "Pick up food");
         allMissions.addMission(jungle, "Find survivors");
         allMissions.addMission(cave, "Eat the shrooms");
-        allMissions.addMission(camp, "prepare to escape the island");
+        allMissions.addMission(camp, "Prepare to escape the island");
         allMissions.addMission(camp, "Escape the island");
     }
 
@@ -213,7 +204,7 @@ public class Game {
     }
 
     /**
-     *
+     * method is used to store all the npcs in a hashmap
      * @return HashMap containing all NPCs
      */
     static HashMap<String, String> storeNPC() {
@@ -660,8 +651,8 @@ public class Game {
     }
 
     /**
-     * Method that contains a short dialog when talking to josephSchnitzel (Joseph
- Schnitzel)
+     * Method that contains a short dialog when talking to josephSchnitzel
+     * (Joseph Schnitzel)
      */
     static public void evilGuyDialog() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
@@ -780,25 +771,25 @@ public class Game {
      */
     static void dropItem(Command command) {
         HashMap newInventory = inventory.getInventory();
-        Iterator itte = newInventory.entrySet().iterator();
+        Iterator iterator = newInventory.entrySet().iterator();
         String seeItem;
 //        int indexItem = -1;
-        String indexItem = "";
+        String nameOfItem = "";
         String dropFromInventory = "debug";
 
-        while (itte.hasNext()) {
-            HashMap.Entry liste = (HashMap.Entry) itte.next();
+        while (iterator.hasNext()) {
+            HashMap.Entry liste = (HashMap.Entry) iterator.next();
             String itemName = (String) liste.getKey();
             if (itemName.equalsIgnoreCase(command.getSecondWord())) {
                 dropFromInventory = itemName;
-                indexItem = itemName;
+                nameOfItem = itemName;
                 break;
             }
         }
-        if (!indexItem.equals("")) {
-            itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem), inventory.getUseable(indexItem)));
-            inventory.removeItemInventory(indexItem);
-            System.out.println("You have dropped: " + indexItem);
+        if (!nameOfItem.equals("")) {
+            itemLocation.addItem(currentRoom, new PickableItem(nameOfItem, inventory.getItemWeight(nameOfItem), inventory.getUseable(nameOfItem)));
+            inventory.removeItemInventory(nameOfItem);
+            System.out.println("You have dropped: " + nameOfItem);
 
         } else {
             System.out.println("Can't drop item that isn't in inventory " + command.getSecondWord());
@@ -1111,7 +1102,7 @@ public class Game {
         Iterator itte = newInventory.entrySet().iterator();
         String seeItem;
 //        int indexItem = -1;
-        String indexItem = "";
+        String nameOfItem = "";
         String useItem = "debug";
 
         while (itte.hasNext()) {
@@ -1119,14 +1110,14 @@ public class Game {
             String itemName = (String) liste.getKey();
             if (itemName.equalsIgnoreCase(command.getSecondWord())) {
                 useItem = itemName;
-                indexItem = itemName;
+                nameOfItem = itemName;
                 break;
             }
         }
-        if (!indexItem.equals("") && inventory.getUseable(indexItem)) {
-            inventory.removeItemInventory(indexItem);
-            System.out.println("You have dropped: " + indexItem);
-            itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem)));
+        if (!nameOfItem.equals("") && inventory.getUseable(nameOfItem)) {
+            inventory.removeItemInventory(nameOfItem);
+            System.out.println("You have dropped: " + nameOfItem);
+            itemLocation.addItem(currentRoom, new PickableItem(nameOfItem, inventory.getItemWeight(nameOfItem)));
             player.setEnergy(player.getEnergy() + 10);
             player.setHealth(player.getHealth() + 5);
 
