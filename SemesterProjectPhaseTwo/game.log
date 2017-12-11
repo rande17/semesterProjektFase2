@@ -14,3 +14,28 @@ save null
 
 
 load null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go null
+go south
+go null
+go north
+go null
+go null
+go north
+? null
+? null
+go south
+go north
+go null
+go null
+go null
+go null
+go south
+? null
