@@ -32,14 +32,14 @@
                 <Button fx:id="inventoryButton" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showInventory" text="Inventory" />
                 <Button fx:id="helpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showHelp" text="Help" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Button fx:id="quitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quitGame" text="Quit" GridPane.columnIndex="1" />
-                <Button fx:id="missionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMission" prefHeight="5.0" prefWidth="98.0" text="Mission" GridPane.rowIndex="1" />
-                <Button fx:id="craftButton" mnemonicParsing="false" onAction="#showCraftMenu" prefHeight="17.0" prefWidth="98.0" text="Craft Menu" GridPane.rowIndex="2" />
+                <Button fx:id="missionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMission" prefWidth="98.0" text="Mission" GridPane.rowIndex="1" />
+                <Button fx:id="craftButton" mnemonicParsing="false" onAction="#showCraftMenu" prefWidth="98.0" text="Craft Menu" GridPane.rowIndex="2" />
                 <ProgressBar fx:id="healthBar" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <ProgressBar fx:id="energyBar" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="7" />
                 <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="6" />
                 <TextArea fx:id="textArea" editable="false" focusTraversable="false" mouseTransparent="true" onMouseClicked="#showHelp" prefHeight="435.0" prefWidth="205.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-            <Button fx:id="escapeButton" mnemonicParsing="false" onAction="#EscapeIslandOnAction" prefHeight="27.0" prefWidth="135.0" text="Escape" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="escapeButton" mnemonicParsing="false" onAction="#EscapeIslandOnAction" prefWidth="135.0" text="Escape" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="saveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaveAction" text="Save" GridPane.columnSpan="2" GridPane.rowIndex="3" />
             </children>
         </GridPane>

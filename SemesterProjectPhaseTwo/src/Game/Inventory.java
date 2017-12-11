@@ -184,10 +184,10 @@ public class Inventory {
     /**
      * Method checks if inventory contains a usable item
      *
-     * @param str name of the item
+     * @param itemName name of the item
      * @return true or false, depending on if the item is usable or not
      */
-    public boolean getUseable(String str) {
-        return useableItems.get(str);
+    public boolean getUseable(String itemName) {
+        return useableItems.get(itemName);
     }
 }

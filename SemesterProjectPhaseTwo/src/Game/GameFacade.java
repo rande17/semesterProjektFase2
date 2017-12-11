@@ -65,11 +65,11 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method used to use the GO command in GUI
      *
-     * @param dir direction of the player
+     * @param direction direction of the player
      */
     @Override
-    public void goGUI(String dir) {
-        Command command = new Command(GO, dir);
+    public void goGUI(String direction) {
+        Command command = new Command(GO, direction);
         try {
             Game.processCommand(command);
         } catch (Throwable ex) {
@@ -138,13 +138,13 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method used to check exits
      *
-     * @param dir
+     * @param direction
      * @return true or false, depending on if there is an exit in the direction
      * heading
      */
     @Override
-    public boolean checkExit(String dir) {
-        return Game.getExitBool(dir);
+    public boolean checkExit(String direction) {
+        return Game.getExitBool(direction);
     }
 
     /**
@@ -270,7 +270,7 @@ public class GameFacade implements InterfaceGame {
         for (int i = 0; i < craftArray.size(); i++) {
             Item item = (Item) craftArray.get(i);
             if (item.getName().equals(itemName)) {
-                itemDescribtion = item.getItemDescribtion();
+                itemDescribtion = item.getItemDescription();
                 break;
             }
         }
