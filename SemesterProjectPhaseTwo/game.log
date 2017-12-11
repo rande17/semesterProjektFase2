@@ -507,3 +507,11 @@ go west
 go null
 save null
 go south
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
