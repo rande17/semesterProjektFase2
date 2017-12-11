@@ -1099,14 +1099,14 @@ public class Game {
      */
     static boolean useItem(Command command) {
         HashMap newInventory = inventory.getInventory();
-        Iterator itte = newInventory.entrySet().iterator();
+        Iterator iterator = newInventory.entrySet().iterator();
         String seeItem;
 //        int indexItem = -1;
         String nameOfItem = "";
         String useItem = "debug";
 
-        while (itte.hasNext()) {
-            HashMap.Entry liste = (HashMap.Entry) itte.next();
+        while (iterator.hasNext()) {
+            HashMap.Entry liste = (HashMap.Entry) iterator.next();
             String itemName = (String) liste.getKey();
             if (itemName.equalsIgnoreCase(command.getSecondWord())) {
                 useItem = itemName;
