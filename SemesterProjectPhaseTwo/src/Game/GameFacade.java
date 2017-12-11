@@ -290,18 +290,20 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
+     * @return 
      */
     @Override
-    public void unlockedEscapeIsland() {
-        Game.UnlockedEscapeTheIsland();
+    public boolean unlockedEscapeIsland() {
+        return Game.UnlockedEscapeTheIsland();
     }
 
     /**
      * Method that locks possibility to escape the island
+     * @return 
      */
     @Override
-    public void lockedEscapeIsland() {
-        Game.lockedEscapeIsland();
+    public boolean lockedEscapeIsland() {
+        return Game.lockedEscapeIsland();
     }
 
     /**
