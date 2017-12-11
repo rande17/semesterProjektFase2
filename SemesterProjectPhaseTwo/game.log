@@ -39,3 +39,14 @@ go null
 go null
 go south
 ? null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go north
+go south
+go north
+go south

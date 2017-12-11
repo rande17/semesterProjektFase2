@@ -47,9 +47,9 @@ public class Game {
     static Item axe = new CraftableItem("Axe", "Axe: Stick, Stone and Rope or Lian", 3);
     static Item raft = new CraftableItem("Raft", "Raft: Lumber, Stick and Rope or Lian", 3);
     static Mission allMissions = new Mission();
-    static NPC npc1 = new NPC();
-    static NPC npc2 = new NPC();
-    static NPC npc3 = new NPC();
+    static NPC BSChristiansen = new NPC();
+    static NPC mysteriousCrab = new NPC();
+    static NPC josephSchnitzel = new NPC();
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
@@ -188,26 +188,26 @@ public class Game {
     public void createNPC() {
         //create the good npc
         createMissions();
-        npc1.setName("BS_Christiansen");
-        npc1.setCurrentRoom(jungle);
-        npc1.setDescribtion("The survivor of the plane crash look to be some kind of veteran soldier, "
+        BSChristiansen.setName("BS_Christiansen");
+        BSChristiansen.setCurrentRoom(jungle);
+        BSChristiansen.setDescription("The survivor of the plane crash look to be some kind of veteran soldier, "
                 + "\nbut he is heavly injured on his right leg so he cant move ");
-        npc1.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter."
+        BSChristiansen.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter."
                 + "\nYou can craft items to help you survive, if you have the right components.");
 
         //create the bad npc
-        npc3.setName("Joseph_Schnitzel");
-        npc3.setCurrentRoom(mountain);
-        npc3.setDescribtion("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
-        npc3.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schnitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
-        npc3.addDialog("");
-        npc3.setDamageValue(100);
+        josephSchnitzel.setName("Joseph_Schnitzel");
+        josephSchnitzel.setCurrentRoom(mountain);
+        josephSchnitzel.setDescription("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
+        josephSchnitzel.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schnitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
+        josephSchnitzel.addDialog("");
+        josephSchnitzel.setDamageValue(100);
 
         //create another npc
-        npc2.setName("Mysterious_Crab");
-        npc2.setCurrentRoom(cave);
-        npc2.setDescribtion("A mysterious crab that you dont really get why can talk");
-        npc2.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them all mr.Crab and know this island like the back of my hand.... oh i mean claw"
+        mysteriousCrab.setName("Mysterious_Crab");
+        mysteriousCrab.setCurrentRoom(cave);
+        mysteriousCrab.setDescription("A mysterious crab that you dont really get why can talk");
+        mysteriousCrab.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them all mr.Crab and know this island like the back of my hand.... oh i mean claw"
                 + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
                 + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
     }
@@ -218,9 +218,9 @@ public class Game {
      */
     static HashMap<String, String> storeNPC() {
         HashMap<String, String> npcMap = new HashMap<>();
-        npcMap.put(npc1.getName(), npc1.getCurrentRoom().getShortDescription());
-        npcMap.put(npc2.getName(), npc2.getCurrentRoom().getShortDescription());
-        npcMap.put(npc3.getName(), npc3.getCurrentRoom().getShortDescription());
+        npcMap.put(BSChristiansen.getName(), BSChristiansen.getCurrentRoom().getShortDescription());
+        npcMap.put(mysteriousCrab.getName(), mysteriousCrab.getCurrentRoom().getShortDescription());
+        npcMap.put(josephSchnitzel.getName(), josephSchnitzel.getCurrentRoom().getShortDescription());
         return npcMap;
     }
 
@@ -243,36 +243,36 @@ public class Game {
 //        Random picker = new Random();
 //        Room[] roomString = {beach, jungle, mountain};
 //        int indexOfRoomString = picker.nextInt(roomString.length);
-//        npc3.setCurrentRoom(roomString[indexOfRoomString]);
+//        josephSchnitzel.setCurrentRoom(roomString[indexOfRoomString]);
 
         if (Time.secondsPassed % 45 == 0) {
             Random picker = new Random();
             String[] roomString = {"south", "north"};
             boolean hasMoved = false;
             while (!hasMoved) {
-                if (npc3.getCurrentRoom().equals(mountain)) {
+                if (josephSchnitzel.getCurrentRoom().equals(mountain)) {
                     String[] newRoomString = {"south"};
                     int index = picker.nextInt(newRoomString.length);
-                    Room next = npc3.getCurrentRoom().getExit(newRoomString[index]);
-                    npc3.setCurrentRoom(next);
+                    Room next = josephSchnitzel.getCurrentRoom().getExit(newRoomString[index]);
+                    josephSchnitzel.setCurrentRoom(next);
                     hasMoved = true;
                     break;
                 }
 
-                if (npc3.getCurrentRoom().equals(beach)) {
+                if (josephSchnitzel.getCurrentRoom().equals(beach)) {
                     String[] newRoomString = {"north"};
                     int indexOfNewRoomString = picker.nextInt(newRoomString.length);
-                    Room nextRoom = npc3.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
-                    npc3.setCurrentRoom(nextRoom);
+                    Room nextRoom = josephSchnitzel.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
+                    josephSchnitzel.setCurrentRoom(nextRoom);
                     hasMoved = true;
                     break;
                 }
 
-                if (npc3.getCurrentRoom().equals(jungle)) {
+                if (josephSchnitzel.getCurrentRoom().equals(jungle)) {
                     String[] newRoomString = {"north", "south"};
                     int indexOfNewRoomString = picker.nextInt(newRoomString.length);
-                    Room nextRoom = npc3.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
-                    npc3.setCurrentRoom(nextRoom);
+                    Room nextRoom = josephSchnitzel.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
+                    josephSchnitzel.setCurrentRoom(nextRoom);
                     hasMoved = true;
                     break;
                 }
@@ -527,17 +527,17 @@ public class Game {
         System.out.println(itemList);
         int currentNPCsInRoom = 0;
 
-        if (npc1.getCurrentRoom() == currentRoom) {
+        if (BSChristiansen.getCurrentRoom() == currentRoom) {
             System.out.println("There seems to be someone resting in the leaves");
             currentNPCsInRoom++;
         }
 
-        if (npc2.getCurrentRoom() == currentRoom) {
+        if (mysteriousCrab.getCurrentRoom() == currentRoom) {
             System.out.println("You sense somebody in the cave");
             currentNPCsInRoom++;
         }
 
-        if (npc3.getCurrentRoom() == currentRoom) {
+        if (josephSchnitzel.getCurrentRoom() == currentRoom) {
             System.out.println("There is an intense smell, somebody seems to be near!");
             currentNPCsInRoom++;
         }
@@ -592,16 +592,16 @@ public class Game {
      * the dialog. If no, it prints that no one is present
      */
     static private void TalkTo() {
-        if (npc1.getCurrentRoom() == currentRoom) {
-            System.out.println(npc1.getDescribtion() + ", yet he still gives you good advice:\n");
-            System.out.println(npc1.getDialog(0));
+        if (BSChristiansen.getCurrentRoom() == currentRoom) {
+            System.out.println(BSChristiansen.getDescription() + ", yet he still gives you good advice:\n");
+            System.out.println(BSChristiansen.getDialog(0));
             System.out.println("");
             woundedSurvivor();
-        } else if (npc2.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
-            System.out.println(npc2.getDescribtion() + "\n" + npc2.getDialog(0));
+        } else if (mysteriousCrab.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
+            System.out.println(mysteriousCrab.getDescription() + "\n" + mysteriousCrab.getDialog(0));
             pregnant();
-        } //        else if (npc3.getCurrentRoom() == currentRoom) {
-        //            System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
+        } //        else if (josephSchnitzel.getCurrentRoom() == currentRoom) {
+        //            System.out.println(josephSchnitzel.getDescribtion() + "\n" + josephSchnitzel.getDialog(0));
         //            evilGuyDialog();
         //        } 
         else {
@@ -611,12 +611,12 @@ public class Game {
     }
 
     /**
-     * Method: force dialog with npc3, if player is in same room
+     * Method: force dialog with josephSchnitzel, if player is in same room
      */
     static private void forceDialog() {
         if (hasTalkedWithEvilGuy == false) {
-            if (npc3.getCurrentRoom() == currentRoom) {
-                System.out.println(npc3.getDescribtion() + "\n" + npc3.getDialog(0));
+            if (josephSchnitzel.getCurrentRoom() == currentRoom) {
+                System.out.println(josephSchnitzel.getDescription() + "\n" + josephSchnitzel.getDialog(0));
                 evilGuyDialog();
                 hasTalkedWithEvilGuy = true;
             }
@@ -644,7 +644,7 @@ public class Game {
     }
 
     /**
-     * Method that creates question when talking with npc2 (crab)
+     * Method that creates question when talking with mysteriousCrab (crab)
      */
     static public void pregnant() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
@@ -660,8 +660,8 @@ public class Game {
     }
 
     /**
-     * Method that contains a short dialog when talking to npc3 (Joseph
-     * Schnitzel)
+     * Method that contains a short dialog when talking to josephSchnitzel (Joseph
+ Schnitzel)
      */
     static public void evilGuyDialog() {
         Scanner scan = new Scanner(System.in); //Creates a new scanner
@@ -669,11 +669,11 @@ public class Game {
 
         if (input.equalsIgnoreCase("yes")) {
             System.out.println("You got a mission, please use the show command for more information");
-            allMissions.addMission(npc3.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
+            allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
             System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
         } else if (input.equalsIgnoreCase("no")) {
             System.out.println("");
-            player.loseHealth(npc3.getDamageValue());
+            player.loseHealth(josephSchnitzel.getDamageValue());
         }
     }
 
@@ -961,9 +961,9 @@ public class Game {
         //       saveObjectsJSON.add(player);
         saveObjectsJSON.add(currentRoom.getShortDescription());
 
-        // saveObjectsJSON.add(npc1);
-        // saveObjectsJSON.add(npc2);
-        // saveObjectsJSON.add(npc3);
+        // saveObjectsJSON.add(BSChristiansen);
+        // saveObjectsJSON.add(mysteriousCrab);
+        // saveObjectsJSON.add(josephSchnitzel);
         System.out.println(saveObjectsJSON.toString());
         return data.objectToJson(saveObjectsJSON);
     }

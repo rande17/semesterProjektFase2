@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class NPC {
 
-    //String used for the describtion of the NPC
-    private String desc;
+    //String used for the description of the NPC
+    private String description;
 
     //String used for the name os the NPC
     private String name;
@@ -25,10 +25,7 @@ public class NPC {
     //ArrayList used to store all dialog options of the NPC;
     private ArrayList<String> dialog = new ArrayList<String>();
 
-    //Room to stre the current room
-    private Room currentPosition;
-
-    private ArrayList NPCExits;
+//    private ArrayList NPCExits;
 
     Room currentRoom;
 
@@ -42,11 +39,11 @@ public class NPC {
      * Constructor that sets the name and location of the NPC while creating it
      *
      * @param _name used to set the name
-     * @param _currentPosition used to set spawning location
+     * @param _currentRoom used to set spawning location
      */
-    public NPC(String _name, Room _currentPosition) {
+    public NPC(String _name, Room _currentRoom) {
         name = _name;
-        currentPosition = _currentPosition;
+        currentRoom = _currentRoom;
 
     }
 
@@ -101,21 +98,21 @@ public class NPC {
     }
 
     /**
-     * setter method used for setting the describtion for a NPC
+     * setter method used for setting the description for a NPC
      *
-     * @param _desc is the describtion
+     * @param _description is the description
      */
-    public void setDescribtion(String _desc) {
-        desc = _desc;
+    public void setDescription(String _description) {
+        description = _description;
     }
 
     /**
-     * getter method used to get the describtion for a NPC
+     * getter method used to get the description for a NPC
      *
-     * @return desc which is the describtion
+     * @return desc which is the description
      */
-    public String getDescribtion() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
     //should be used to close any open dialog with the NPC
@@ -138,23 +135,15 @@ public class NPC {
      * @return currentPosition of the NPC
      */
     public Room getCurrentRoom() {
-        return currentPosition;
+        return currentRoom;
     }
 
     /**
      * Setter method used to set the currentroom of a NPC
      *
-     * @param goToRoom moves the NPC to another room
+     * @param _currentRoom moves the NPC to another room
      */
-    public void setCurrentRoom(Room goToRoom) {
-        currentPosition = goToRoom;
+    public void setCurrentRoom(Room _currentRoom) {
+        currentRoom = _currentRoom;
     }
-
-    /**
-     * @param _currentPosition
-     */
-    public void setCurrentPosition(Room _currentPosition) {
-        currentPosition = _currentPosition;
-    }
-
 }
