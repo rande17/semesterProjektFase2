@@ -92,6 +92,7 @@ public class FXMLDocumentController implements Initializable {
         String imgPath = "GUI/Assets/Character/" + player.getId().toString().trim().toLowerCase() + "down.png";
         Image img = new Image(imgPath);
         player.setImage(img);
+
     }
 
     @FXML
@@ -138,7 +139,7 @@ public class FXMLDocumentController implements Initializable {
             intersectWithObject();
             moveObjectNPC(npc3);
             game.energyLossToPlayer();
-
+            showEscapeButtonUnlocked();
         }
     }
 
@@ -192,7 +193,7 @@ public class FXMLDocumentController implements Initializable {
                                 textDrawed = false;
                                 PickItemPopUpText(objectID);
                             } else {
-                                System.out.println("TEST");
+                                //System.out.println("TEST");
                                 textDrawed = false;
                                 PickItemFailedPopUpText(objectID);
                             }
@@ -244,7 +245,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void go(String dir) throws IOException {
-        System.out.println(game.getRoomDescribtion().equals("airport"));
+        //System.out.println(game.getRoomDescribtion().equals("airport"));
         if (game.getRoomDescribtion().equals("airport")) {
             game.goGUI(dir);
             changeScene("splashscreen1");
@@ -253,8 +254,6 @@ public class FXMLDocumentController implements Initializable {
             changeScene(game.getRoomDescribtion());
         }
 
-        //   changeScene("splashscreen1");
-        // changeScene(game.getRoomDescribtion());
     }
 
     public void spawnNPC() {
@@ -499,11 +498,14 @@ public class FXMLDocumentController implements Initializable {
     private void winGame(ActionEvent event) {
         game.win();
     }
-    private void changeToWinScreen() throws IOException {
-            changeScene("winscreen");
-    }
 
-   public void escapePopUpText() {
+    //change scene to win screen
+    private void changeToWinScreen() throws IOException {
+        changeScene("winscreen");
+    }
+//create a popup text for when you hit the escape button so you ether win the game or continue to play
+
+    public void escapePopUpText() {
 
         Button yesButton = new Button("Yes");
         Button noButton = new Button("No");
@@ -514,9 +516,6 @@ public class FXMLDocumentController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             }
-                
-            //winGame(event);
-            //background.getChildren().remove(popupBackground);
         });
 
         noButton.setOnAction((event) -> {
@@ -542,7 +541,7 @@ public class FXMLDocumentController implements Initializable {
             background.getChildren().add(popupBackground);
             textDrawed = true;
 
-        }else if (!game.lockedEscapeIsland()) {
+        } else if (!game.lockedEscapeIsland()) {
 
             background.getChildren().remove(popupBackground);
             textDrawed = false;
@@ -557,6 +556,15 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
+
+    private void showEscapeButtonUnlocked() {
+        if (!game.unlockedEscapeIsland()) {
+            textArea.setText(
+                    " You have unlocked the\n escape button, so when\n you are ready to leave\n the island go to the\n beach and use it.");
+
+        }
+    }
+
     private void openWindow() {
         Button quitButton = new Button("X");
 
@@ -612,7 +620,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void EscapeIslandOnAction(ActionEvent event) throws IOException {
 //        changeScene("winscreen");
-          escapePopUpText();
+        escapePopUpText();
     }
 
     @FXML

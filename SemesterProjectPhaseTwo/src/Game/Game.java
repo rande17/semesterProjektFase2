@@ -833,7 +833,7 @@ public class Game {
      * current room is beach and if mission is completed
      */
     static boolean UnlockedEscapeTheIsland() {
-        if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
+        if (allMissions.missionStatus.get("Escape the island") == true) {
             return false;
         }
         return true;

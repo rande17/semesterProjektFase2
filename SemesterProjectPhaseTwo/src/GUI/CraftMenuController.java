@@ -72,6 +72,7 @@ public class CraftMenuController implements Initializable {
           String idOfCraftableItem;
           idOfCraftableItem=(String)idOfSelectedRadioButton.getId().replace("RadioButton", "");
           game.craftItemGUI(idOfCraftableItem);
+          requirementsTextArea.setText(idOfCraftableItem + " has been added to inventory");
     }
 
     public void populateVBoxWithRadioButtons() {

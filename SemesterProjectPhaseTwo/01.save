@@ -1,31 +1,16 @@
 [
   {
-    "currentQuantity": 7,
-    "inventoryMaxWeight": 25,
-    "currentInventoryWeight": 10,
+    "currentQuantity": 1,
+    "inventoryMaxWeight": 10,
+    "currentInventoryWeight": 1,
     "inventory": {
-      "Boardingpass": 1,
-      "Backpack": 1,
-      "Berry": 2,
-      "Fish": 1,
-      "Raft": 1,
-      "Spear": 1
+      "Boardingpass": 1
     },
     "itemWeight": {
-      "Boardingpass": 1,
-      "Backpack": 0,
-      "Berry": 1,
-      "Fish": 1,
-      "Raft": 3,
-      "Spear": 3
+      "Boardingpass": 1
     },
     "useableItems": {
-      "Boardingpass": true,
-      "Backpack": false,
-      "Berry": true,
-      "Fish": false,
-      "Raft": false,
-      "Spear": false
+      "Boardingpass": false
     }
   },
   {
@@ -41,7 +26,7 @@
           "itemDescription": "This is some wild eggs, maybe it can be used for food",
           "weight": 1,
           "name": "Egg",
-          "useable": false
+          "useable": true
         },
         {
           "itemDescription": "This is a log of tree, maybe it can be used to craft something to get away from this island ",
@@ -55,7 +40,7 @@
           "itemDescription": "these shrooms look suspecius, but maybe the can be",
           "weight": 1,
           "name": "Shroom",
-          "useable": false
+          "useable": true
         },
         {
           "itemDescription": "This is a stone, maybe it can be used to create something more usefull",
@@ -73,7 +58,7 @@
           "itemDescription": "This is freshwater found in the jungle, maybe you can drink it",
           "weight": 2,
           "name": "Waterbottle",
-          "useable": false
+          "useable": true
         },
         {
           "itemDescription": "This a flint, maybe it can be used to create something more usefull",
@@ -90,9 +75,21 @@
       ],
       "seabottom": [
         {
+          "itemDescription": "This is a backpack from the plane crash maybe you can use it to carry more items ",
+          "weight": 0,
+          "name": "Backpack",
+          "useable": false
+        },
+        {
           "itemDescription": "This is a water bottle from the plan crash ",
           "weight": 1,
           "name": "WaterBottle",
+          "useable": true
+        },
+        {
+          "itemDescription": "This is some rope that has been washed up on the beach shore from the plane crash",
+          "weight": 2,
+          "name": "Rope",
           "useable": false
         }
       ],
@@ -107,12 +104,36 @@
           "itemDescription": "Why are you inspecting this item, its GOD damn fish",
           "weight": 1,
           "name": "Fish",
+          "useable": true
+        },
+        {
+          "itemDescription": "Why are you inspecting this item, its GOD damn fish",
+          "weight": 1,
+          "name": "Fish",
+          "useable": true
+        },
+        {
+          "itemDescription": "This a flint, maybe it can be used to create something more usefull",
+          "weight": 2,
+          "name": "Flint",
           "useable": false
         },
         {
           "itemDescription": "This is some rope that has been washed up on the beach shore from the plane crash ",
           "weight": 2,
           "name": "Rope",
+          "useable": false
+        },
+        {
+          "itemDescription": "This is a small stick, maybe it can be used to create something more usefull",
+          "weight": 1,
+          "name": "Stick",
+          "useable": false
+        },
+        {
+          "itemDescription": "This is a small stick, maybe it can be used to create something more usefull",
+          "weight": 1,
+          "name": "Stick",
           "useable": false
         },
         {
@@ -130,6 +151,30 @@
       ],
       "jungle": [
         {
+          "itemDescription": "this is berries, maybe its poisonous try ur luck!! ",
+          "weight": 1,
+          "name": "Berry",
+          "useable": true
+        },
+        {
+          "itemDescription": "this is berries, maybe its poisonous try ur luck!! ",
+          "weight": 1,
+          "name": "Berry",
+          "useable": true
+        },
+        {
+          "itemDescription": "This is a log of tree, maybe it can be used to craft something to get away from this island ",
+          "weight": 3,
+          "name": "Lumber",
+          "useable": false
+        },
+        {
+          "itemDescription": "This is a lian from the jungle, maybe it can be used to create something more usefull",
+          "weight": 2,
+          "name": "Lian",
+          "useable": false
+        },
+        {
           "itemDescription": "This is a lian from the jungle, maybe it can be used to create something more usefull",
           "weight": 2,
           "name": "Lian",
@@ -139,6 +184,12 @@
           "itemDescription": "This is a stone, maybe it can be used to create something more usefull",
           "weight": 2,
           "name": "Stone",
+          "useable": false
+        },
+        {
+          "itemDescription": "This is a small stick, maybe it can be used to create something more usefull",
+          "weight": 1,
+          "name": "Stick",
           "useable": false
         },
         {
@@ -164,24 +215,36 @@
           "useable": false
         },
         {
+          "itemDescription": "This is a small stick, maybe it can be used to create something more usefull",
+          "weight": 1,
+          "name": "Stick",
+          "useable": false
+        },
+        {
           "itemDescription": "This is some wild eggs, maybe it can be used for food",
           "weight": 1,
           "name": "Egg",
-          "useable": false
+          "useable": true
         }
       ]
     },
     "items": [
       {
-        "itemDescription": "This is a stone, maybe it can be used to create something more usefull",
-        "weight": 2,
-        "name": "Stone",
+        "itemDescription": "This is a backpack from the plane crash maybe you can use it to carry more items ",
+        "weight": 0,
+        "name": "Backpack",
         "useable": false
       },
       {
-        "itemDescription": "This is some wild eggs, maybe it can be used for food",
+        "itemDescription": "This is a water bottle from the plan crash ",
         "weight": 1,
-        "name": "Egg",
+        "name": "WaterBottle",
+        "useable": true
+      },
+      {
+        "itemDescription": "This is some rope that has been washed up on the beach shore from the plane crash",
+        "weight": 2,
+        "name": "Rope",
         "useable": false
       }
     ]
@@ -190,8 +253,7 @@
     "missionStatus": {
       "Eat the shrooms": false,
       "Find survivors": false,
-      "Pick up food": true,
-      "Get me some eggs or I will kill you!!!!": false,
+      "Pick up food": false,
       "Prepare to escape the island": false,
       "Picking up first item": true,
       "Find your boardingpass": true,
@@ -200,8 +262,8 @@
     "score": {
       "score": 0
     },
-    "name": "Get me some eggs or I will kill you!!!!"
+    "name": "Escape the island"
   },
-  "camp"
+  "beach"
 ]
 
