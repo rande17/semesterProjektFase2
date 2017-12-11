@@ -360,4 +360,9 @@ public class GameFacade implements InterfaceGame {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public void newGameGUI() {
+        Game.initGame();
+    }
 }

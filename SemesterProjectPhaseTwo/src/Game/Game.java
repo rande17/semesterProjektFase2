@@ -59,7 +59,7 @@ public class Game {
      * Used to initialize different rooms and their respective items, and also
      * set the currentRoom
      */
-    private void createRooms() {
+    private static void createRooms() {
 //      Room airport, beach, jungle, mountain, cave, camp, raft, seaBottom;
 
         airport = new Room("airport");
@@ -94,7 +94,7 @@ public class Game {
     /**
      * Initializes pickable & non pickable items and adding them to rooms
      */
-    public void createItem() {
+    public static void createItem() {
         //Initializing an item and putting it in a room airport
         itemLocation.addItem(airport, new PickableItem("Bottle", "This is a bottle that have been left behind by someone", 2, false));
         itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii: 126AB", 1, false));
@@ -150,7 +150,7 @@ public class Game {
     /**
      * Crafted items added to ArrayList
      */
-    public void putCraftableItemInArrayList() {
+    public static void putCraftableItemInArrayList() {
 
         craftableItem.craftableListArray.add(campfire);
         craftableItem.craftableListArray.add(raft);
@@ -161,8 +161,7 @@ public class Game {
     /**
      * Creating missions and putting and putting them in the game
      */
-    public void createMissions() {
-
+    public static void createMissions() {
         allMissions.addMission(airport, "Find your boardingpass");
         allMissions.addMission(airport, "Picking up first item");
         allMissions.addMission(beach, "Pick up food");
@@ -176,7 +175,7 @@ public class Game {
      * Initializing NPCs, with name, current room position, desribtion and
      * dialog
      */
-    public void createNPC() {
+    public static void createNPC() {
         //create the good npc
         createMissions();
         BSChristiansen.setName("BS_Christiansen");
@@ -205,6 +204,7 @@ public class Game {
 
     /**
      * method is used to store all the npcs in a hashmap
+     *
      * @return HashMap containing all NPCs
      */
     static HashMap<String, String> storeNPC() {
@@ -218,8 +218,19 @@ public class Game {
     /**
      * Initializing Game
      */
-    public void initGame() {
-
+    public static void initGame() {
+        hasBoardingpass = false;
+        hasTalkedWithEvilGuy = false;
+        data = new DataFacade();
+        itemLocation = new ItemLocation();
+        inventory = new Inventory();
+        player = new Player("Player", "???", currentRoom, 100, 100);
+        score = new Score();
+        allMissions = new Mission();
+        BSChristiansen = new NPC();
+        mysteriousCrab = new NPC();
+        josephSchnitzel = new NPC();
+        craftableItem = new CraftableItem();
         createRooms();
         createItem();
         createMissions();
@@ -827,7 +838,7 @@ public class Game {
         }
         return true;
     }
-    
+
     static boolean UnlockedEscapeTheIslandWin() {
         if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
             win();
@@ -835,8 +846,6 @@ public class Game {
         }
         return true;
     }
-    
-    
 
     static boolean lockedEscapeIsland() {
         if (allMissions.missionStatus.get("Escape the island") == false) {

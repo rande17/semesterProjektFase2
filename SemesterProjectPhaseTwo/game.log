@@ -628,3 +628,123 @@ load null
 
 
 load null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+go null
+go south
+go null
+go null
+go south
+go null
+go null
+go north
+go null
+go north
+? null
+go north
+go south
+go east
+show null
+craft raft
+show null
+go west
+go null
+show null
+go south
+go west
+go null
+save null
+go east
+go null
+go north
+go south
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go south
+go null
+go null
+go north
+go null
+go null
+go null
+go null
+go null
+go west
+go null
+go east
+go north
+? null
+go null
+go null
+go null
+go null
+go south
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go south
+go null
+go null
+go north
+go null
+go null
+go null
+go null
+go north
+go null
+go null
+go null
+go null
+go south
+go null
+go null
+go west
+go east
+
+
+ >>>  Starting new game <<< 
+
+
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go south
+go null
+go null
+go north
+go null
+go null
+go null
+go null
+go west
+go null
+go null
+go east
+go null
+go north
+? null
+go null
+go null
+go null
+go null
+go null
+go null
+go south

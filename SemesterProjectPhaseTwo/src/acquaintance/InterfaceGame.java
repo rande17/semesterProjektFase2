@@ -44,6 +44,6 @@ public interface InterfaceGame {
     public void saveGameGUI();
     public boolean unlockedEscapeIsland();
     public boolean lockedEscapeIsland();
-    
+    public void newGameGUI();
     public void loadGameGUI();
 }
