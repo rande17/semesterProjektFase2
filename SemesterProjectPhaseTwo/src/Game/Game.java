@@ -999,7 +999,7 @@ public class Game {
             double itemQuantity;
             if (itemListString.contains(",")) {
                 itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.indexOf(",")));
-                inventoryItemQuantityString = inventoryItemQuantityString.substring(0, inventoryItemQuantityString.indexOf(","));
+                inventoryItemQuantityString = inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf(",") + 1, inventoryItemQuantityString.length());
                 itemSet = itemListString.substring(0, itemListString.indexOf(","));
                 itemListString = itemListString.substring(itemListString.indexOf(",") + 1, itemListString.length());
             } else {
