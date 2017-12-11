@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -216,7 +218,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void populateItemsOnMap() {
-        if (!itemsDrawed) {
+        if (!itemsDrawed && background.getHeight() > 0) {
             itemsArray = game.getItemsOnMap();
             if (!itemsArray.isEmpty()) {
                 for (int i = 0; i < itemsArray.size(); i++) {
@@ -242,23 +244,23 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void go(String dir) throws IOException {
-        System.out.println(game.getRoom().equals("airport"));
-        if (game.getRoom().equals("airport")) {
+        System.out.println(game.getRoomDescribtion().equals("airport"));
+        if (game.getRoomDescribtion().equals("airport")) {
             game.goGUI(dir);
             changeScene("splashscreen1");
         } else {
             game.goGUI(dir);
-            changeScene(game.getRoom());
+            changeScene(game.getRoomDescribtion());
         }
 
         //   changeScene("splashscreen1");
-        // changeScene(game.getRoom());
+        // changeScene(game.getRoomDescribtion());
     }
 
     public void spawnNPC() {
         game.getNPC();
 
-        if (!NPCDrawed) {
+        if (!NPCDrawed && background.getWidth() > 0) {
             NPCHashMap = game.getNPC();
             if (!NPCHashMap.isEmpty()) {
 
@@ -266,7 +268,7 @@ public class FXMLDocumentController implements Initializable {
 
                 while (iterator.hasNext()) {
                     HashMap.Entry entry = (HashMap.Entry) iterator.next();
-                    if (entry.getValue().equals(game.getRoom())) {
+                    if (entry.getValue().equals(game.getRoomDescribtion())) {
 
                         ImageView NPC = new ImageView();
                         System.out.println(entry.getKey().toString());
@@ -295,7 +297,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void moveObject(ImageView shapeToMove, String dir) throws IOException {
-        if (shapeToMove != null) {
+        if (shapeToMove != null && background.getHeight() > 0) {
             // System.out.println(player.toString());
             // System.out.println(shapeToMove.toString());
             boolean playerIsObject = shapeToMove.equals(player);
@@ -328,11 +330,9 @@ public class FXMLDocumentController implements Initializable {
                     if (shapeToMove.getLayoutY() >= background.getHeight() - speed - shapeToMove.getFitHeight()) {
                         if (game.checkExit("south")) {
                             direction = "south";
-                            shapeToMove.setLayoutX(x);
                             go = true;
-
+                            shapeToMove.setLayoutX(x);
                             shapeToMove.setLayoutY(0);
-                            System.out.println(shapeToMove.getLayoutBounds().toString());
                         }
                     } else {
                         shapeToMove.setLayoutY(shapeToMove.getLayoutY() + speed);
@@ -350,7 +350,7 @@ public class FXMLDocumentController implements Initializable {
 
                             shapeToMove.setLayoutX(background.getWidth() - shapeToMove.getFitWidth());
                             shapeToMove.setLayoutY(y);
-                        } else if (game.getRoom().equalsIgnoreCase("airport")) {
+                        } else if (game.getRoomDescribtion().equalsIgnoreCase("airport")) {
                             textDrawed = false;
                             LockItemPopUpText();
 
@@ -499,24 +499,34 @@ public class FXMLDocumentController implements Initializable {
     private void winGame(ActionEvent event) {
         game.win();
     }
+    private void changeToWinScreen() throws IOException {
+            changeScene("winscreen");
+    }
 
-    public void escapePopUpText() {
+   public void escapePopUpText() {
 
         Button yesButton = new Button("Yes");
         Button noButton = new Button("No");
 
         yesButton.setOnAction((event) -> {
-            winGame(event);
-            background.getChildren().remove(popupBackground);
+            try {
+                changeToWinScreen();
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+            //winGame(event);
+            //background.getChildren().remove(popupBackground);
         });
 
         noButton.setOnAction((event) -> {
             quitDialog(event);
         });
 
-        if (textDrawed) {
+        System.out.println(game.unlockedEscapeIsland());
+        if (!game.unlockedEscapeIsland()) {
             background.getChildren().remove(popupBackground);
-            game.unlockedEscapeIsland();
+            textDrawed = false;
             openWindow();
 
             popupText.setText(
@@ -532,10 +542,11 @@ public class FXMLDocumentController implements Initializable {
             background.getChildren().add(popupBackground);
             textDrawed = true;
 
-        }
-        if (!textDrawed) {
+        }else if (!game.lockedEscapeIsland()) {
+
             background.getChildren().remove(popupBackground);
-            game.lockedEscapeIsland();
+            textDrawed = false;
+
             openWindow();
 
             popupText.setText(
@@ -546,7 +557,6 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
-
     private void openWindow() {
         Button quitButton = new Button("X");
 
@@ -601,11 +611,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void EscapeIslandOnAction(ActionEvent event) throws IOException {
-        changeScene("winscreen");
-    }
-
-    @FXML
-    private void showHelp(MouseEvent event) {
+//        changeScene("winscreen");
+          escapePopUpText();
     }
 
     @FXML

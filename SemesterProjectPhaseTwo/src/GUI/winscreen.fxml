@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane accessibleHelp="g" accessibleText="dazsfa" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/splashscreen1.png');-fx-background-size: stretch" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.WinScreenController">
+<AnchorPane accessibleHelp="g" accessibleText="dazsfa" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/winscreen1.png');-fx-background-size: stretch" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.WinScreenController">
    <children>
            
        
-      <Button fx:id="HighScoreSubmitButton" layoutX="325.0" layoutY="490.0" mnemonicParsing="false" onAction="#SubmitHighScore" prefHeight="67.0" prefWidth="125.0" text="Submit HighScore" />
+      <Button fx:id="HighScoreSubmitButton" layoutX="325.0" layoutY="490.0" mnemonicParsing="false" onAction="#SubmitHighScore" prefHeight="67.0" prefWidth="150.0" text="Submit HighScore" />
       <TextField fx:id="PlayerName" layoutX="306.0" layoutY="443.0" />
       <Label layoutX="317.0" layoutY="419.0" text="Please enter your name:" />
    </children>

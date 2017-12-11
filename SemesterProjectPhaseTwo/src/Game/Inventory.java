@@ -1,74 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Game;
 
 import java.util.*;
 
-/**
- *
- * @author marti
- */
 public class Inventory {
 
-    private int inventoryMaxQuantity = 10;
     private int currentQuantity = 0;
     private int inventoryMaxWeight = 10; //set default inventory weight 
     private int currentInventoryWeight = 0;
     private HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
     private HashMap<String, Integer> itemWeight = new HashMap<>();
     private HashMap<String, Boolean> useableItems = new HashMap<>();
-//constuctor  
-
-    Inventory() {
-    }
-//constructer
 
     /**
+     * Constructor, no args for creating Inventory instance
+     */
+    Inventory() {
+    }
+
+    /**
+     * Constructor, for creating Inventory instance
      *
      * @param _InventoryMaxWeight used to set the max weight of the inventory
      */
     Inventory(int _InventoryMaxWeight) {
         inventoryMaxWeight = _InventoryMaxWeight;
     }
-//get max inventory weight
 
     /**
-     *
-     * @param _InventoryMaxWeight used to set the max weight of the inventory
-     * @param _InventoryMaxQuantity used to set the max capacity of the
-     * inventory
-     */
-    Inventory(int _InventoryMaxWeight, int _InventoryMaxQuantity) {
-        inventoryMaxWeight = _InventoryMaxWeight;
-        inventoryMaxQuantity = _InventoryMaxQuantity;
-    }
-
-    /**
-     *
-     * @return returns the max weight of inventory
+     * @return max weight of inventory
      */
     public int getInventoryMaxWeight() {
         return inventoryMaxWeight;
     }
 
     /**
-     *
      * @param _item used for adding item to inventory
-     * @return true or false whether there is enough room for the item in
-     * inventory
+     * @return true or false depending on if inventory max weight is reached
      */
     public boolean addItemInInventory(Item _item) {
         int quantity = 0;
-        String itemInInventory = "";
         String itemName = _item.getName();
         int weightOfItem = _item.getWeight();
         boolean useable = _item.getUseable();
-        
-        itemWeight.put(itemName, weightOfItem);
-        useableItems.put(itemName, useable);
+
         /*currentQuantity < inventoryMaxQuantity */
         if ((weightOfItem + currentInventoryWeight) <= inventoryMaxWeight) {
             if (inventory.containsKey(itemName)) {
@@ -76,6 +50,8 @@ public class Inventory {
 //                return true;
             } else {
                 quantity = 1;
+                itemWeight.put(itemName, weightOfItem);
+                useableItems.put(itemName, useable);
             }
             inventory.put(itemName, quantity);
             currentQuantity += 1;
@@ -88,87 +64,49 @@ public class Inventory {
         return false;
     }
 
-//    public void addItemInInventory(Item _item) {
-//        int quantity = 0;
-//        String itemInInventory = "";
-//        String itemName = _item.getName();
-//        int weightOfItem = _item.getWeight();
-//
-//        itemWeight.put(itemName, weightOfItem);
-//        if (currentQuantity < inventoryMaxQuantity && (weightOfItem + currentInventoryWeight) <= inventoryMaxWeight) {
-//            if (inventory.containsKey(itemName)) {
-//                quantity = inventory.get(itemName) + 1;
-//
-//            } else {
-//                quantity = 1;
-//            }
-//            inventory.put(itemName, quantity);
-//            currentQuantity += 1;
-//            currentInventoryWeight += weightOfItem;
-//
-//        } else {
-//            System.out.println("You can't pickup this item");
-//        }
-//    }
     /**
-     * Drop item from inventory and add to Room
+     * Method: Drops item from inventory and adds it to current room
      *
      * @param _string used for ether remove or decrease number of items
      */
     public void removeItemInventory(String _string) {
         int quantity = inventory.get(_string) - 1;
-
+        int weight = itemWeight.get(_string);
         if (inventory.get(_string) <= 1) {
             inventory.remove(_string);
-
+            itemWeight.remove(_string);
+            useableItems.remove(_string);
         } else {
             inventory.replace(_string, quantity);
 
         }
-        currentInventoryWeight -= itemWeight.get(_string);
-        currentQuantity = currentQuantity - 1;
-
-    }
-
-   /* public void useItem(String _string) {
-        int quantity = inventory.get(_string) - 1;
-
-        if (inventory.get(_string) <= 1) {
-            inventory.remove(_string);
-
-        } else {
-            inventory.replace(_string, quantity);
-
-        }
-        currentInventoryWeight -= itemWeight.get(_string);
+        currentInventoryWeight -= weight;
         currentQuantity = currentQuantity - 1;
     }
-*/
-    //method to show inventory
+
+    /**
+     * Method that prints inventory
+     */
     public void showInventory() {
         System.out.println(inventory + "\n");
     }
 
     /**
-     * get current inventory weight
-     *
-     * @return returns the current weight
+     * @return the current weight of items in inventory
      */
     public int getCurrentInventoryWeight() {
         return currentInventoryWeight;
     }
 
-    // get inventory
     /**
-     *
-     * @return return inventory
+     * @return inventory HashMap
      */
     public HashMap getInventory() {
         return inventory;
     }
 
     /**
-     * Set new weight for the inventory
+     * Method to set new weight for the inventory
      *
      * @param _InventoryMaxWeight used to set the max weight
      */
@@ -179,12 +117,9 @@ public class Inventory {
 
     /**
      *
-     * @param _InventoryMaxQuantity used to set the max quantity
+     * @return inventory status to give an overview of how much the inventory
+     * contains
      */
-    public void setinventoryMaxQuantity(int _InventoryMaxQuantity) {
-        inventoryMaxQuantity = _InventoryMaxQuantity;
-    }
-
     public String getInventoryStatus() {
         String inventoryStatus = "Inventory weight: ";
         inventoryStatus += getCurrentInventoryWeight();
@@ -193,18 +128,22 @@ public class Inventory {
         inventoryStatus += "\n";
 
         return inventoryStatus;
-
     }
 
     /**
-     *
      * @param itemName get the item weight of a specific item
-     * @return
+     * @return weight for an item
      */
     public int getItemWeight(String itemName) {
         return itemWeight.get(itemName);
     }
 
+    /**
+     * Method that iterates through Inventory HashMap and converts Item key and
+     * value to a String
+     *
+     * @return String of item name and item quantity
+     */
     @Override
     public String toString() {
         String inventoryString = "";
@@ -222,22 +161,33 @@ public class Inventory {
         return inventoryString;
     }
 
+    /**
+     * Method, converting Inventory HashMap to an ArrayList
+     *
+     * @return Inventory ArrayList
+     */
     public ArrayList inventoryNames() {
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> inventoryArrayList = new ArrayList<>();
 
         Iterator iterator = inventory.entrySet().iterator();
         int i = 0;
 
         while (i < inventory.size()) {
             HashMap.Entry entry = (HashMap.Entry) iterator.next();
-            list.add(i, (String) entry.getKey());
+            inventoryArrayList.add(i, (String) entry.getKey());
             i++;
         }
 
-        return list;
+        return inventoryArrayList;
     }
-    
-    public boolean getUseable(String str){
+
+    /**
+     * Method checks if inventory contains a usable item
+     *
+     * @param str name of the item
+     * @return true or false, depending on if the item is usable or not
+     */
+    public boolean getUseable(String str) {
         return useableItems.get(str);
     }
 }

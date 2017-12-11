@@ -77,7 +77,7 @@ public class Game {
         mountain = new Room("mountain");
         cave = new Room("cave");
         camp = new Room("camp");
-        seaBottom = new Room("seabuttom");
+        seaBottom = new Room("seabottom");
 
         //Setting the the exits in different rooms
         beach.setExit("north", jungle);
@@ -148,7 +148,7 @@ public class Game {
         //Initializing an item and putting it in a room camp
         itemLocation.addItem(camp, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
         itemLocation.addItem(camp, new PickableItem("Stick", "This is a small stick, maybe it can be used to create something more usefull", 1, false));
-        itemLocation.addItem(mountain, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
+        itemLocation.addItem(camp, new PickableItem("Egg", "This is some wild eggs, maybe it can be used for food", 1, true));
 
         //Initializing an item and putting it in a room seaBottom
         itemLocation.addItem(seaBottom, new PickableItem("Backpack", "This is a backpack from the plane crash maybe you can use it to carry more items ", 0, false));
@@ -796,9 +796,9 @@ public class Game {
             }
         }
         if (!indexItem.equals("")) {
+            itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem), inventory.getUseable(indexItem)));
             inventory.removeItemInventory(indexItem);
             System.out.println("You have dropped: " + indexItem);
-            itemLocation.addItem(currentRoom, new PickableItem(indexItem, inventory.getItemWeight(indexItem), inventory.getUseable(indexItem)));
 
         } else {
             System.out.println("Can't drop item that isn't in inventory " + command.getSecondWord());
@@ -830,18 +830,41 @@ public class Game {
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
      */
-    static void UnlockedEscapeTheIsland() {
-        //  if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
-        win();
-        //  }
+    static boolean UnlockedEscapeTheIsland() {
+        if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
+            win();
+            return false;
+        }
+        return true;
     }
 
-    /**
-     * Method that locks possibility to escape the island
-     */
-    static void lockedEscapeIsland() {
+    static boolean lockedEscapeIsland() {
         if (allMissions.missionStatus.get("Escape the island") == false) {
             System.out.println("You haven't unlocked this command yet");
+            return false;
+        }
+        return true;
+    }
+
+    private static Room getRoomFromName(String roomName) {
+        roomName = roomName.toLowerCase();
+        switch (roomName) {
+            case "airport":
+                return airport;
+            case "beach":
+                return beach;
+            case "jungle":
+                return jungle;
+            case "mountain":
+                return mountain;
+            case "cave":
+                return cave;
+            case "camp":
+                return camp;
+            case "seabottom":
+                return seaBottom;
+            default:
+                return airport;
         }
     }
 
@@ -919,7 +942,7 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    static  void saveGame() throws IOException, Throwable {
+    static void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());
         save.saveGame();
@@ -935,10 +958,13 @@ public class Game {
         saveObjectsJSON.add(inventory);
         saveObjectsJSON.add(itemLocation);
         saveObjectsJSON.add(allMissions);
+        //       saveObjectsJSON.add(player);
+        saveObjectsJSON.add(currentRoom.getShortDescription());
+
         // saveObjectsJSON.add(npc1);
         // saveObjectsJSON.add(npc2);
         // saveObjectsJSON.add(npc3);
-
+        System.out.println(saveObjectsJSON.toString());
         return data.objectToJson(saveObjectsJSON);
     }
 
@@ -946,31 +972,84 @@ public class Game {
      * Method used to load a saved game file, to be able to continue that
      * specific game
      */
+    private static String removeCrapCharsFromString(String stringToClean) {
+        stringToClean = stringToClean.replace("{", "");
+        stringToClean = stringToClean.replace("}", "");
+        stringToClean = stringToClean.replace("[", "");
+        stringToClean = stringToClean.replace("]", "");
+        stringToClean = stringToClean.replace(" ", "");
+        return stringToClean;
+    }
+
     static private void loadGame() {
         ArrayList loadData = data.loadGame();
 
         //inventory
-        LinkedTreeMap inventoryMap = (LinkedTreeMap) loadData.get(0);
-        for (Iterator it = inventoryMap.entrySet().iterator(); it.hasNext(); it.next()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            String key = (String) entry.getKey();
-            if (key.equals("inventory")) {
-                LinkedTreeMap inventoryItems = (LinkedTreeMap) entry.getValue();
-                String itemsToAdd = inventoryItems.keySet().toString();
-                itemsToAdd = itemsToAdd.replace("[", "");
-                itemsToAdd = itemsToAdd.replace("]", "");
-                while (itemsToAdd.indexOf(",") > 0) {
-                    String nextItem = itemsToAdd.substring(0, itemsToAdd.indexOf(","));
-                    itemsToAdd = itemsToAdd.substring(itemsToAdd.indexOf(",") + 1, itemsToAdd.length());
-                    Item item;
-                    //          item = new PickableItem(nextItem, "", 1);
-                    //          inventory.addItemInInventory(item);
-                }
-                //          Item item = new PickableItem(itemsToAdd, "", 1);
-                //          inventory.addItemInInventory(item);
+        inventory = new Inventory();
+        LinkedTreeMap saveMap = (LinkedTreeMap) loadData.get(0);
+        LinkedTreeMap inventoryItemWeight = (LinkedTreeMap) saveMap.get("itemWeight");
+        LinkedTreeMap inventoryItemQuantity = (LinkedTreeMap) saveMap.get("inventory");
+        String inventoryItemQuantityString = inventoryItemQuantity.toString();
+        inventoryItemQuantityString = removeCrapCharsFromString(inventoryItemQuantityString);
+        String itemListString = inventoryItemWeight.toString();
+        itemListString = removeCrapCharsFromString(itemListString);
+
+        for (int i = 0; i < inventoryItemWeight.size(); i++) {
+            String itemSet;
+            double itemQuantity;
+            if (itemListString.contains(",")) {
+                itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.indexOf(",")));
+                inventoryItemQuantityString = inventoryItemQuantityString.substring(0, inventoryItemQuantityString.indexOf(","));
+                itemSet = itemListString.substring(0, itemListString.indexOf(","));
+                itemListString = itemListString.substring(itemListString.indexOf(",") + 1, itemListString.length());
+            } else {
+                itemSet = itemListString;
+                itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.length()));
+            }
+            String itemName = itemSet.substring(0, itemSet.indexOf("="));
+            int itemWeight = Double.valueOf(itemSet.substring(itemSet.indexOf("=") + 1, itemSet.length())).intValue();
+            while (itemQuantity > 0) {
+                Item item = new Item(itemName, "", itemWeight, true);
+                inventory.addItemInInventory(item);
+                itemQuantity--;
             }
         }
 
+        //itemList
+        itemLocation = new ItemLocation();
+        saveMap = (LinkedTreeMap) loadData.get(1);
+        LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap.get("itemList");
+        String rooms = itemLocationOnMap.keySet().toString();
+        rooms = removeCrapCharsFromString(rooms);
+
+        for (int j = 0; j <= itemLocationOnMap.size() - 1; j++) {
+            String itemToAdd;
+
+            if (rooms.contains(",")) {
+                itemToAdd = rooms.substring(0, rooms.indexOf(","));
+            } else {
+                itemToAdd = rooms;
+            }
+
+            rooms = rooms.substring(rooms.indexOf(",") + 1, rooms.length());
+            ArrayList itemInRoom = (ArrayList) itemLocationOnMap.get(itemToAdd);
+            for (int i = 0; i < itemInRoom.size(); i++) {
+                Item itemLocationToAdd;
+                LinkedTreeMap itemT = (LinkedTreeMap) itemInRoom.get(i);
+
+                String itemName = itemT.get("name").toString();
+                String itemDesc = itemT.get("itemDescribtion").toString();
+                int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());
+                boolean itemUseable = Boolean.getBoolean(itemT.get("useable").toString());
+
+                itemLocationToAdd = new PickableItem(itemName, itemDesc, itemWeight, itemUseable);
+                itemLocation.addItem(itemToAdd, itemLocationToAdd);
+
+            }
+        }
+        //set room
+        String spawnRoom = loadData.get(3).toString();
+        currentRoom = getRoomFromName(spawnRoom);
     }
 
     /**

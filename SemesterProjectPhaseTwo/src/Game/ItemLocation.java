@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class ItemLocation {
 
     //HashMap used for making a itemlist of each room
-    HashMap<Room, ArrayList> itemList = new HashMap<>();
+    HashMap<String, ArrayList> itemList = new HashMap<>();
 
     //sets the name of the arraylist to items
     private ArrayList items;
@@ -30,6 +30,14 @@ public class ItemLocation {
      * @param _item the name of the item
      */
     public void addItem(Room _room, Item _item) {
+        if (!itemList.containsKey(_room.getShortDescription())) {
+            itemList.put(_room.getShortDescription(), new ArrayList());
+        }
+        items = itemList.get(_room.getShortDescription());
+        items.add(_item);
+        itemList.put(_room.getShortDescription(), items);
+    }
+    public void addItem(String _room, Item _item) {
         if (!itemList.containsKey(_room)) {
             itemList.put(_room, new ArrayList());
         }
@@ -46,7 +54,7 @@ public class ItemLocation {
      * @return the itemList of the current room
      */
     ArrayList getItems(Room currentRoom) {
-        return itemList.get(currentRoom);
+        return itemList.get(currentRoom.getShortDescription());
     }
 
     /**
@@ -56,7 +64,7 @@ public class ItemLocation {
      * @param itemsInRoom the name of the arraylist
      */
     public void setItem(Room _room, ArrayList itemsInRoom) {
-        itemList.replace(_room, itemsInRoom);
+        itemList.replace(_room.getShortDescription(), itemsInRoom);
     }
     
     public void emptyItemLocation(){

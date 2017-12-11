@@ -100,7 +100,9 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    private void loadgameMenuButtonAction(MouseEvent event) {
+    private void loadgameMenuButtonAction(MouseEvent event) throws IOException {
+        game.loadGameGUI();
+        changeScene(game.getRoomDescribtion());
     }
 
     @FXML

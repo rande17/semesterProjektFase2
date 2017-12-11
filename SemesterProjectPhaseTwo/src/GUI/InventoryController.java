@@ -66,7 +66,7 @@ public class InventoryController implements Initializable {
 
     @FXML
     private void handleBackAction(ActionEvent event) throws IOException {
-        changeScene(inventoryMenu.getRoom());
+        changeScene(inventoryMenu.getRoomDescribtion());
     }
 
     @FXML
