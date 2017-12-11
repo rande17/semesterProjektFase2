@@ -44,4 +44,5 @@ public interface InterfaceGame {
     public void submitHighScore(String playerName);
     public boolean useItem(String itemToUse);
     public void saveGameGUI();
+    public void loadGameGUI();
 }

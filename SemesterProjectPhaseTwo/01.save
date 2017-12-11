@@ -1,16 +1,79 @@
 [
   {
-    "inventoryMaxQuantity": 10,
-    "currentQuantity": 0,
+    "currentQuantity": 1,
     "inventoryMaxWeight": 10,
-    "currentInventoryWeight": 0,
-    "inventory": {},
-    "itemWeight": {},
-    "useableItems": {}
+    "currentInventoryWeight": 1,
+    "inventory": {
+      "Boardingpass": 1
+    },
+    "itemWeight": {
+      "Boardingpass": 1
+    },
+    "useableItems": {
+      "Boardingpass": true
+    }
   },
   {
     "itemList": {
-      "Game.Room@7070ca11": [
+      "mountain": [
+        {
+          "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
+          "weight": 2,
+          "name": "Stone",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is some wild eggs, maybe it can be used for food",
+          "weight": 1,
+          "name": "Egg",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is a log of tree, maybe it can be used to craft something to get away from this island ",
+          "weight": 3,
+          "name": "Lumber",
+          "useable": false
+        }
+      ],
+      "cave": [
+        {
+          "itemDescribtion": "these shrooms look suspecius, but maybe the can be",
+          "weight": 1,
+          "name": "Shroom",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
+          "weight": 2,
+          "name": "Stone",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
+          "weight": 2,
+          "name": "Stone",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is freshwater found in the jungle, maybe you can drink it",
+          "weight": 2,
+          "name": "Waterbottle",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This a flint, maybe it can be used to create something more usefull",
+          "weight": 2,
+          "name": "Flint",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "The giant rock dont look like it can be moved",
+          "weight": 100,
+          "name": "GiantRock",
+          "useable": false
+        }
+      ],
+      "seabottom": [
         {
           "itemDescribtion": "This is a backpack from the plane crash maybe you can use it to carry more items ",
           "weight": 0,
@@ -21,7 +84,7 @@
           "itemDescribtion": "This is a water bottle from the plan crash ",
           "weight": 1,
           "name": "WaterBottle",
-          "useable": true
+          "useable": false
         },
         {
           "itemDescribtion": "This is some rope that has been washed up on the beach shore from the plane crash",
@@ -30,111 +93,7 @@
           "useable": false
         }
       ],
-      "Game.Room@2b43e2f1": [
-        {
-          "itemDescribtion": "this is berries, maybe its poisonous try ur luck!! ",
-          "weight": 1,
-          "name": "Berry",
-          "useable": true
-        },
-        {
-          "itemDescribtion": "this is berries, maybe its poisonous try ur luck!! ",
-          "weight": 1,
-          "name": "Berry",
-          "useable": true
-        },
-        {
-          "itemDescribtion": "This is a log of tree, maybe it can be used to craft something to get away from this island ",
-          "weight": 3,
-          "name": "Lumber",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is a lian from the jungle, maybe it can be used to create something more usefull",
-          "weight": 2,
-          "name": "Lian",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is a lian from the jungle, maybe it can be used to create something more usefull",
-          "weight": 2,
-          "name": "Lian",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
-          "weight": 2,
-          "name": "Stone",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is a small stick, maybe it can be used to create something more usefull",
-          "weight": 1,
-          "name": "Stick",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "The giant log dont look like it can be moved",
-          "weight": 100,
-          "name": "GiantLog",
-          "useable": false
-        }
-      ],
-      "Game.Room@2e152e9d": [
-        {
-          "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
-          "weight": 2,
-          "name": "Stone",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is some wild eggs, maybe it can be used for food",
-          "weight": 1,
-          "name": "Egg",
-          "useable": true
-        },
-        {
-          "itemDescribtion": "This is a log of tree, maybe it can be used to craft something to get away from this island ",
-          "weight": 3,
-          "name": "Lumber",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is some wild eggs, maybe it can be used for food",
-          "weight": 1,
-          "name": "Egg",
-          "useable": true
-        }
-      ],
-      "Game.Room@4410fc08": [
-        {
-          "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
-          "weight": 2,
-          "name": "Stone",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is a small stick, maybe it can be used to create something more usefull",
-          "weight": 1,
-          "name": "Stick",
-          "useable": false
-        }
-      ],
-      "Game.Room@69c47e89": [
-        {
-          "itemDescribtion": "This is a bottle that have been left behind by someone",
-          "weight": 2,
-          "name": "Bottle",
-          "useable": false
-        },
-        {
-          "itemDescribtion": "This is a boardingpass to get on the plane to Hawaii: 126AB",
-          "weight": 1,
-          "name": "Boardingpass",
-          "useable": false
-        }
-      ],
-      "Game.Room@6508aae7": [
+      "beach": [
         {
           "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
           "weight": 2,
@@ -145,13 +104,13 @@
           "itemDescribtion": "Why are you inspecting this item, its GOD damn fish",
           "weight": 1,
           "name": "Fish",
-          "useable": true
+          "useable": false
         },
         {
           "itemDescribtion": "Why are you inspecting this item, its GOD damn fish",
           "weight": 1,
           "name": "Fish",
-          "useable": true
+          "useable": false
         },
         {
           "itemDescribtion": "This a flint, maybe it can be used to create something more usefull",
@@ -190,17 +149,35 @@
           "useable": false
         }
       ],
-      "Game.Room@64ef2de0": [
+      "jungle": [
         {
-          "itemDescribtion": "these shrooms look suspecius, but maybe the can be",
+          "itemDescribtion": "this is berries, maybe its poisonous try ur luck!! ",
           "weight": 1,
-          "name": "Shroom",
-          "useable": true
+          "name": "Berry",
+          "useable": false
         },
         {
-          "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
+          "itemDescribtion": "this is berries, maybe its poisonous try ur luck!! ",
+          "weight": 1,
+          "name": "Berry",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is a log of tree, maybe it can be used to craft something to get away from this island ",
+          "weight": 3,
+          "name": "Lumber",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is a lian from the jungle, maybe it can be used to create something more usefull",
           "weight": 2,
-          "name": "Stone",
+          "name": "Lian",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is a lian from the jungle, maybe it can be used to create something more usefull",
+          "weight": 2,
+          "name": "Lian",
           "useable": false
         },
         {
@@ -210,42 +187,64 @@
           "useable": false
         },
         {
-          "itemDescribtion": "This is freshwater found in the jungle, maybe you can drink it",
-          "weight": 2,
-          "name": "Waterbottle",
-          "useable": true
-        },
-        {
-          "itemDescribtion": "This a flint, maybe it can be used to create something more usefull",
-          "weight": 2,
-          "name": "Flint",
+          "itemDescribtion": "This is a small stick, maybe it can be used to create something more usefull",
+          "weight": 1,
+          "name": "Stick",
           "useable": false
         },
         {
-          "itemDescribtion": "The giant rock dont look like it can be moved",
+          "itemDescribtion": "The giant log dont look like it can be moved",
           "weight": 100,
-          "name": "GiantRock",
+          "name": "GiantLog",
+          "useable": false
+        }
+      ],
+      "airport": [
+        {
+          "itemDescribtion": "This is a bottle that have been left behind by someone",
+          "weight": 2,
+          "name": "Bottle",
+          "useable": false
+        }
+      ],
+      "camp": [
+        {
+          "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
+          "weight": 2,
+          "name": "Stone",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is a small stick, maybe it can be used to create something more usefull",
+          "weight": 1,
+          "name": "Stick",
+          "useable": false
+        },
+        {
+          "itemDescribtion": "This is some wild eggs, maybe it can be used for food",
+          "weight": 1,
+          "name": "Egg",
           "useable": false
         }
       ]
     },
     "items": [
       {
-        "itemDescribtion": "This is a backpack from the plane crash maybe you can use it to carry more items ",
-        "weight": 0,
-        "name": "Backpack",
+        "itemDescribtion": "This is a stone, maybe it can be used to create something more usefull",
+        "weight": 2,
+        "name": "Stone",
         "useable": false
       },
       {
-        "itemDescribtion": "This is a water bottle from the plan crash ",
+        "itemDescribtion": "This is a small stick, maybe it can be used to create something more usefull",
         "weight": 1,
-        "name": "WaterBottle",
-        "useable": true
+        "name": "Stick",
+        "useable": false
       },
       {
-        "itemDescribtion": "This is some rope that has been washed up on the beach shore from the plane crash",
-        "weight": 2,
-        "name": "Rope",
+        "itemDescribtion": "This is some wild eggs, maybe it can be used for food",
+        "weight": 1,
+        "name": "Egg",
         "useable": false
       }
     ]
@@ -256,14 +255,16 @@
       "Find survivors": false,
       "Pick up food": false,
       "prepare to escape the island": false,
-      "Picking up first item": false,
-      "Find your boardingpass": false,
+      "Get me some eggs or I will kill you!!!!": false,
+      "Picking up first item": true,
+      "Find your boardingpass": true,
       "Escape the island": false
     },
     "score": {
       "score": 0
     },
-    "name": "Escape the island"
-  }
+    "name": "Get me some eggs or I will kill you!!!!"
+  },
+  "mountain"
 ]
 
