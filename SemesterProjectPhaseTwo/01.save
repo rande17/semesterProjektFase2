@@ -1,16 +1,19 @@
 [
   {
-    "currentQuantity": 1,
+    "currentQuantity": 2,
     "inventoryMaxWeight": 10,
-    "currentInventoryWeight": 1,
+    "currentInventoryWeight": 2,
     "inventory": {
-      "Boardingpass": 1
+      "Boardingpass": 1,
+      "Fish": 1
     },
     "itemWeight": {
-      "Boardingpass": 1
+      "Boardingpass": 1,
+      "Fish": 1
     },
     "useableItems": {
-      "Boardingpass": false
+      "Boardingpass": false,
+      "Fish": true
     }
   },
   {
@@ -99,12 +102,6 @@
           "weight": 2,
           "name": "Stone",
           "useable": false
-        },
-        {
-          "itemDescription": "Why are you inspecting this item, its GOD damn fish",
-          "weight": 1,
-          "name": "Fish",
-          "useable": true
         },
         {
           "itemDescription": "Why are you inspecting this item, its GOD damn fish",
@@ -253,7 +250,7 @@
     "missionStatus": {
       "Eat the shrooms": false,
       "Find survivors": false,
-      "Pick up food": false,
+      "Pick up food": true,
       "Prepare to escape the island": false,
       "Picking up first item": true,
       "Find your boardingpass": true,
@@ -264,6 +261,6 @@
     },
     "name": "Escape the island"
   },
-  "beach"
+  "jungle"
 ]
 

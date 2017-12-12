@@ -2,6 +2,7 @@ package Game;
 
 import FileHandling.DataFacade;
 import FileHandling.Save;
+import GUI.SemesterProjectPhaseTwo;
 import com.google.gson.internal.LinkedTreeMap;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -21,6 +24,8 @@ public class Game {
 
     /* data field with the attributes parser and currentRoom
        making them private so we only can use them in the Game class */
+    static String GUIoption;
+    static boolean usingGui = false;
     static private boolean hasBoardingpass = false;
     static private Parser parser;
     static Room currentRoom;
@@ -181,15 +186,18 @@ public class Game {
         BSChristiansen.setCurrentRoom(jungle);
         BSChristiansen.setDescription("The survivor of the plane crash look to be some kind of veteran soldier, "
                 + "\nbut he is heavly injured on his right leg so he cant move ");
-        BSChristiansen.addDialog("If you want to survive on this GOD forsaken island, you must first find food and shelter."
-                + "\nYou can craft items to help you survive, if you have the right components.");
+        BSChristiansen.addDialog("If you want to survive on this GOD forsaken island, you \nmust first find food and shelter."
+                + "\nYou can craft items to help you survive, if you \nhave the right components.");
 
         //create the bad npc
         josephSchnitzel.setName("Joseph_Schnitzel");
         josephSchnitzel.setCurrentRoom(mountain);
         josephSchnitzel.setDescription("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
-        josephSchnitzel.addDialog("Heeelloooo there my freshlooking friend, I am Joseph Schnitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
-        josephSchnitzel.addDialog("");
+        josephSchnitzel.addDialog("Heeelloooo there my freshlooking friend, I am Joseph\nSchnitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
+        josephSchnitzel.addDialog("Talks to himself\nis that muppet still alive");
+        josephSchnitzel.addDialog("Talks to himself\nHow long is he going to last");
+        josephSchnitzel.addDialog("Talks to himself\nI wonder what those noises were ing the cave");
+        josephSchnitzel.addDialog("GET THE HELL OUT OF MY WAY!!!");
         josephSchnitzel.setDamageValue(100);
 
         //create another npc
@@ -211,6 +219,14 @@ public class Game {
         npcMap.put(BSChristiansen.getName(), BSChristiansen.getCurrentRoom().getShortDescription());
         npcMap.put(mysteriousCrab.getName(), mysteriousCrab.getCurrentRoom().getShortDescription());
         npcMap.put(josephSchnitzel.getName(), josephSchnitzel.getCurrentRoom().getShortDescription());
+        return npcMap;
+    }
+    
+    static HashMap<String, NPC> getNPCFromName() {
+        HashMap<String, NPC> npcMap = new HashMap<>();
+        npcMap.put(BSChristiansen.getName(), BSChristiansen);
+        npcMap.put(mysteriousCrab.getName(), mysteriousCrab);
+        npcMap.put(josephSchnitzel.getName(), josephSchnitzel);
         return npcMap;
     }
 
@@ -467,7 +483,7 @@ public class Game {
      *
      * @param command to go to room
      */
-    static void goRoom(Command command) {
+    static void goRoom(Command command) throws InterruptedException {
         if (currentRoom == airport) {
             lockRoom(command);
         }
@@ -611,17 +627,23 @@ public class Game {
 
     }
 
+    static boolean forcedTextBox = false;
     /**
      * Method: force dialog with josephSchnitzel, if player is in same room
      */
-    static private void forceDialog() {
+    static private void forceDialog() throws InterruptedException {
         if (hasTalkedWithEvilGuy == false) {
             if (josephSchnitzel.getCurrentRoom() == currentRoom) {
-                System.out.println(josephSchnitzel.getDescription() + "\n" + josephSchnitzel.getDialog(0));
+                forcedTextBox = true;
+                System.out.println(josephSchnitzel.getDescription() + "\n" + josephSchnitzel.getDialog(0, false));
                 evilGuyDialog();
                 hasTalkedWithEvilGuy = true;
             }
         }
+    }
+
+    public static void setHasTalkedToEvilGuy(boolean bool) {
+        hasTalkedWithEvilGuy = bool;
     }
 
     /**
@@ -648,7 +670,32 @@ public class Game {
      * Method that creates question when talking with mysteriousCrab (crab)
      */
     static public void pregnant() {
-        Scanner scan = new Scanner(System.in); //Creates a new scanner
+        Scanner scan = new Scanner(System.in);//Creates a new scanner
+        Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    input = "";
+                    while (!(input.equals("yes") || input.equals("no"))) {
+                        input = getOption();
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    if (input.equalsIgnoreCase("yes")) {
+                        System.out.println("You got a mission, please use the show command for more information");
+                        allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
+                        System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
+                    } else if (input.equalsIgnoreCase("no")) {
+                        System.out.println("");
+                        player.loseHealth(josephSchnitzel.getDamageValue());
+                    }
+                    
+                
+                }
+            };
+            thread.start();
         System.out.println("Are u pregnant?"); //Asks question
         String input = scan.nextLine(); //Waits for input
         if (input.equalsIgnoreCase("yes")) {
@@ -660,22 +707,62 @@ public class Game {
         }
     }
 
+    static String getOption() {
+        return GUIoption;
+    }
+
+    public static void setOption(String opt) {
+        GUIoption = opt;
+    }
     /**
      * Method that contains a short dialog when talking to josephSchnitzel
      * (Joseph Schnitzel)
      */
-    static public void evilGuyDialog() {
-        Scanner scan = new Scanner(System.in); //Creates a new scanner
-        String input = scan.nextLine(); //Waits for input
+    static String input = "";
 
-        if (input.equalsIgnoreCase("yes")) {
-            System.out.println("You got a mission, please use the show command for more information");
-            allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
-            System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
-        } else if (input.equalsIgnoreCase("no")) {
-            System.out.println("");
-            player.loseHealth(josephSchnitzel.getDamageValue());
+    static public void evilGuyDialog() throws InterruptedException {
+
+        Scanner scan = new Scanner(System.in); //Creates a new scanner
+        if (GUIoption == null) {
+            GUIoption = "";
         }
+        if (usingGui) {
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    while (!(input.equals("yes") || input.equals("no"))) {
+                        input = getOption();
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    if (input.equalsIgnoreCase("yes")) {
+                        System.out.println("You got a mission, please use the show command for more information");
+                        allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
+                        System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
+                    } else if (input.equalsIgnoreCase("no")) {
+                        System.out.println("");
+                        player.loseHealth(josephSchnitzel.getDamageValue());
+                    }
+                    forcedTextBox = false;
+                    setHasTalkedToEvilGuy(true);
+                }
+            };
+            thread.start();
+        } else {
+            input = scan.nextLine(); //Waits for input
+            if (input.equalsIgnoreCase("yes")) {
+                System.out.println("You got a mission, please use the show command for more information");
+                allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
+                System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
+            } else if (input.equalsIgnoreCase("no")) {
+                System.out.println("");
+                player.loseHealth(josephSchnitzel.getDamageValue());
+            }
+        }
+
     }
 
     /**
@@ -1141,5 +1228,10 @@ public class Game {
             return true;
         }
         return false;
+    }
+
+    public static String talkToNPC(String npc) {
+        System.out.println(npc);
+        return getNPCFromName().get(npc).getDialog(0);
     }
 }

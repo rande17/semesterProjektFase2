@@ -75,9 +75,32 @@ public class NPC {
     public String getDialog(int i) {
         if (i > 0 && i < dialog.size()) {
             return "You have baffled me, I don't know what to say";
+        }else if(dialog.size() > 1){
+        String stringToReturn = dialog.get(i);
+        dialog.remove(i);
+        return stringToReturn;
+        }else{
+           return   dialog.get(i);
         }
-        return dialog.get(i);
+        
     }
+    public String getDialog(int i, boolean remove) {
+        if(remove){
+        if (i > 0 && i < dialog.size()) {
+            return "You have baffled me, I don't know what to say";
+        }else if(dialog.size() > 1){
+        String stringToReturn = dialog.get(i);
+        dialog.remove(i);
+        return stringToReturn;
+        }else{
+           return   dialog.get(i);
+        }
+        
+    }else{
+            return dialog.get(i);
+        }
+    }
+    
 
     /**
      * setter method used to set a damagevalue for a NPC
