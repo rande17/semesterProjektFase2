@@ -1601,3 +1601,14 @@ go west
 go north
 go null
 go north
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go north
+go north
+go south

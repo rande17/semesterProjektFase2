@@ -94,6 +94,7 @@ public class FXMLDocumentController implements Initializable {
         String imgPath = "GUI/Assets/Character/" + player.getId().toString().trim().toLowerCase() + "down.png";
         Image img = new Image(imgPath);
         player.setImage(img);
+
     }
 
     @FXML
@@ -149,7 +150,7 @@ public class FXMLDocumentController implements Initializable {
             intersectWithObject();
             moveObjectNPC(npc3);
             game.energyLossToPlayer();
-
+            showEscapeButtonUnlocked();
         }
     }
 
@@ -194,6 +195,7 @@ public class FXMLDocumentController implements Initializable {
                                 textDrawed = false;
                                 PickItemPopUpText(objectID);
                             } else {
+                                //System.out.println("TEST");
                                 textDrawed = false;
                                 PickItemFailedPopUpText(objectID);
                             }
@@ -562,6 +564,8 @@ public class FXMLDocumentController implements Initializable {
         changeScene("winscreen");
     }
 
+//create a popup text for when you hit the escape button so you ether win the game or continue to play
+
     public void escapePopUpText() {
 
         Button yesButton = new Button("Yes");
@@ -613,6 +617,14 @@ public class FXMLDocumentController implements Initializable {
 
             background.getChildren().add(popupBackground);
             textDrawed = true;
+
+        }
+    }
+
+    private void showEscapeButtonUnlocked() {
+        if (!game.unlockedEscapeIsland()) {
+            textArea.setText(
+                    " You have unlocked the\n escape button, so when\n you are ready to leave\n the island go to the\n beach and use it.");
 
         }
     }
