@@ -167,7 +167,6 @@ public class Game {
         allMissions.addMission(beach, "Pick up food");
         allMissions.addMission(jungle, "Find survivors");
         allMissions.addMission(cave, "Eat the shrooms");
-        allMissions.addMission(camp, "Prepare to escape the island");
         allMissions.addMission(camp, "Escape the island");
     }
 
