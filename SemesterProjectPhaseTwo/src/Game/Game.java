@@ -1116,7 +1116,7 @@ public class Game {
         LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap.get("itemList");
         String rooms = itemLocationOnMap.keySet().toString();
         rooms = removeCrapCharsFromString(rooms);
-
+        System.out.println(itemLocationOnMap.toString());
         for (int j = 0; j <= itemLocationOnMap.size() - 1; j++) {
             String itemToAdd;
 
@@ -1131,9 +1131,10 @@ public class Game {
             for (int i = 0; i < itemInRoom.size(); i++) {
                 Item itemLocationToAdd;
                 LinkedTreeMap itemT = (LinkedTreeMap) itemInRoom.get(i);
-
+                System.out.println(itemT.toString());
                 String itemName = itemT.get("name").toString();
-                String itemDesc = itemT.get("itemDescribtion").toString();
+  //              String itemDesc = itemT.get("itemDescription").toString();
+                String itemDesc = "";
                 int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());
                 boolean itemUseable = Boolean.getBoolean(itemT.get("useable").toString());
 
