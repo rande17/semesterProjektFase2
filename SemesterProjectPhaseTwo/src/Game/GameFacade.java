@@ -290,7 +290,8 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean unlockedEscapeIsland() {
@@ -299,7 +300,8 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method that locks possibility to escape the island
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean lockedEscapeIsland() {
@@ -364,5 +366,25 @@ public class GameFacade implements InterfaceGame {
     @Override
     public void newGameGUI() {
         Game.initGame();
+    }
+
+    @Override
+    public String getDialog(String NPCname) {
+        return Game.talkToNPC(NPCname);
+    }
+
+    @Override
+    public void useGUI() {
+        Game.usingGui = true;
+    }
+    
+    @Override
+    public void sendDialogOption(String opt){
+        Game.setOption(opt);
+    }
+
+    @Override
+    public boolean forcedText() {
+        return Game.forcedTextBox;
     }
 }
