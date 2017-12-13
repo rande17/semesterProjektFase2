@@ -1,8 +1,7 @@
 package Game;
 
-import FileHandling.DataFacade;
-import FileHandling.Save;
-import GUI.SemesterProjectPhaseTwo;
+import Data.DataFacade;
+import Data.Save;
 import com.google.gson.internal.LinkedTreeMap;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,12 +13,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author Michael Kolling and David J. Barnes
- * @version 2006.03.30
- * @author Nicolai
- * @version 2006.03.30daSFT
- */
 public class Game {
 
     /* data field with the attributes parser and currentRoom
@@ -193,7 +186,7 @@ public class Game {
         josephSchnitzel.setName("Joseph_Schnitzel");
         josephSchnitzel.setCurrentRoom(mountain);
         josephSchnitzel.setDescription("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
-        josephSchnitzel.addDialog("Heeelloooo there my freshlooking friend, I am Joseph\nSchnitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
+        josephSchnitzel.addDialog("Heeelloooo there my freshlooking friend, I am Joseph\nSchnitzel, if you scratch my back I might scratch your's." + "\n" + "Go fetch me some eggs, or I'll kill you");
         josephSchnitzel.addDialog("Talks to himself\nis that muppet still alive");
         josephSchnitzel.addDialog("Talks to himself\nHow long is he going to last");
         josephSchnitzel.addDialog("Talks to himself\nI wonder what those noises were ing the cave");
