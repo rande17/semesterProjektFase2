@@ -1,21 +1,18 @@
 [
   {
-    "currentQuantity": 4,
+    "currentQuantity": 2,
     "inventoryMaxWeight": 10,
-    "currentInventoryWeight": 5,
+    "currentInventoryWeight": 2,
     "inventory": {
       "Boardingpass": 1,
-      "Bottle": 1,
-      "Fish": 2
+      "Fish": 1
     },
     "itemWeight": {
       "Boardingpass": 1,
-      "Bottle": 2,
       "Fish": 1
     },
     "useableItems": {
       "Boardingpass": false,
-      "Bottle": false,
       "Fish": true
     }
   },
@@ -107,7 +104,13 @@
           "useable": false
         },
         {
-          "itemDescribtion": "This a flint, maybe it can be used to create something more usefull",
+          "itemDescription": "Why are you inspecting this item, its GOD damn fish",
+          "weight": 1,
+          "name": "Fish",
+          "useable": true
+        },
+        {
+          "itemDescription": "This a flint, maybe it can be used to create something more usefull",
           "weight": 2,
           "name": "Flint",
           "useable": false
@@ -193,7 +196,14 @@
           "useable": false
         }
       ],
-      "airport": [],
+      "airport": [
+        {
+          "itemDescription": "This is a bottle that have been left behind by someone",
+          "weight": 2,
+          "name": "Bottle",
+          "useable": false
+        }
+      ],
       "camp": [
         {
           "itemDescription": "This is a stone, maybe it can be used to create something more usefull",
@@ -208,7 +218,7 @@
           "useable": false
         },
         {
-          "itemDescribtion": "This is some wild eggs, maybe it can be used for food",
+          "itemDescription": "This is some wild eggs, maybe it can be used for food",
           "weight": 1,
           "name": "Egg",
           "useable": true
@@ -217,19 +227,19 @@
     },
     "items": [
       {
-        "itemDescribtion": "This is a backpack from the plane crash maybe you can use it to carry more items ",
+        "itemDescription": "This is a backpack from the plane crash maybe you can use it to carry more items ",
         "weight": 0,
         "name": "Backpack",
         "useable": false
       },
       {
-        "itemDescribtion": "This is a water bottle from the plan crash ",
+        "itemDescription": "This is a water bottle from the plan crash ",
         "weight": 1,
         "name": "WaterBottle",
         "useable": true
       },
       {
-        "itemDescribtion": "This is some rope that has been washed up on the beach shore from the plane crash",
+        "itemDescription": "This is some rope that has been washed up on the beach shore from the plane crash",
         "weight": 2,
         "name": "Rope",
         "useable": false
@@ -241,7 +251,7 @@
       "Eat the shrooms": false,
       "Find survivors": false,
       "Pick up food": true,
-      "prepare to escape the island": false,
+      "Prepare to escape the island": false,
       "Picking up first item": true,
       "Find your boardingpass": true,
       "Escape the island": false
@@ -251,6 +261,6 @@
     },
     "name": "Escape the island"
   },
-  "beach"
+  "jungle"
 ]
 
