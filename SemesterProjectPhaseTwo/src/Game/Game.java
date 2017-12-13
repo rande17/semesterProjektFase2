@@ -197,9 +197,9 @@ public class Game {
         mysteriousCrab.setName("Mysterious_Crab");
         mysteriousCrab.setCurrentRoom(cave);
         mysteriousCrab.setDescription("A mysterious crab that you dont really get why can talk");
-        mysteriousCrab.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them\nall mr.Crab and know this island like the back of my hand!\noh i mean claw..."
-                + "\nSO if you want the rarest item you can find on this island,\nyou must first help me find some stuff " + "\n"
-                + "If you answer my very cool questions correctly, you will get\nan awesome unique reward, hehehe!");
+        mysteriousCrab.addDialog("MUHAHAHA i'm the finest and most knowledgeable \ncrab of them all mr.Crab and know this island\n like the back of my hand! oh i mean claw..."
+                 + "\n"
+                + "If you answer my very cool questions correctly, you \nwill get an awesome unique reward, hehehe!");
     }
 
     /**
@@ -1216,7 +1216,7 @@ public class Game {
             inventory.removeItemInventory(nameOfItem);
             System.out.println("You have dropped: " + nameOfItem);
             itemLocation.addItem(currentRoom, new PickableItem(nameOfItem, inventory.getItemWeight(nameOfItem)));
-            player.setEnergy(player.getEnergy() + 10);
+            player.setEnergy(player.getEnergy() + 20);
             player.setHealth(player.getHealth() + 5);
 
             return true;

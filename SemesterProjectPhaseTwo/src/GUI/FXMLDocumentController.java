@@ -462,7 +462,10 @@ public class FXMLDocumentController implements Initializable {
 //        energyBar.setProgress(game.playerEnergy());
         energyBar.setProgress(energy);
 
-        if (health == 0 || energy == 0) {
+        if (energy <= 0) {
+            game.lose();
+        }
+        if (health <= 0) {
             game.lose();
         }
     }
