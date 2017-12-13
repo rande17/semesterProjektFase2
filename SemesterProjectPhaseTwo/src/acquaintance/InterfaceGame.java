@@ -27,7 +27,7 @@ public interface InterfaceGame {
     public int playerEnergy();
     public int maxPlayerHealth();
     public int maxPlayerEnergy();
-    public void damageToPlayer();
+//    public void damageToPlayer();
     public void energyLossToPlayer();
     public boolean checkExit(String dir);
     public HashMap<String, String> getNPC();
@@ -50,4 +50,5 @@ public interface InterfaceGame {
     public void useGUI();
     public void sendDialogOption(String opt);
     public boolean forcedText();
+    public String getPositionOfAllCharacters();
 }

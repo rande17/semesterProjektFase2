@@ -200,11 +200,10 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method used to deal damage to the player
      */
-    @Override
-    public void damageToPlayer() {
-        Game.player.loseHealth(25);
-    }
-
+//    @Override
+//    public void damageToPlayer() {
+//        Game.player.loseHealth(25);
+//    }
     /**
      * Method used to decrease the energy of the player
      */
@@ -377,14 +376,34 @@ public class GameFacade implements InterfaceGame {
     public void useGUI() {
         Game.usingGui = true;
     }
-    
+
     @Override
-    public void sendDialogOption(String opt){
+    public void sendDialogOption(String opt) {
         Game.setOption(opt);
     }
 
     @Override
     public boolean forcedText() {
         return Game.forcedTextBox;
+    }
+
+    @Override
+    public String getPositionOfAllCharacters() {
+        String returnString = "";
+        String fillerText = " is at the ";
+
+        returnString += Game.player.getName() + fillerText + Game.player.
+                getCurrentRoom().getShortDescription() + System.lineSeparator();
+        returnString += Game.BSChristiansen.getName().replace("_", " ")
+                + fillerText + Game.BSChristiansen.getCurrentRoom().
+                        getShortDescription() + System.lineSeparator();
+        returnString += Game.josephSchnitzel.getName().replace("_", " ")
+                + fillerText + Game.josephSchnitzel.getCurrentRoom().
+                        getShortDescription() + System.lineSeparator();
+        returnString += Game.mysteriousCrab.getName().replace("_", " ")
+                + fillerText + Game.mysteriousCrab.getCurrentRoom().
+                        getShortDescription() + System.lineSeparator();
+
+        return returnString;
     }
 }
