@@ -22,6 +22,7 @@ public class CraftableItem extends Item {
      * No-args contructor
      */
     public CraftableItem() {
+        craftableListArray = new ArrayList<>();
     }
 
     /**

@@ -31,6 +31,7 @@ public interface InterfaceGame {
     public void energyLossToPlayer();
     public boolean checkExit(String dir);
     public HashMap<String, String> getNPC();
+    public String getDialog(String NPCname);
     public void lose();
     public void win();
     public int gameTime();
@@ -44,6 +45,9 @@ public interface InterfaceGame {
     public void saveGameGUI();
     public boolean unlockedEscapeIsland();
     public boolean lockedEscapeIsland();
-    
+    public void newGameGUI();
     public void loadGameGUI();
+    public void useGUI();
+    public void sendDialogOption(String opt);
+    public boolean forcedText();
 }

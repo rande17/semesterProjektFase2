@@ -102,6 +102,7 @@ public class MainMenuController implements Initializable {
     @FXML
     private void loadgameMenuButtonAction(MouseEvent event) throws IOException {
         game.loadGameGUI();
+        game.useGUI();
         changeScene(game.getRoomDescribtion());
     }
 
@@ -128,7 +129,9 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private void newgameButtonAction(ActionEvent event) throws IOException {
-        changeScene("airport");
+        game.newGameGUI();
+        game.useGUI();
+        changeScene(game.getRoomDescribtion());
         
     }
 

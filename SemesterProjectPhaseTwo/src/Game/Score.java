@@ -50,10 +50,10 @@ public class Score implements Serializable {
     /**
      * setter method used to set a name for score
      *
-     * @param newName is the name of score
+     * @param _name is the name of score
      */
-    public void setName(String newName) {
-        name = newName;
+    public void setName(String _name) {
+        name = _name;
     }
 
     /**

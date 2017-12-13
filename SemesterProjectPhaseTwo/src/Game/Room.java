@@ -58,7 +58,7 @@ public class Room {
      * for given direction the function returns the room
      *
      * @param direction gets the direction
-     * @return
+     * @return returns a room for the given direction
      */
     public Room getExit(String direction) {
         return exits.get(direction);

@@ -65,11 +65,11 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method used to use the GO command in GUI
      *
-     * @param dir direction of the player
+     * @param direction direction of the player
      */
     @Override
-    public void goGUI(String dir) {
-        Command command = new Command(GO, dir);
+    public void goGUI(String direction) {
+        Command command = new Command(GO, direction);
         try {
             Game.processCommand(command);
         } catch (Throwable ex) {
@@ -138,13 +138,13 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method used to check exits
      *
-     * @param dir
+     * @param direction
      * @return true or false, depending on if there is an exit in the direction
      * heading
      */
     @Override
-    public boolean checkExit(String dir) {
-        return Game.getExitBool(dir);
+    public boolean checkExit(String direction) {
+        return Game.getExitBool(direction);
     }
 
     /**
@@ -270,7 +270,7 @@ public class GameFacade implements InterfaceGame {
         for (int i = 0; i < craftArray.size(); i++) {
             Item item = (Item) craftArray.get(i);
             if (item.getName().equals(itemName)) {
-                itemDescribtion = item.getItemDescribtion();
+                itemDescribtion = item.getItemDescription();
                 break;
             }
         }
@@ -290,7 +290,8 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean unlockedEscapeIsland() {
@@ -299,7 +300,8 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method that locks possibility to escape the island
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean lockedEscapeIsland() {
@@ -359,5 +361,30 @@ public class GameFacade implements InterfaceGame {
         } catch (Throwable ex) {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void newGameGUI() {
+        Game.initGame();
+    }
+
+    @Override
+    public String getDialog(String NPCname) {
+        return Game.talkToNPC(NPCname);
+    }
+
+    @Override
+    public void useGUI() {
+        Game.usingGui = true;
+    }
+    
+    @Override
+    public void sendDialogOption(String opt){
+        Game.setOption(opt);
+    }
+
+    @Override
+    public boolean forcedText() {
+        return Game.forcedTextBox;
     }
 }
