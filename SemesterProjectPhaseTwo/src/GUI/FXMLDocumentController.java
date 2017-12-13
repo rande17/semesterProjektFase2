@@ -26,7 +26,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -87,6 +86,7 @@ public class FXMLDocumentController implements Initializable {
     private Button escapeButton;
     @FXML
     private Button saveButton;
+    private boolean positionTextAdded = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -144,7 +144,8 @@ public class FXMLDocumentController implements Initializable {
                     System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getFitHeight());
                     break;
                 case H:
-                    game.damageToPlayer();
+//                    game.damageToPlayer();
+                    textArea.setText("Previous eventhandler removed");
                     break;
             }
             intersectWithObject();
@@ -465,8 +466,8 @@ public class FXMLDocumentController implements Initializable {
             game.lose();
         }
     }
-    
-        public void showMissionGiveByNpc() {
+
+    public void showMissionGiveByNpc() {
         if (textDrawed) {
             background.getChildren().remove(popupBackground);
             openWindow();
@@ -500,7 +501,7 @@ public class FXMLDocumentController implements Initializable {
                 popupBackground.getChildren().remove(yesButton);
                 showMissionGiveByNpc();
                 //background.getChildren().remove(popupBackground);
-                
+
             });
 
             yesButton.setLayoutX(10);
@@ -523,11 +524,20 @@ public class FXMLDocumentController implements Initializable {
     public void InteractNPC(String npcID) {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
-            openWindow();
-            popupText.setText(game.getDialog(npcID));
-            background.getChildren().add(popupBackground);
-            textDrawed = true;
-
+//            openWindow();
+            if (game.getDialog(npcID) == game.getDialog("Mysterious_Crab")) {
+                openWindow();
+                popupText.setText(game.getDialog(npcID));
+                popupBackground.setLayoutY(440);
+                popupText.setPrefHeight(150);
+                background.getChildren().add(popupBackground);
+                textDrawed = true;
+            } else {
+                openWindow();
+                popupText.setText(game.getDialog(npcID));
+                background.getChildren().add(popupBackground);
+                textDrawed = true;
+            }
         }
     }
 
@@ -582,7 +592,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
 //create a popup text for when you hit the escape button so you ether win the game or continue to play
-
     public void escapePopUpText() {
 
         Button yesButton = new Button("Yes");
@@ -641,7 +650,10 @@ public class FXMLDocumentController implements Initializable {
     private void showEscapeButtonUnlocked() {
         if (!game.unlockedEscapeIsland()) {
             textArea.setText(
-                    " You have unlocked the\n escape button, so when\n you are ready to leave\n the island go to the\n beach and use it.");
+                    " You have unlocked the\n escape button, so when\n you are "
+                    + "ready to leave\n the island go to the\n beach "
+                    + "and use it." + System.lineSeparator()
+                    + System.lineSeparator());
 
         }
     }
@@ -709,5 +721,10 @@ public class FXMLDocumentController implements Initializable {
     private void handleSaveAction(ActionEvent event) {
         game.saveGameGUI();
         textArea.setText("Game saved");
+    }
+
+    @FXML
+    public void getPositionOfCharacters() {
+        textArea.appendText(game.getPositionOfAllCharacters());
     }
 }

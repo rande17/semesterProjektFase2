@@ -22,6 +22,7 @@
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="537.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="537.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="537.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="537.0" minHeight="30.0" prefHeight="507.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="527.0" minHeight="20.0" prefHeight="21.0" vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
@@ -32,12 +33,13 @@
                 <Button fx:id="quitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quitGame" text="Quit" GridPane.columnIndex="1" />
                 <Button fx:id="missionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMission" prefHeight="5.0" prefWidth="98.0" text="Mission" GridPane.rowIndex="1" />
                 <Button fx:id="craftButton" mnemonicParsing="false" onAction="#showCraftMenu" prefHeight="17.0" prefWidth="98.0" text="Craft Menu" GridPane.rowIndex="2" />
-                <ProgressBar fx:id="healthBar" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <ProgressBar fx:id="energyBar" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="5" />
-                <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="4" />
-                <TextArea fx:id="textArea" editable="false" focusTraversable="false" mouseTransparent="true" onMouseClicked="#showHelp" prefHeight="435.0" prefWidth="205.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                <ProgressBar fx:id="healthBar" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <ProgressBar fx:id="energyBar" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label maxWidth="1.7976931348623157E308" text="Health" GridPane.rowIndex="6" />
+                <Label maxWidth="1.7976931348623157E308" text="Energy" GridPane.rowIndex="5" />
+                <TextArea fx:id="textArea" editable="false" focusTraversable="false" mouseTransparent="true" onMouseClicked="#showHelp" prefHeight="435.0" prefWidth="205.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
             <Button fx:id="saveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaveAction" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#getPositionOfCharacters" text="Get Positions" GridPane.columnSpan="2" GridPane.rowIndex="3" />
             </children>
         </GridPane>
         <AnchorPane fx:id="background" maxWidth="600" prefHeight="600.0" prefWidth="600.0" style="overflow: hidden; -fx-background-image: url('GUI/Assets/seabuttom.png'); -fx-background-size: stretch">

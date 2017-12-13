@@ -1,8 +1,7 @@
 package Game;
 
-import FileHandling.DataFacade;
-import FileHandling.Save;
-import GUI.SemesterProjectPhaseTwo;
+import Data.DataFacade;
+import Data.Save;
 import com.google.gson.internal.LinkedTreeMap;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,12 +13,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author Michael Kolling and David J. Barnes
- * @version 2006.03.30
- * @author Nicolai
- * @version 2006.03.30daSFT
- */
 public class Game {
 
     /* data field with the attributes parser and currentRoom
@@ -193,7 +186,7 @@ public class Game {
         josephSchnitzel.setName("Joseph_Schnitzel");
         josephSchnitzel.setCurrentRoom(mountain);
         josephSchnitzel.setDescription("A lonely surviver with very filthy hair, and a wierd smell of weinerschnitzel.");
-        josephSchnitzel.addDialog("Heeelloooo there my freshlooking friend, I am Joseph\nSchnitzel, if you scratch my back I might scratch your's." + "\n" + "Will you, fetch me some eggs?: Yes or no");
+        josephSchnitzel.addDialog("Heeelloooo there my freshlooking friend, I am Joseph\nSchnitzel, if you scratch my back I might scratch your's." + "\n" + "Go fetch me some eggs, or I'll kill you");
         josephSchnitzel.addDialog("Talks to himself\nis that muppet still alive");
         josephSchnitzel.addDialog("Talks to himself\nHow long is he going to last");
         josephSchnitzel.addDialog("Talks to himself\nI wonder what those noises were ing the cave");
@@ -204,9 +197,9 @@ public class Game {
         mysteriousCrab.setName("Mysterious_Crab");
         mysteriousCrab.setCurrentRoom(cave);
         mysteriousCrab.setDescription("A mysterious crab that you dont really get why can talk");
-        mysteriousCrab.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them all mr.Crab and know this island like the back of my hand.... oh i mean claw"
-                + "\n SO if you want the rarest item you can find on this island, you must first help me find some stuff " + "\n"
-                + "If you answer my very cool questions correctly, you will get an awesome unique reward, hehehe!");
+        mysteriousCrab.addDialog("MUHAHAHA i'm the finest and most knowledgeable crab of them\nall mr.Crab and know this island like the back of my hand!\noh i mean claw..."
+                + "\nSO if you want the rarest item you can find on this island,\nyou must first help me find some stuff " + "\n"
+                + "If you answer my very cool questions correctly, you will get\nan awesome unique reward, hehehe!");
     }
 
     /**
@@ -1116,7 +1109,7 @@ public class Game {
         LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap.get("itemList");
         String rooms = itemLocationOnMap.keySet().toString();
         rooms = removeCrapCharsFromString(rooms);
-
+        System.out.println(itemLocationOnMap.toString());
         for (int j = 0; j <= itemLocationOnMap.size() - 1; j++) {
             String itemToAdd;
 
@@ -1131,9 +1124,10 @@ public class Game {
             for (int i = 0; i < itemInRoom.size(); i++) {
                 Item itemLocationToAdd;
                 LinkedTreeMap itemT = (LinkedTreeMap) itemInRoom.get(i);
-
+                System.out.println(itemT.toString());
                 String itemName = itemT.get("name").toString();
-                String itemDesc = itemT.get("itemDescribtion").toString();
+  //              String itemDesc = itemT.get("itemDescription").toString();
+                String itemDesc = "";
                 int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());
                 boolean itemUseable = Boolean.getBoolean(itemT.get("useable").toString());
 

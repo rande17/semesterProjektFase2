@@ -22,7 +22,7 @@ import javafx.scene.input.KeyEvent;
  *
  * @author Nicolai
  */
-public class FXMLSplash implements Initializable {
+public class FXMLSplashController implements Initializable {
 
     @FXML
     private Button nextButton;
