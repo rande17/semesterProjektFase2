@@ -11,22 +11,29 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method that gets items in current room and adds them to an ArrayList
+     *
      * @return ArrayList of item names
      */
     @Override
     public ArrayList getItemsOnMap() {
-        ArrayList itemArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
-        ArrayList itemNameArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
-        itemArrayList = Game.itemLocation.getItems(Game.currentRoom);
-        for (int i = 0; i < itemArrayList.size(); i++) {
-            Item item = (Item) itemArrayList.get(i);
-            itemNameArrayList.add(item.getName());
+        ArrayList itemNameArrayList;
+        if (Game.itemLocation.getItems(Game.currentRoom) != null && Game.itemLocation.getItems(Game.currentRoom).size() > 0) {
+            ArrayList itemArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
+            itemNameArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
+            itemArrayList = Game.itemLocation.getItems(Game.currentRoom);
+            for (int i = 0; i < itemArrayList.size(); i++) {
+                Item item = (Item) itemArrayList.get(i);
+                itemNameArrayList.add(item.getName());
+            }
+        } else {
+            itemNameArrayList = new ArrayList();
         }
         return itemNameArrayList;
     }
 
     /**
      * Method that checks if you can pickup an Item playing the the GUI
+     *
      * @param itemToTake, the item interacted with
      * @return true or false
      */
@@ -46,6 +53,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to craft items in GUI
+     *
      * @param itemToCraft, the craftitem
      */
     @Override
@@ -56,11 +64,12 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to use the GO command in GUI
-     * @param dir direction of the player
+     *
+     * @param direction direction of the player
      */
     @Override
-    public void goGUI(String dir) {
-        Command command = new Command(GO, dir);
+    public void goGUI(String direction) {
+        Command command = new Command(GO, direction);
         try {
             Game.processCommand(command);
         } catch (Throwable ex) {
@@ -70,6 +79,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to get shortDescribtion of current room
+     *
      * @return current room describtion as String
      */
     @Override
@@ -79,6 +89,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to print inventory in GUI
+     *
      * @return Inventory as Strings
      */
     @Override
@@ -88,6 +99,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to print missions in GUI
+     *
      * @return missions as Strings
      */
     @Override
@@ -97,6 +109,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to show help in GUI
+     *
      * @return help information as Strings
      */
     @Override
@@ -114,6 +127,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to print highscore in GUI
+     *
      * @return highscore as Strings
      */
     @Override
@@ -123,16 +137,19 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to check exits
-     * @param dir
-     * @return true or false, depending on if there is an exit in the direction heading
+     *
+     * @param direction
+     * @return true or false, depending on if there is an exit in the direction
+     * heading
      */
     @Override
-    public boolean checkExit(String dir) {
-        return Game.getExitBool(dir);
+    public boolean checkExit(String direction) {
+        return Game.getExitBool(direction);
     }
 
     /**
      * Method used to get health of the player
+     *
      * @return player health
      */
     @Override
@@ -142,6 +159,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to get time passed during play time.
+     *
      * @return seconds passed during play time
      */
     @Override
@@ -151,6 +169,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to get energi of the player
+     *
      * @return player energy
      */
     @Override
@@ -160,6 +179,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to get max health of the player
+     *
      * @return player max health
      */
     @Override
@@ -168,7 +188,8 @@ public class GameFacade implements InterfaceGame {
     }
 
     /**
-     * Method used to get max energy of the player 
+     * Method used to get max energy of the player
+     *
      * @return player max energy
      */
     @Override
@@ -194,6 +215,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to get HashMap containing NPCs
+     *
      * @return HashmMap containing NPCs
      */
     @Override
@@ -208,7 +230,7 @@ public class GameFacade implements InterfaceGame {
     public void lose() {
         Game.lose();
     }
-    
+
     /**
      * Method used to win the game
      */
@@ -219,7 +241,8 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to get craftable items
-     * @return ArrayList containing craftable items 
+     *
+     * @return ArrayList containing craftable items
      */
     @Override
     public ArrayList getCraftableItemsArray() {
@@ -235,6 +258,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to get desribtion of craftable item
+     *
      * @param itemName, name of the craftable item
      * @return craftable item desribtion as String
      */
@@ -246,7 +270,7 @@ public class GameFacade implements InterfaceGame {
         for (int i = 0; i < craftArray.size(); i++) {
             Item item = (Item) craftArray.get(i);
             if (item.getName().equals(itemName)) {
-                itemDescribtion = item.getItemDescribtion();
+                itemDescribtion = item.getItemDescription();
                 break;
             }
         }
@@ -255,6 +279,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to get name of all items in inventory
+     *
      * @return ArrayList of item names in inventory
      */
     @Override
@@ -265,7 +290,8 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean unlockedEscapeIsland() {
@@ -274,15 +300,17 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method that locks possibility to escape the island
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean lockedEscapeIsland() {
         return Game.lockedEscapeIsland();
     }
-  
+
     /**
      * Method used for dropping item from inventory
+     *
      * @param itemToDrop, item to be dropped
      */
     @Override
@@ -293,6 +321,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method for using items stored in inventory
+     *
      * @param itemToUse, item to be used
      * @return true or false depending on if item can be used or not
      */
@@ -304,6 +333,7 @@ public class GameFacade implements InterfaceGame {
 
     /**
      * Method used to submit highscore after completing the game
+     *
      * @param playerName, refers to the name entered by the player
      */
     @Override
@@ -321,5 +351,40 @@ public class GameFacade implements InterfaceGame {
         } catch (Throwable ex) {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void loadGameGUI() {
+        Command command = new Command(LOAD, null);
+        try {
+            Game.processCommand(command);
+        } catch (Throwable ex) {
+            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void newGameGUI() {
+        Game.initGame();
+    }
+
+    @Override
+    public String getDialog(String NPCname) {
+        return Game.talkToNPC(NPCname);
+    }
+
+    @Override
+    public void useGUI() {
+        Game.usingGui = true;
+    }
+    
+    @Override
+    public void sendDialogOption(String opt){
+        Game.setOption(opt);
+    }
+
+    @Override
+    public boolean forcedText() {
+        return Game.forcedTextBox;
     }
 }

@@ -2,7 +2,7 @@ package Game;
 
 public class Item {
 
-    private String itemDescribtion;
+    private String itemDescription;
     private int weight;
     private String name;
     private boolean useable;
@@ -33,7 +33,7 @@ public class Item {
     Item(String _name, String _description, int _weight) {
         name = _name;
         weight = _weight;
-        itemDescribtion = _description;
+        itemDescription = _description;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Item {
     Item(String _name, String _description, int _weight, boolean _useable) {
         name = _name;
         weight = _weight;
-        itemDescribtion = _description;
+        itemDescription = _description;
         useable = _useable;
     }
 
@@ -66,7 +66,7 @@ public class Item {
      * @param newDescribtion sets new description
      */
     public void setItemDescribtions(String newDescribtion) {
-        itemDescribtion = newDescribtion;
+        itemDescription = newDescribtion;
     }
 
     /**
@@ -74,8 +74,8 @@ public class Item {
      *
      * @return returns the description of the Item
      */
-    public String getItemDescribtion() {
-        return itemDescribtion;
+    public String getItemDescription() {
+        return itemDescription;
     }
 
     /**

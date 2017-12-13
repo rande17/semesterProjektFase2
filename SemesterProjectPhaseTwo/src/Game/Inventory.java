@@ -43,8 +43,6 @@ public class Inventory {
         int weightOfItem = _item.getWeight();
         boolean useable = _item.getUseable();
 
-        itemWeight.put(itemName, weightOfItem);
-        useableItems.put(itemName, useable);
         /*currentQuantity < inventoryMaxQuantity */
         if ((weightOfItem + currentInventoryWeight) <= inventoryMaxWeight) {
             if (inventory.containsKey(itemName)) {
@@ -52,6 +50,8 @@ public class Inventory {
 //                return true;
             } else {
                 quantity = 1;
+                itemWeight.put(itemName, weightOfItem);
+                useableItems.put(itemName, useable);
             }
             inventory.put(itemName, quantity);
             currentQuantity += 1;
@@ -71,15 +71,16 @@ public class Inventory {
      */
     public void removeItemInventory(String _string) {
         int quantity = inventory.get(_string) - 1;
-
+        int weight = itemWeight.get(_string);
         if (inventory.get(_string) <= 1) {
             inventory.remove(_string);
-
+            itemWeight.remove(_string);
+            useableItems.remove(_string);
         } else {
             inventory.replace(_string, quantity);
 
         }
-        currentInventoryWeight -= itemWeight.get(_string);
+        currentInventoryWeight -= weight;
         currentQuantity = currentQuantity - 1;
     }
 
@@ -162,6 +163,7 @@ public class Inventory {
 
     /**
      * Method, converting Inventory HashMap to an ArrayList
+     *
      * @return Inventory ArrayList
      */
     public ArrayList inventoryNames() {
@@ -179,12 +181,13 @@ public class Inventory {
         return inventoryArrayList;
     }
 
-   /**
+    /**
      * Method checks if inventory contains a usable item
-     * @param str name of the item
+     *
+     * @param itemName name of the item
      * @return true or false, depending on if the item is usable or not
      */
-    public boolean getUseable(String str) {
-        return useableItems.get(str);
+    public boolean getUseable(String itemName) {
+        return useableItems.get(itemName);
     }
 }
