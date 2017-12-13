@@ -390,7 +390,7 @@ public class GameFacade implements InterfaceGame {
     @Override
     public String getPositionOfAllCharacters() {
         String returnString = "";
-        String fillerText = " is at the ";
+        String fillerText = ": " + System.lineSeparator() + "Is at the ";
 
         returnString += Game.player.getName() + fillerText + Game.player.
                 getCurrentRoom().getShortDescription() + System.lineSeparator();

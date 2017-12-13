@@ -524,11 +524,20 @@ public class FXMLDocumentController implements Initializable {
     public void InteractNPC(String npcID) {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
-            openWindow();
-            popupText.setText(game.getDialog(npcID));
-            background.getChildren().add(popupBackground);
-            textDrawed = true;
-
+//            openWindow();
+            if (game.getDialog(npcID) == game.getDialog("Mysterious_Crab")) {
+                openWindow();
+                popupText.setText(game.getDialog(npcID));
+                popupBackground.setLayoutY(440);
+                popupText.setPrefHeight(150);
+                background.getChildren().add(popupBackground);
+                textDrawed = true;
+            } else {
+                openWindow();
+                popupText.setText(game.getDialog(npcID));
+                background.getChildren().add(popupBackground);
+                textDrawed = true;
+            }
         }
     }
 
