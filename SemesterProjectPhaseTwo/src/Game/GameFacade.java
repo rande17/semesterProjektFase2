@@ -209,7 +209,7 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public void energyLossToPlayer() {
-        Game.player.loseEnergy(5);
+        Game.player.loseEnergy(15);
     }
 
     /**
