@@ -181,6 +181,7 @@ public class Game {
                 + "\nbut he is heavly injured on his right leg so he cant move ");
         BSChristiansen.addDialog("If you want to survive on this GOD forsaken island, you \nmust first find food and shelter."
                 + "\nYou can craft items to help you survive, if you \nhave the right components.");
+        BSChristiansen.addDialog("To escape the island you need a raft, \nsome berries and fish so you can survive on the sea,\nand a spear so you can hunt for more food");
 
         //create the bad npc
         josephSchnitzel.setName("Joseph_Schnitzel");
@@ -197,9 +198,9 @@ public class Game {
         mysteriousCrab.setName("Mysterious_Crab");
         mysteriousCrab.setCurrentRoom(cave);
         mysteriousCrab.setDescription("A mysterious crab that you dont really get why can talk");
-        mysteriousCrab.addDialog("MUHAHAHA i'm the finest and most knowledgeable \ncrab of them all mr.Crab and know this island\n like the back of my hand! oh i mean claw..."
-                 + "\n"
-                + "If you answer my very cool questions correctly, you \nwill get an awesome unique reward, hehehe!");
+        mysteriousCrab.addDialog("MUHAHAHA i'm the finest and most knowledgeable \ncrab of them all mr.Crab and know this island\nlike the back of my hand! oh i mean claw..."
+                 + "\nA Random fact: "
+                + "to escape this island you need a raft, \nsome berries and fish so you can survive on the sea,\nand a spear so you can hunt for more food");
     }
 
     /**
