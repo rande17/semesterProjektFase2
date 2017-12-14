@@ -80,3 +80,71 @@ go south
 go north
 go east
 go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+go west
+go null
+go null
+go null
+go null
+go north
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+go west
+go null
+go north
+go null
+go north
+go south
+go null
+go null
+go south
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+go west
+go north
+go null
+go east
+go west
+go south
+go null
+go north
+go south
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+go west
+go null
+go null
+go null
+go null
+go north
+go south
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+go west
+go north
