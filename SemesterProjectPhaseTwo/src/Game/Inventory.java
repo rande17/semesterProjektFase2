@@ -25,6 +25,14 @@ public class Inventory {
     Inventory(int _InventoryMaxWeight) {
         inventoryMaxWeight = _InventoryMaxWeight;
     }
+    
+    public HashMap getInventoryHashMap(){
+        HashMap<String, HashMap> hm = new HashMap();
+        hm.put("inventory", inventory);
+        hm.put("itemWeight", itemWeight);
+        hm.put("useableItems", useableItems);
+        return hm;
+    }
 
     /**
      * @return max weight of inventory

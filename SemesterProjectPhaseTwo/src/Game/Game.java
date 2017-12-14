@@ -50,8 +50,6 @@ public class Game {
 
         return (currentRoom.getExit(direction) != null);
     }
-    
-
 
     //file thats gonna be written to and the extension
     /**
@@ -155,10 +153,10 @@ public class Game {
         craftableItem.addItemToCraftableList(axe);
         craftableItem.addItemToCraftableList(spear);
     }
-    
-    public CraftableItem getCraftableItemList(){
+
+    public CraftableItem getCraftableItemList() {
         return craftableItem;
-    } 
+    }
 
     /**
      * Creating missions and putting and putting them in the game
@@ -218,7 +216,7 @@ public class Game {
         npcMap.put(josephSchnitzel.getName(), josephSchnitzel.getCurrentRoom().getShortDescription());
         return npcMap;
     }
-    
+
     static HashMap<String, NPC> NPCFromName() {
         HashMap<String, NPC> npcMap = new HashMap<>();
         npcMap.put(BSChristiansen.getName(), BSChristiansen);
@@ -257,7 +255,7 @@ public class Game {
 
         if (Time.secondsPassed % 45 == 44) {
             Random picker = new Random();
-           while (true) {
+            while (true) {
                 if (josephSchnitzel.getCurrentRoom().equals(mountain)) {
                     String[] newRoomString = {"south"};
                     int index = picker.nextInt(newRoomString.length);
@@ -342,7 +340,7 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-     boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
+    boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -611,11 +609,11 @@ public class Game {
     }
 
     static boolean forcedTextBox = false;
-    
-    public boolean getForcedTextBox(){
+
+    public boolean getForcedTextBox() {
         return forcedTextBox;
     }
-    
+
     /**
      * Method: force dialog with josephSchnitzel, if player is in same room
      */
@@ -696,7 +694,7 @@ public class Game {
         return GUIoption;
     }
 
-    public  void setOption(String opt) {
+    public void setOption(String opt) {
         GUIoption = opt;
     }
     /**
@@ -851,7 +849,7 @@ public class Game {
      *
      * @param command used for checking if an item exists in inventory
      */
-     void dropItem(Command command) {
+    void dropItem(Command command) {
         HashMap newInventory = inventory.getInventory();
         Iterator iterator = newInventory.entrySet().iterator();
         String seeItem;
@@ -903,14 +901,14 @@ public class Game {
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
      */
-     boolean UnlockedEscapeTheIsland() {
+    boolean UnlockedEscapeTheIsland() {
         if (allMissions.missionStatus.get("Escape the island") == true) {
             return false;
         }
         return true;
     }
 
-     boolean UnlockedEscapeTheIslandWin() {
+    boolean UnlockedEscapeTheIslandWin() {
         if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
             win();
             return false;
@@ -918,7 +916,7 @@ public class Game {
         return true;
     }
 
-     boolean lockedEscapeIsland() {
+    boolean lockedEscapeIsland() {
         if (allMissions.missionStatus.get("Escape the island") == false) {
             System.out.println("You haven't unlocked this command yet");
             return false;
@@ -992,7 +990,7 @@ public class Game {
     /**
      * Method used to handle lose condition
      */
-     private void loseCondition() {
+    private void loseCondition() {
         if (player.getHealth() <= 0) {
             lose();
         }
@@ -1035,8 +1033,8 @@ public class Game {
     static private String objectsToSave() {
         ArrayList saveObjectsJSON;
         saveObjectsJSON = new ArrayList(10);
-        saveObjectsJSON.add(inventory);
-        saveObjectsJSON.add(itemLocation);
+        saveObjectsJSON.add(inventory.getInventoryHashMap());
+        saveObjectsJSON.add(itemLocation.getAllItems());
         saveObjectsJSON.add(allMissions);
 
         saveObjectsJSON.add(currentRoom.getShortDescription());
@@ -1064,69 +1062,76 @@ public class Game {
         //inventory
         inventory = new Inventory();
         LinkedTreeMap saveMap = (LinkedTreeMap) loadData.get(0);
-        LinkedTreeMap inventoryItemWeight = (LinkedTreeMap) saveMap.get("itemWeight");
-        LinkedTreeMap inventoryItemQuantity = (LinkedTreeMap) saveMap.get("inventory");
-        String inventoryItemQuantityString = inventoryItemQuantity.toString();
-        inventoryItemQuantityString = removeCrapCharsFromString(inventoryItemQuantityString);
-        String itemListString = inventoryItemWeight.toString();
-        itemListString = removeCrapCharsFromString(itemListString);
+        System.out.println(saveMap.toString() + "map");
+        if (!saveMap.isEmpty()) {
+            LinkedTreeMap inventoryItemWeight = (LinkedTreeMap) saveMap.get("itemWeight");
+            LinkedTreeMap inventoryItemQuantity = (LinkedTreeMap) saveMap.get("inventory");
+            System.out.println(inventoryItemQuantity);
+            String inventoryItemQuantityString = inventoryItemQuantity.toString();
+            inventoryItemQuantityString = removeCrapCharsFromString(inventoryItemQuantityString);
+            String itemListString = inventoryItemWeight.toString();
+            itemListString = removeCrapCharsFromString(itemListString);
 
-        for (int i = 0; i < inventoryItemWeight.size(); i++) {
-            String itemSet;
-            double itemQuantity;
-            if (itemListString.contains(",")) {
-                itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.indexOf(",")));
-                inventoryItemQuantityString = inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf(",") + 1, inventoryItemQuantityString.length());
-                itemSet = itemListString.substring(0, itemListString.indexOf(","));
-                itemListString = itemListString.substring(itemListString.indexOf(",") + 1, itemListString.length());
-            } else {
-                itemSet = itemListString;
-                itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.length()));
-            }
-            String itemName = itemSet.substring(0, itemSet.indexOf("="));
-            int itemWeight = Double.valueOf(itemSet.substring(itemSet.indexOf("=") + 1, itemSet.length())).intValue();
-            while (itemQuantity > 0) {
-                Item item = new Item(itemName, "", itemWeight, true);
-                inventory.addItemInInventory(item);
-                itemQuantity--;
+            for (int i = 0; i < inventoryItemWeight.size(); i++) {
+                String itemSet;
+                double itemQuantity;
+                if (itemListString.contains(",")) {
+                    itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.indexOf(",")));
+                    inventoryItemQuantityString = inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf(",") + 1, inventoryItemQuantityString.length());
+                    itemSet = itemListString.substring(0, itemListString.indexOf(","));
+                    itemListString = itemListString.substring(itemListString.indexOf(",") + 1, itemListString.length());
+                } else {
+                    itemSet = itemListString;
+                    itemQuantity = Double.parseDouble(inventoryItemQuantityString.substring(inventoryItemQuantityString.indexOf("=") + 1, inventoryItemQuantityString.length()));
+                }
+                String itemName = itemSet.substring(0, itemSet.indexOf("="));
+                int itemWeight = Double.valueOf(itemSet.substring(itemSet.indexOf("=") + 1, itemSet.length())).intValue();
+                while (itemQuantity > 0) {
+                    Item item = new Item(itemName, "", itemWeight, true);
+                    inventory.addItemInInventory(item);
+                    itemQuantity--;
+                }
             }
         }
 
         //itemList
         itemLocation = new ItemLocation();
         saveMap = (LinkedTreeMap) loadData.get(1);
-        LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap.get("itemList");
-        String rooms = itemLocationOnMap.keySet().toString();
-        rooms = removeCrapCharsFromString(rooms);
-        System.out.println(itemLocationOnMap.toString());
-        for (int j = 0; j <= itemLocationOnMap.size() - 1; j++) {
-            String itemToAdd;
+        if (!saveMap.isEmpty()) {
+            System.out.println(saveMap.toString());
+            LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap.get("inventory");
+            String rooms = itemLocationOnMap.keySet().toString();
+            rooms = removeCrapCharsFromString(rooms);
+            System.out.println(itemLocationOnMap.toString());
+            for (int j = 0; j <= itemLocationOnMap.size() - 1; j++) {
+                String itemToAdd;
 
-            if (rooms.contains(",")) {
-                itemToAdd = rooms.substring(0, rooms.indexOf(","));
-            } else {
-                itemToAdd = rooms;
+                if (rooms.contains(",")) {
+                    itemToAdd = rooms.substring(0, rooms.indexOf(","));
+                } else {
+                    itemToAdd = rooms;
+                }
+
+                rooms = rooms.substring(rooms.indexOf(",") + 1, rooms.length());
+                ArrayList itemInRoom = (ArrayList) itemLocationOnMap.get(itemToAdd);
+                for (int i = 0; i < itemInRoom.size(); i++) {
+                    Item itemLocationToAdd;
+                    LinkedTreeMap itemT = (LinkedTreeMap) itemInRoom.get(i);
+                    System.out.println(itemT.toString());
+                    String itemName = itemT.get("name").toString();
+                    String itemDesc = "";
+                    int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());
+                    boolean itemUseable = Boolean.getBoolean(itemT.get("useable").toString());
+
+                    itemLocationToAdd = new PickableItem(itemName, itemDesc, itemWeight, itemUseable);
+                    itemLocation.addItem(itemToAdd, itemLocationToAdd);
+
+                }
             }
-
-            rooms = rooms.substring(rooms.indexOf(",") + 1, rooms.length());
-            ArrayList itemInRoom = (ArrayList) itemLocationOnMap.get(itemToAdd);
-            for (int i = 0; i < itemInRoom.size(); i++) {
-                Item itemLocationToAdd;
-                LinkedTreeMap itemT = (LinkedTreeMap) itemInRoom.get(i);
-                System.out.println(itemT.toString());
-                String itemName = itemT.get("name").toString();
-                String itemDesc = "";
-                int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());
-                boolean itemUseable = Boolean.getBoolean(itemT.get("useable").toString());
-
-                itemLocationToAdd = new PickableItem(itemName, itemDesc, itemWeight, itemUseable);
-                itemLocation.addItem(itemToAdd, itemLocationToAdd);
-
-            }
+            //set room
+            String spawnRoom = loadData.get(3).toString();
+            currentRoom = getRoomFromName(spawnRoom);
         }
-        //set room
-        String spawnRoom = loadData.get(3).toString();
-        currentRoom = getRoomFromName(spawnRoom);
     }
 
     /**
@@ -1141,7 +1146,7 @@ public class Game {
     /**
      * Method used to handle actions when game is won
      */
-     void win() {
+    void win() {
         String name = score.getName();
         if (Time.getSecondsPassed() < 1) {
             calculateMissionScore();
@@ -1183,7 +1188,7 @@ public class Game {
      * @param command used to check if USE command is used correctly
      * @return boolean, whether if item is used or not
      */
-     boolean useItem(Command command) {
+    boolean useItem(Command command) {
         HashMap newInventory = inventory.getInventory();
         Iterator iterator = newInventory.entrySet().iterator();
         String seeItem;
@@ -1216,29 +1221,32 @@ public class Game {
         System.out.println(npc);
         return NPCFromName().get(npc).getDialog(0);
     }
-    
-    public NPC getNPCFromName(String npc){
-        return NPCFromName().get(npc);   
+
+    public NPC getNPCFromName(String npc) {
+        return NPCFromName().get(npc);
     }
-    
-    public ItemLocation getItemLocation(){
+
+    public ItemLocation getItemLocation() {
         return itemLocation;
     }
-    
-    public Room getCurrentRoom(){
+
+    public Room getCurrentRoom() {
         return currentRoom;
     }
-    
-    public Inventory getInventory(){
+
+    public Inventory getInventory() {
         return inventory;
     }
-    public Mission getAllMissions(){
+
+    public Mission getAllMissions() {
         return allMissions;
     }
-    public Player getPlayer(){
+
+    public Player getPlayer() {
         return player;
     }
-    public void setUsingGUI(boolean _usingGui){
+
+    public void setUsingGUI(boolean _usingGui) {
         usingGui = _usingGui;
     }
 }

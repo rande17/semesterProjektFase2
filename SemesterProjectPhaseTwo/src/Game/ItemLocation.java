@@ -61,6 +61,10 @@ public class ItemLocation {
     ArrayList getItems(Room currentRoom) {
         return itemList.get(currentRoom.getShortDescription());
     }
+    
+    public HashMap getAllItems(){
+        return itemList;
+    }
 
     /**
      * setter method to set an item to an new arraylist/room
