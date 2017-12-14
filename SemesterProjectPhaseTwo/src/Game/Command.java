@@ -16,7 +16,7 @@ public class Command {
      */
     private String secondWord;
 
-    //Laver et commandWord der skal have et secondWord
+   
     /**
      * Constructor that sets commandWord and secondWord while creating it
      *
@@ -28,7 +28,7 @@ public class Command {
         secondWord = _secondWord;
     }
 
-    //Laver getter metoder
+    
     /**
      * Method used for returning the commandWord
      *
@@ -47,7 +47,7 @@ public class Command {
         return secondWord;
     }
 
-    //Tjekker om den command der er blevet indtastet er korrekt
+    
     /**
      * Method used for checking if a commandWord is valid
      *
@@ -58,7 +58,7 @@ public class Command {
         return (commandWord == CommandWord.UNKNOWN);
     }
 
-    //Tjekker om commandWord har second word
+
     /**
      * Method used for checking if there is a secondWord in a entered command
      * string

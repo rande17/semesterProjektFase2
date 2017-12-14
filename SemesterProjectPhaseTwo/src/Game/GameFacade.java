@@ -42,12 +42,7 @@ public class GameFacade implements InterfaceGame {
         boolean returnbool;
         Command command = new Command(TAKE, itemToTake);
         returnbool = Game.takeItem(command);
-//            Command commandd = new Command(UNKNOWN, itemToTake);
-//        try {
-//            Game.processCommand(commandd);
-//        } catch (Throwable ex) {
-//            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
         return returnbool;
     }
 
@@ -197,13 +192,6 @@ public class GameFacade implements InterfaceGame {
         return Game.player.getMaxEnergy();
     }
 
-    /**
-     * Method used to deal damage to the player
-     */
-//    @Override
-//    public void damageToPlayer() {
-//        Game.player.loseHealth(25);
-//    }
     /**
      * Method used to decrease the energy of the player
      */

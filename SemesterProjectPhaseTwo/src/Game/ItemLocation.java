@@ -45,7 +45,6 @@ public class ItemLocation {
         items.add(_item);
         itemList.put(_room, items);
     }
-//    public ArrayList getItems(Room room){
 
     /**
      * getter method to get items for the current room

@@ -96,7 +96,6 @@ public class Game {
         //Initializing an item and putting it in a room airport
         itemLocation.addItem(airport, new PickableItem("Bottle", "This is a bottle that have been left behind by someone", 2, false));
         itemLocation.addItem(airport, new PickableItem("Boardingpass", "This is a boardingpass to get on the plane to Hawaii: 126AB", 1, false));
-        //itemLocation.addItem(airport, new Item("StopSign", "this is a shop", 100));
 
         //Initializing an item and putting it in a room beach
         itemLocation.addItem(beach, new PickableItem("Stone", "This is a stone, maybe it can be used to create something more usefull", 2, false));
@@ -199,7 +198,7 @@ public class Game {
         mysteriousCrab.setCurrentRoom(cave);
         mysteriousCrab.setDescription("A mysterious crab that you dont really get why can talk");
         mysteriousCrab.addDialog("MUHAHAHA i'm the finest and most knowledgeable \ncrab of them all mr.Crab and know this island\nlike the back of my hand! oh i mean claw..."
-                 + "\nA Random fact: "
+                + "\nA Random fact: "
                 + "to escape this island you need a raft, \nsome berries and fish so you can survive on the sea,\nand a spear so you can hunt for more food");
     }
 
@@ -215,7 +214,7 @@ public class Game {
         npcMap.put(josephSchnitzel.getName(), josephSchnitzel.getCurrentRoom().getShortDescription());
         return npcMap;
     }
-    
+
     static HashMap<String, NPC> getNPCFromName() {
         HashMap<String, NPC> npcMap = new HashMap<>();
         npcMap.put(BSChristiansen.getName(), BSChristiansen);
@@ -251,10 +250,6 @@ public class Game {
      * Method that handles NPC movement
      */
     static private void npcPath() {
-//        Random picker = new Random();
-//        Room[] roomString = {beach, jungle, mountain};
-//        int indexOfRoomString = picker.nextInt(roomString.length);
-//        josephSchnitzel.setCurrentRoom(roomString[indexOfRoomString]);
 
         if (Time.secondsPassed % 45 == 0) {
             Random picker = new Random();
@@ -429,7 +424,6 @@ public class Game {
 
         while (inventory.getInventory().containsKey("Raft") && inventory.getInventory().containsKey("Berry") && inventory.getInventory().containsKey("Fish")
                 && inventory.getInventory().containsKey("Spear")) {
-//        while (inventory.getInventory().containsKey("Boardingpass")) {
             allMissions.setMissionComplete("Escape the island");
 
             if (currentRoom != beach) {
@@ -496,7 +490,6 @@ public class Game {
             System.out.println("There is no path!");
         } else {
             currentRoom = nextRoom;
-            //System.out.println(currentRoom.getLongDescription());
             System.out.println(player.getCurrentRoom().getLongDescription());
 
         }
@@ -611,17 +604,14 @@ public class Game {
         } else if (mysteriousCrab.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(mysteriousCrab.getDescription() + "\n" + mysteriousCrab.getDialog(0));
             pregnant();
-        } //        else if (josephSchnitzel.getCurrentRoom() == currentRoom) {
-        //            System.out.println(josephSchnitzel.getDescribtion() + "\n" + josephSchnitzel.getDialog(0));
-        //            evilGuyDialog();
-        //        } 
-        else {
+        } else {
             System.out.println("There is nobody to communicate with in this Room");
         }
 
     }
 
     static boolean forcedTextBox = false;
+
     /**
      * Method: force dialog with josephSchnitzel, if player is in same room
      */
@@ -656,8 +646,6 @@ public class Game {
         } else {
             System.out.println("Come back again if you change your mind");
         }
-//            if (allMissions.missionStatus.get("Helping the injured survivor") == true){
-//                System.out.println("");
     }
 
     /**
@@ -666,30 +654,29 @@ public class Game {
     static public void pregnant() {
         Scanner scan = new Scanner(System.in);//Creates a new scanner
         Thread thread = new Thread() {
-                @Override
-                public void run() {
-                    input = "";
-                    while (!(input.equals("yes") || input.equals("no"))) {
-                        input = getOption();
-                        try {
-                            Thread.sleep(10);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+            @Override
+            public void run() {
+                input = "";
+                while (!(input.equals("yes") || input.equals("no"))) {
+                    input = getOption();
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    if (input.equalsIgnoreCase("yes")) {
-                        System.out.println("You got a mission, please use the show command for more information");
-                        allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
-                        System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
-                    } else if (input.equalsIgnoreCase("no")) {
-                        System.out.println("");
-                        player.loseHealth(josephSchnitzel.getDamageValue());
-                    }
-                    
-                
                 }
-            };
-            thread.start();
+                if (input.equalsIgnoreCase("yes")) {
+                    System.out.println("You got a mission, please use the show command for more information");
+                    allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
+                    System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
+                } else if (input.equalsIgnoreCase("no")) {
+                    System.out.println("");
+                    player.loseHealth(josephSchnitzel.getDamageValue());
+                }
+
+            }
+        };
+        thread.start();
         System.out.println("Are u pregnant?"); //Asks question
         String input = scan.nextLine(); //Waits for input
         if (input.equalsIgnoreCase("yes")) {
@@ -1047,12 +1034,9 @@ public class Game {
         saveObjectsJSON.add(inventory);
         saveObjectsJSON.add(itemLocation);
         saveObjectsJSON.add(allMissions);
-        //       saveObjectsJSON.add(player);
+
         saveObjectsJSON.add(currentRoom.getShortDescription());
 
-        // saveObjectsJSON.add(BSChristiansen);
-        // saveObjectsJSON.add(mysteriousCrab);
-        // saveObjectsJSON.add(josephSchnitzel);
         System.out.println(saveObjectsJSON.toString());
         return data.objectToJson(saveObjectsJSON);
     }
@@ -1127,7 +1111,6 @@ public class Game {
                 LinkedTreeMap itemT = (LinkedTreeMap) itemInRoom.get(i);
                 System.out.println(itemT.toString());
                 String itemName = itemT.get("name").toString();
-  //              String itemDesc = itemT.get("itemDescription").toString();
                 String itemDesc = "";
                 int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());
                 boolean itemUseable = Boolean.getBoolean(itemT.get("useable").toString());
@@ -1200,7 +1183,6 @@ public class Game {
         HashMap newInventory = inventory.getInventory();
         Iterator iterator = newInventory.entrySet().iterator();
         String seeItem;
-//        int indexItem = -1;
         String nameOfItem = "";
         String useItem = "debug";
 
@@ -1214,9 +1196,10 @@ public class Game {
             }
         }
         if (!nameOfItem.equals("") && inventory.getUseable(nameOfItem)) {
-            inventory.removeItemInventory(nameOfItem);
+
             System.out.println("You have dropped: " + nameOfItem);
             itemLocation.addItem(currentRoom, new PickableItem(nameOfItem, inventory.getItemWeight(nameOfItem)));
+            inventory.removeItemInventory(nameOfItem);
             player.setEnergy(player.getEnergy() + 20);
             player.setHealth(player.getHealth() + 5);
 

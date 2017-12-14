@@ -11,7 +11,7 @@ import java.util.Set;
 public class Room {
 
     private String description;
-    private HashMap<String, Room> exits; //ask Rande << just an initialization of a HashMap with the identifier exits, that takes a String object as the first object and a Room as the second object, hope it makes sense
+    private HashMap<String, Room> exits; //just an initialization of a HashMap with the identifier exits, that takes a String object as the first object and a Room as the second object, hope it makes sense
 
     /**
      * Constructor connect the new room with the description

@@ -127,22 +127,10 @@ public class HighscoreManager {
         }
         //for loop that print out score name and score
         for (int i = 0; i < x; i++) {
-//            highscoreList += (i + 1) + ".\t" + scores.get(i).getName() + "\t\t" + scores.get(i).getCurrentScore() + "\n";
             highscoreList += (i + 1) + ".\t" + String.format("%-12s", scores.get(i).getName()) + "\t\t" + scores.get(i).getCurrentScore() + "\n";
         }
 
         return highscoreList;
     }
-   
-//    @Override
-//    public String toString() {
-//        for (String s : scores) {
-//            System.out.println("");
-//        
-//        
-//        
-//        
-//      
-//    }
-//}
+
 }

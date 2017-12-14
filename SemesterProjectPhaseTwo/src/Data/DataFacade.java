@@ -68,8 +68,6 @@ public class DataFacade implements InterfaceData {
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(DataFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // return gson.fromJSON(loadstring, Array.class);
-        //System.out.println(loadstring);
         ArrayList SaveData = (ArrayList) gson.fromJson(loadstring, new TypeToken<ArrayList>() {}.getType());
         return SaveData;
 
