@@ -17,40 +17,41 @@ public class Game {
 
     /* data field with the attributes parser and currentRoom
        making them private so we only can use them in the Game class */
-    static String GUIoption;
-    static boolean usingGui = false;
-    static private boolean hasBoardingpass = false;
-    static private Parser parser;
-    static Room currentRoom;
+    private static String GUIoption;
+    private static boolean usingGui = false;
+    private static boolean hasBoardingpass = false;
+    private static Parser parser;
+    private static Room currentRoom;
     private static Room airport, beach, jungle, mountain, cave, camp, seaBottom;
-    static private boolean hasTalkedWithEvilGuy = false;
+    private static boolean hasTalkedWithEvilGuy = false;
     private static DataFacade data = new DataFacade();
-    static ItemLocation itemLocation = new ItemLocation();
-    static Inventory inventory = new Inventory();
-    static CraftableItem craftableItem = new CraftableItem();
-    static Player player = new Player("Player", "???", currentRoom, 100, 100);
-    static Score score = new Score();
-    static Item debug = new Item("debug");
-    static Item campfire = new CraftableItem("Campfire", "Campfire: Lumber, Stick and Flint", 3);
-    static Item spear = new CraftableItem("Spear", "Spear: Stick, Flint and Rope or Lian", 3);
-    static Item axe = new CraftableItem("Axe", "Axe: Stick, Stone and Rope or Lian", 3);
-    static Item raft = new CraftableItem("Raft", "Raft: Lumber, Stick and Rope or Lian", 3);
-    static Mission allMissions = new Mission();
-    static NPC BSChristiansen = new NPC();
-    static NPC mysteriousCrab = new NPC();
-    static NPC josephSchnitzel = new NPC();
+    private static ItemLocation itemLocation = new ItemLocation();
+    private static Inventory inventory = new Inventory();
+    private static CraftableItem craftableItem = new CraftableItem();
+    private static Player player = new Player("Player", "???", currentRoom, 100, 100);
+    private static Score score = new Score();
+    private static Item debug = new Item("debug");
+    private static Item campfire = new CraftableItem("Campfire", "Campfire: Lumber, Stick and Flint", 3);
+    private static Item spear = new CraftableItem("Spear", "Spear: Stick, Flint and Rope or Lian", 3);
+    private static Item axe = new CraftableItem("Axe", "Axe: Stick, Stone and Rope or Lian", 3);
+    private static Item raft = new CraftableItem("Raft", "Raft: Lumber, Stick and Rope or Lian", 3);
+    private static Mission allMissions = new Mission();
+    private static NPC BSChristiansen = new NPC();
+    private static NPC mysteriousCrab = new NPC();
+    private static NPC josephSchnitzel = new NPC();
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
     public Game() {
-        initGame();
         parser = new Parser();
     }
 
-    public static boolean getExitBool(String direction) {
+    public boolean getExitBool(String direction) {
 
         return (currentRoom.getExit(direction) != null);
     }
+    
+
 
     //file thats gonna be written to and the extension
     /**
@@ -150,11 +151,15 @@ public class Game {
      */
     public static void putCraftableItemInArrayList() {
 
-        craftableItem.craftableListArray.add(campfire);
-        craftableItem.craftableListArray.add(raft);
-        craftableItem.craftableListArray.add(axe);
-        craftableItem.craftableListArray.add(spear);
+        craftableItem.addItemToCraftableList(campfire);
+        craftableItem.addItemToCraftableList(raft);
+        craftableItem.addItemToCraftableList(axe);
+        craftableItem.addItemToCraftableList(spear);
     }
+    
+    public CraftableItem getCraftableItemList(){
+        return craftableItem;
+    } 
 
     /**
      * Creating missions and putting and putting them in the game
@@ -174,7 +179,6 @@ public class Game {
      */
     public static void createNPC() {
         //create the good npc
-        createMissions();
         BSChristiansen.setName("BS_Christiansen");
         BSChristiansen.setCurrentRoom(jungle);
         BSChristiansen.setDescription("The survivor of the plane crash look to be some kind of veteran soldier, "
@@ -208,7 +212,7 @@ public class Game {
      *
      * @return HashMap containing all NPCs
      */
-    static HashMap<String, String> storeNPC() {
+    public HashMap<String, String> storeNPC() {
         HashMap<String, String> npcMap = new HashMap<>();
         npcMap.put(BSChristiansen.getName(), BSChristiansen.getCurrentRoom().getShortDescription());
         npcMap.put(mysteriousCrab.getName(), mysteriousCrab.getCurrentRoom().getShortDescription());
@@ -216,7 +220,7 @@ public class Game {
         return npcMap;
     }
     
-    static HashMap<String, NPC> getNPCFromName() {
+    static HashMap<String, NPC> NPCFromName() {
         HashMap<String, NPC> npcMap = new HashMap<>();
         npcMap.put(BSChristiansen.getName(), BSChristiansen);
         npcMap.put(mysteriousCrab.getName(), mysteriousCrab);
@@ -227,7 +231,7 @@ public class Game {
     /**
      * Initializing Game
      */
-    public static void initGame() {
+    public void initGame() {
         hasBoardingpass = false;
         hasTalkedWithEvilGuy = false;
         data = new DataFacade();
@@ -256,17 +260,14 @@ public class Game {
 //        int indexOfRoomString = picker.nextInt(roomString.length);
 //        josephSchnitzel.setCurrentRoom(roomString[indexOfRoomString]);
 
-        if (Time.secondsPassed % 45 == 0) {
+        if (Time.secondsPassed % 45 == 44) {
             Random picker = new Random();
-            String[] roomString = {"south", "north"};
-            boolean hasMoved = false;
-            while (!hasMoved) {
+           while (true) {
                 if (josephSchnitzel.getCurrentRoom().equals(mountain)) {
                     String[] newRoomString = {"south"};
                     int index = picker.nextInt(newRoomString.length);
                     Room next = josephSchnitzel.getCurrentRoom().getExit(newRoomString[index]);
                     josephSchnitzel.setCurrentRoom(next);
-                    hasMoved = true;
                     break;
                 }
 
@@ -275,7 +276,6 @@ public class Game {
                     int indexOfNewRoomString = picker.nextInt(newRoomString.length);
                     Room nextRoom = josephSchnitzel.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
                     josephSchnitzel.setCurrentRoom(nextRoom);
-                    hasMoved = true;
                     break;
                 }
 
@@ -284,7 +284,6 @@ public class Game {
                     int indexOfNewRoomString = picker.nextInt(newRoomString.length);
                     Room nextRoom = josephSchnitzel.getCurrentRoom().getExit(newRoomString[indexOfNewRoomString]);
                     josephSchnitzel.setCurrentRoom(nextRoom);
-                    hasMoved = true;
                     break;
                 }
             }
@@ -302,6 +301,7 @@ public class Game {
      */
     public void play() throws FileNotFoundException, IOException, Throwable {
         Time time = new Time();
+        initGame();
         printWelcome();
         time.start();
         data.logWrite(System.lineSeparator() + System.lineSeparator() + " >>>  Starting new game <<< " + System.lineSeparator() + System.lineSeparator());
@@ -347,7 +347,7 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    static boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
+     boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -460,7 +460,7 @@ public class Game {
      *
      * @return Method that returns help message when using the help command
      */
-    static String printHelp() {
+    public String printHelp() {
         String helpDialog = "You are lost. You are alone." + "\n" + "You wander around on this" + "\n" + "god forsaken island."
                 + "\n" + "\n" + "You move around using" + "\n" + "W A S D or the arrows";
         System.out.println("You are lost. You are alone. You wander");
@@ -622,6 +622,11 @@ public class Game {
     }
 
     static boolean forcedTextBox = false;
+    
+    public boolean getForcedTextBox(){
+        return forcedTextBox;
+    }
+    
     /**
      * Method: force dialog with josephSchnitzel, if player is in same room
      */
@@ -705,7 +710,7 @@ public class Game {
         return GUIoption;
     }
 
-    public static void setOption(String opt) {
+    public  void setOption(String opt) {
         GUIoption = opt;
     }
     /**
@@ -766,7 +771,7 @@ public class Game {
      * you need to craft the wanted craftitem. If yes, the craftitem is added to
      * inventory and the items used is removed. If no, crafting is unsuccessful.
      */
-    static public void craftItem(Command command) {
+    public void craftItem(Command command) {
         if (command.hasSecondWord()) {
             String craft = command.getSecondWord();
             if (craft.equalsIgnoreCase("Recipe")) {
@@ -860,7 +865,7 @@ public class Game {
      *
      * @param command used for checking if an item exists in inventory
      */
-    static void dropItem(Command command) {
+     void dropItem(Command command) {
         HashMap newInventory = inventory.getInventory();
         Iterator iterator = newInventory.entrySet().iterator();
         String seeItem;
@@ -912,14 +917,14 @@ public class Game {
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
      */
-    static boolean UnlockedEscapeTheIsland() {
+     boolean UnlockedEscapeTheIsland() {
         if (allMissions.missionStatus.get("Escape the island") == true) {
             return false;
         }
         return true;
     }
 
-    static boolean UnlockedEscapeTheIslandWin() {
+     boolean UnlockedEscapeTheIslandWin() {
         if (currentRoom == beach && allMissions.missionStatus.get("Escape the island") == true) {
             win();
             return false;
@@ -927,7 +932,7 @@ public class Game {
         return true;
     }
 
-    static boolean lockedEscapeIsland() {
+     boolean lockedEscapeIsland() {
         if (allMissions.missionStatus.get("Escape the island") == false) {
             System.out.println("You haven't unlocked this command yet");
             return false;
@@ -977,7 +982,7 @@ public class Game {
      *
      * @param _playerName used to store a name entered by the player
      */
-    static void setHighscoreName(String _playerName) {
+    void setHighscoreName(String _playerName) {
         String name = _playerName;
 
         System.out.println(name + "Game");
@@ -1001,7 +1006,7 @@ public class Game {
     /**
      * Method used to handle lose condition
      */
-    static private void loseCondition() {
+     private void loseCondition() {
         if (player.getHealth() <= 0) {
             lose();
         }
@@ -1146,7 +1151,7 @@ public class Game {
      *
      * @return Highscore string that show stored highscores
      */
-    static String getHighscoreFromData() {
+    String getHighscoreFromData() {
         String highscoreString = data.printHighscore();
         return highscoreString;
     }
@@ -1154,7 +1159,7 @@ public class Game {
     /**
      * Method used to handle actions when game is won
      */
-    static void win() {
+     void win() {
         String name = score.getName();
         if (Time.getSecondsPassed() < 1) {
             calculateMissionScore();
@@ -1184,7 +1189,7 @@ public class Game {
     /**
      * Method used when game is lost
      */
-    static void lose() {
+    void lose() {
         System.out.println("You have lost the game!!!" + "\n" + "You spend: " + Time.getSecondsPassed() + " seconds playing the game!");
         System.exit(0);
 
@@ -1196,7 +1201,7 @@ public class Game {
      * @param command used to check if USE command is used correctly
      * @return boolean, whether if item is used or not
      */
-    static boolean useItem(Command command) {
+     boolean useItem(Command command) {
         HashMap newInventory = inventory.getInventory();
         Iterator iterator = newInventory.entrySet().iterator();
         String seeItem;
@@ -1214,9 +1219,9 @@ public class Game {
             }
         }
         if (!nameOfItem.equals("") && inventory.getUseable(nameOfItem)) {
-            inventory.removeItemInventory(nameOfItem);
             System.out.println("You have dropped: " + nameOfItem);
             itemLocation.addItem(currentRoom, new PickableItem(nameOfItem, inventory.getItemWeight(nameOfItem)));
+            inventory.removeItemInventory(nameOfItem);
             player.setEnergy(player.getEnergy() + 20);
             player.setHealth(player.getHealth() + 5);
 
@@ -1225,8 +1230,33 @@ public class Game {
         return false;
     }
 
-    public static String talkToNPC(String npc) {
+    public String talkToNPC(String npc) {
         System.out.println(npc);
-        return getNPCFromName().get(npc).getDialog(0);
+        return NPCFromName().get(npc).getDialog(0);
+    }
+    
+    public NPC getNPCFromName(String npc){
+        return NPCFromName().get(npc);   
+    }
+    
+    public ItemLocation getItemLocation(){
+        return itemLocation;
+    }
+    
+    public Room getCurrentRoom(){
+        return currentRoom;
+    }
+    
+    public Inventory getInventory(){
+        return inventory;
+    }
+    public Mission getAllMissions(){
+        return allMissions;
+    }
+    public Player getPlayer(){
+        return player;
+    }
+    public void setUsingGUI(boolean _usingGui){
+        usingGui = _usingGui;
     }
 }

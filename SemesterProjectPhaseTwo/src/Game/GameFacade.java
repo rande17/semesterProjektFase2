@@ -17,10 +17,11 @@ public class GameFacade implements InterfaceGame {
     @Override
     public ArrayList getItemsOnMap() {
         ArrayList itemNameArrayList;
-        if (Game.itemLocation.getItems(Game.currentRoom) != null && Game.itemLocation.getItems(Game.currentRoom).size() > 0) {
-            ArrayList itemArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
-            itemNameArrayList = new ArrayList(Game.itemLocation.getItems(Game.currentRoom).size());
-            itemArrayList = Game.itemLocation.getItems(Game.currentRoom);
+        Game game = new Game();
+        if (game.getItemLocation().getItems(game.getCurrentRoom()) != null && game.getItemLocation().getItems(game.getCurrentRoom()).size() > 0) {
+            ArrayList itemArrayList;
+            itemNameArrayList = new ArrayList(game.getItemLocation().getItems(game.getCurrentRoom()).size());
+            itemArrayList = game.getItemLocation().getItems(game.getCurrentRoom());
             for (int i = 0; i < itemArrayList.size(); i++) {
                 Item item = (Item) itemArrayList.get(i);
                 itemNameArrayList.add(item.getName());
@@ -40,14 +41,9 @@ public class GameFacade implements InterfaceGame {
     @Override
     public boolean takeItemGUI(String itemToTake) {
         boolean returnbool;
+        Game game = new Game();
         Command command = new Command(TAKE, itemToTake);
-        returnbool = Game.takeItem(command);
-//            Command commandd = new Command(UNKNOWN, itemToTake);
-//        try {
-//            Game.processCommand(commandd);
-//        } catch (Throwable ex) {
-//            Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        returnbool = game.takeItem(command);
         return returnbool;
     }
 
@@ -58,8 +54,10 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public void craftItemGUI(String itemToCraft) {
+
+        Game game = new Game();
         Command command = new Command(CRAFT, itemToCraft);
-        Game.craftItem(command);
+        game.craftItem(command);
     }
 
     /**
@@ -69,9 +67,10 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public void goGUI(String direction) {
+        Game game = new Game();
         Command command = new Command(GO, direction);
         try {
-            Game.processCommand(command);
+            game.processCommand(command);
         } catch (Throwable ex) {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,7 +83,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public String getRoomDescribtion() {
-        return Game.currentRoom.getShortDescription();
+        Game game = new Game();
+        return game.getCurrentRoom().getShortDescription();
     }
 
     /**
@@ -94,7 +94,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public String printInventory() {
-        return Game.inventory.toString();
+        Game game = new Game();
+        return game.getInventory().toString();
     }
 
     /**
@@ -104,7 +105,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public String printMissions() {
-        return Game.allMissions.toString();
+        Game game = new Game();
+        return game.getAllMissions().toString();
     }
 
     /**
@@ -114,7 +116,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public String showHelp() {
-        return Game.printHelp();
+        Game game = new Game();
+        return game.printHelp();
     }
 
     /**
@@ -132,7 +135,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public String printHighscoreGUI() {
-        return Game.getHighscoreFromData().toString();
+        Game game = new Game();
+        return game.getHighscoreFromData();
     }
 
     /**
@@ -144,7 +148,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public boolean checkExit(String direction) {
-        return Game.getExitBool(direction);
+        Game game = new Game();
+        return game.getExitBool(direction);
     }
 
     /**
@@ -154,7 +159,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public int playerHealth() {
-        return Game.player.getHealth();
+        Game game = new Game();
+        return game.getPlayer().getHealth();
     }
 
     /**
@@ -174,7 +180,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public int playerEnergy() {
-        return Game.player.getEnergy();
+        Game game = new Game();
+        return game.getPlayer().getEnergy();
     }
 
     /**
@@ -184,7 +191,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public int maxPlayerHealth() {
-        return Game.player.getMaxHealth();
+        Game game = new Game();
+        return game.getPlayer().getMaxHealth();
     }
 
     /**
@@ -194,22 +202,17 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public int maxPlayerEnergy() {
-        return Game.player.getMaxEnergy();
+        Game game = new Game();
+        return game.getPlayer().getMaxEnergy();
     }
 
-    /**
-     * Method used to deal damage to the player
-     */
-//    @Override
-//    public void damageToPlayer() {
-//        Game.player.loseHealth(25);
-//    }
     /**
      * Method used to decrease the energy of the player
      */
     @Override
     public void energyLossToPlayer() {
-        Game.player.loseEnergy(15);
+        Game game = new Game();
+        game.getPlayer().loseEnergy(15);
     }
 
     /**
@@ -219,7 +222,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public HashMap<String, String> getNPC() {
-        return Game.storeNPC();
+        Game game = new Game();
+        return game.storeNPC();
     }
 
     /**
@@ -227,7 +231,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public void lose() {
-        Game.lose();
+        Game game = new Game();
+        game.lose();
     }
 
     /**
@@ -235,7 +240,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public void win() {
-        Game.win();
+        Game game = new Game();
+        game.win();
     }
 
     /**
@@ -245,9 +251,10 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public ArrayList getCraftableItemsArray() {
-        ArrayList craftableItemsArrayList = new ArrayList(CraftableItem.craftableListArray.size());
-        ArrayList craftableItemsNameArrayList = new ArrayList(CraftableItem.craftableListArray.size());
-        craftableItemsArrayList = CraftableItem.craftableListArray;
+        Game game = new Game();
+        ArrayList craftableItemsArrayList;
+        ArrayList craftableItemsNameArrayList = new ArrayList(game.getCraftableItemList().craftableListArray.size());
+        craftableItemsArrayList = game.getCraftableItemList().craftableListArray;
         for (int i = 0; i < craftableItemsArrayList.size(); i++) {
             Item item = (Item) craftableItemsArrayList.get(i);
             craftableItemsNameArrayList.add(item.getName());
@@ -263,8 +270,9 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public String getCraftableItemDescribtion(String itemName) {
-        ArrayList craftArray = new ArrayList(CraftableItem.craftableListArray.size());
-        craftArray = CraftableItem.craftableListArray;
+        Game game = new Game();
+        ArrayList craftArray;
+        craftArray = game.getCraftableItemList().craftableListArray;
         String itemDescribtion = "";
         for (int i = 0; i < craftArray.size(); i++) {
             Item item = (Item) craftArray.get(i);
@@ -283,7 +291,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public ArrayList inventoryNames() {
-        return Game.inventory.inventoryNames();
+        Game game = new Game();
+        return game.getInventory().inventoryNames();
     }
 
     /**
@@ -294,7 +303,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public boolean unlockedEscapeIsland() {
-        return Game.UnlockedEscapeTheIsland();
+        Game game = new Game();
+        return game.UnlockedEscapeTheIsland();
     }
 
     /**
@@ -304,7 +314,8 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public boolean lockedEscapeIsland() {
-        return Game.lockedEscapeIsland();
+        Game game = new Game();
+        return game.lockedEscapeIsland();
     }
 
     /**
@@ -314,8 +325,9 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public void dropItem(String itemToDrop) {
+        Game game = new Game();
         Command command = new Command(DROP, itemToDrop);
-        Game.dropItem(command);
+        game.dropItem(command);
     }
 
     /**
@@ -326,8 +338,9 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public boolean useItem(String itemToUse) {
+        Game game = new Game();
         Command command = new Command(DROP, itemToUse);
-        return Game.useItem(command);
+        return game.useItem(command);
     }
 
     /**
@@ -337,16 +350,17 @@ public class GameFacade implements InterfaceGame {
      */
     @Override
     public void submitHighScore(String playerName) {
-        System.out.println(playerName + "Facade");
-        Game.setHighscoreName(playerName);
-        Game.win();
+        Game game = new Game();
+        game.setHighscoreName(playerName);
+        game.win();
     }
 
     @Override
     public void saveGameGUI() {
+        Game game = new Game();
         Command command = new Command(SAVE, null);
         try {
-            Game.processCommand(command);
+            game.processCommand(command);
         } catch (Throwable ex) {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -354,9 +368,10 @@ public class GameFacade implements InterfaceGame {
 
     @Override
     public void loadGameGUI() {
+        Game game = new Game();
         Command command = new Command(LOAD, null);
         try {
-            Game.processCommand(command);
+            game.processCommand(command);
         } catch (Throwable ex) {
             Logger.getLogger(GameFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -364,45 +379,51 @@ public class GameFacade implements InterfaceGame {
 
     @Override
     public void newGameGUI() {
-        Game.initGame();
+        Game game = new Game();
+        game.initGame();
     }
 
     @Override
     public String getDialog(String NPCname) {
-        return Game.talkToNPC(NPCname);
+        Game game = new Game();
+        return game.talkToNPC(NPCname);
     }
 
     @Override
     public void useGUI() {
-        Game.usingGui = true;
+        Game game = new Game();
+        game.setUsingGUI(true);
     }
 
     @Override
     public void sendDialogOption(String opt) {
-        Game.setOption(opt);
+        Game game = new Game();
+        game.setOption(opt);
     }
 
     @Override
     public boolean forcedText() {
-        return Game.forcedTextBox;
+        Game game = new Game();
+        return game.getForcedTextBox();
     }
 
     @Override
     public String getPositionOfAllCharacters() {
+        Game game = new Game();
         String returnString = "";
         String fillerText = ": " + System.lineSeparator() + "Is at the ";
 
-        returnString += Game.player.getName() + fillerText + Game.player.
+        returnString += game.getPlayer().getName() + fillerText + game.getPlayer().
                 getCurrentRoom().getShortDescription() + System.lineSeparator();
-        returnString += Game.BSChristiansen.getName().replace("_", " ")
-                + fillerText + Game.BSChristiansen.getCurrentRoom().
-                        getShortDescription() + System.lineSeparator();
-        returnString += Game.josephSchnitzel.getName().replace("_", " ")
-                + fillerText + Game.josephSchnitzel.getCurrentRoom().
-                        getShortDescription() + System.lineSeparator();
-        returnString += Game.mysteriousCrab.getName().replace("_", " ")
-                + fillerText + Game.mysteriousCrab.getCurrentRoom().
-                        getShortDescription() + System.lineSeparator();
+        returnString += game.getNPCFromName("BS_Christiansen").getName().replace("_", " ")
+                + fillerText + game.getNPCFromName("BS_Christiansen").getCurrentRoom().
+                getShortDescription() + System.lineSeparator();
+        returnString += game.getNPCFromName("Joseph_Schnitzel").getName().replace("_", " ")
+                + fillerText + game.getNPCFromName("Joseph_Schnitzel").getCurrentRoom().
+                getShortDescription() + System.lineSeparator();
+        returnString += game.getNPCFromName("Mysterious_Crab").getName().replace("_", " ")
+                + fillerText + game.getNPCFromName("Mysterious_Crab").getCurrentRoom().
+                getShortDescription() + System.lineSeparator();
 
         return returnString;
     }

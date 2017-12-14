@@ -5,7 +5,6 @@
  */
 package Game;
 
-import static Game.Game.allMissions;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -14,6 +13,7 @@ import java.util.Iterator;
  * @author marti
  */
 public class Mission {
+//    Game game = new Game();
 
     HashMap<String, Boolean> missionStatus = new HashMap();
 //    HashMap<String, String> missionInfo = new HashMap();
@@ -72,8 +72,9 @@ public class Mission {
 
     @Override
     public String toString() {
+        Game game = new Game();
         String missionStatusString = "";
-        Iterator iteratorMissionStatus = allMissions.missionStatus.entrySet().iterator();
+        Iterator iteratorMissionStatus = game.getAllMissions().missionStatus.entrySet().iterator();
 
         while (iteratorMissionStatus.hasNext()) {
             HashMap.Entry entry = (HashMap.Entry) iteratorMissionStatus.next();
