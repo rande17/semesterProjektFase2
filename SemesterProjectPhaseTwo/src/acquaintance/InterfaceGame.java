@@ -22,12 +22,10 @@ public interface InterfaceGame {
     public void quitGame();
     public String printMissions();
     public String printHighscoreGUI();
-//   public String showHelp();
     public int playerHealth();
     public int playerEnergy();
     public int maxPlayerHealth();
     public int maxPlayerEnergy();
-//    public void damageToPlayer();
     public void energyLossToPlayer();
     public boolean checkExit(String dir);
     public HashMap<String, String> getNPC();

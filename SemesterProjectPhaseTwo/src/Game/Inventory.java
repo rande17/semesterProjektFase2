@@ -47,7 +47,6 @@ public class Inventory {
         if ((weightOfItem + currentInventoryWeight) <= inventoryMaxWeight) {
             if (inventory.containsKey(itemName)) {
                 quantity = inventory.get(itemName) + 1;
-//                return true;
             } else {
                 quantity = 1;
                 itemWeight.put(itemName, weightOfItem);

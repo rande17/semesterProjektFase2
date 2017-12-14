@@ -16,7 +16,6 @@ public class Mission {
 //    Game game = new Game();
 
     HashMap<String, Boolean> missionStatus = new HashMap();
-//    HashMap<String, String> missionInfo = new HashMap();
 
     Score score = new Score();
 
@@ -50,24 +49,12 @@ public class Mission {
     }
 
     /**
-     * method to get mission descibtion
-     *
-     * @param key of the hashmap
-     * @return
-     */
-//    public String getMissionDescribtion(String key) {
-//        return missionInfo.get(key);
-//    }
-    /**
      * method to set mission to true if complete
      *
      * @param key of the hashmap
      */
     public void setMissionComplete(String key) {
         missionStatus.replace(key, true);
-        //Kalder ukendt klasse
-
-//        score.addToPoints(missionPoint.get(key));
     }
 
     @Override

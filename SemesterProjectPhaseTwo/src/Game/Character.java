@@ -1,5 +1,8 @@
 package Game;
 
+/*
+no arcs constructor 
+*/
 public class Character {
 
     // Data field
@@ -18,11 +21,11 @@ public class Character {
      */
     private Room currentRoom;
 
-    private int health;
-    private int energy;
-    private int maxHealth;
-    private int maxEnergy;
-    private boolean hasLostEnergy = false;
+//    private int health;
+//    private int energy;
+//    private int maxHealth;
+//    private int maxEnergy;
+//    private boolean hasLostEnergy = false;
 
     // Constructors, creates instance of Character
     public Character() {
@@ -45,45 +48,47 @@ public class Character {
      * @param _name sets the name of the Character instance
      * @param _description sets the description of the Character instance
      * @param _currentRoom sets the current room of the Character
-     * @param _health sets the health of the character
-     * @param _energy sets the energy of the character
+     * /
+//     * @param _health sets the health of the character
+//     * @param _energy sets the energy of the character
      */
-    public Character(String _name, String _description, Room _currentRoom, int _health, int _energy) {
+//    , int _health, int _energy
+    public Character(String _name, String _description, Room _currentRoom) {
         name = _name;
         description = _description;
         currentRoom = _currentRoom;
-        health = _health;
-        energy = _energy;
-        maxHealth = _health;
-        maxEnergy = _energy;
+//        health = _health;
+//        energy = _energy;
+//        maxHealth = _health;
+//        maxEnergy = _energy;
     }
 
-    /**
-     * A method that subtracts the damage specified in the parameterlist
-     *
-     * @param dmg sets the dmg the character is going to lose
-     */
-    public void loseHealth(int dmg) {
-        health -= dmg;
-    }
-
-    /**
-     * A method that subtracts the energy specified in the parameterlist
-     *
-     * @param energyLoss is the amount which is to be lost
-     */
-    public void loseEnergy(int energyLoss) {
-        if (Time.getSecondsPassed() % 15 == 0) {
-            while (!hasLostEnergy) {
-                energy -= energyLoss;
-                hasLostEnergy = true;
-                break;
-            }
-        }
-        if (Time.getSecondsPassed() % 5 != 0) {
-            hasLostEnergy = false;
-        }
-    }
+//    /**
+//     * A method that subtracts the damage specified in the parameterlist
+//     *
+//     * @param dmg sets the dmg the character is going to lose
+//     */
+//    public void loseHealth(int dmg) {
+//        health -= dmg;
+//    }
+//
+//    /**
+//     * A method that subtracts the energy specified in the parameterlist
+//     *
+//     * @param energyLoss is the amount which is to be lost
+//     */
+//    public void loseEnergy(int energyLoss) {
+//        if (Time.getSecondsPassed() % 15 == 0) {
+//            while (!hasLostEnergy) {
+//                energy -= energyLoss;
+//                hasLostEnergy = true;
+//                break;
+//            }
+//        }
+//        if (Time.getSecondsPassed() % 5 != 0) {
+//            hasLostEnergy = false;
+//        }
+//    }
 
     /**
      * getter method for name
@@ -102,8 +107,14 @@ public class Character {
         return description;
     }
 
-    // Method, set Character name
-    public void setName() {
+
+    /**
+     * Method, set Character name
+     * 
+     * @param _name sets name
+     */
+    public void setName(String _name) {
+        name = _name;
     }
 
     /**
@@ -133,60 +144,60 @@ public class Character {
 
     }
 
-    /**
-     *
-     * @param newEnergy sets new value of energy
-     */
-    public void setEnergy(int newEnergy) {
-        if (maxEnergy < newEnergy) {
-            energy = maxEnergy;
-        } else {
-            energy = newEnergy;
-        }
-
-    }
-
-    /**
-     *
-     * @param newHealth sets a new value of health
-     */
-    public void setHealth(int newHealth) {
-        if (maxHealth < newHealth) {
-            health = maxHealth;
-        } else {
-            health = newHealth;
-        }
-    }
-
+//    /**
+//     *
+//     * @param newEnergy sets new value of energy
+//     */
+//    public void setEnergy(int newEnergy) {
+//        if (maxEnergy < newEnergy) {
+//            energy = maxEnergy;
+//        } else {
+//            energy = newEnergy;
+//        }
+//
+//    }
+//
+//    /**
+//     *
+//     * @param newHealth sets a new value of health
+//     */
+//    public void setHealth(int newHealth) {
+//        if (maxHealth < newHealth) {
+//            health = maxHealth;
+//        } else {
+//            health = newHealth;
+//        }
+//    }
+//
     /**
      *
      * @return energy of the character
      */
-    public int getEnergy() {
-        return energy;
-    }
-
-    /**
-     *
-     * @return health of the character
-     */
-    public int getHealth() {
-        return health;
-    }
-
-    /**
-     * 
-     * @return maxEnergy of the character
-     */
-    public int getMaxEnergy() {
-        return maxEnergy;
-    }
-
-    /**
-     *
-     * @return maxHealth of the character
-     */
-    public int getMaxHealth() {
-        return maxHealth;
-    }
+//    public int getEnergy() {
+//        return energy;
+//    }
+//
+//    /**
+//     *
+//     * @return health of the character
+//     */
+//    public int getHealth() {
+//        return health;
+//    }
+//
+//    /**
+//     * 
+//     * @return maxEnergy of the character
+//     */
+//    public int getMaxEnergy() {
+//        return maxEnergy;
+//    }
+//
+//    /**
+//     *
+//     * @return maxHealth of the character
+//     */
+//    public int getMaxHealth() {
+//        return maxHealth;
+//    }
 }
