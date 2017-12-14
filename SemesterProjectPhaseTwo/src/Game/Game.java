@@ -1207,7 +1207,6 @@ public class Game {
         if (!nameOfItem.equals("") && inventory.getUseable(nameOfItem)) {
 
             System.out.println("You have dropped: " + nameOfItem);
-            itemLocation.addItem(currentRoom, new PickableItem(nameOfItem, inventory.getItemWeight(nameOfItem)));
             inventory.removeItemInventory(nameOfItem);
             player.setEnergy(player.getEnergy() + 20);
             player.setHealth(player.getHealth() + 5);

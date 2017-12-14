@@ -339,7 +339,7 @@ public class GameFacade implements InterfaceGame {
     @Override
     public boolean useItem(String itemToUse) {
         Game game = new Game();
-        Command command = new Command(DROP, itemToUse);
+        Command command = new Command(USE, itemToUse);
         return game.useItem(command);
     }
 
