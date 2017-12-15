@@ -10,7 +10,7 @@ package Data;
  * @author marti
  */
 public class Logger extends WriteToFile {
-    
+
     public Logger(){
         super("game", "log");
     }
