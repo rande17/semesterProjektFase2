@@ -5,7 +5,6 @@
  */
 package Game;
 
-import static Game.Game.allMissions;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -14,9 +13,9 @@ import java.util.Iterator;
  * @author marti
  */
 public class Mission {
+//    Game game = new Game();
 
     HashMap<String, Boolean> missionStatus = new HashMap();
-//    HashMap<String, String> missionInfo = new HashMap();
 
     Score score = new Score();
 
@@ -50,30 +49,19 @@ public class Mission {
     }
 
     /**
-     * method to get mission descibtion
-     *
-     * @param key of the hashmap
-     * @return
-     */
-//    public String getMissionDescribtion(String key) {
-//        return missionInfo.get(key);
-//    }
-    /**
      * method to set mission to true if complete
      *
      * @param key of the hashmap
      */
     public void setMissionComplete(String key) {
         missionStatus.replace(key, true);
-        //Kalder ukendt klasse
-
-//        score.addToPoints(missionPoint.get(key));
     }
 
     @Override
     public String toString() {
+        Game game = new Game();
         String missionStatusString = "";
-        Iterator iteratorMissionStatus = allMissions.missionStatus.entrySet().iterator();
+        Iterator iteratorMissionStatus = game.getAllMissions().missionStatus.entrySet().iterator();
 
         while (iteratorMissionStatus.hasNext()) {
             HashMap.Entry entry = (HashMap.Entry) iteratorMissionStatus.next();

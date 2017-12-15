@@ -144,7 +144,6 @@ public class FXMLDocumentController implements Initializable {
                     System.out.println("x:" + player.getLayoutX() + " y: " + player.getLayoutY() + " bgHeight:" + background.getHeight() + " playerHeight: " + player.getFitHeight());
                     break;
                 case H:
-//                    game.damageToPlayer();
                     textArea.setText("Previous eventhandler removed");
                     break;
             }
@@ -196,7 +195,6 @@ public class FXMLDocumentController implements Initializable {
                                 textDrawed = false;
                                 PickItemPopUpText(objectID);
                             } else {
-                                //System.out.println("TEST");
                                 textDrawed = false;
                                 PickItemFailedPopUpText(objectID);
                             }
@@ -229,7 +227,6 @@ public class FXMLDocumentController implements Initializable {
         pxend = pxstart + player.getFitWidth();
         pystart = player.getLayoutY();
         pyend = pystart + player.getFitHeight();
-// 
         if (pxstart < xEnd && pxend > xStart && pystart < yEnd && pyend > yStart) {
             return true;
         } else {
@@ -503,7 +500,6 @@ public class FXMLDocumentController implements Initializable {
                 popupBackground.getChildren().remove(noButton);
                 popupBackground.getChildren().remove(yesButton);
                 showMissionGiveByNpc();
-                //background.getChildren().remove(popupBackground);
 
             });
 
@@ -527,7 +523,6 @@ public class FXMLDocumentController implements Initializable {
     public void InteractNPC(String npcID) {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
-//            openWindow();
             if (game.getDialog(npcID) == game.getDialog("Mysterious_Crab")) {
                 openWindow();
                 popupText.setText(game.getDialog(npcID));
@@ -607,8 +602,6 @@ public class FXMLDocumentController implements Initializable {
                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            //winGame(event);
-            //background.getChildren().remove(popupBackground);
         });
 
         noButton.setOnAction((event) -> {
@@ -674,7 +667,6 @@ public class FXMLDocumentController implements Initializable {
         });
 
         popupBackground.setPrefSize(10, 10);
-//        popupBackground.setLayoutX((background.getWidth() / 1) - (background.getHeight() / 2));
         popupBackground.setLayoutX(130);
         popupBackground.setLayoutY(470);
         popupBackground.setOpacity(0.6);

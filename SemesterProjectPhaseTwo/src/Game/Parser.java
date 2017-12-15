@@ -6,7 +6,7 @@ import java.util.Scanner;
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-public class Parser { // transformering fra udstruktureret data til struktureret
+public class Parser { //transforming unstructered data to structured
     // private variable. 
 
     private CommandWords commands;
@@ -20,7 +20,6 @@ public class Parser { // transformering fra udstruktureret data til struktureret
         reader = new Scanner(System.in);
     }
 
-    // Metode, get command, input reads input line.
     /**
      * getter method used to get a command from input
      *

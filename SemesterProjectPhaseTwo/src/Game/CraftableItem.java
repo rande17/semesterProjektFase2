@@ -16,13 +16,17 @@ public class CraftableItem extends Item {
     /**
      * ArrayList used for storing craftableItems
      */
-    static ArrayList<Item> craftableListArray = new ArrayList<>();
+    ArrayList<Item> craftableListArray = new ArrayList<>();
     
     /**
      * No-args contructor
      */
     public CraftableItem() {
         craftableListArray = new ArrayList<>();
+    }
+    
+    public void addItemToCraftableList(Item item){
+        craftableListArray.add(item);
     }
 
     /**

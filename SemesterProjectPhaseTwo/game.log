@@ -6,8 +6,7 @@
 go null
 go west
 go null
-go north
-go east
+go null
 
 
  >>>  Starting new game <<< 
@@ -15,26 +14,16 @@ go east
 
 go null
 go west
+go null
+go null
+go null
 go north
+go null
+go null
 go east
-
-
- >>>  Starting new game <<< 
-
-
 go null
 go west
 go north
-go east
-
-
- >>>  Starting new game <<< 
-
-
-go null
-go west
-go north
-go east
 
 
  >>>  Starting new game <<< 
@@ -45,93 +34,453 @@ go west
 go north
 go east
 go null
+go null
+go null
+go west
+go null
+go null
+go south
 go west
 go east
-
-
- >>>  Starting new game <<< 
-
-
-go null
-
-
- >>>  Starting new game <<< 
-
-
 go null
 go west
-go north
-go east
-
-
- >>>  Starting new game <<< 
-
-
+go south
 go null
-go west
 go null
 go north
 go null
-go east
-
-
- >>>  Starting new game <<< 
-
-
-
-
- >>>  Starting new game <<< 
-
-
-
-
- >>>  Starting new game <<< 
-
-
 go null
-
-
- >>>  Starting new game <<< 
-
-
+go null
+go null
 go null
 go west
+go null
+go null
+go null
+go east
 go north
-go east
-
-
- >>>  Starting new game <<< 
-
-
-go null
-go west
 go null
 go null
-
-
- >>>  Starting new game <<< 
-
-
-go null
-go west
-go null
-go null
-
-
- >>>  Starting new game <<< 
-
-
-go null
-go west
-go null
-
-
- >>>  Starting new game <<< 
-
-
-go null
-go west
 go null
 go north
+go south
+go null
+go null
+go null
+go south
+go null
+go null
+go west
+
+
+ >>>  Starting new game <<< 
+
+
+
+
+ >>>  Starting new game <<< 
+
+
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+show null
+take boardingpass
+show null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+show null
+inspect null
+
+
+ >>>  Starting new game <<< 
+
+
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+go null
+show null
+inspect null
+take boardingpass
+go west
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+show null
+go west
+
+
+ >>>  Starting new game <<< 
+
+
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+go null
+go null
+go null
+go null
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go west
+go null
+go north
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+
+
+ >>>  Starting new game <<< 
+
+
+go west
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go west
+go null
+go null
+show null
+inspect null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go west
 go east
 go null
+go null
+go null
+go null
+go null
+go null
+go south
+go north
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go south
+go null
+go null
+go north
+go null
+go null
+go null
+go null
+go west
+go null
+go null
+go null
+go east
+go null
+go north
+go null
+go null
+go null
+go null
+go north
+go south
+go null
+go south
+? null
+? null
+quit null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go south
+go null
+go null
+go north
+go null
+go null
+go null
+go null
+go west
+go null
+go east
+go null
+go north
+go null
+go null
+go null
+go null
+go null
+go south
+go null
+go north
+go south
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go null
+go null
+go null
+go null
+go null
+
+
+ >>>  Starting new game <<< 
+
+
+save null
+go null
+go null
+go west
+go null
+go null
+go null
+go south
+go null
+go north
+go null
+go null
+go null
+go null
+go north
+go null
+go null
+go null
+go null
+go null
+go null
+go south
+go west
+go null
+go east
+load null
+go null
+save null
+go west
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+save null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+save null
+go null
+save null
+
+
+ >>>  Starting new game <<< 
+
+
+save null
+go null
+go null
+save null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+save null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+load null
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go null
+go west

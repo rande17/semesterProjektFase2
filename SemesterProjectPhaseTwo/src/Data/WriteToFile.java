@@ -56,11 +56,9 @@ public class WriteToFile {
  * @throws IOException 
  */
     public void write(String str) throws FileNotFoundException, IOException {
-   // String outputfile = userHome + File.separator + defaultFolder + File.separator + fileName + ext;
     String outputfile = fileName + ext;
     File file = new File(outputfile);
         if (writer == null) {
-//            file.getParentFile().mkdirs();
             writer = new FileWriter(outputfile, append);
         }
         writer.write(str + System.lineSeparator());

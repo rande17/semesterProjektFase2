@@ -11,15 +11,21 @@ import java.util.HashMap;
 public class ItemLocation {
 
     //HashMap used for making a itemlist of each room
-    HashMap<String, ArrayList> itemList = new HashMap<>();
+    static HashMap<String, ArrayList> itemList = new HashMap<>();
 
     //sets the name of the arraylist to items
-    private ArrayList items;
+    private static ArrayList items;
+    
+    @Override
+    public String toString(){
+        return itemList.toString();
+    }
 
     /**
      * no-args constructor for itemLocation
      */
     public ItemLocation() {
+        itemList = new HashMap();
     }
 
     /**
@@ -45,7 +51,6 @@ public class ItemLocation {
         items.add(_item);
         itemList.put(_room, items);
     }
-//    public ArrayList getItems(Room room){
 
     /**
      * getter method to get items for the current room
@@ -55,6 +60,10 @@ public class ItemLocation {
      */
     ArrayList getItems(Room currentRoom) {
         return itemList.get(currentRoom.getShortDescription());
+    }
+    
+    public HashMap getAllItems(){
+        return itemList;
     }
 
     /**

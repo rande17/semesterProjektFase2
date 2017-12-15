@@ -4,12 +4,12 @@ import java.util.*;
 
 public class Inventory {
 
-    private int currentQuantity = 0;
-    private int inventoryMaxWeight = 10; //set default inventory weight 
-    private int currentInventoryWeight = 0;
-    private HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
-    private HashMap<String, Integer> itemWeight = new HashMap<>();
-    private HashMap<String, Boolean> useableItems = new HashMap<>();
+    private static int currentQuantity = 0;
+    private static int inventoryMaxWeight = 10; //set default inventory weight 
+    private static int currentInventoryWeight = 0;
+    private static HashMap<String, Integer> inventory = new HashMap<>(); //Create a HashMap
+    private static HashMap<String, Integer> itemWeight = new HashMap<>();
+    private static HashMap<String, Boolean> useableItems = new HashMap<>();
 
     /**
      * Constructor, no args for creating Inventory instance
@@ -24,6 +24,14 @@ public class Inventory {
      */
     Inventory(int _InventoryMaxWeight) {
         inventoryMaxWeight = _InventoryMaxWeight;
+    }
+    
+    public HashMap getInventoryHashMap(){
+        HashMap<String, HashMap> hm = new HashMap();
+        hm.put("inventory", inventory);
+        hm.put("itemWeight", itemWeight);
+        hm.put("useableItems", useableItems);
+        return hm;
     }
 
     /**
@@ -47,7 +55,6 @@ public class Inventory {
         if ((weightOfItem + currentInventoryWeight) <= inventoryMaxWeight) {
             if (inventory.containsKey(itemName)) {
                 quantity = inventory.get(itemName) + 1;
-//                return true;
             } else {
                 quantity = 1;
                 itemWeight.put(itemName, weightOfItem);
