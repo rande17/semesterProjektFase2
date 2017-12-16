@@ -601,7 +601,6 @@ public class Game {
             woundedSurvivor();
         } else if (mysteriousCrab.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(mysteriousCrab.getDescription() + "\n" + mysteriousCrab.getDialog(0));
-            pregnant();
         } else {
             System.out.println("There is nobody to communicate with in this Room");
         }
@@ -647,46 +646,6 @@ public class Game {
             System.out.println("Come back again if you change your mind");
         } else {
             System.out.println("Come back again if you change your mind");
-        }
-    }
-
-    /**
-     * Method that creates question when talking with mysteriousCrab (crab)
-     */
-    static public void pregnant() {
-        Scanner scan = new Scanner(System.in);//Creates a new scanner
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                input = "";
-                while (!(input.equals("yes") || input.equals("no"))) {
-                    input = getOption();
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                if (input.equalsIgnoreCase("yes")) {
-                    System.out.println("You got a mission, please use the show command for more information");
-                    allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
-                    System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
-                } else if (input.equalsIgnoreCase("no")) {
-                    System.out.println("");
-                    player.loseHealth(josephSchnitzel.getDamageValue());
-                }
-
-            }
-        };
-        thread.start();
-        System.out.println("Are u pregnant?"); //Asks question
-        String input = scan.nextLine(); //Waits for input
-        if (input.equalsIgnoreCase("yes")) {
-            System.out.println("Great! congratulations");
-        } else if (input.equalsIgnoreCase("no")) {
-            System.out.println("Keep trying it will happen.");
-        } else { //If the input is anything else
-            System.out.println("This is a yes or no question.");
         }
     }
 
