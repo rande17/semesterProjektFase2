@@ -25,6 +25,9 @@ public class HighscoreManager {
     static ObjectOutputStream outputStream = null;
     static ObjectInputStream inputStream = null;
 
+    /**
+     * no-args constructor for HighScoreManager
+     */
     public HighscoreManager() {
         //initialising the scores-arraylist
         scores = new ArrayList<Score>();
@@ -60,6 +63,9 @@ public class HighscoreManager {
         updateScoreFile(); //update the score list
     }
 
+    /**
+     * used to load the highscores from a file
+     */
     public static void loadScoreFile() {
         try {
             //load the highscore file that is in a form of arraylist and put it in the scores arraylist
@@ -84,6 +90,9 @@ public class HighscoreManager {
         }
     }
 
+    /**
+     * used to update the score file
+     */
     public void updateScoreFile() {
         try {
             //It will take the new current score arraylist and write it to the file

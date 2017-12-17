@@ -21,6 +21,10 @@ public class Score implements Serializable {
     private String name;
 
     //no args constructer 
+
+    /**
+     * no-args constructor for Score
+     */
     public Score() {
     }
 

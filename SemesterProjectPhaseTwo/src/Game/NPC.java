@@ -69,6 +69,12 @@ public class NPC extends Character{
         
     }
 
+    /**
+     *
+     * @param i is the index which is used in the for-loop
+     * @param remove whether to remove or not
+     * @return the dialog at the given index
+     */
     public String getDialog(int i, boolean remove) {
         if(remove){
         if (i > 0 && i < dialog.size()) {

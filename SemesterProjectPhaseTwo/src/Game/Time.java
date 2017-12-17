@@ -47,6 +47,9 @@ public class Time {
         return secondsPassed;
     }
 
+    /**
+     * method used to start the timer
+     */
     public void start() {
         myTimer.scheduleAtFixedRate(timerTask, 1000, 1000);
     }

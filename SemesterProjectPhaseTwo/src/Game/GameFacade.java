@@ -261,8 +261,8 @@ public class GameFacade implements InterfaceGame {
     public ArrayList getCraftableItemsArray() {
         Game game = new Game();
         ArrayList craftableItemsArrayList;
-        ArrayList craftableItemsNameArrayList = new ArrayList(game.getCraftableItemList().craftableListArray.size());
-        craftableItemsArrayList = game.getCraftableItemList().craftableListArray;
+        ArrayList craftableItemsNameArrayList = new ArrayList(game.getCraftableItemList().getCratableListArray().size());
+        craftableItemsArrayList = game.getCraftableItemList().getCratableListArray();
         for (int i = 0; i < craftableItemsArrayList.size(); i++) {
             Item item = (Item) craftableItemsArrayList.get(i);
             craftableItemsNameArrayList.add(item.getName());
@@ -280,7 +280,7 @@ public class GameFacade implements InterfaceGame {
     public String getCraftableItemDescribtion(String itemName) {
         Game game = new Game();
         ArrayList craftArray;
-        craftArray = game.getCraftableItemList().craftableListArray;
+        craftArray = game.getCraftableItemList().getCratableListArray();
         String itemDescribtion = "";
         for (int i = 0; i < craftArray.size(); i++) {
             Item item = (Item) craftArray.get(i);

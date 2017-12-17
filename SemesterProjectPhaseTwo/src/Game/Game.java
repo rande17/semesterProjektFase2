@@ -50,10 +50,18 @@ public class Game {
 
     /* Constructor that runs the method createRooms and set our variable parser
        equal to the Parser method in the Parser class */
+    /**
+     * no-args constructor for Game
+     */
     public Game() {
         parser = new Parser();
     }
 
+    /**
+     *
+     * @param direction which direction to go in
+     * @return whether there is a room in the given direction
+     */
     public boolean getExitBool(String direction) {
 
         return (currentRoom.getExit(direction) != null);
@@ -162,6 +170,10 @@ public class Game {
         craftableItem.addItemToCraftableList(spear);
     }
 
+    /**
+     *
+     * @return the instance of CraftableItem
+     */
     public CraftableItem getCraftableItemList() {
         return craftableItem;
     }
@@ -349,7 +361,7 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    boolean processCommand(Command command) throws FileNotFoundException, IOException, InterruptedException  {
+    boolean processCommand(Command command) throws FileNotFoundException, IOException, InterruptedException {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -618,6 +630,10 @@ public class Game {
 
     static boolean forcedTextBox = false;
 
+    /**
+     *
+     * @return a boolean called forcedTextBox
+     */
     public boolean getForcedTextBox() {
         return forcedTextBox;
     }
@@ -636,6 +652,10 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @param bool whether the player has talked with evil npc
+     */
     public static void setHasTalkedToEvilGuy(boolean bool) {
         hasTalkedWithEvilGuy = bool;
     }
@@ -662,6 +682,10 @@ public class Game {
         return GUIoption;
     }
 
+    /**
+     *
+     * @param opt the response
+     */
     public void setOption(String opt) {
         GUIoption = opt;
     }
@@ -671,6 +695,10 @@ public class Game {
      */
     static String input = "";
 
+    /**
+     *
+     * @throws InterruptedException if you are interrupted
+     */
     static public void evilGuyDialog() throws InterruptedException {
 
         Scanner scan = new Scanner(System.in); //Creates a new scanner
@@ -733,7 +761,7 @@ public class Game {
                 inventory.removeItemInventory("Lumber");
                 inventory.removeItemInventory("Stick");
                 inventory.removeItemInventory("Flint");
-                if (craftableItem.craftableListArray.contains(campfire)) {
+                if (craftableItem.getCratableListArray().contains(campfire)) {
                     inventory.addItemInInventory(campfire);
                     System.out.println("A Campfire is added to your inventory");
                 }
@@ -747,7 +775,7 @@ public class Game {
                 } else {
                     inventory.removeItemInventory("Lian");
                 }
-                if (craftableItem.craftableListArray.contains(spear)) {
+                if (craftableItem.getCratableListArray().contains(spear)) {
                     inventory.addItemInInventory(spear);
                     System.out.println("A Spear is added to your inventory");
                 }
@@ -761,7 +789,7 @@ public class Game {
                 } else {
                     inventory.removeItemInventory("Lian");
                 }
-                if (craftableItem.craftableListArray.contains(axe)) {
+                if (craftableItem.getCratableListArray().contains(axe)) {
                     inventory.addItemInInventory(axe);
                     System.out.println("An axe is added to your inventory");
                 }
@@ -775,7 +803,7 @@ public class Game {
                 } else {
                     inventory.removeItemInventory("Lian");
                 }
-                if (craftableItem.craftableListArray.contains(raft)) {
+                if (craftableItem.getCratableListArray().contains(raft)) {
                     inventory.addItemInInventory(raft);
                     System.out.println("Raft has been added to inventory");
                 }
@@ -1009,8 +1037,9 @@ public class Game {
     }
 
     /**
-     * 
-     * @param stringToClean take a string and removes a bunch of characters from it
+     *
+     * @param stringToClean take a string and removes a bunch of characters from
+     * it
      * @return returns a string without a bunc of charaters
      */
     private static String removeCrapCharsFromString(String stringToClean) {
@@ -1021,7 +1050,7 @@ public class Game {
         stringToClean = stringToClean.replace(" ", "");
         return stringToClean;
     }
-    
+
     /**
      * Method used to load a saved game file, to be able to continue that
      * specific game
@@ -1181,35 +1210,69 @@ public class Game {
         return false;
     }
 
+    /**
+     *
+     * @param npc which npc to talk to 
+     * @return the dialog for the given npc
+     */
     public String talkToNPC(String npc) {
         System.out.println(npc);
         return NPCFromName().get(npc).getDialog(0);
     }
 
+    /**
+     *
+     * @param npc which npc
+     * @return the given npc
+     */
     public NPC getNPCFromName(String npc) {
         return NPCFromName().get(npc);
     }
 
+    /**
+     *
+     * @return the instance of ItemLocation
+     */
     public ItemLocation getItemLocation() {
         return itemLocation;
     }
 
+    /**
+     *
+     * @return currentRoom
+     */
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
+    /**
+     *
+     * @return the inventory
+     */
     public Inventory getInventory() {
         return inventory;
     }
 
+    /**
+     *
+     * @return allMissions
+     */
     public Mission getAllMissions() {
         return allMissions;
     }
 
+    /**
+     *
+     * @return the player
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     *
+     * @param _usingGui set either to true or false
+     */
     public void setUsingGUI(boolean _usingGui) {
         usingGui = _usingGui;
     }

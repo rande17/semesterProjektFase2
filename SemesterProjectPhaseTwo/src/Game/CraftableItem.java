@@ -20,7 +20,7 @@ public class CraftableItem extends Item {
     /**
      * ArrayList used for storing craftableItems
      */
-    ArrayList<Item> craftableListArray = new ArrayList<>();
+   private ArrayList<Item> craftableListArray = new ArrayList<>();
 
     /**
      * No-args contructor
@@ -45,5 +45,13 @@ public class CraftableItem extends Item {
      */
     public CraftableItem(String name, String description, int weight) {
         super(name, description, weight, false);
+    }
+    
+    /**
+     * 
+     * @return the arraylist with the craftableitems
+     */
+    public ArrayList getCratableListArray(){
+        return craftableListArray;
     }
 }

@@ -516,3 +516,13 @@ go south
 go north
 go south
 go south
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go null
+go null

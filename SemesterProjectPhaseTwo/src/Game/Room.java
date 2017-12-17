@@ -32,17 +32,29 @@ public class Room {
         exits.put(direction, neighbor);
     }
 
-    //returns the description of the room
+
+    /**
+     *
+     * @return the description of the room
+     */
     public String getShortDescription() {
         return description;
     }
 
-    //returns the description of where you are, plus possible exits
+
+    /**
+     *
+     * @return the description of where you are, plus possible exits
+     */
     public String getLongDescription() {
         return "You are " + description + ".\n" + getExitString();
     }
 
-    //returns all possible exis from current room
+
+    /**
+     *
+     * @return all possible exis from current room
+     */
     public String getExitString() {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();

@@ -61,6 +61,10 @@ public class Mission {
         missionStatus.replace(key, true);
     }
 
+    /**
+     *
+     * @return full list of mission status
+     */
     @Override
     public String toString() {
         Game game = new Game();

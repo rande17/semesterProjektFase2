@@ -11,6 +11,9 @@ package Data;
  */
 public class Logger extends WriteToFile {
 
+    /**
+     * no args constructor for Logger
+     */
     public Logger(){
         super("game", "log");
     }

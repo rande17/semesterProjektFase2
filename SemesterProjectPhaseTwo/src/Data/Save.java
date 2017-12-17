@@ -49,6 +49,7 @@ public class Save extends WriteToFile {
 
     /**
      *
+     * @return  the save file
      * @throws IOException makes an exception if the program doesn't have read
      * access to the file or the file doesn't exists
      */
