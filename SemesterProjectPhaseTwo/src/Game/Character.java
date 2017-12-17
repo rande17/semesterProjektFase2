@@ -1,8 +1,13 @@
 package Game;
 
-/*
-no arcs constructor 
-*/
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie
+ * @author Martin
+ */
 public class Character {
 
     // Data field
@@ -26,8 +31,10 @@ public class Character {
 //    private int maxHealth;
 //    private int maxEnergy;
 //    private boolean hasLostEnergy = false;
-
     // Constructors, creates instance of Character
+    /**
+     * No-args constructor for character
+     */
     public Character() {
     }
 
@@ -47,10 +54,9 @@ public class Character {
      *
      * @param _name sets the name of the Character instance
      * @param _description sets the description of the Character instance
-     * @param _currentRoom sets the current room of the Character
-     * /
-//     * @param _health sets the health of the character
-//     * @param _energy sets the energy of the character
+     * @param _currentRoom sets the current room of the Character / // * @param
+     * _health sets the health of the character // * @param _energy sets the
+     * energy of the character
      */
 //    , int _health, int _energy
     public Character(String _name, String _description, Room _currentRoom) {
@@ -89,7 +95,6 @@ public class Character {
 //            hasLostEnergy = false;
 //        }
 //    }
-
     /**
      * getter method for name
      *
@@ -107,10 +112,9 @@ public class Character {
         return description;
     }
 
-
     /**
      * Method, set Character name
-     * 
+     *
      * @param _name sets name
      */
     public void setName(String _name) {

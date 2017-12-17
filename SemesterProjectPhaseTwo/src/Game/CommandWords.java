@@ -3,7 +3,7 @@ package Game;
 import java.util.HashMap;
 
 /**
- * @mod Rickie, added comments to most of the lines to reflect what they do
+ * @author Rickie, added comments to most of the lines to reflect what they do
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */

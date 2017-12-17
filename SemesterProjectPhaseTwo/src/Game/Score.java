@@ -8,8 +8,12 @@ package Game;
 import java.io.Serializable;
 
 /**
- *
- * @author rickie
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie
+ * @author Martin
  */
 public class Score implements Serializable {
 
@@ -40,7 +44,7 @@ public class Score implements Serializable {
 
     /**
      * getter method used to get the name of score
-     * 
+     *
      * @return name of the score
      */
     public String getName() {

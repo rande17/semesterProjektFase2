@@ -7,6 +7,14 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie
+ * @author Martin
+ */
 public class GameFacade implements InterfaceGame {
 
     /**
@@ -142,7 +150,7 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method used to check exits
      *
-     * @param direction
+     * @param direction is the direction for which the exit is checked
      * @return true or false, depending on if there is an exit in the direction
      * heading
      */
@@ -355,6 +363,9 @@ public class GameFacade implements InterfaceGame {
         game.win();
     }
 
+    /**
+     * Method used for saving the game up in the GUI layer
+     */
     @Override
     public void saveGameGUI() {
         Game game = new Game();
@@ -366,6 +377,9 @@ public class GameFacade implements InterfaceGame {
         }
     }
 
+    /**
+     * Method used for loading the game up in the GUI layer
+     */
     @Override
     public void loadGameGUI() {
         Game game = new Game();
@@ -377,36 +391,59 @@ public class GameFacade implements InterfaceGame {
         }
     }
 
+    /**
+     * Method used for starting a new game in the GUI layer
+     */
     @Override
     public void newGameGUI() {
         Game game = new Game();
         game.initGame();
     }
 
+    /**
+     *
+     * @param NPCname Name of the NPC which the player wants to talk with
+     * @return NPC dialog
+     */
     @Override
     public String getDialog(String NPCname) {
         Game game = new Game();
         return game.talkToNPC(NPCname);
     }
 
+    /**
+     * Set whether or not to use the GUI
+     */
     @Override
     public void useGUI() {
         Game game = new Game();
         game.setUsingGUI(true);
     }
 
+    /**
+     * 
+     * @param opt is the response to the NPC, J.S.
+     */
     @Override
     public void sendDialogOption(String opt) {
         Game game = new Game();
         game.setOption(opt);
     }
 
+    /**
+     *
+     * @return the forced dialog with the npc
+     */
     @Override
     public boolean forcedText() {
         Game game = new Game();
         return game.getForcedTextBox();
     }
 
+    /**
+     *
+     * @return the position of player and all NPC's
+     */
     @Override
     public String getPositionOfAllCharacters() {
         Game game = new Game();
@@ -417,13 +454,13 @@ public class GameFacade implements InterfaceGame {
                 getCurrentRoom().getShortDescription() + System.lineSeparator();
         returnString += game.getNPCFromName("BS_Christiansen").getName().replace("_", " ")
                 + fillerText + game.getNPCFromName("BS_Christiansen").getCurrentRoom().
-                getShortDescription() + System.lineSeparator();
+                        getShortDescription() + System.lineSeparator();
         returnString += game.getNPCFromName("Joseph_Schnitzel").getName().replace("_", " ")
                 + fillerText + game.getNPCFromName("Joseph_Schnitzel").getCurrentRoom().
-                getShortDescription() + System.lineSeparator();
+                        getShortDescription() + System.lineSeparator();
         returnString += game.getNPCFromName("Mysterious_Crab").getName().replace("_", " ")
                 + fillerText + game.getNPCFromName("Mysterious_Crab").getCurrentRoom().
-                getShortDescription() + System.lineSeparator();
+                        getShortDescription() + System.lineSeparator();
 
         return returnString;
     }

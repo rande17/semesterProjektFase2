@@ -13,6 +13,14 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie
+ * @author Martin
+ */
 public class Game {
 
     /* data field with the attributes parser and currentRoom
@@ -89,7 +97,7 @@ public class Game {
     }
 
     /**
-     * Initializes pickable & non pickable items and adding them to rooms
+     * Initializes pickable and non pickable items and adding them to rooms
      */
     public static void createItem() {
         //Initializing an item and putting it in a room airport
@@ -288,9 +296,10 @@ public class Game {
      * while loop that checks if the game is finished. The condition is set to
      * false when the game starts.
      *
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws Throwable
+     * @throws FileNotFoundException FileNotFoundException if the file is not
+     * found
+     * @throws IOException IOException if the file cannot be read from
+     * @throws Throwable Throwable is thrown
      */
     public void play() throws FileNotFoundException, IOException, Throwable {
         Time time = new Time();

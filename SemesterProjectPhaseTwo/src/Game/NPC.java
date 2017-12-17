@@ -8,9 +8,13 @@ package Game;
 import java.util.ArrayList;
 
 /**
- *
- * @author marti
- */
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class NPC extends Character{
 
     //int used to store how much damage the NPC does
@@ -81,8 +85,7 @@ public class NPC extends Character{
             return dialog.get(i);
         }
     }
-    
-
+   
     /**
      * setter method used to set a damagevalue for a NPC
      *

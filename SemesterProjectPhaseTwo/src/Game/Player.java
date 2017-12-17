@@ -1,5 +1,13 @@
 package Game;
 
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class Player extends Character {
 
     private int health;

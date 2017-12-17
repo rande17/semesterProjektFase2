@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author Nicolai
  * @author Rickie
  * @author Frederik
- * @author Julie Dittmann Weimar Andersen
+ * @author Julie 
  * @author Martin
  */
 public class SemesterProjekt {

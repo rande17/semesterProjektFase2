@@ -2,6 +2,14 @@ package Game;
 
 import java.util.*;
 
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class Inventory {
 
     private static int currentQuantity = 0;
@@ -26,6 +34,10 @@ public class Inventory {
         inventoryMaxWeight = _InventoryMaxWeight;
     }
     
+    /**
+     *
+     * @return a HashMap with values: inventory, itemWeigth, and useableItems
+     */
     public HashMap getInventoryHashMap(){
         HashMap<String, HashMap> hm = new HashMap();
         hm.put("inventory", inventory);

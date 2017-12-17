@@ -8,6 +8,14 @@ package Game;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie
+ * @author Martin
+ */
 public class ItemLocation {
 
     //HashMap used for making a itemlist of each room
@@ -15,9 +23,13 @@ public class ItemLocation {
 
     //sets the name of the arraylist to items
     private static ArrayList items;
-    
+
+    /**
+     *
+     * @return a string representation of an hashmap
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return itemList.toString();
     }
 
@@ -43,6 +55,12 @@ public class ItemLocation {
         items.add(_item);
         itemList.put(_room.getShortDescription(), items);
     }
+
+    /**
+     *
+     * @param _room which room to add the item in
+     * @param _item wbich item to add
+     */
     public void addItem(String _room, Item _item) {
         if (!itemList.containsKey(_room)) {
             itemList.put(_room, new ArrayList());
@@ -61,8 +79,12 @@ public class ItemLocation {
     ArrayList getItems(Room currentRoom) {
         return itemList.get(currentRoom.getShortDescription());
     }
-    
-    public HashMap getAllItems(){
+
+    /**
+     *
+     * @return a hashmap which is used to store all items
+     */
+    public HashMap getAllItems() {
         return itemList;
     }
 
@@ -75,8 +97,11 @@ public class ItemLocation {
     public void setItem(Room _room, ArrayList itemsInRoom) {
         itemList.replace(_room.getShortDescription(), itemsInRoom);
     }
-    
-    public void emptyItemLocation(){
+
+    /**
+     * used to clear every item off the map
+     */
+    public void emptyItemLocation() {
         itemList = null;
     }
 }

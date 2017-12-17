@@ -2,6 +2,15 @@ package Game;
 
 import java.util.Date;
 
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
+
 public class PickableItem extends Item {
 
     // Respawn time for an item

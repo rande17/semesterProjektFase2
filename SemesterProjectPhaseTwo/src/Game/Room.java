@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * @mod Julie Dittmann Weimar Andersen, added comments
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */

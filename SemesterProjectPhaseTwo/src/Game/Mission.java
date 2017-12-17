@@ -9,9 +9,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- *
- * @author marti
- */
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class Mission {
 //    Game game = new Game();
 

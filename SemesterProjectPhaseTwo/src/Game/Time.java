@@ -9,8 +9,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- *
- * @author Martin Sorensen
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie
+ * @author Martin
  */
 public class Time {
 

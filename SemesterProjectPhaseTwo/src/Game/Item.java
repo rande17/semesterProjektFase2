@@ -1,5 +1,12 @@
 package Game;
-
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class Item {
 
     private String itemDescription;
