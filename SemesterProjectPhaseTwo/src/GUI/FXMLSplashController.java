@@ -18,10 +18,13 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
 /**
- * FXML Controller class
- *
+ * @author Thomas
  * @author Nicolai
- */
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class FXMLSplashController implements Initializable {
 
     @FXML
@@ -29,11 +32,19 @@ public class FXMLSplashController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url never used
+     * @param rb never used
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    /**
+     *
+     * @param newScene what scene to change to
+     * @throws IOException if the fxml cannot be found
+     */
     public void changeScene(String newScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         

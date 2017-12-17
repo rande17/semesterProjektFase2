@@ -23,12 +23,18 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
 /**
- * FXML Controller class
- *
- * @author frede
- */
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class CraftMenuController implements Initializable {
 
+    /**
+     * instance of GameFacade
+     */
     public static GameFacade game = new GameFacade();
 
     Parent root;
@@ -47,6 +53,8 @@ public class CraftMenuController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url never used
+     * @param rb never used
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -91,6 +99,9 @@ public class CraftMenuController implements Initializable {
           }
     }
 
+    /**
+     * used to populate the vbox in crafting menu with radiobuttons
+     */
     public void populateVBoxWithRadioButtons() {
         if (!craftItemsAdded) {
             craftingItems = game.getCraftableItemsArray();

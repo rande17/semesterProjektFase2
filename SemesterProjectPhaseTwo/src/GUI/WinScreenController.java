@@ -21,10 +21,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * FXML Controller class
- *
- * @author rickie
- */
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class WinScreenController implements Initializable {
     private static GameFacade game = new GameFacade();
     @FXML
@@ -34,6 +37,8 @@ public class WinScreenController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url never used
+     * @param rb never used
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -47,7 +52,12 @@ public class WinScreenController implements Initializable {
         changeScene("mainMenu");
     }
 
-      public void changeScene(String newScene) throws IOException {
+    /**
+     *
+     * @param newScene what scene to change to
+     * @throws IOException if the fxml cannot be found
+     */
+    public void changeScene(String newScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         
         scene.setRoot(root);

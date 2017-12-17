@@ -14,6 +14,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class SemesterProjectPhaseTwo extends Application {
 
     Parent root;
@@ -30,6 +38,11 @@ public class SemesterProjectPhaseTwo extends Application {
         stage.setOnCloseRequest(e -> System.exit(0));
     }
 
+    /**
+     *
+     * @param args used to launch
+     * @throws Throwable if exception is met
+     */
     public static void main(String[] args) throws Throwable {
 
         Thread thread = new Thread() {

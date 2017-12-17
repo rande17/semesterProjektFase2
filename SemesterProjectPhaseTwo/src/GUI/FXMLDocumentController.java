@@ -37,6 +37,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
+
 public class FXMLDocumentController implements Initializable {
 
     private static GameFacade game = new GameFacade();
@@ -177,6 +186,9 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
+    /**
+     * Checks if intersecting with object
+     */
     public void intersectWithObject() {
         if (player != null) {
 
@@ -240,6 +252,9 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * populate items on the map
+     */
     public void populateItemsOnMap() {
         if (!itemsDrawed && background.getHeight() > 0) {
             itemsArray = game.getItemsOnMap();
@@ -264,6 +279,11 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param dir what direction to go in
+     * @throws IOException if the file cannot be found
+     */
     public void go(String dir) throws IOException {
 
         if (game.getRoomDescribtion().equals("airport")) {
@@ -276,6 +296,9 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
+    /**
+     * used to spawn the npcs
+     */
     public void spawnNPC() {
         game.getNPC();
 
@@ -314,6 +337,12 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param shapeToMove is the player
+     * @param dir what direction
+     * @throws IOException if the file cannot be found
+     */
     public void moveObject(ImageView shapeToMove, String dir) throws IOException {
 
         if (shapeToMove != null && background.getHeight() > 0) {
@@ -457,6 +486,9 @@ public class FXMLDocumentController implements Initializable {
         textArea.setText(game.printMissions());
     }
 
+    /**
+     * used to update the bars
+     */
     public void updateBars() {
         //
         health = 1.0 * game.playerHealth() / game.maxPlayerHealth();
@@ -473,6 +505,9 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * used to show the missions given
+     */
     public void showMissionGiveByNpc() {
         if (textDrawed) {
             background.getChildren().remove(popupBackground);
@@ -526,6 +561,10 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param npcID which npc to interact with
+     */
     public void InteractNPC(String npcID) {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
@@ -545,6 +584,10 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param item which item to pick up
+     */
     public void PickItemPopUpText(String item) {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
@@ -559,6 +602,10 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param item which item to pick up
+     */
     public void PickItemFailedPopUpText(String item) {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
@@ -573,6 +620,9 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * gives a text if the door is locked
+     */
     public void LockItemPopUpText() {
         if (!textDrawed) {
             background.getChildren().remove(popupBackground);
@@ -595,7 +645,9 @@ public class FXMLDocumentController implements Initializable {
         changeScene("winscreen");
     }
 
-//create a popup text for when you hit the escape button so you ether win the game or continue to play
+    /**
+     * create a popup text for when you hit the escape button so you ether win the game or continue to play
+     */
     public void escapePopUpText() {
 
         Button yesButton = new Button("Yes");
@@ -695,6 +747,11 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param newScene
+     * @throws IOException
+     */
     public void changeSceneCraftMenu(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene = player.getScene();
@@ -724,6 +781,9 @@ public class FXMLDocumentController implements Initializable {
         textArea.setText("Game saved");
     }
 
+    /**
+     * used to get position of all characters
+     */
     @FXML
     public void getPositionOfCharacters() {
         textArea.appendText(game.getPositionOfAllCharacters());

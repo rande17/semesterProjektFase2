@@ -10,8 +10,6 @@ import static GUI.MainMenuController.scene;
 import Game.GameFacade;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,13 +24,18 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
 /**
- * FXML Controller class
- *
- * @author Zuzu
- */
+ * @author Thomas
+ * @author Nicolai
+ * @author Rickie
+ * @author Frederik
+ * @author Julie 
+ * @author Martin
+*/
 public class InventoryController implements Initializable {
     
-    
+    /**
+     * instance of GameFacade
+     */
     public static GameFacade inventoryMenu = new GameFacade();
 
     Parent root;
@@ -52,11 +55,19 @@ public class InventoryController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url never used
+     * @param rb never used
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    /**
+     *
+     * @param newScene what scene to change to
+     * @throws IOException if the fxml cannot be found
+     */
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene = backButton.getScene();
