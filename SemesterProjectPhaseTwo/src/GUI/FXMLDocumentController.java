@@ -153,7 +153,13 @@ public class FXMLDocumentController implements Initializable {
             showEscapeButtonUnlocked();
         }
     }
-
+    
+    /**
+     * 
+     * @param newScene the name of the fxml file which the GUI 
+     * is switching to (without the .fxml notation)
+     * @throws IOException 
+     */
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         itemsDrawed = false;

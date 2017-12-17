@@ -53,14 +53,25 @@ public class CraftMenuController implements Initializable {
         // TODO
         populateVBoxWithRadioButtons();
     }
-
+    
+    /**
+     * 
+     * @param newScene the name of the fxml file which the GUI 
+     * is switching to (without the .fxml notation)
+     * @throws IOException 
+     */
     public void changeScene(String newScene) throws IOException {
         root = FXMLLoader.load(getClass().getResource(newScene + ".fxml"));
         scene = backButton.getScene();
         scene.setRoot(root);
         scene.getRoot().requestFocus();
     }
-
+    
+    /**
+     * 
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void handleBackAction(ActionEvent event) throws IOException {
         changeScene(game.getRoomDescribtion());

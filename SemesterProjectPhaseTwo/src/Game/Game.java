@@ -349,7 +349,7 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    boolean processCommand(Command command) throws FileNotFoundException, IOException, Throwable {
+    boolean processCommand(Command command) throws FileNotFoundException, IOException, InterruptedException  {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -610,7 +610,6 @@ public class Game {
             woundedSurvivor();
         } else if (mysteriousCrab.getCurrentRoom() == currentRoom && inventory.getInventory().containsKey("Shroom")) {
             System.out.println(mysteriousCrab.getDescription() + "\n" + mysteriousCrab.getDialog(0));
-            pregnant();
         } else {
             System.out.println("There is nobody to communicate with in this Room");
         }
@@ -656,46 +655,6 @@ public class Game {
             System.out.println("Come back again if you change your mind");
         } else {
             System.out.println("Come back again if you change your mind");
-        }
-    }
-
-    /**
-     * Method that creates question when talking with mysteriousCrab (crab)
-     */
-    static public void pregnant() {
-        Scanner scan = new Scanner(System.in);//Creates a new scanner
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                input = "";
-                while (!(input.equals("yes") || input.equals("no"))) {
-                    input = getOption();
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                if (input.equalsIgnoreCase("yes")) {
-                    System.out.println("You got a mission, please use the show command for more information");
-                    allMissions.addMission(josephSchnitzel.getCurrentRoom(), "Get me some eggs or I will kill you!!!!");
-                    System.out.println("You survived snitzel this time, but take care: " + player.getHealth());
-                } else if (input.equalsIgnoreCase("no")) {
-                    System.out.println("");
-                    player.loseHealth(josephSchnitzel.getDamageValue());
-                }
-
-            }
-        };
-        thread.start();
-        System.out.println("Are u pregnant?"); //Asks question
-        String input = scan.nextLine(); //Waits for input
-        if (input.equalsIgnoreCase("yes")) {
-            System.out.println("Great! congratulations");
-        } else if (input.equalsIgnoreCase("no")) {
-            System.out.println("Keep trying it will happen.");
-        } else { //If the input is anything else
-            System.out.println("This is a yes or no question.");
         }
     }
 
@@ -1029,7 +988,7 @@ public class Game {
      * @throws IOException
      * @throws Throwable
      */
-    static void saveGame() throws IOException, Throwable {
+    void saveGame() throws IOException, Throwable {
         Save save = new Save("01");
         save.addToSaveGame(objectsToSave());
         save.saveGame();
@@ -1039,22 +998,20 @@ public class Game {
      *
      * @return
      */
-    static private String objectsToSave() {
+    private String objectsToSave() {
         ArrayList saveObjectsJSON;
-        saveObjectsJSON = new ArrayList(10);
+        saveObjectsJSON = new ArrayList();
         saveObjectsJSON.add(inventory.getInventoryHashMap());
         saveObjectsJSON.add(itemLocation.getAllItems());
         saveObjectsJSON.add(allMissions);
-
         saveObjectsJSON.add(currentRoom.getShortDescription());
-
-        System.out.println(saveObjectsJSON.toString());
         return data.objectToJson(saveObjectsJSON);
     }
 
     /**
-     * Method used to load a saved game file, to be able to continue that
-     * specific game
+     * 
+     * @param stringToClean take a string and removes a bunch of characters from it
+     * @return returns a string without a bunc of charaters
      */
     private static String removeCrapCharsFromString(String stringToClean) {
         stringToClean = stringToClean.replace("{", "");
@@ -1064,18 +1021,20 @@ public class Game {
         stringToClean = stringToClean.replace(" ", "");
         return stringToClean;
     }
-
+    
+    /**
+     * Method used to load a saved game file, to be able to continue that
+     * specific game
+     */
     static private void loadGame() {
         ArrayList loadData = data.loadGame();
 
         //inventory
         inventory = new Inventory();
         LinkedTreeMap saveMap = (LinkedTreeMap) loadData.get(0);
-        System.out.println(saveMap.toString() + "map");
         if (!saveMap.isEmpty()) {
             LinkedTreeMap inventoryItemWeight = (LinkedTreeMap) saveMap.get("itemWeight");
             LinkedTreeMap inventoryItemQuantity = (LinkedTreeMap) saveMap.get("inventory");
-            System.out.println(inventoryItemQuantity);
             String inventoryItemQuantityString = inventoryItemQuantity.toString();
             inventoryItemQuantityString = removeCrapCharsFromString(inventoryItemQuantityString);
             String itemListString = inventoryItemWeight.toString();
@@ -1107,11 +1066,9 @@ public class Game {
         itemLocation = new ItemLocation();
         saveMap = (LinkedTreeMap) loadData.get(1);
         if (!saveMap.isEmpty()) {
-            System.out.println(saveMap.toString());
             LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap.get("inventory");
             String rooms = itemLocationOnMap.keySet().toString();
             rooms = removeCrapCharsFromString(rooms);
-            System.out.println(itemLocationOnMap.toString());
             for (int j = 0; j <= itemLocationOnMap.size() - 1; j++) {
                 String itemToAdd;
 
@@ -1126,7 +1083,6 @@ public class Game {
                 for (int i = 0; i < itemInRoom.size(); i++) {
                     Item itemLocationToAdd;
                     LinkedTreeMap itemT = (LinkedTreeMap) itemInRoom.get(i);
-                    System.out.println(itemT.toString());
                     String itemName = itemT.get("name").toString();
                     String itemDesc = "";
                     int itemWeight = (int) Double.parseDouble(itemT.get("weight").toString());

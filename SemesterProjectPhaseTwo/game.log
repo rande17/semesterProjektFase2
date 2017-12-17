@@ -484,3 +484,35 @@ load null
 go null
 go null
 go west
+
+
+ >>>  Starting new game <<< 
+
+
+go null
+go west
+go null
+go null
+go null
+go null
+go null
+go south
+go null
+go null
+go north
+go west
+go null
+go null
+go east
+go null
+go north
+go null
+go null
+go null
+go null
+go null
+go north
+go south
+go north
+go south
+go south

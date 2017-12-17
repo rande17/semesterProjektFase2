@@ -6,7 +6,6 @@
 package Data;
 
 import Game.Score;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -15,6 +14,15 @@ import java.util.Comparator;
  */
 public class CompareScore implements Comparator<Score> {
 
+    /**
+     * @param score1 takes a Score object that should be compared to an other
+     * Score
+     * @param score2 takes a Score object that should be compared to an other
+     * Score
+     * @return returns -1 if score1 is greater than score2, 1 if score2 is
+     * higher than score1, otherwise it returns 0
+     */
+    @Override
     public int compare(Score score1, Score score2) {
 
         int sc1 = score1.getCurrentScore();
