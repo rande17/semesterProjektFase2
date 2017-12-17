@@ -1095,8 +1095,9 @@ public class Game {
         itemLocation = new ItemLocation();
         saveMap = (LinkedTreeMap) loadData.get(1);
         if (!saveMap.isEmpty()) {
-            LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap.get("inventory");
-            String rooms = itemLocationOnMap.keySet().toString();
+            System.out.println(saveMap.keySet());
+            LinkedTreeMap itemLocationOnMap = (LinkedTreeMap) saveMap;
+            String rooms = saveMap.keySet().toString();
             rooms = removeCrapCharsFromString(rooms);
             for (int j = 0; j <= itemLocationOnMap.size() - 1; j++) {
                 String itemToAdd;
