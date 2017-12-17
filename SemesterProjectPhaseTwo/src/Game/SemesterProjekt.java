@@ -19,7 +19,8 @@ public class SemesterProjekt {
 
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
+     * @throws java.io.IOException if the file cannot be found
+     * @throws Throwable if an exception is thrown
      */
     public static void main(String[] args) throws IOException, Throwable{
 

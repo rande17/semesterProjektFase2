@@ -307,7 +307,7 @@ public class GameFacade implements InterfaceGame {
      * Method that unlocks the possibility to escape the island. It checks if
      * current room is beach and if mission is completed
      *
-     * @return
+     * @return wheter the option to escape the island is unlocked
      */
     @Override
     public boolean unlockedEscapeIsland() {
@@ -318,7 +318,7 @@ public class GameFacade implements InterfaceGame {
     /**
      * Method that locks possibility to escape the island
      *
-     * @return
+     * @return wheter the option to escape the island is unlocked
      */
     @Override
     public boolean lockedEscapeIsland() {
